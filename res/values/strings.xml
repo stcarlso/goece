@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="app_name">Go ECE!</string>
+	<string name="error">Error</string>
+	<string name="ok">OK</string>
+	<string name="guiTabAnalog">Analog</string>
+	<string name="guiTabDigital">Digital</string>
+	<string name="guiTabCircuits">Circuits</string>
+	<string name="guiColorCode">Resistor Color Code</string>
+	<string name="guiSMDResistor">SMD Resistor Code</string>
+	<string name="guiKMapper">K-Map Generator</string>
+	<string name="guiResLine">Value is underlined</string>
+	<string name="guiCalculate">Calculate</string>
+	<string name="guiResInvalid">Invalid resistor code.</string>
+	<string name="guiResInitialValue">103</string>
+</resources>

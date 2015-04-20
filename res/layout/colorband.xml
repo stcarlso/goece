@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:layout_width="wrap_content" android:layout_height="wrap_content"
+  			  android:orientation="vertical" android:layout_margin="10dp"
+			  android:divider="@drawable/divider_tall" android:showDividers="middle">
+	<Button android:layout_width="40dp" android:layout_height="30dp"
+			android:id="@+id/guiColor0" android:background="@drawable/black"/>
+	<Button android:layout_width="40dp" android:layout_height="30dp"
+			android:id="@+id/guiColor1" android:background="@drawable/brown"/>
+	<Button android:layout_width="40dp" android:layout_height="30dp"
+			android:id="@+id/guiColor2" android:background="@drawable/red"/>
+	<Button android:layout_width="40dp" android:layout_height="30dp"
+			android:id="@+id/guiColor3" android:background="@drawable/orange"/>
+	<Button android:layout_width="40dp" android:layout_height="30dp"
+			android:id="@+id/guiColor4" android:background="@drawable/yellow"/>
+	<Button android:layout_width="40dp" android:layout_height="30dp"
+			android:id="@+id/guiColor5" android:background="@drawable/green"/>
+	<Button android:layout_width="40dp" android:layout_height="30dp"
+			android:id="@+id/guiColor6" android:background="@drawable/blue"/>
+	<Button android:layout_width="40dp" android:layout_height="30dp"
+			android:id="@+id/guiColor7" android:background="@drawable/violet"/>
+	<Button android:layout_width="40dp" android:layout_height="30dp"
+			android:id="@+id/guiColor8" android:background="@drawable/grey"/>
+	<Button android:layout_width="40dp" android:layout_height="30dp"
+			android:id="@+id/guiColor9" android:background="@drawable/white"/>
+	<Button android:layout_width="40dp" android:layout_height="30dp"
+			android:id="@+id/guiColor10" android:background="@drawable/transparent"/>
+	<Button android:layout_width="40dp" android:layout_height="30dp"
+			android:id="@+id/guiColor11" android:background="@drawable/gold"/>
+	<Button android:layout_width="40dp" android:layout_height="30dp"
+			android:id="@+id/guiColor12" android:background="@drawable/silver"/>
+</LinearLayout>
