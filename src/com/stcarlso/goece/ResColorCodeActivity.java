@@ -38,31 +38,32 @@ public class ResColorCodeActivity extends ChildActivity implements
 	 * Shared code between color code and SMD to indicate standard/non-standard values.
 	 *
 	 * @param value the resistor value
-	 * @param series the EIA series to check
-	 * @param isStandard the text box to update
+	 * @param std the text box to update
 	 * @return true if the resistor was a standard value, or false otherwise
 	 */
-	public static boolean checkEIATable(final double value, final EIAResistorTable.EIASeries
-			series, final TextView isStandard) {
-		final boolean std = EIAResistorTable.isEIAValue(value, series);
-		if (std) {
+	public static boolean checkEIATable(final EIAResistorValue value, final TextView std) {
+		final double res = value.getValue();
+		// Is it standard?
+		final EIAResistorTable.EIASeries series = value.getSeries();
+		final boolean isStandard = EIAResistorTable.isEIAValue(res, series);
+		if (isStandard) {
 			// In standard series, say so
-			isStandard.setTextColor(Color.GREEN);
-			isStandard.setText("Standard " + series.toString() + " value");
+			std.setTextColor(Color.GREEN);
+			std.setText("Standard " + series.toString() + " value");
 		} else {
 			// Not in standard series, indicate closest value
-			final double closest = EIAResistorTable.nearestEIAValue(value, series), errorPct;
+			final double closest = EIAResistorTable.nearestEIAValue(res, series), errorPct;
 			// Calculate % error
-			if (value <= 0.0)
+			if (res <= 0.0)
 				errorPct = 0.0;
 			else
-				errorPct = 100.0 * (closest - value) / value;
+				errorPct = 100.0 * (closest - res) / res;
 			// Display appropriate message
-			isStandard.setTextColor(Color.RED);
-			isStandard.setText(String.format("Nearest %s value is %s [%+.1f%%]",
-				series.toString(), ECEActivity.formatResistance(closest), errorPct));
+			std.setTextColor(Color.RED);
+			std.setText(String.format("Nearest %s value is %s [%+.1f%%]", series,
+				new EIAResistorValue(closest, series, 0.0), errorPct));
 		}
-		return std;
+		return isStandard;
 	}
 
 
@@ -72,8 +73,12 @@ public class ResColorCodeActivity extends ChildActivity implements
 	public static final double[] MULTIPLIER = new double[] {
 		1.0, 10.0, 100.0, 1000.0, 1e4, 1e5, 1e6, 1e7, 1.0, 1.0, 1.0, 0.1, 0.01
 	};
-	public static final String[] TOLERANCE = new String[] {
-		"", "1", "2", "", "", "0.5", "0.25", "0.1", "0.05", "", "20", "5", "10"
+	/**
+	 * The tolerance for each possible 4th (5th) band value.
+	 */
+	public static final double[] TOLERANCE = new double[] {
+		0.0, Units.TOL_1P, Units.TOL_2P, 0.0, 0.0, 0.005, 0.0025, Units.TOL_P1, 0.0005,
+		0.0, Units.TOL_20P, Units.TOL_10P, Units.TOL_5P
 	};
 	/**
 	 * Keeps a copy of the band objects on screen.
@@ -99,10 +104,6 @@ public class ResColorCodeActivity extends ChildActivity implements
 		if (bands[2].getValue() < 10)
 			// 5 band
 			value = value * 10 + bands[2].getValue();
-		// Calculate multiplier and display
-		final double finalValue = MULTIPLIER[bands[3].getValue()] * (double)value;
-		output.setText(ECEActivity.formatResistance(finalValue) + " " + ECEActivity.P_M_SYMBOL +
-			TOLERANCE[tol] + "%");
 		// Calculate EIA series
 		final EIAResistorTable.EIASeries series;
 		switch (tol) {
@@ -127,8 +128,12 @@ public class ResColorCodeActivity extends ChildActivity implements
 			series = EIAResistorTable.EIASeries.E96;
 			break;
 		}
+		// Calculate multiplier
+		final EIAResistorValue finalValue = new EIAResistorValue(value *
+			MULTIPLIER[bands[3].getValue()], series, TOLERANCE[tol]);
+		output.setText(finalValue.toString());
 		// In EIA series?
-		checkEIATable(finalValue, series, (TextView)findViewById(R.id.guiResIsStandard));
+		checkEIATable(finalValue, (TextView)findViewById(R.id.guiResIsStandard));
 	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

@@ -39,56 +39,17 @@ import android.view.inputmethod.InputMethodManager;
  */
 public final class ECEActivity extends FragmentActivity {
 	/**
-	 * The ohm symbol. Do not localize!
-	 */
-	public static final String OHM_SYMBOL = "\u03A9";
-	/**
-	 * The plus/minus symbol. Do not localize.
-	 */
-	public static final String P_M_SYMBOL = "\u00B1";
-
-	/**
-	 * The prefix the unit gets for each cut-off below.
-	 */
-	public static final String[] ENGR_NAMES = {
-		"f", "n", "\u03BC", "m", "", "K", "M", "G", "T"
-	};
-	/**
-	 * Cut-off values for engineering formatting.
-	 */
-	public static final double[] ENGR_THRESHOLD = {
-		1e-12, 1e-9, 1e-6, 1e-3, 1, 1e3, 1e6, 1e9, 1e12, Double.MAX_VALUE
-	};
-
-	/**
-	 * Formats the string as an engineering value (with K, M, G, ...)
+	 * Formats the string as an engineering value (with K, M, G, ...) and a tolerance.
 	 *
 	 * @param value the value to format
-	 * @param suffix the suffix (F, V, A, ...)
+	 * @param units the units (F, V, A, ...)
+	 * @param tolerance the tolerance of the value (0.1 = 10%, 0.01 = 1%) or 0 to suppress
 	 * @return the string formatted very nicely
 	 */
-	public static String engineeringFormat(final double value, final String suffix) {
-		String prefix = "";
-		double engr = value;
-		int sf = 0;
-		// Look for the prefix
-		for (int i = 0; i < ENGR_THRESHOLD.length && i < ENGR_NAMES.length; i++)
-			if (value < ENGR_THRESHOLD[i + 1]) {
-				// Found correct prefix
-				prefix = ENGR_NAMES[i];
-				engr = value / ENGR_THRESHOLD[i];
-				break;
-			}
-		// Calculate sig figs
-		if (engr >= 100.0)
-			sf = 0;
-		else if (engr >= 10.0)
-			sf = 1;
-		else if (engr >= 1.0)
-			sf = 2;
-		else
-			sf = 3;
-		return String.format("%." + Integer.toString(sf) + "f %s%s", engr, prefix, suffix);
+	@Deprecated
+	public static String engineeringFormat(final double value, final String units,
+										   final double tolerance) {
+		return new EngineeringValue(value, tolerance, units).toString();
 	}
 	/**
 	 * Displays an error message popup.
@@ -101,15 +62,6 @@ public final class ECEActivity extends FragmentActivity {
 		builder.setMessage(messageID);
 		builder.setPositiveButton(R.string.ok, new IgnoreOnClickListener());
 		builder.create().show();
-	}
-	/**
-	 * Formats a resistance value.
-	 *
-	 * @param value the resistor value to format
-	 * @return the value with engineering format and the ohm symbol
-	 */
-	public static String formatResistance(final double value) {
-		return engineeringFormat(value, OHM_SYMBOL);
 	}
 	/**
 	 * Shows the soft keyboard after a short delay. Why android why?

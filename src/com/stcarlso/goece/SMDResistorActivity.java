@@ -44,49 +44,47 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 		return new IllegalArgumentException("SMD resistor code: " + code);
 	}
 	/**
+	 * Parse a code in the form "3R00" or "10R5" into a value, where R is the decimal point
+	 * location. The code must contain exactly one capital letter 'R'
+	 *
+	 * @param code the value to parse
+	 * @return the parsed value
+	 * @throws NumberFormatException if the value could not be parsed in this way
+	 */
+	public static double parseRValue(final String code) {
+		return Double.parseDouble(code.replace('R', '.'));
+	}
+	/**
 	 * Parses a 3-letter SMD resistor code.
 	 *
 	 * @param code the SMD resistor code
-	 * @return the resistor value
-	 * @throws IllegalArgumentException if the code cannot be parsed
+	 * @return the resistor value, or null if the code cannot be parsed
 	 */
-	public static double parse3LetterCode(final String code) {
-		final char multChar;
-		double value;
-		if (code == null || code.length() != 3)
-			throw forResistorCode(code);
-		multChar = code.charAt(2);
-		try {
-			// The vast majority of resistors fit this pattern
-			int firstTwo = Integer.parseInt(code.substring(0, 2));
-			if (multChar == 'R')
-				// 33R
-				value = (double)firstTwo;
-			else if (Character.isDigit(multChar))
-				// 10 ^ x
-				value = (double)firstTwo * Math.pow(10.0, (double)(multChar - '0'));
-			else {
-				// E96 new generation
-				firstTwo = EIAResistorTable.e96SMDCode(firstTwo);
-				value = (double)firstTwo * EIAResistorTable.letterToMultiplier(multChar);
-				if (value == 0.0)
-					throw forResistorCode(code);
-			}
-		} catch (NumberFormatException ignore) {
-			// Has an R somewhere?
-			final char c1 = code.charAt(0), c2 = code.charAt(1), c3 = code.charAt(2);
-			if (c1 == 'R') {
-				try {
-					// R10 = 0.10 ohm
-					value = (double)Integer.parseInt(code.substring(1)) * 0.01;
-				} catch (NumberFormatException e) {
-					throw forResistorCode(code);
+	public static EIAResistorValue parse3LetterCode(final String code) {
+		EIAResistorValue value = null;
+		if (code != null && code.length() == 3) {
+			final char multChar = code.charAt(2);
+			try {
+				if (code.indexOf('R') >= 0)
+					// 4R7
+					value = new EIAResistorValue(parseRValue(code), EIAResistorValue.E24);
+				else {
+					// The vast majority of resistors fit this pattern
+					final int prefix = Integer.parseInt(code.substring(0, 2));
+					if (Character.isDigit(multChar))
+						// 10 ^ x
+						value = new EIAResistorValue(prefix * Math.pow(10.0, multChar - '0'),
+							EIAResistorValue.E24);
+					else {
+						// E96 new generation
+						final double vv = EIAResistorTable.e96SMDCode(prefix) *
+							EIAResistorTable.letterToMultiplier(multChar);
+						if (vv != 0.0)
+							// This is a 1% resistor!
+							value = new EIAResistorValue(vv, EIAResistorValue.E96);
+					}
 				}
-			} else if (c2 == 'R' && Character.isDigit(c1) && Character.isDigit(c3))
-				// 3R3 = 3.3 ohm
-				value = (double)(c1 - '0') + (double)(c3 - '0') * 0.1;
-			else
-				throw forResistorCode(code);
+			} catch (NumberFormatException ignore) { }
 		}
 		return value;
 	}
@@ -94,55 +92,21 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	 * Parses a 4-letter SMD resistor code.
 	 *
 	 * @param code the SMD resistor code
-	 * @return the resistor value
-	 * @throws IllegalArgumentException if the code cannot be parsed
+	 * @return the resistor value, or null if the code cannot be parsed
 	 */
-	public static double parse4LetterCode(final String code) {
-		final char multChar;
-		double value;
-		if (code == null || code.length() != 4)
-			throw forResistorCode(code);
-		multChar = code.charAt(3);
-		try {
-			// The vast majority of resistors fit this pattern
-			int firstThree = Integer.parseInt(code.substring(0, 3));
-			if (multChar == 'R')
-				// 330R
-				value = (double)firstThree;
-			else if (Character.isDigit(multChar))
-				// 10 ^ x
-				value = (double)firstThree * Math.pow(10.0, (double)(multChar - '0'));
-			else
-				throw forResistorCode(code);
-		} catch (NumberFormatException ignore) {
-			// Has an R somewhere?
-			final char c1 = code.charAt(0), c2 = code.charAt(1), c3 = code.charAt(2),
-				c4 = code.charAt(3);
-			if (c1 == 'R') {
-				try {
-					// R100 = 0.100 ohm
-					value = (double)Integer.parseInt(code.substring(1)) * 0.001;
-				} catch (NumberFormatException ignored) {
-					throw forResistorCode(code);
-				}
-			} else if (c2 == 'R' && Character.isDigit(c1)) {
-				try {
-					// 3R30 = 3.30 ohm
-					value = (double)(c1 - '0') + (double)Integer.parseInt(code.substring(2)) *
-						0.01;
-				} catch (NumberFormatException ignored) {
-					throw forResistorCode(code);
-				}
-			} else if (c3 == 'R' && Character.isDigit(c4)) {
-				try {
-					// 47R0 = 47.0 ohm
-					value = (double)Integer.parseInt(code.substring(0, 2)) +
-						(double)(c4 - '0') * 0.1;
-				} catch (NumberFormatException ignored) {
-					throw forResistorCode(code);
-				}
-			} else
-				throw new IllegalArgumentException("SMD resistor code: " + code);
+	public static EIAResistorValue parse4LetterCode(final String code) {
+		EIAResistorValue value = null;
+		if (code != null && code.length() == 4) {
+			final char multChar = code.charAt(3);
+			try {
+				if (code.indexOf('R') >= 0)
+					// 33R0
+					value = new EIAResistorValue(parseRValue(code), EIAResistorValue.E96);
+				else if (Character.isDigit(multChar))
+					// The vast majority of resistors fit this pattern
+					value = new EIAResistorValue(Integer.parseInt(code.substring(0, 3)) *
+						Math.pow(10.0, multChar - '0'), EIAResistorValue.E96);
+			} catch (NumberFormatException ignore) { }
 		}
 		return value;
 	}
@@ -162,38 +126,28 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	 * @param showErrors whether error messages should be shown
 	 */
 	private void calculate(final String code, final boolean showErrors) {
-		double value = 0.0;
-		boolean error = true;
-		final int tolerance;
+		final EIAResistorValue value;
 		// 3 or 4 characters?
 		switch (code.length()) {
 		case 3:
 			// 3 char
-			tolerance = EIAResistorTable.letterToMultiplier(code.charAt(2)) == 0.0 ? 5 : 1;
-			try {
-				value = parse3LetterCode(code);
-				error = false;
-			} catch (IllegalArgumentException ignore) { }
+			value = parse3LetterCode(code);
 			break;
 		case 4:
 			// 4 char
-			tolerance = 1;
-			try {
-				value = parse4LetterCode(code);
-				error = false;
-			} catch (IllegalArgumentException ignore) { }
+			value = parse4LetterCode(code);
 			break;
 		default:
-			tolerance = 0;
+			value = null;
 			break;
 		}
-		if (error) {
+		if (value == null) {
 			// Oh no!
 			if (showErrors)
 				ECEActivity.errorMessage(this, R.string.guiResInvalid);
 		} else {
 			// Display it!
-			showValue(value, tolerance);
+			showValue(value);
 			lastCode = code;
 		}
 	}
@@ -210,15 +164,22 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.smdresistor);
 		EnterKeyListener.addListener(this, R.id.guiResSMDCode, this);
-		// Will set the last value appropriately
-		recalculate(false);
+		if (savedInstanceState != null && savedInstanceState.containsKey("lastCode")) {
+			// Retrieve the code from a saved execution
+			lastCode = savedInstanceState.getString("lastCode", lastCode);
+			calculate(lastCode, false);
+		} else
+			// Will set the last value appropriately
+			recalculate(false);
 		ECEActivity.initShowSoftKeyboard(findViewById(R.id.guiResSMDCode));
 	}
+	@Override
 	protected void onRestoreInstanceState(Bundle state) {
 		super.onRestoreInstanceState(state);
 		lastCode = state.getString("lastCode", lastCode);
 		calculate(lastCode, false);
 	}
+	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putString("lastCode", lastCode);
@@ -242,21 +203,9 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	 * Display the resistor value on screen.
 	 *
 	 * @param value the calculated value
-	 * @param tolerance the tolerance in % points
 	 */
-	private void showValue(final double value, final int tolerance) {
-		final EIAResistorTable.EIASeries series;
-		// Update value
-		final TextView output = (TextView)findViewById(R.id.guiResValue);
-		// Guess 5% for 3-digit and 1% otherwise
-		if (tolerance == 5)
-			series = EIAResistorTable.EIASeries.E24;
-		else
-			series = EIAResistorTable.EIASeries.E96;
-		output.setText(ECEActivity.formatResistance(value) + " " + ECEActivity.P_M_SYMBOL +
-			Integer.toString(tolerance) + "%");
-		// Check the EIA standard value
-		ResColorCodeActivity.checkEIATable(value, series,
-			(TextView)findViewById(R.id.guiResIsStandard));
+	private void showValue(final EIAResistorValue value) {
+		((TextView)findViewById(R.id.guiResValue)).setText(value.toString());
+		ResColorCodeActivity.checkEIATable(value, (TextView)findViewById(R.id.guiResIsStandard));
 	}
 }
