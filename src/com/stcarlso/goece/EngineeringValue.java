@@ -34,6 +34,20 @@ public class EngineeringValue implements Serializable {
 	private static final long serialVersionUID = 3381934552647230468L;
 
 	/**
+	 * Generates a raw value from a significand and prefix code. Mainly useful when constructing
+	 * a value from a friendly entry field allowing discrete prefix selection.
+	 *
+	 * @param significand the significand (need not be in 1..1000)
+	 * @param prefixCode the SI prefix code
+	 * @return the corresponding raw value
+	 */
+	public static double valueFromSigExp(final double significand, final int prefixCode) {
+		if (prefixCode < 0 || prefixCode >= ENGR_THRESHOLD.length)
+			throw new IllegalArgumentException("prefix code");
+		return significand * ENGR_THRESHOLD[prefixCode];
+	}
+
+	/**
 	 * The plus/minus symbol. Do not localize.
 	 */
 	protected static final String P_M_SYMBOL = "\u00B1";
@@ -41,7 +55,7 @@ public class EngineeringValue implements Serializable {
 	 * The prefix the unit gets for each cut-off below.
 	 */
 	protected static final String[] ENGR_NAMES = {
-		"f", "n", "\u03BC", "m", "", "K", "M", "G", "T"
+		"f", "n", "\u03BC", "m", "", "K", "M", "G", "T", "E"
 	};
 	/**
 	 * Cut-off values for engineering formatting.
@@ -105,6 +119,17 @@ public class EngineeringValue implements Serializable {
 		this(value, tolerance, 3, units);
 	}
 	/**
+	 * Create a new engineering value based on an existing value's tolerance, significant
+	 * figures, and units, but with a new raw value.
+	 *
+	 * @param value the raw value
+	 * @param template the template value where units, tolerance, and significant figures are
+	 * copied
+	 */
+	public EngineeringValue(final double value, final EngineeringValue template) {
+		this(value, template.getTolerance(), template.getSigfigs(), template.getUnits());
+	}
+	/**
 	 * Creates a new engineering value with the specified tolerance, precision, and units.
 	 *
 	 * @param value the raw value
@@ -114,6 +139,7 @@ public class EngineeringValue implements Serializable {
 	 */
 	public EngineeringValue(final double value, final double tolerance, final int sigfigs,
 							final String units) {
+		final double absValue = Math.abs(value);
 		// Do not allow NaN or inf
 		if (Double.isNaN(value) || Double.isInfinite(value))
 			throw new IllegalArgumentException("value");
@@ -131,13 +157,14 @@ public class EngineeringValue implements Serializable {
 		int code = 4;
 		double engr = value;
 		// Look for the prefix
-		for (int i = 0; i < ENGR_THRESHOLD.length && i < ENGR_NAMES.length; i++)
-			if (value < ENGR_THRESHOLD[i + 1]) {
-				// Found correct prefix
-				code = i;
-				engr = value / ENGR_THRESHOLD[code];
-				break;
-			}
+		if (absValue > 0.0)
+			for (int i = 0; i < ENGR_THRESHOLD.length && i < ENGR_NAMES.length; i++)
+				if (absValue < ENGR_THRESHOLD[i + 1]) {
+					// Found correct prefix
+					code = i;
+					engr = value / ENGR_THRESHOLD[code];
+					break;
+				}
 		// Assign significand and prefix code
 		prefix = code;
 		significand = engr;
@@ -149,6 +176,11 @@ public class EngineeringValue implements Serializable {
 		return Double.compare(value.getValue(), getValue()) == 0 && getUnits().equals(
 			value.getUnits());
 	}
+	/**
+	 * Retrieves the number of significant figures of this value.
+	 *
+	 * @return the total number of significant digits
+	 */
 	public int getSigfigs() {
 		return sigfigs;
 	}
@@ -203,25 +235,33 @@ public class EngineeringValue implements Serializable {
 	}
 	public int hashCode() {
 		final long temp = Double.doubleToLongBits(getValue());
-		return 31 * (int)(temp ^ (temp >>> 32)) + units.hashCode();
+		return 31 * (int)(temp ^ (temp >>> 32)) + getUnits().hashCode();
+	}
+	/**
+	 * Returns the significand of this value rounded to the significant figures places. Does
+	 * not include E+ or E- exponent.
+	 *
+	 * @return the significand of this value rounded to significant figures
+	 */
+	public String significandToString() {
+		final double sig = getSignificand(), absSig = Math.abs(sig);
+		final int decimals, sf = getSigfigs();
+		// Calculate number of decimal places to show
+		if (absSig >= 100.0)
+			decimals = sf - 3;
+		else if (absSig >= 10.0)
+			decimals = sf - 2;
+		else if (absSig >= 1.0)
+			decimals = sf - 1;
+		else
+			decimals = sf;
+		// Compose format string
+		return String.format("%." + decimals + "f", sig);
 	}
 	public String toString() {
-		final int sf;
-		final StringBuilder format = new StringBuilder();
-		final double sig = getSignificand(), tol = getTolerance() * 100.0;
-		// Calculate number of decimal places to show
-		if (sig >= 100.0)
-			sf = sigfigs - 3;
-		else if (sig >= 10.0)
-			sf = sigfigs - 2;
-		else if (sig >= 1.0)
-			sf = sigfigs - 1;
-		else
-			sf = sigfigs;
-		// Compose tolerance string
-		format.append("%.");
-		format.append(sf);
-		format.append("f %s%s");
+		final StringBuilder format = new StringBuilder(significandToString());
+		final double tol = getTolerance() * 100.0;
+		format.append(" %s%s");
 		if (tol > 0.0) {
 			// Do what we can to fix the broken mess that is floating point
 			final int tolInt = (int)Math.round(100.0 * tol), dp;
@@ -237,6 +277,6 @@ public class EngineeringValue implements Serializable {
 			format.append(String.format("%." + Integer.toString(dp) + "f", tol));
 			format.append("%%");
 		}
-		return String.format(format.toString(), sig, getSIPrefix(), getUnits());
+		return String.format(format.toString(), getSIPrefix(), getUnits());
 	}
 }

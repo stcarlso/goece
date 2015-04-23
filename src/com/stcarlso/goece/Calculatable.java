@@ -24,22 +24,10 @@
 
 package com.stcarlso.goece;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 /**
- * Fragment which displays all items on the Analog tab.
+ * An event handler for recalculation events. This class is triggered by ValueEntryBox and/or
+ * ValueEntryDialog when recalculation is necessary.
  */
-public class AnalogFragment extends MenuFragment {
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final View view = inflater.inflate(R.layout.analog, container, false);
-		// Configure all buttons
-		setButtonEvent(view, R.id.guiColorCode, ResColorCodeActivity.class);
-		setButtonEvent(view, R.id.guiSMDResistor, SMDResistorActivity.class);
-		setButtonEvent(view, R.id.guiOhmsLaw, OhmsLawActivity.class);
-		return view;
-	}
+public interface Calculatable {
+	void recalculate();
 }

@@ -33,9 +33,10 @@ import android.support.v4.app.TaskStackBuilder;
 import android.view.MenuItem;
 
 /**
- * Handles the up action gracefully!
+ * An activity parent which handles the up action gracefully and fixes the gross problem with
+ * value entry boxes needing a parent.
  */
-public abstract class ChildActivity extends Activity {
+public abstract class ChildActivity extends Activity implements Calculatable {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		final ActionBar bar = getActionBar();
@@ -60,5 +61,16 @@ public abstract class ChildActivity extends Activity {
 			break;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	/**
+	 * Sets the listener and parent activity of the specified value entry box. Useful for the
+	 * vast majority of activities.
+	 *
+	 * @param id the entry box to configure
+	 */
+	public void setupValueEntryBox(final int id) {
+		final ValueEntryBox box = ((ValueEntryBox)findViewById(id));
+		box.setParentActivity(this);
+		box.setOnCalculateListener(this);
 	}
 }

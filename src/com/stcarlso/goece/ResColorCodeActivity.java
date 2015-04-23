@@ -26,14 +26,12 @@ package com.stcarlso.goece;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 
 /**
  * Tab for a resistor color code (PTH) value calculator.
  */
-public class ResColorCodeActivity extends ChildActivity implements
-		NumberPicker.OnValueChangeListener {
+public class ResColorCodeActivity extends ChildActivity {
 	/**
 	 * Shared code between color code and SMD to indicate standard/non-standard values.
 	 *
@@ -88,9 +86,6 @@ public class ResColorCodeActivity extends ChildActivity implements
 	public ResColorCodeActivity() {
 		super();
 		bands = new ColorBand[5];
-	}
-	public void onValueChange(NumberPicker src, int oldValue, int newValue) {
-		recalculate();
 	}
 	/**
 	 * Recalculates the resistor value and checks to see if it is actually available in that
@@ -148,6 +143,6 @@ public class ResColorCodeActivity extends ChildActivity implements
 		recalculate();
 		// Add click listeners
 		for (ColorBand band : bands)
-			band.setOnValueChangedListener(this);
+			band.setOnCalculateListener(this);
 	}
 }

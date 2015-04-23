@@ -32,7 +32,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.NumberPicker;
 
 /**
  * A component which displays colors on the screen and can be checked for the selected color.
@@ -43,9 +42,9 @@ public class ColorBand extends LinearLayout implements View.OnClickListener {
 	 */
 	private Button[] colors;
 	/**
-	 * Called when a new value is selected (yeah, it is a reuse, but this is a number control!)
+	 * Called when a new value is selected
 	 */
-	private NumberPicker.OnValueChangeListener listener;
+	private Calculatable listener;
 	/**
 	 * The currently selected button index.
 	 */
@@ -64,13 +63,11 @@ public class ColorBand extends LinearLayout implements View.OnClickListener {
 		init(context, attrs);
 	}
 	/**
-	 * Calls the on-changed listener if necessary on a value change.
-	 *
-	 * @param oldValue the original value (the current value is the newValue)
+	 * Fires the recalculate method of the attached listener, if it exists.
 	 */
-	private void callOnChangedListener(final int oldValue) {
-		if (listener != null && oldValue != value)
-			listener.onValueChange(null, oldValue, value);
+	protected void callOnCalculateListener() {
+		if (listener != null)
+			listener.recalculate();
 	}
 	private void init(final Context context, final AttributeSet attrs) {
 		View.inflate(context, R.layout.colorband, this);
@@ -156,7 +153,8 @@ public class ColorBand extends LinearLayout implements View.OnClickListener {
 				break;
 			}
 		// Fire change event, if actually changed
-		callOnChangedListener(oldValue);
+		if (oldValue != value)
+			callOnCalculateListener();
 	}
 	@Override
 	protected void onRestoreInstanceState(Parcelable state) {
@@ -167,7 +165,8 @@ public class ColorBand extends LinearLayout implements View.OnClickListener {
 			final int v = ecess.getValue(), oldValue = value;
 			if (v >= 0 && v < colors.length) {
 				setValue(v);
-				callOnChangedListener(oldValue);
+				if (v != oldValue)
+					callOnCalculateListener();
 			}
 		} else
 			super.onRestoreInstanceState(state);
@@ -186,15 +185,15 @@ public class ColorBand extends LinearLayout implements View.OnClickListener {
 		return value;
 	}
 	/**
-	 * Sets the listener called when the user selects a new value.
+	 * Changes the listener fired when the value is changed and recalculation is required.
 	 *
-	 * @param listener the new object to listen for events
+	 * @param listener the listener to be fired
 	 */
-	public void setOnValueChangedListener(final NumberPicker.OnValueChangeListener listener) {
+	public void setOnCalculateListener(final Calculatable listener) {
 		this.listener = listener;
 	}
 	/**
-	 * Changes the currently selected index. Does not fire the click listener.
+	 * Changes the currently selected index. Does not fire the calculation listener.
 	 *
 	 * @param newValue the new value
 	 */

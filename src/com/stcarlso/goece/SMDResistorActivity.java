@@ -35,15 +35,6 @@ import android.widget.TextView;
  */
 public class SMDResistorActivity extends ChildActivity implements View.OnClickListener {
 	/**
-	 * Generate an exception for invalid resistor codes.
-	 *
-	 * @param code the resistor code which was invalid
-	 * @return an IllegalArgumentException ready to throw
-	 */
-	private static IllegalArgumentException forResistorCode(final String code) {
-		return new IllegalArgumentException("SMD resistor code: " + code);
-	}
-	/**
 	 * Parse a code in the form "3R00" or "10R5" into a value, where R is the decimal point
 	 * location. The code must contain exactly one capital letter 'R'
 	 *
@@ -157,7 +148,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	 * @param v the source view
 	 */
 	public void onClick(View v) {
-		recalculate(true);
+		recalculate();
 	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -170,7 +161,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 			calculate(lastCode, false);
 		} else
 			// Will set the last value appropriately
-			recalculate(false);
+			recalculate();
 		ECEActivity.initShowSoftKeyboard(findViewById(R.id.guiResSMDCode));
 	}
 	@Override
@@ -187,17 +178,15 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	/**
 	 * Recalculates the resistor value and checks to see if it is actually available in that
 	 * EIA tolerance series.
-	 *
-	 * @param showErrors true if error dialogs are to be shown, or false otherwise
 	 */
-	public void recalculate(final boolean showErrors) {
+	public void recalculate() {
 		final EditText input = (EditText)findViewById(R.id.guiResSMDCode);
 		final boolean underline = ((CheckBox)findViewById(R.id.guiResLine)).isChecked();
 		// If underlined, prepend "R"
 		String code = input.getText().toString();
 		if (underline)
 			code = "R" + code;
-		calculate(code, showErrors);
+		calculate(code, true);
 	}
 	/**
 	 * Display the resistor value on screen.

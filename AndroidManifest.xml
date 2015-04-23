@@ -20,5 +20,9 @@
 				  android:label="@string/guiSMDResistor" android:windowSoftInputMode="adjustResize">
 			<meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.stcarlso.goece.ECEActivity"/>
 		</activity>
+		<activity android:name="com.stcarlso.goece.OhmsLawActivity"
+				  android:label="@string/guiOhmsLaw" android:windowSoftInputMode="adjustResize">
+			<meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.stcarlso.goece.ECEActivity"/>
+		</activity>
 	</application>
 </manifest>

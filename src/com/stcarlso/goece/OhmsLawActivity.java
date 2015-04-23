@@ -25,21 +25,27 @@
 package com.stcarlso.goece;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 /**
- * Fragment which displays all items on the Analog tab.
+ * Very simple Ohm's law activity. Everyone should know it, but this adds engineering value
+ * goodness! (uA, mV, Gohm anyone?)
  */
-public class AnalogFragment extends MenuFragment {
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final View view = inflater.inflate(R.layout.analog, container, false);
-		// Configure all buttons
-		setButtonEvent(view, R.id.guiColorCode, ResColorCodeActivity.class);
-		setButtonEvent(view, R.id.guiSMDResistor, SMDResistorActivity.class);
-		setButtonEvent(view, R.id.guiOhmsLaw, OhmsLawActivity.class);
-		return view;
+public class OhmsLawActivity extends ChildActivity {
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.ohmslaw);
+		setupValueEntryBox(R.id.guiOhmsCurrent);
+		setupValueEntryBox(R.id.guiOhmsResistance);
+		setupValueEntryBox(R.id.guiOhmsVoltage);
+	}
+	public void recalculate() {
+		// TODO Update correct field!
+		final ValueEntryBox v = (ValueEntryBox)findViewById(R.id.guiOhmsVoltage);
+		final ValueEntryBox i = (ValueEntryBox)findViewById(R.id.guiOhmsCurrent);
+		final ValueEntryBox r = (ValueEntryBox)findViewById(R.id.guiOhmsResistance);
+		final EngineeringValue volts = v.getValue(), ohms = r.getValue();
+		if (ohms.getValue() > 0.0)
+			i.setValue(new EngineeringValue(volts.getValue() / ohms.getValue(),
+				i.getValue().getUnits()));
 	}
 }

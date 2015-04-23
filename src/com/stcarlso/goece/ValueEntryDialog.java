@@ -48,9 +48,14 @@ public class ValueEntryDialog extends DialogFragment implements
 	 * @return the dialog object for event attachment and eventual show()
 	 */
 	public static ValueEntryDialog create(final EngineeringValue value, final String desc) {
-		final ValueEntryDialog dialog = new ValueEntryDialog();
-		dialog.setDescription(desc);
-		dialog.setValue(value);
+		final ValueEntryDialog dialog;
+		if (value != null) {
+			// Create dialog and set description/value
+			dialog = new ValueEntryDialog();
+			dialog.setDescription(desc);
+			dialog.setValue(value);
+		} else
+			dialog = null;
 		return dialog;
 	}
 
@@ -59,13 +64,35 @@ public class ValueEntryDialog extends DialogFragment implements
 	 */
 	private String desc;
 	/**
+	 * Reference to the drop-down list of unit selections.
+	 */
+	private Spinner unitSelect;
+	/**
+	 * The optional listener to be fired when the value is changed.
+	 */
+	private OnCalculateListener listener;
+	/**
+	 * Reference to the edit box containing the user's new value.
+	 */
+	private EditText valueEntry;
+	/**
 	 * The last successfully entered or set value.
 	 */
 	private EngineeringValue value;
 
 	public ValueEntryDialog() {
 		desc = "Enter new value";
+		unitSelect = null;
+		valueEntry = null;
+		listener = null;
 		value = new EngineeringValue(0.0);
+	}
+	/**
+	 * Fires the recalculate method of the attached listener, if it exists.
+	 */
+	protected void callOnCalculateListener() {
+		if (listener != null)
+			listener.onValueChange(getValue());
 	}
 	/**
 	 * Get the value entered by the user; if no value was entered, or if Cancel was selected,
@@ -77,7 +104,17 @@ public class ValueEntryDialog extends DialogFragment implements
 		return value;
 	}
 	public void onClick(DialogInterface dialog, int which) {
-		dismiss();
+		// Load value and unit
+		if (valueEntry != null && unitSelect != null)
+			try {
+				final double newValue = Double.parseDouble(valueEntry.getText().toString());
+				// Load the new value
+				value = new EngineeringValue(EngineeringValue.valueFromSigExp(newValue,
+					unitSelect.getSelectedItemPosition()), value);
+				// If we fail, do not close the dialog
+				callOnCalculateListener();
+				dismiss();
+			} catch (NumberFormatException ignore) { }
 	}
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		final Activity act = getActivity();
@@ -95,13 +132,14 @@ public class ValueEntryDialog extends DialogFragment implements
 			android.R.layout.simple_spinner_item, unitList);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		// Assign to dropdown
-		final Spinner dropdown = (Spinner)dialog.findViewById(R.id.guiValueExp);
-		dropdown.setAdapter(adapter);
-		dropdown.setSelection(value.getSIPrefixCode());
+		unitSelect = (Spinner)dialog.findViewById(R.id.guiValueExp);
+		unitSelect.setAdapter(adapter);
+		unitSelect.setSelection(value.getSIPrefixCode());
 		// Load text
-		final EditText realValue = (EditText)dialog.findViewById(R.id.guiValue);
-		realValue.setText(Double.toString(value.getSignificand()));
-		ECEActivity.initShowSoftKeyboard(realValue);
+		valueEntry = (EditText)dialog.findViewById(R.id.guiValue);
+		valueEntry.setText(value.significandToString());
+		valueEntry.selectAll();
+		ECEActivity.initShowSoftKeyboard(valueEntry);
 		builder.setTitle(desc);
 		// Create OK and Cancel buttons
 		builder.setPositiveButton(R.string.ok, this);
@@ -117,6 +155,14 @@ public class ValueEntryDialog extends DialogFragment implements
 		this.desc = desc;
 	}
 	/**
+	 * Changes the listener fired when the value is changed and recalculation is required.
+	 *
+	 * @param listener the listener to be fired
+	 */
+	public void setOnCalculateListener(final OnCalculateListener listener) {
+		this.listener = listener;
+	}
+	/**
 	 * Presets the value in this dialog box.
 	 *
 	 * @param value the current value
@@ -124,5 +170,19 @@ public class ValueEntryDialog extends DialogFragment implements
 	protected void setValue(final EngineeringValue value) {
 		if (value != null)
 			this.value = value;
+	}
+
+	/**
+	 * Since ValueEntryDialog is usually created and left for dead, the Calculatable listener
+	 * will do us no good as the receiver will have no records of our existence (sob). So we
+	 * use a different listener that includes the EngineeringValue entered.
+	 */
+	public interface OnCalculateListener {
+		/**
+		 * Invoked when the value is changed.
+		 *
+		 * @param newValue the new value
+		 */
+		void onValueChange(EngineeringValue newValue);
 	}
 }
