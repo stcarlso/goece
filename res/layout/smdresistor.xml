@@ -48,6 +48,6 @@
 				  android:text="@string/guiResInitialValue" android:selectAllOnFocus="true"
 				  android:ems="4"/>
 		<Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:text="@string/guiCalculate" android:onClick="onClick"/>
+				android:text="@string/calculate" android:onClick="onClick"/>
 	</LinearLayout>
 </RelativeLayout>

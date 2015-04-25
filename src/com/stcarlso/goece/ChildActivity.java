@@ -31,12 +31,48 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.view.MenuItem;
+import android.view.View;
+
+import java.util.*;
 
 /**
  * An activity parent which handles the up action gracefully and fixes the gross problem with
  * value entry boxes needing a parent.
  */
 public abstract class ChildActivity extends Activity implements Calculatable {
+	/**
+	 * History of fields that were changed, with the most recently changed at the front.
+	 */
+	private LinkedList<Integer> recalcHistory;
+
+	protected ChildActivity() {
+		recalcHistory = new LinkedList<Integer>();
+	}
+	/**
+	 * Retrieves the value of the specified value entry box.
+	 *
+	 * @param id the entry box to fetch
+	 * @return the value in that box
+	 */
+	protected EngineeringValue getValueEntry(final int id) {
+		return ((ValueEntryBox)findViewById(id)).getValue();
+	}
+	/**
+	 * Returns the view ID of the registered view which was least recently changed.
+	 *
+	 * @return the ID of the registered view with the oldest value
+	 */
+	protected int leastRecentlyChanged() {
+		return recalcHistory.getLast();
+	}
+	/**
+	 * Returns the view ID of the registered view which was most recently changed.
+	 *
+	 * @return the ID of the view that was just changed
+	 */
+	protected int mostRecentlyChanged() {
+		return recalcHistory.getFirst();
+	}
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		final ActionBar bar = getActionBar();
@@ -49,11 +85,11 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 		case android.R.id.home:
 			// Find the parent activity
 			final Intent upIntent = NavUtils.getParentActivityIntent(this);
-			if (NavUtils.shouldUpRecreateTask(this, upIntent)) {
+			if (NavUtils.shouldUpRecreateTask(this, upIntent))
 				// Launched from another application, create a new task
 				TaskStackBuilder.create(this).addNextIntentWithParentStack(upIntent).
 					startActivities();
-			} else
+			else
 				// No need to create a new back stack
 				NavUtils.navigateUpTo(this, upIntent);
 			break;
@@ -63,14 +99,60 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 		return super.onOptionsItemSelected(item);
 	}
 	/**
+	 * Call when a view is changed to moves it to the front of the adjustable list.
+	 *
+	 * @param view the view which was just modified
+	 * @return the value of leastRecentlyChanged(), or -1 if the view argument was not found
+	 */
+	protected int pushAdjustment(final View view) {
+		final int id = view.getId();
+		int idx = -1;
+		// Iterate through and pull it to the front
+		final Iterator<Integer> lookup = recalcHistory.iterator();
+		while (idx < 0 && lookup.hasNext()) {
+			final int newID = lookup.next();
+			if (id == newID) {
+				// Found it
+				lookup.remove();
+				recalcHistory.addFirst(id);
+				idx = leastRecentlyChanged();
+			}
+		}
+		return idx;
+	}
+	/**
+	 * Registers the control as an adjustable that will follow the LRU rules (least recently
+	 * used) rules to determine the value to be calculated.
+	 *
+	 * @param view the control to add to the list; the last control added initially is the
+	 * first to be adjusted!
+	 */
+	protected void registerAdjustable(final View view) {
+		recalcHistory.add(view.getId());
+	}
+	/**
 	 * Sets the listener and parent activity of the specified value entry box. Useful for the
 	 * vast majority of activities.
 	 *
 	 * @param id the entry box to configure
 	 */
-	public void setupValueEntryBox(final int id) {
+	protected void setupValueEntryBox(final int id) {
 		final ValueEntryBox box = ((ValueEntryBox)findViewById(id));
 		box.setParentActivity(this);
 		box.setOnCalculateListener(this);
+		registerAdjustable(box);
+	}
+	/**
+	 * Changes the value of the specified value entry box.
+	 *
+	 * @param id the entry box to modify
+	 * @param newValue the value to be set
+	 * @return the old value of that box
+	 */
+	protected EngineeringValue setValueEntry(final int id, final EngineeringValue newValue) {
+		final ValueEntryBox box = ((ValueEntryBox)findViewById(id));
+		final EngineeringValue oldValue = box.getValue();
+		box.setValue(newValue);
+		return oldValue;
 	}
 }

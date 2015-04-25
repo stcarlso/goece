@@ -67,7 +67,7 @@ public class ColorBand extends LinearLayout implements View.OnClickListener {
 	 */
 	protected void callOnCalculateListener() {
 		if (listener != null)
-			listener.recalculate();
+			listener.recalculate(this);
 	}
 	private void init(final Context context, final AttributeSet attrs) {
 		View.inflate(context, R.layout.colorband, this);

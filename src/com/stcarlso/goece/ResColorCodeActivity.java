@@ -26,6 +26,7 @@ package com.stcarlso.goece;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 /**
@@ -87,11 +88,7 @@ public class ResColorCodeActivity extends ChildActivity {
 		super();
 		bands = new ColorBand[5];
 	}
-	/**
-	 * Recalculates the resistor value and checks to see if it is actually available in that
-	 * EIA tolerance series.
-	 */
-	public void recalculate() {
+	public void recalculate(final View source) {
 		final TextView output = (TextView)findViewById(R.id.guiResValue);
 		final int tol = bands[4].getValue();
 		// Calculate prefix
@@ -140,7 +137,7 @@ public class ResColorCodeActivity extends ChildActivity {
 		bands[2] = (ColorBand)findViewById(R.id.guiResBand3);
 		bands[3] = (ColorBand)findViewById(R.id.guiResBand4);
 		bands[4] = (ColorBand)findViewById(R.id.guiResBand5);
-		recalculate();
+		recalculate(bands[4]);
 		// Add click listeners
 		for (ColorBand band : bands)
 			band.setOnCalculateListener(this);

@@ -24,10 +24,17 @@
 
 package com.stcarlso.goece;
 
+import android.view.View;
+
 /**
- * An event handler for recalculation events. This class is triggered by ValueEntryBox and/or
- * ValueEntryDialog when recalculation is necessary.
+ * An event handler for recalculation events. This class is triggered by view classes when
+ * recalculation is necessary.
  */
 public interface Calculatable {
-	void recalculate();
+	/**
+	 * Called when the activity should recalculate values.
+	 *
+	 * @param source the view which was modified to trigger this event
+	 */
+	void recalculate(final View source);
 }

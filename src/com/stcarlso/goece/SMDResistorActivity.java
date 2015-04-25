@@ -148,12 +148,14 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	 * @param v the source view
 	 */
 	public void onClick(View v) {
-		recalculate();
+		recalculate(v);
 	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.smdresistor);
+		// Add listener to calculate on press
+		final View codeIn = findViewById(R.id.guiResSMDCode);
 		EnterKeyListener.addListener(this, R.id.guiResSMDCode, this);
 		if (savedInstanceState != null && savedInstanceState.containsKey("lastCode")) {
 			// Retrieve the code from a saved execution
@@ -161,8 +163,8 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 			calculate(lastCode, false);
 		} else
 			// Will set the last value appropriately
-			recalculate();
-		ECEActivity.initShowSoftKeyboard(findViewById(R.id.guiResSMDCode));
+			recalculate(codeIn);
+		ECEActivity.initShowSoftKeyboard(codeIn);
 	}
 	@Override
 	protected void onRestoreInstanceState(Bundle state) {
@@ -175,11 +177,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 		super.onSaveInstanceState(outState);
 		outState.putString("lastCode", lastCode);
 	}
-	/**
-	 * Recalculates the resistor value and checks to see if it is actually available in that
-	 * EIA tolerance series.
-	 */
-	public void recalculate() {
+	public void recalculate(final View source) {
 		final EditText input = (EditText)findViewById(R.id.guiResSMDCode);
 		final boolean underline = ((CheckBox)findViewById(R.id.guiResLine)).isChecked();
 		// If underlined, prepend "R"

@@ -25,6 +25,7 @@
 package com.stcarlso.goece;
 
 import android.os.Bundle;
+import android.view.View;
 
 /**
  * Very simple Ohm's law activity. Everyone should know it, but this adds engineering value
@@ -34,18 +35,38 @@ public class OhmsLawActivity extends ChildActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ohmslaw);
+		// Register value entry boxes
 		setupValueEntryBox(R.id.guiOhmsCurrent);
 		setupValueEntryBox(R.id.guiOhmsResistance);
 		setupValueEntryBox(R.id.guiOhmsVoltage);
+		recalculate(findViewById(R.id.guiOhmsVoltage));
 	}
-	public void recalculate() {
-		// TODO Update correct field!
-		final ValueEntryBox v = (ValueEntryBox)findViewById(R.id.guiOhmsVoltage);
-		final ValueEntryBox i = (ValueEntryBox)findViewById(R.id.guiOhmsCurrent);
-		final ValueEntryBox r = (ValueEntryBox)findViewById(R.id.guiOhmsResistance);
-		final EngineeringValue volts = v.getValue(), ohms = r.getValue();
-		if (ohms.getValue() > 0.0)
-			i.setValue(new EngineeringValue(volts.getValue() / ohms.getValue(),
-				i.getValue().getUnits()));
+	public void recalculate(final View source) {
+		final EngineeringValue volts = getValueEntry(R.id.guiOhmsVoltage),
+			ohms = getValueEntry(R.id.guiOhmsResistance),
+			amps = getValueEntry(R.id.guiOhmsCurrent);
+		// Raw values
+		final double v = volts.getValue(), i = amps.getValue(), r = ohms.getValue();
+		final int id = pushAdjustment(source);
+		// Push onto stack
+		switch (id) {
+		case R.id.guiOhmsVoltage:
+			// Update voltage
+			setValueEntry(R.id.guiOhmsVoltage, new EngineeringValue(i * r, volts));
+			break;
+		case R.id.guiOhmsCurrent:
+			// Update current
+			if (r > 0.0)
+				setValueEntry(R.id.guiOhmsCurrent, new EngineeringValue(v / r, amps));
+			break;
+		case R.id.guiOhmsResistance:
+			// Update resistance
+			if (i > 0.0)
+				setValueEntry(R.id.guiOhmsResistance, new EngineeringValue(v / i, ohms));
+			break;
+		default:
+			// Invalid
+			break;
+		}
 	}
 }
