@@ -24,57 +24,25 @@
 
 package com.stcarlso.goece;
 
-/**
- * A class listing available units for EngineeringValue.
- */
-public interface Units {
-	/**
-	 * Indicate capacitance values with "C"
-	 */
-	String CAPACITANCE = "C";
-	/**
-	 * Indicate current values with "A"
-	 */
-	String CURRENT = "A";
-	/**
-	 * Indicate inductance values with "H"
-	 */
-	String INDUCTANCE = "H";
-	/**
-	 * Indicate power units with "W"
-	 */
-	String POWER = "W";
-	/**
-	 * Indicate resistance values with the Greek capital omega (ohm) symbol.
-	 */
-	String RESISTANCE = "\u03A9";
-	/**
-	 * Indicate voltage values with "V"
-	 */
-	String VOLTAGE = "V";
+import android.content.SharedPreferences;
 
+/**
+ * A simple marker interface common to custom controls which allows their state to be saved
+ * and restored to the application preferences.
+ */
+public interface Restorable {
 	/**
-	 * 20% tolerance
+	 * Loads the state of this control. If no state is available, nothing should happen. The
+	 * same ID as in saveState() must be used.
+	 *
+	 * @param prefs the location of the state to restore
 	 */
-	double TOL_20P = 0.2;
+	void loadState(SharedPreferences prefs);
 	/**
-	 * 10% tolerance
+	 * Save the state of this control. It should be saved with a unique ID, preferably the
+	 * integer ID of the field.
+	 *
+	 * @param prefs the location where the state will be stored
 	 */
-	double TOL_10P = 0.1;
-	/**
-	 * 5% tolerance, fairly common
-	 */
-	double TOL_5P = 0.05;
-	/**
-	 * 2% tolerance
-	 */
-	double TOL_2P = 0.02;
-	/**
-	 * 1% tolerance
-	 */
-	double TOL_1P = 0.01;
-	/**
-	 * 0.1% tolerance
-	 */
-	double TOL_P1 = 0.001;
+	void saveState(SharedPreferences.Editor prefs);
 }

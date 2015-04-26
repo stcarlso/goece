@@ -25,6 +25,7 @@
 package com.stcarlso.goece;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.os.Parcelable;
 import android.util.AttributeSet;
@@ -36,7 +37,7 @@ import android.widget.LinearLayout;
 /**
  * A component which displays colors on the screen and can be checked for the selected color.
  */
-public class ColorBand extends LinearLayout implements View.OnClickListener {
+public class ColorBand extends LinearLayout implements View.OnClickListener, Restorable {
 	/**
 	 * Copies of the buttons on the screen.
 	 */
@@ -143,6 +144,14 @@ public class ColorBand extends LinearLayout implements View.OnClickListener {
 			setValue(0);
 			break;
 		}
+	}
+	public void loadState(SharedPreferences prefs) {
+		final int idx = prefs.getInt(Integer.toString(getId()), -1);
+		if (idx >= 0 && idx < colors.length)
+			setValue(idx);
+	}
+	public void saveState(SharedPreferences.Editor prefs) {
+		prefs.putInt(Integer.toString(getId()), getValue());
 	}
 	public void onClick(View view) {
 		final int id = view.getId(), oldValue = value;

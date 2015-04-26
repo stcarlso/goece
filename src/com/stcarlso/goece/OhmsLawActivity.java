@@ -26,6 +26,7 @@ package com.stcarlso.goece;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 
 /**
  * Very simple Ohm's law activity. Everyone should know it, but this adds engineering value
@@ -39,34 +40,70 @@ public class OhmsLawActivity extends ChildActivity {
 		setupValueEntryBox(R.id.guiOhmsCurrent);
 		setupValueEntryBox(R.id.guiOhmsResistance);
 		setupValueEntryBox(R.id.guiOhmsVoltage);
+		loadPrefs();
 		recalculate(findViewById(R.id.guiOhmsVoltage));
 	}
 	public void recalculate(final View source) {
-		final EngineeringValue volts = getValueEntry(R.id.guiOhmsVoltage),
-			ohms = getValueEntry(R.id.guiOhmsResistance),
-			amps = getValueEntry(R.id.guiOhmsCurrent);
+		final ValueEntryBox volts = (ValueEntryBox)findViewById(R.id.guiOhmsVoltage);
+		final ValueEntryBox ohms = (ValueEntryBox)findViewById(R.id.guiOhmsResistance);
+		final ValueEntryBox amps = (ValueEntryBox)findViewById(R.id.guiOhmsCurrent);
 		// Raw values
-		final double v = volts.getValue(), i = amps.getValue(), r = ohms.getValue();
-		final int id = pushAdjustment(source);
+		final double v = volts.getRawValue(), i = amps.getRawValue(), r = ohms.getRawValue();
 		// Push onto stack
+		final int id = pushAdjustment(source);
 		switch (id) {
 		case R.id.guiOhmsVoltage:
 			// Update voltage
-			setValueEntry(R.id.guiOhmsVoltage, new EngineeringValue(i * r, volts));
+			setValueEntry(volts, i * r);
+			updatePower(i * i * r);
+			amps.setError(null);
+			ohms.setError(null);
 			break;
 		case R.id.guiOhmsCurrent:
 			// Update current
-			if (r > 0.0)
-				setValueEntry(R.id.guiOhmsCurrent, new EngineeringValue(v / r, amps));
+			if (r > 0.0) {
+				setValueEntry(amps, v / r);
+				updatePower(v * v / r);
+			} else {
+				setErrorEntry(amps, R.string.guiOhmsResError);
+				updatePower(Double.NaN);
+			}
+			volts.setError(null);
+			ohms.setError(null);
 			break;
 		case R.id.guiOhmsResistance:
 			// Update resistance
-			if (i > 0.0)
-				setValueEntry(R.id.guiOhmsResistance, new EngineeringValue(v / i, ohms));
+			if (i > 0.0) {
+				setValueEntry(ohms, v / i);
+				updatePower(v * i);
+			} else {
+				setErrorEntry(ohms, R.string.guiOhmsCurError);
+				updatePower(Double.NaN);
+			}
+			volts.setError(null);
+			amps.setError(null);
 			break;
 		default:
 			// Invalid
 			break;
 		}
+	}
+	/**
+	 * Update the text area with the power dissipated.
+	 *
+	 * @param power the calculated power in W
+	 */
+	private void updatePower(final double power) {
+		final String label = getString(R.string.power), data;
+		final TextView view = (TextView)findViewById(R.id.guiOhmsPower);
+		// Power overwhelming
+		if (Double.isNaN(power)) {
+			data = "Overwhelming!";
+			view.setError("Power overwhelming!");
+		} else {
+			view.setError(null);
+			data = new EngineeringValue(power, Units.POWER).toString();
+		}
+		view.setText(label + ": " + data);
 	}
 }

@@ -24,57 +24,30 @@
 
 package com.stcarlso.goece;
 
-/**
- * A class listing available units for EngineeringValue.
- */
-public interface Units {
-	/**
-	 * Indicate capacitance values with "C"
-	 */
-	String CAPACITANCE = "C";
-	/**
-	 * Indicate current values with "A"
-	 */
-	String CURRENT = "A";
-	/**
-	 * Indicate inductance values with "H"
-	 */
-	String INDUCTANCE = "H";
-	/**
-	 * Indicate power units with "W"
-	 */
-	String POWER = "W";
-	/**
-	 * Indicate resistance values with the Greek capital omega (ohm) symbol.
-	 */
-	String RESISTANCE = "\u03A9";
-	/**
-	 * Indicate voltage values with "V"
-	 */
-	String VOLTAGE = "V";
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
 
-	/**
-	 * 20% tolerance
-	 */
-	double TOL_20P = 0.2;
-	/**
-	 * 10% tolerance
-	 */
-	double TOL_10P = 0.1;
-	/**
-	 * 5% tolerance, fairly common
-	 */
-	double TOL_5P = 0.05;
-	/**
-	 * 2% tolerance
-	 */
-	double TOL_2P = 0.02;
-	/**
-	 * 1% tolerance
-	 */
-	double TOL_1P = 0.01;
-	/**
-	 * 0.1% tolerance
-	 */
-	double TOL_P1 = 0.001;
+/**
+ * Calculate the reactance of capacitors and inductors at a given frequency, and perform angle
+ * and magnitude calculations of the complex impedance.
+ */
+public class ImpedanceActivity extends ChildActivity {
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.impedance);
+		setupValueEntryBox(R.id.guiImpedCap);
+		setupValueEntryBox(R.id.guiImpedFreq);
+		setupValueEntryBox(R.id.guiImpedImp);
+		setupValueEntryBox(R.id.guiImpedInd);
+		setupValueEntryBox(R.id.guiImpedPha);
+		setupValueEntryBox(R.id.guiImpedReact);
+		setupValueEntryBox(R.id.guiImpedRes);
+		loadPrefs();
+		recalculate(findViewById(R.id.guiImpedRes));
+	}
+	public void recalculate(View source) {
+
+	}
 }

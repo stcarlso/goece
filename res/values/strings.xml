@@ -24,33 +24,43 @@
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 <resources>
-  <!-- App wide resources -->
-  <string name="app_name">Go ECE!</string>
-  <string name="cancel">Cancel</string>
-  <string name="error">Error</string>
-  <string name="ok">OK</string>
-  <string name="calculate">Calculate</string>
-  <!-- These show up pretty often -->
-  <string name="voltage">Voltage</string>
-  <string name="current">Current</string>
-  <string name="resist">Resistance</string>
-  <string name="react">Reactance</string>
-  <string name="imped">Impedance</string>
-  <string name="power">Power</string>
-  <string name="induct">Inductance</string>
-  <string name="capacit">Capacitance</string>
-  <!-- Activity names and titles -->
-  <string name="guiTabAnalog">Analog</string>
-  <string name="guiTabDigital">Digital</string>
-  <string name="guiTabCircuits">Circuits</string>
-  <string name="guiKMapper">K-Map Generator</string>
-  <string name="guiColorCode">Resistor Color Code</string>
-  <string name="guiSMDResistor">SMD Resistor Code</string>
-  <string name="guiOhmsLaw">Ohm\'s Law and Power</string>
-  <!-- Resources for individual activities -->
-  <!-- SMD resistor code -->
-  <string name="guiResLine">Value is underlined</string>
-  <string name="guiResInvalid">Invalid resistor code.</string>
-  <string name="guiResInitialValue">103</string>
-  <!-- Ohm's law -->
+	<!-- App wide resources -->
+	<string name="app_name">Go ECE!</string>
+	<string name="cancel">Cancel</string>
+	<string name="error">Error</string>
+	<string name="ok">OK</string>
+	<string name="calculate">Calculate</string>
+	<!-- These show up pretty often -->
+	<string name="voltage">Voltage</string>
+	<string name="current">Current</string>
+	<string name="resist">Resistance</string>
+	<string name="react">Reactance</string>
+	<string name="imped">Impedance</string>
+	<string name="power">Power</string>
+	<string name="induct">Inductance</string>
+	<string name="capacit">Capacitance</string>
+	<string name="freq">Frequency</string>
+	<string name="period">Period</string>
+	<string name="mag">Magnitude</string>
+	<string name="phase">Phase</string>
+	<string name="amplit">Amplitude</string>
+	<string name="pktopk">Peak-to-Peak</string>
+	<string name="rms">RMS</string>
+	<!-- Activity names and titles -->
+	<string name="guiTabAnalog">Analog</string>
+	<string name="guiTabDigital">Digital</string>
+	<string name="guiTabCircuits">Circuits</string>
+	<string name="guiKMapper">K-Map Generator</string>
+	<string name="guiColorCode">Resistor Color Code</string>
+	<string name="guiSMDResistor">SMD Resistor Code</string>
+	<string name="guiOhmsLaw">Ohm\'s Law and Power</string>
+	<string name="guiImpedance">Impedance</string>
+	<!-- Resources for individual activities -->
+	<!-- SMD resistor code -->
+	<string name="guiResLine">Value is underlined</string>
+	<string name="guiResInvalid">Invalid resistor code.</string>
+	<string name="guiResInitialValue">103</string>
+	<!-- Ohm's law -->
+	<string name="guiOhmsResError">Resistance cannot be zero.</string>
+	<string name="guiOhmsCurError">Current cannot be zero.</string>
 </resources>

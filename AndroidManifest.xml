@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-		  package="com.stcarlso.goece"
-		  android:versionCode="1"
-		  android:versionName="1.0">
-	<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="21" />
-	<application android:label="@string/app_name" android:icon="@drawable/ic_launcher" android:allowBackup="true">
-		<activity android:name="com.stcarlso.goece.ECEActivity"
-				  android:label="@string/app_name">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1"
+		  package="com.stcarlso.goece" android:versionName="1.0">
+	<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="21"/>
+	<application android:label="@string/app_name" android:icon="@drawable/ic_launcher"
+				 android:allowBackup="true">
+		<activity android:name="com.stcarlso.goece.ECEActivity" android:label="@string/app_name">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 				<category android:name="android.intent.category.LAUNCHER"/>
@@ -14,15 +12,23 @@
 		</activity>
 		<activity android:name="com.stcarlso.goece.ResColorCodeActivity"
 				  android:label="@string/guiColorCode" android:windowSoftInputMode="adjustResize">
-			<meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.stcarlso.goece.ECEActivity"/>
+			<meta-data android:name="android.support.PARENT_ACTIVITY"
+					   android:value="com.stcarlso.goece.ECEActivity"/>
 		</activity>
 		<activity android:name="com.stcarlso.goece.SMDResistorActivity"
 				  android:label="@string/guiSMDResistor" android:windowSoftInputMode="adjustResize">
-			<meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.stcarlso.goece.ECEActivity"/>
+			<meta-data android:name="android.support.PARENT_ACTIVITY"
+					   android:value="com.stcarlso.goece.ECEActivity"/>
 		</activity>
 		<activity android:name="com.stcarlso.goece.OhmsLawActivity"
 				  android:label="@string/guiOhmsLaw" android:windowSoftInputMode="adjustResize">
-			<meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.stcarlso.goece.ECEActivity"/>
+			<meta-data android:name="android.support.PARENT_ACTIVITY"
+					   android:value="com.stcarlso.goece.ECEActivity"/>
+		</activity>
+		<activity android:name="com.stcarlso.goece.ImpedanceActivity"
+				  android:label="@string/guiImpedance" android:windowSoftInputMode="adjustResize">
+			<meta-data android:name="android.support.PARENT_ACTIVITY"
+					   android:value="com.stcarlso.goece.ECEActivity"/>
 		</activity>
 	</application>
 </manifest>

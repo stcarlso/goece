@@ -65,7 +65,6 @@ public class ResColorCodeActivity extends ChildActivity {
 		return isStandard;
 	}
 
-
 	/**
 	 * The resistor power-of-10 multiplier for each possible 3rd (4th) band value.
 	 */
@@ -137,9 +136,12 @@ public class ResColorCodeActivity extends ChildActivity {
 		bands[2] = (ColorBand)findViewById(R.id.guiResBand3);
 		bands[3] = (ColorBand)findViewById(R.id.guiResBand4);
 		bands[4] = (ColorBand)findViewById(R.id.guiResBand5);
-		recalculate(bands[4]);
 		// Add click listeners
-		for (ColorBand band : bands)
+		for (ColorBand band : bands) {
 			band.setOnCalculateListener(this);
+			registerAdjustable(band);
+		}
+		loadPrefs();
+		recalculate(bands[4]);
 	}
 }

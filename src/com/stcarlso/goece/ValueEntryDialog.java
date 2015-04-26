@@ -122,10 +122,10 @@ public class ValueEntryDialog extends DialogFragment implements
 		// Load layout
 		final View dialog = act.getLayoutInflater().inflate(R.layout.valueentry, null);
 		builder.setView(dialog);
-		// Populate the unit choices
+		// Populate the unit choices, skip the last (invalid) choice
 		final String[] prefix = EngineeringValue.ENGR_NAMES,
-			unitList = new String[prefix.length];
-		for (int i = 0; i < prefix.length; i++)
+			unitList = new String[prefix.length - 1];
+		for (int i = 0; i < unitList.length; i++)
 			unitList[i] = prefix[i] + value.getUnits();
 		// Create array adapter
 		final ArrayAdapter<String> adapter = new ArrayAdapter<String>(act,

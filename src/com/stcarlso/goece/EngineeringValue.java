@@ -142,13 +142,13 @@ public class EngineeringValue implements Serializable {
 		final double absValue = Math.abs(value);
 		// Do not allow NaN or inf
 		if (Double.isNaN(value) || Double.isInfinite(value))
-			throw new IllegalArgumentException("value");
+			throw new IllegalArgumentException("value: " + value);
 		if (units == null)
 			throw new NullPointerException("units");
 		if (tolerance < 0.0 || tolerance >= 1.0)
-			throw new IllegalArgumentException("tolerance");
+			throw new IllegalArgumentException("tolerance: " + tolerance);
 		if (sigfigs < 1 || sigfigs > 14)
-			throw new IllegalArgumentException("significant figures");
+			throw new IllegalArgumentException("significant figures: " + sigfigs);
 		// Initialize tolerance and units
 		raw = value;
 		this.sigfigs = sigfigs;
@@ -236,6 +236,15 @@ public class EngineeringValue implements Serializable {
 	public int hashCode() {
 		final long temp = Double.doubleToLongBits(getValue());
 		return 31 * (int)(temp ^ (temp >>> 32)) + getUnits().hashCode();
+	}
+	/**
+	 * Convenience method to copy the metadata of this value into a new object.
+	 *
+	 * @param newRaw the new raw value
+	 * @return a new instance with the specified value, but units and tolerance from this object
+	 */
+	public EngineeringValue newValue(final double newRaw) {
+		return new EngineeringValue(newRaw, this);
 	}
 	/**
 	 * Returns the significand of this value rounded to the significant figures places. Does

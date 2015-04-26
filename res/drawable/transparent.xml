@@ -4,12 +4,12 @@
 		<selector>
 			<item android:state_selected="true">
 				<shape android:shape="rectangle">
-					<stroke android:width="4dp" android:color="#66CCFF" />
+					<stroke android:width="4dp" android:color="#66CCFF"/>
 				</shape>
 			</item>
 			<item>
 				<shape android:shape="rectangle">
-					<stroke android:width="2dp" android:color="#FFFFFF" />
+					<stroke android:width="2dp" android:color="#FFFFFF"/>
 				</shape>
 			</item>
 		</selector>

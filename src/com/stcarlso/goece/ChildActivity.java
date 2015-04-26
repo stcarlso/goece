@@ -27,11 +27,14 @@ package com.stcarlso.goece;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.CheckBox;
+import android.widget.TextView;
 
 import java.util.*;
 
@@ -41,6 +44,17 @@ import java.util.*;
  */
 public abstract class ChildActivity extends Activity implements Calculatable {
 	/**
+	 * Changes the value of the specified value entry box.
+	 *
+	 * @param box the entry box to modify
+	 * @param newValue the value to be set
+	 */
+	protected static void setValueEntry(final ValueEntryBox box, final double newValue) {
+		box.setValue(box.getValue().newValue(newValue));
+		box.setError(null);
+	}
+
+	/**
 	 * History of fields that were changed, with the most recently changed at the front.
 	 */
 	private LinkedList<Integer> recalcHistory;
@@ -49,21 +63,56 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 		recalcHistory = new LinkedList<Integer>();
 	}
 	/**
-	 * Retrieves the value of the specified value entry box.
-	 *
-	 * @param id the entry box to fetch
-	 * @return the value in that box
-	 */
-	protected EngineeringValue getValueEntry(final int id) {
-		return ((ValueEntryBox)findViewById(id)).getValue();
-	}
-	/**
 	 * Returns the view ID of the registered view which was least recently changed.
 	 *
 	 * @return the ID of the registered view with the oldest value
 	 */
 	protected int leastRecentlyChanged() {
 		return recalcHistory.getLast();
+	}
+	/**
+	 * Method for subclasses to override for restoration of standard Android objects not loaded
+	 * automatically by the loadPrefs method (not Restorable).
+	 *
+	 * @param prefs the preference location to read the preferences
+	 */
+	protected void loadCustomPrefs(SharedPreferences prefs) { }
+	/**
+	 * Loads from application settings the values of all fields registered with
+	 * registerAdjustable.
+	 */
+	protected void loadPrefs() {
+		final SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+		for (int id : recalcHistory)
+			// Restore all items marked as Restorable
+			((Restorable)findViewById(id)).loadState(prefs);
+		loadCustomPrefs(prefs);
+	}
+	/**
+	 * Loads the state of a CheckBox object from the preferences.
+	 *
+	 * @param prefs the preference location to read the preferences
+	 * @param id the ID of the control to load
+	 */
+	protected void loadPrefsCheckBox(final SharedPreferences prefs, final int id) {
+		final CheckBox view = (CheckBox)findViewById(id);
+		final String idS = Integer.toString(id);
+		// Only change if the preferences are initialized
+		if (prefs.contains(idS))
+			view.setChecked(prefs.getBoolean(idS, false));
+	}
+	/**
+	 * Loads the text of a TextView object from the preferences. This works for EditText too.
+	 *
+	 * @param prefs the preference location to read the preferences
+	 * @param id the ID of the control to load
+	 */
+	protected void loadPrefsTextView(final SharedPreferences prefs, final int id) {
+		final TextView view = (TextView)findViewById(id);
+		final String idS = Integer.toString(id);
+		// Only change if the preferences are initialized
+		if (prefs.contains(idS))
+			view.setText(prefs.getString(idS, ""));
 	}
 	/**
 	 * Returns the view ID of the registered view which was most recently changed.
@@ -98,6 +147,14 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	protected void onPause() {
+		super.onPause();
+		savePrefs();
+	}
+	protected void onResume() {
+		super.onResume();
+		loadPrefs();
+	}
 	/**
 	 * Call when a view is changed to moves it to the front of the adjustable list.
 	 *
@@ -131,6 +188,46 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 		recalcHistory.add(view.getId());
 	}
 	/**
+	 * Method for subclasses to override for the saving of standard Android objects not stored
+	 * automatically by the savePrefs method (not Restorable).
+	 *
+	 * @param prefs the preference location to store the preferences
+	 */
+	protected void saveCustomPrefs(SharedPreferences.Editor prefs) { }
+	/**
+	 * Saves to application settings the values of all fields registered with
+	 * registerAdjustable.
+	 */
+	protected void savePrefs() {
+		final SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+		final SharedPreferences.Editor editor = prefs.edit();
+		// Save all items registered as Restorable
+		for (int id : recalcHistory)
+			((Restorable)findViewById(id)).saveState(editor);
+		saveCustomPrefs(editor);
+		editor.apply();
+	}
+	/**
+	 * Saves the state of a CheckBox object in the preferences.
+	 *
+	 * @param prefs the preference location to store the preferences
+	 * @param id the ID of the control to save
+	 */
+	protected void savePrefsCheckBox(final SharedPreferences.Editor prefs, final int id) {
+		final CheckBox view = (CheckBox)findViewById(id);
+		prefs.putBoolean(Integer.toString(id), view.isChecked());
+	}
+	/**
+	 * Saves the text of a TextView object in the preferences. This works for EditText too.
+	 *
+	 * @param prefs the preference location to store the preferences
+	 * @param id the ID of the control to save
+	 */
+	protected void savePrefsTextView(final SharedPreferences.Editor prefs, final int id) {
+		final TextView view = (TextView)findViewById(id);
+		prefs.putString(Integer.toString(id), view.getText().toString());
+	}
+	/**
 	 * Sets the listener and parent activity of the specified value entry box. Useful for the
 	 * vast majority of activities.
 	 *
@@ -143,16 +240,14 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 		registerAdjustable(box);
 	}
 	/**
-	 * Changes the value of the specified value entry box.
+	 * Shows a red indicator on the value indicating that an error occurred during calculation.
+	 * Less intrusive than a dialog yet still noticeable.
 	 *
-	 * @param id the entry box to modify
-	 * @param newValue the value to be set
-	 * @return the old value of that box
+	 * @param box the entry box to show the error
+	 * @return the current value in that box
 	 */
-	protected EngineeringValue setValueEntry(final int id, final EngineeringValue newValue) {
-		final ValueEntryBox box = ((ValueEntryBox)findViewById(id));
-		final EngineeringValue oldValue = box.getValue();
-		box.setValue(newValue);
-		return oldValue;
+	protected EngineeringValue setErrorEntry(final ValueEntryBox box, final int errorID) {
+		box.setError(getString(errorID));
+		return box.getValue();
 	}
 }

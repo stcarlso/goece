@@ -24,6 +24,7 @@
 
 package com.stcarlso.goece;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -142,6 +143,10 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 			lastCode = code;
 		}
 	}
+	protected void loadCustomPrefs(SharedPreferences prefs) {
+		loadPrefsCheckBox(prefs, R.id.guiResLine);
+		loadPrefsTextView(prefs, R.id.guiResSMDCode);
+	}
 	/**
 	 * Receive click events from the calculate button and recalculate.
 	 *
@@ -157,6 +162,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 		// Add listener to calculate on press
 		final View codeIn = findViewById(R.id.guiResSMDCode);
 		EnterKeyListener.addListener(this, R.id.guiResSMDCode, this);
+		loadPrefs();
 		if (savedInstanceState != null && savedInstanceState.containsKey("lastCode")) {
 			// Retrieve the code from a saved execution
 			lastCode = savedInstanceState.getString("lastCode", lastCode);
@@ -185,6 +191,10 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 		if (underline)
 			code = "R" + code;
 		calculate(code, true);
+	}
+	protected void saveCustomPrefs(SharedPreferences.Editor prefs) {
+		savePrefsCheckBox(prefs, R.id.guiResLine);
+		savePrefsTextView(prefs, R.id.guiResSMDCode);
 	}
 	/**
 	 * Display the resistor value on screen.

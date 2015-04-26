@@ -26,26 +26,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
 			  xmlns:ece="http://schemas.android.com/apk/res/com.stcarlso.goece"
-			  android:layout_width="match_parent" android:layout_height="match_parent"
-			  tools:context=".OhmsLawActivity">
-
-	<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
-									  android:layout_height="wrap_content" ece:units="V"
-									  android:layout_gravity="center_horizontal"
-									  android:id="@+id/guiOhmsVoltage" ece:value="1.0"
-									  ece:description="@string/voltage"/>
-	<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
-									  android:layout_height="wrap_content" ece:units="A"
-									  android:layout_gravity="center_horizontal"
-									  android:id="@+id/guiOhmsCurrent" ece:value="1.0"
-									  ece:description="@string/current"/>
+			  android:layout_width="match_parent" android:layout_height="match_parent">
 	<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
 									  android:layout_height="wrap_content" ece:units="Ω"
+									  android:id="@+id/guiImpedRes" ece:value="10"
 									  android:layout_gravity="center_horizontal"
-									  android:id="@+id/guiOhmsResistance" ece:value="1.0"
 									  ece:description="@string/resist"/>
-	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:id="@+id/guiOhmsPower" android:layout_gravity="center_horizontal"
-			  android:layout_marginTop="40dp"
-			  android:textAppearance="@android:style/TextAppearance.Large"/>
+	<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
+									  android:layout_height="wrap_content" ece:units="F"
+									  android:id="@+id/guiImpedCap" ece:value="1E-6"
+									  android:layout_gravity="center_horizontal"
+									  ece:description="@string/capacit"/>
+	<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
+									  android:layout_height="wrap_content" ece:units="H"
+									  android:id="@+id/guiImpedInd" ece:value="1E-6"
+									  android:layout_gravity="center_horizontal"
+									  ece:description="@string/induct"/>
+	<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
+									  android:layout_height="wrap_content" ece:units="Hz"
+									  android:id="@+id/guiImpedFreq" ece:value="1000"
+									  android:layout_gravity="center_horizontal"
+									  ece:description="@string/freq"/>
+	<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
+									  android:layout_marginTop="40dp"
+									  android:layout_height="wrap_content" ece:units="Ω"
+									  android:id="@+id/guiImpedReact" ece:value="0.001"
+									  android:layout_gravity="center_horizontal"
+									  ece:description="@string/react"/>
+	<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
+									  android:layout_height="wrap_content" ece:units="Ω"
+									  android:id="@+id/guiImpedImp" ece:value="0.001"
+									  android:layout_gravity="center_horizontal"
+									  ece:description="@string/imped"/>
+	<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
+									  android:layout_height="wrap_content" ece:units="°"
+									  android:id="@+id/guiImpedPha" ece:value="0"
+									  android:layout_gravity="center_horizontal"
+									  ece:description="@string/phase"/>
 </LinearLayout>

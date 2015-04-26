@@ -40,6 +40,7 @@ public class AnalogFragment extends MenuFragment {
 		setButtonEvent(view, R.id.guiColorCode, ResColorCodeActivity.class);
 		setButtonEvent(view, R.id.guiSMDResistor, SMDResistorActivity.class);
 		setButtonEvent(view, R.id.guiOhmsLaw, OhmsLawActivity.class);
+		setButtonEvent(view, R.id.guiImpedance, ImpedanceActivity.class);
 		return view;
 	}
 }
