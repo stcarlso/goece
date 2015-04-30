@@ -49,9 +49,10 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 * @param box the entry box to modify
 	 * @param newValue the value to be set
 	 */
-	protected static void setValueEntry(final ValueEntryBox box, final double newValue) {
-		box.setValue(box.getValue().newValue(newValue));
-		box.setError(null);
+	protected static void setValueEntry(final View box, final double newValue) {
+		final ValueEntryBox ve = (ValueEntryBox)box;
+		ve.updateValue(newValue);
+		ve.setError(null);
 	}
 
 	/**

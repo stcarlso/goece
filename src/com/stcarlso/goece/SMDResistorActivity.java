@@ -52,28 +52,28 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	 * @param code the SMD resistor code
 	 * @return the resistor value, or null if the code cannot be parsed
 	 */
-	public static EIAResistorValue parse3LetterCode(final String code) {
-		EIAResistorValue value = null;
+	public static EIAValue parse3LetterCode(final String code) {
+		EIAValue value = null;
 		if (code != null && code.length() == 3) {
 			final char multChar = code.charAt(2);
 			try {
 				if (code.indexOf('R') >= 0)
 					// 4R7
-					value = new EIAResistorValue(parseRValue(code), EIAResistorValue.E24);
+					value = new EIAValue(parseRValue(code), EIAValue.E24);
 				else {
 					// The vast majority of resistors fit this pattern
 					final int prefix = Integer.parseInt(code.substring(0, 2));
 					if (Character.isDigit(multChar))
 						// 10 ^ x
-						value = new EIAResistorValue(prefix * Math.pow(10.0, multChar - '0'),
-							EIAResistorValue.E24);
+						value = new EIAValue(prefix * Math.pow(10.0, multChar - '0'),
+							EIAValue.E24);
 					else {
 						// E96 new generation
-						final double vv = EIAResistorTable.e96SMDCode(prefix) *
-							EIAResistorTable.letterToMultiplier(multChar);
+						final double vv = EIATable.e96SMDCode(prefix) *
+							EIATable.letterToMultiplier(multChar);
 						if (vv != 0.0)
 							// This is a 1% resistor!
-							value = new EIAResistorValue(vv, EIAResistorValue.E96);
+							value = new EIAValue(vv, EIAValue.E96);
 					}
 				}
 			} catch (NumberFormatException ignore) { }
@@ -86,18 +86,18 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	 * @param code the SMD resistor code
 	 * @return the resistor value, or null if the code cannot be parsed
 	 */
-	public static EIAResistorValue parse4LetterCode(final String code) {
-		EIAResistorValue value = null;
+	public static EIAValue parse4LetterCode(final String code) {
+		EIAValue value = null;
 		if (code != null && code.length() == 4) {
 			final char multChar = code.charAt(3);
 			try {
 				if (code.indexOf('R') >= 0)
 					// 33R0
-					value = new EIAResistorValue(parseRValue(code), EIAResistorValue.E96);
+					value = new EIAValue(parseRValue(code), EIAValue.E96);
 				else if (Character.isDigit(multChar))
 					// The vast majority of resistors fit this pattern
-					value = new EIAResistorValue(Integer.parseInt(code.substring(0, 3)) *
-						Math.pow(10.0, multChar - '0'), EIAResistorValue.E96);
+					value = new EIAValue(Integer.parseInt(code.substring(0, 3)) *
+						Math.pow(10.0, multChar - '0'), EIAValue.E96);
 			} catch (NumberFormatException ignore) { }
 		}
 		return value;
@@ -118,7 +118,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	 * @param showErrors whether error messages should be shown
 	 */
 	private void calculate(final String code, final boolean showErrors) {
-		final EIAResistorValue value;
+		final EIAValue value;
 		// 3 or 4 characters?
 		switch (code.length()) {
 		case 3:
@@ -201,8 +201,8 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	 *
 	 * @param value the calculated value
 	 */
-	private void showValue(final EIAResistorValue value) {
+	private void showValue(final EIAValue value) {
 		((TextView)findViewById(R.id.guiResValue)).setText(value.toString());
-		ResColorCodeActivity.checkEIATable(value, (TextView)findViewById(R.id.guiResIsStandard));
+		ResColorActivity.checkEIATable(value, (TextView)findViewById(R.id.guiResIsStandard));
 	}
 }

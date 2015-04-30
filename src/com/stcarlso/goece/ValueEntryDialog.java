@@ -30,16 +30,26 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 /**
  * Represents a dialog box which can accept ECE values in scientific notation.
  */
 public class ValueEntryDialog extends DialogFragment implements
-		DialogInterface.OnClickListener {
+		DialogInterface.OnClickListener, View.OnKeyListener {
+	/**
+	 * The EIA series that are used for the display helpers. There must be one text view per
+	 * entry!
+	 */
+	private static final EIATable.EIASeries[] SERIES = {
+		EIATable.EIASeries.E96, EIATable.EIASeries.E24,
+		EIATable.EIASeries.E12, EIATable.EIASeries.E6
+	};
 	/**
 	 * Creates and shows a value entry dialog.
 	 *
@@ -95,6 +105,16 @@ public class ValueEntryDialog extends DialogFragment implements
 			listener.onValueChange(getValue());
 	}
 	/**
+	 * Returns the value currently entered in the fields.
+	 *
+	 * @return the value entered by the user
+	 * @throws NumberFormatException if the value in the numeric field is not valid
+	 */
+	private double getEnteredValue() {
+		return EngineeringValue.valueFromSigExp(Double.parseDouble(valueEntry.getText().
+			toString()), unitSelect.getSelectedItemPosition());
+	}
+	/**
 	 * Get the value entered by the user; if no value was entered, or if Cancel was selected,
 	 * the last preset value is returned.
 	 *
@@ -107,14 +127,16 @@ public class ValueEntryDialog extends DialogFragment implements
 		// Load value and unit
 		if (valueEntry != null && unitSelect != null)
 			try {
-				final double newValue = Double.parseDouble(valueEntry.getText().toString());
 				// Load the new value
-				value = new EngineeringValue(EngineeringValue.valueFromSigExp(newValue,
-					unitSelect.getSelectedItemPosition()), value);
+				value = value.newValue(getEnteredValue());
 				// If we fail, do not close the dialog
 				callOnCalculateListener();
 				dismiss();
 			} catch (NumberFormatException ignore) { }
+	}
+	public boolean onKey(View v, int keyCode, KeyEvent event) {
+		updateValidValues(v.getRootView());
+		return false;
 	}
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		final Activity act = getActivity();
@@ -135,10 +157,12 @@ public class ValueEntryDialog extends DialogFragment implements
 		unitSelect = (Spinner)dialog.findViewById(R.id.guiValueExp);
 		unitSelect.setAdapter(adapter);
 		unitSelect.setSelection(value.getSIPrefixCode());
-		// Load text
+		// Load text, allow editing of a few more sigfigs than usual
 		valueEntry = (EditText)dialog.findViewById(R.id.guiValue);
-		valueEntry.setText(value.significandToString());
+		valueEntry.setOnKeyListener(this);
+		valueEntry.setText(value.significandToString(6));
 		valueEntry.selectAll();
+		updateValidValues(dialog);
 		ECEActivity.initShowSoftKeyboard(valueEntry);
 		builder.setTitle(desc);
 		// Create OK and Cancel buttons
@@ -170,6 +194,35 @@ public class ValueEntryDialog extends DialogFragment implements
 	protected void setValue(final EngineeringValue value) {
 		if (value != null)
 			this.value = value;
+	}
+	/**
+	 * Updates some labels beneath the text box for feedback on valid 1%, 5%, 10%, and 20%
+	 * values. Only shows for Units.RESISTANCE, Units.CAPACITANCE, and Units.INDUCTANCE.
+	 *
+	 * @param view the parent layout view
+	 */
+	protected void updateValidValues(final View view) {
+		final String units = getValue().getUnits();
+		final TextView[] pct = new TextView[SERIES.length];
+		// Check if units are approved for display
+		final boolean use = Units.RESISTANCE.equals(units) || Units.CAPACITANCE.equals(units) ||
+			Units.INDUCTANCE.equals(units);
+		pct[0] = (TextView)view.findViewById(R.id.guiValid1Pct);
+		pct[1] = (TextView)view.findViewById(R.id.guiValid5Pct);
+		pct[2] = (TextView)view.findViewById(R.id.guiValid10Pct);
+		pct[3] = (TextView)view.findViewById(R.id.guiValid20Pct);
+		// Update visibility
+		for (TextView tv : pct)
+			tv.setVisibility(use ? View.VISIBLE : View.GONE);
+		if (use) {
+			// Parse the value, do nothing if not yet valid
+			final double entry = getEnteredValue();
+			// For each one, grab the index and check it
+			for (int i = 0; i < pct.length; i++)
+				// Display nearest value
+				ResColorActivity.checkEIATable(new EIAValue(entry, SERIES[i], units),
+					pct[i]);
+		}
 	}
 
 	/**

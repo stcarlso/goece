@@ -27,31 +27,31 @@ package com.stcarlso.goece;
 import java.util.*;
 
 /**
- * Contains tables of the available EIA resistor values and allows rounding to nearest/checking
- * against them.
+ * Contains tables of the available EIA values and allows rounding to nearest/checking against
+ * them.
  */
-public final class EIAResistorTable {
+public final class EIATable {
 	/**
-	 * EIA E6 (20% tolerance) resistors
+	 * EIA E6 (20% tolerance) components
 	 */
 	private static final int[] E6_VALUES = new int[] {
 		100, 150, 220, 330, 470, 680,
 	};
 	/**
-	 * EIA E12 (10% tolerance) resistors
+	 * EIA E12 (10% tolerance) components
 	 */
 	private static final int[] E12_VALUES = new int[] {
 		100, 120, 150, 180, 220, 270, 330, 390, 470, 560, 680, 820,
 	};
 	/**
-	 * EIA E24 (5% tolerance) resistors
+	 * EIA E24 (5% tolerance) components
 	 */
 	private static final int[] E24_VALUES = new int[] {
 		100, 110, 120, 130, 150, 160, 180, 200, 220, 240, 270, 300, 330, 360, 390, 430, 470,
 		510, 560, 620, 680, 750, 820, 910,
 	};
 	/**
-	 * EIA E48 (2% tolerance) resistors
+	 * EIA E48 (2% tolerance) components
 	 */
 	private static final int[] E48_VALUES = new int[] {
 		100, 105, 110, 115, 121, 127, 133, 140, 147, 154, 162, 169, 178, 187,
@@ -60,7 +60,7 @@ public final class EIAResistorTable {
 		750, 787, 825, 866, 909, 953,
 	};
 	/**
-	 * EIA E96 (1% tolerance) resistors
+	 * EIA E96 (1% tolerance) components
 	 */
 	private static final int[] E96_VALUES = new int[] {
 		100, 102, 105, 107, 110, 113, 115, 118, 121, 124, 127, 130, 133, 137,
@@ -91,14 +91,14 @@ public final class EIAResistorTable {
 		return value;
 	}
 	/**
-	 * Determines whether the resistor value is a standard EIA value.
+	 * Determines whether the component value is a standard EIA value.
 	 *
-	 * @param res the resistor value to check
-	 * @param series the EIA resistor series to check
+	 * @param value the component value to check
+	 * @param series the EIA series to check
 	 * @return whether the value (within a small tolerance) is available in that series
 	 */
-	public static boolean isEIAValue(final double res, final EIASeries series) {
-		return res >= 0.0 && Math.abs(nearestEIAValue(res, series) - res) < res * 1E-5;
+	public static boolean isEIAValue(final double value, final EIASeries series) {
+		return value >= 0.0 && Math.abs(nearestEIAValue(value, series) - value) < value * 1E-5;
 	}
 	/**
 	 * Convert an SMD EIA-96 letter suffix to the correct multiplier.
@@ -147,10 +147,10 @@ public final class EIAResistorTable {
 		return multiplier;
 	}
 	/**
-	 * Calculats the nearest EIA standard value for the given resistor value.
+	 * Calculats the nearest EIA standard value for the given component value.
 	 *
-	 * @param res the required resistor value
-	 * @param series the EIA resistor series to search
+	 * @param res the required component value
+	 * @param series the EIA series to search
 	 * @return whether the value (within a small tolerance) is available in that series
 	 */
 	public static double nearestEIAValue(final double res, final EIASeries series) {
@@ -187,7 +187,7 @@ public final class EIAResistorTable {
 	}
 
 	/**
-	 * Available EIA resistor series for the methods in this class.
+	 * Available EIA component series for the methods in this class.
 	 */
 	public enum EIASeries {
 		/**

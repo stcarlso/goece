@@ -34,6 +34,24 @@ public class EngineeringValue implements Serializable {
 	private static final long serialVersionUID = 3381934552647230468L;
 
 	/**
+	 * Formats a tolerance value as a string.
+	 *
+	 * @param tol the tolerance value to display
+	 * @return the value with a reasonable number of decimal places and no extra sigfigs!
+	 */
+	public static String toleranceToString(final double tolIn) {
+		// Do what we can to fix the broken mess that is floating point
+		final double tol = tolIn * 100.0;
+		final int tolInt = (int)Math.round(100.0 * tol), dp;
+		if (tolInt % 100 == 0)
+			dp = 0;
+		else if (tolInt % 10 == 0)
+			dp = 1;
+		else
+			dp = 2;
+		return String.format("%." + Integer.toString(dp) + "f", tol);
+	}
+	/**
 	 * Generates a raw value from a significand and prefix code. Mainly useful when constructing
 	 * a value from a friendly entry field allowing discrete prefix selection.
 	 *
@@ -253,8 +271,18 @@ public class EngineeringValue implements Serializable {
 	 * @return the significand of this value rounded to significant figures
 	 */
 	public String significandToString() {
+		return significandToString(getSigfigs());
+	}
+	/**
+	 * Returns the significand of this value rounded to a custom number of significant figures.
+	 * Does not include E+ or E- exponent.
+	 *
+	 * @param sf the number of significant figures to apply
+	 * @return the significand of this value rounded to significant figures
+	 */
+	public String significandToString(final int sf) {
 		final double sig = getSignificand(), absSig = Math.abs(sig);
-		final int decimals, sf = getSigfigs();
+		final int decimals;
 		// Calculate number of decimal places to show
 		if (absSig >= 100.0)
 			decimals = sf - 3;
@@ -269,21 +297,13 @@ public class EngineeringValue implements Serializable {
 	}
 	public String toString() {
 		final StringBuilder format = new StringBuilder(significandToString());
-		final double tol = getTolerance() * 100.0;
+		final double tol = getTolerance();
 		format.append(" %s%s");
 		if (tol > 0.0) {
-			// Do what we can to fix the broken mess that is floating point
-			final int tolInt = (int)Math.round(100.0 * tol), dp;
-			if (tolInt % 100 == 0)
-				dp = 0;
-			else if (tolInt % 10 == 0)
-				dp = 1;
-			else
-				dp = 2;
 			// value +/- #%
 			format.append(' ');
 			format.append(P_M_SYMBOL);
-			format.append(String.format("%." + Integer.toString(dp) + "f", tol));
+			format.append(toleranceToString(tol));
 			format.append("%%");
 		}
 		return String.format(format.toString(), getSIPrefix(), getUnits());

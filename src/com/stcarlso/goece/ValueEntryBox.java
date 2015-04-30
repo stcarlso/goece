@@ -106,6 +106,7 @@ public class ValueEntryBox extends Button implements View.OnClickListener, Resto
 	private void init(final Context context, final AttributeSet attrs) {
 		String units = "", desc = "Value";
 		double iv = 0.0;
+		int sf = 3;
 		activity = null;
 		// Initialize click listeners
 		listener = null;
@@ -120,6 +121,7 @@ public class ValueEntryBox extends Button implements View.OnClickListener, Resto
 				units = values.getString(R.styleable.ValueEntryBox_units);
 				desc = values.getString(R.styleable.ValueEntryBox_description);
 				iv = values.getFloat(R.styleable.ValueEntryBox_value, 0.0f);
+				sf = values.getInt(R.styleable.ValueEntryBox_sigfigs, 3);
 			} catch (Exception e) {
 				Log.e("ValueEntryBox", "Invalid attributes:", e);
 			}
@@ -128,7 +130,7 @@ public class ValueEntryBox extends Button implements View.OnClickListener, Resto
 			Log.w("ValueEntryBox", "No units specified, defaulting to unitless!");
 		// Create value and set text
 		description = desc;
-		setValue(new EngineeringValue(iv, units));
+		setValue(new EngineeringValue(iv, 0.0, sf, units));
 	}
 	public void loadState(SharedPreferences prefs) {
 		final String idS = Integer.toString(getId());
@@ -226,7 +228,7 @@ public class ValueEntryBox extends Button implements View.OnClickListener, Resto
 	/**
 	 * Update the button text.
 	 */
-	public void updateText() {
+	protected void updateText() {
 		// Get text
 		final String dest = getDescription(), val = getValue().toString();
 		final SpannableStringBuilder text = new SpannableStringBuilder();
@@ -237,5 +239,14 @@ public class ValueEntryBox extends Button implements View.OnClickListener, Resto
 		text.setSpan(new RelativeSizeSpan(0.8f), 0, dest.length(),
 			Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		setText(text);
+	}
+	/**
+	 * Changes the raw value of this value entry box, keeping all other engineering parameters
+	 * the same.
+	 *
+	 * @param rawValue the new raw value to show in this entry box
+	 */
+	public void updateValue(final double rawValue) {
+		setValue(getValue().newValue(rawValue));
 	}
 }

@@ -51,40 +51,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0024cbc7-21cd-4014-805d-7a7fa0b06e96" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ImpedanceActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/Restorable.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/impedance.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/AnalogFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/AnalogFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ChildActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ChildActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ColorBand.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ColorBand.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/EngineeringValue.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/EngineeringValue.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoECE.ipr" afterPath="$PROJECT_DIR$/GoECE.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoECE.iws" afterPath="$PROJECT_DIR$/GoECE.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/OhmsLawActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/OhmsLawActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ResColorCodeActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ResColorCodeActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ImpedanceActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ImpedanceActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/SMDResistorActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/SMDResistorActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/Units.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/Units.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ValueEntryBox.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ValueEntryBox.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ValueEntryDialog.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ValueEntryDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/analog.xml" afterPath="$PROJECT_DIR$/res/layout/analog.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/black.xml" afterPath="$PROJECT_DIR$/res/drawable/black.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/blue.xml" afterPath="$PROJECT_DIR$/res/drawable/blue.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/brown.xml" afterPath="$PROJECT_DIR$/res/drawable/brown.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/colorband.xml" afterPath="$PROJECT_DIR$/res/layout/colorband.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/gold.xml" afterPath="$PROJECT_DIR$/res/drawable/gold.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/green.xml" afterPath="$PROJECT_DIR$/res/drawable/green.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/grey.xml" afterPath="$PROJECT_DIR$/res/drawable/grey.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/ohmslaw.xml" afterPath="$PROJECT_DIR$/res/layout/ohmslaw.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/orange.xml" afterPath="$PROJECT_DIR$/res/drawable/orange.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/red.xml" afterPath="$PROJECT_DIR$/res/drawable/red.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/attrs.xml" afterPath="$PROJECT_DIR$/res/values/attrs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/impedance.xml" afterPath="$PROJECT_DIR$/res/layout/impedance.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/rescolorcode.xml" afterPath="$PROJECT_DIR$/res/layout/rescolorcode.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/silver.xml" afterPath="$PROJECT_DIR$/res/drawable/silver.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/transparent.xml" afterPath="$PROJECT_DIR$/res/drawable/transparent.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/violet.xml" afterPath="$PROJECT_DIR$/res/drawable/violet.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/white.xml" afterPath="$PROJECT_DIR$/res/drawable/white.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable/yellow.xml" afterPath="$PROJECT_DIR$/res/drawable/yellow.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/valueentry.xml" afterPath="$PROJECT_DIR$/res/layout/valueentry.xml" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\EIAResistorTable.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/EIATable.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\EIAResistorValue.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/EIAValue.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\ResColorCodeActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ResColorActivity.java" />
     </list>
     <ignored path="GoECE.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -106,15 +90,27 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="OhmsLawActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/OhmsLawActivity.java">
+      <file leaf-file-name="ValueEntryDialog.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ValueEntryDialog.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="1.1171875">
+              <caret line="187" column="5" selection-start-line="187" selection-start-column="5" selection-end-line="187" selection-end-column="5" />
+              <folding>
+                <element signature="e#4220#4221#0" expanded="true" />
+                <element signature="e#4239#4240#0" expanded="true" />
+                <element signature="e#6361#6362#0" expanded="true" />
+                <element signature="e#6384#6385#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EIAValue.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/EIAValue.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="78" column="17" selection-start-line="78" selection-start-column="17" selection-end-line="78" selection-end-column="17" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3421#3446#0" expanded="true" />
-              </folding>
+              <caret line="130" column="41" selection-start-line="130" selection-start-column="41" selection-end-line="130" selection-end-column="41" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -123,30 +119,22 @@
         <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ImpedanceActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="39" column="45" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="45" />
+              <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="impedance.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="impedance.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/impedance.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33333334">
-              <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
-              <folding>
-                <element signature="e#1972#1988#0" expanded="true" />
-                <element signature="e#2263#2280#0" expanded="true" />
-                <element signature="e#2555#2571#0" expanded="true" />
-                <element signature="e#2848#2862#0" expanded="true" />
-                <element signature="e#3183#3198#0" expanded="true" />
-                <element signature="e#3474#3489#0" expanded="true" />
-                <element signature="e#3761#3776#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
           <provider editor-type-id="android-designer">
             <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-14.4827585">
+              <caret line="28" column="86" selection-start-line="28" selection-start-column="86" selection-end-line="28" selection-end-column="86" />
+              <folding />
+            </state>
           </provider>
         </entry>
       </file>
@@ -174,11 +162,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/EngineeringValue.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/OhmsLawActivity.java" />
-        <option value="$PROJECT_DIR$/res/layout/impedance.xml" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/ImpedanceActivity.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/res/layout/rescolorcode.xml" />
+        <option value="$PROJECT_DIR$/res/layout/impedance.xml" />
+        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/EngineeringValue.java" />
+        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/ResColorActivity.java" />
       </list>
     </option>
   </component>
@@ -236,6 +224,9 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -267,6 +258,10 @@
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="goece" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -284,9 +279,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -501,7 +493,13 @@
       <option name="project" value="LOCAL" />
       <updated>1429936408891</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="The application now remembers its state when closed and reopened. However, upgrading the APK breaks the ID-to-field mapping and often causes us to stop working.&#10;&#10;Add power calculations to ohm's law and start work on complex impedance.">
+      <created>1430011539221</created>
+      <option name="number" value="00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1430011539221</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView">
@@ -568,7 +566,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="3" />
+      <option name="time" value="5" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -577,58 +575,49 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ChildActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.91852677">
-          <caret line="144" column="16" selection-start-line="144" selection-start-column="16" selection-end-line="144" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/OhmsLawActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="78" column="17" selection-start-line="78" selection-start-column="17" selection-end-line="78" selection-end-column="17" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3421#3446#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.03348214">
-          <caret line="2" column="39" selection-start-line="2" selection-start-column="39" selection-end-line="2" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ImpedanceActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="45" selection-start-line="39" selection-start-column="45" selection-end-line="39" selection-end-column="45" />
+          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/impedance.xml">
+    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/EIAValue.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
-          <folding>
-            <element signature="e#1972#1988#0" expanded="true" />
-            <element signature="e#2263#2280#0" expanded="true" />
-            <element signature="e#2555#2571#0" expanded="true" />
-            <element signature="e#2848#2862#0" expanded="true" />
-            <element signature="e#3183#3198#0" expanded="true" />
-            <element signature="e#3474#3489#0" expanded="true" />
-            <element signature="e#3761#3776#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="130" column="41" selection-start-line="130" selection-start-column="41" selection-end-line="130" selection-end-column="41" />
+          <folding />
         </state>
       </provider>
-      <provider editor-type-id="android-designer">
-        <state />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/EngineeringValue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3515625">
+          <caret line="43" column="41" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ResColorActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.96651787">
+          <caret line="134" column="55" selection-start-line="134" selection-start-column="55" selection-end-line="134" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ValueEntryDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1171875">
+          <caret line="187" column="5" selection-start-line="187" selection-start-column="5" selection-end-line="187" selection-end-column="5" />
+          <folding>
+            <element signature="e#4220#4221#0" expanded="true" />
+            <element signature="e#4239#4240#0" expanded="true" />
+            <element signature="e#6361#6362#0" expanded="true" />
+            <element signature="e#6384#6385#0" expanded="true" />
+          </folding>
+        </state>
       </provider>
     </entry>
   </component>

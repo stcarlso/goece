@@ -37,7 +37,7 @@ public class AnalogFragment extends MenuFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.analog, container, false);
 		// Configure all buttons
-		setButtonEvent(view, R.id.guiColorCode, ResColorCodeActivity.class);
+		setButtonEvent(view, R.id.guiColorCode, ResColorActivity.class);
 		setButtonEvent(view, R.id.guiSMDResistor, SMDResistorActivity.class);
 		setButtonEvent(view, R.id.guiOhmsLaw, OhmsLawActivity.class);
 		setButtonEvent(view, R.id.guiImpedance, ImpedanceActivity.class);

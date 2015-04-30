@@ -31,5 +31,6 @@
 		<attr name="units" format="string"/>
 		<attr name="value" format="float"/>
 		<attr name="description" format="string"/>
+		<attr name="sigfigs" format="integer"/>
 	</declare-styleable>
 </resources>

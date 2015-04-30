@@ -32,26 +32,27 @@ import android.widget.TextView;
 /**
  * Tab for a resistor color code (PTH) value calculator.
  */
-public class ResColorCodeActivity extends ChildActivity {
+public class ResColorActivity extends ChildActivity {
 	/**
 	 * Shared code between color code and SMD to indicate standard/non-standard values.
 	 *
-	 * @param value the resistor value
+	 * @param value the component value
 	 * @param std the text box to update
-	 * @return true if the resistor was a standard value, or false otherwise
+	 * @return true if the component was a standard value, or false otherwise
 	 */
-	public static boolean checkEIATable(final EIAResistorValue value, final TextView std) {
+	public static boolean checkEIATable(final EIAValue value, final TextView std) {
 		final double res = value.getValue();
 		// Is it standard?
-		final EIAResistorTable.EIASeries series = value.getSeries();
-		final boolean isStandard = EIAResistorTable.isEIAValue(res, series);
+		final EIATable.EIASeries series = value.getSeries();
+		final boolean isStandard = EIATable.isEIAValue(res, series);
+		final String tolStr = EngineeringValue.toleranceToString(value.getTolerance());
 		if (isStandard) {
 			// In standard series, say so
 			std.setTextColor(Color.GREEN);
-			std.setText("Standard " + series.toString() + " value");
+			std.setText(String.format("Standard %s%% value", tolStr));
 		} else {
 			// Not in standard series, indicate closest value
-			final double closest = EIAResistorTable.nearestEIAValue(res, series), errorPct;
+			final double closest = EIATable.nearestEIAValue(res, series), errorPct;
 			// Calculate % error
 			if (res <= 0.0)
 				errorPct = 0.0;
@@ -59,8 +60,8 @@ public class ResColorCodeActivity extends ChildActivity {
 				errorPct = 100.0 * (closest - res) / res;
 			// Display appropriate message
 			std.setTextColor(Color.RED);
-			std.setText(String.format("Nearest %s value is %s [%+.1f%%]", series,
-				new EIAResistorValue(closest, series, 0.0), errorPct));
+			std.setText(String.format("Nearest %s%% value is %s [%+.1f%%]", tolStr,
+				new EIAValue(closest, series, 0.0, value.getUnits()), errorPct));
 		}
 		return isStandard;
 	}
@@ -76,14 +77,14 @@ public class ResColorCodeActivity extends ChildActivity {
 	 */
 	public static final double[] TOLERANCE = new double[] {
 		0.0, Units.TOL_1P, Units.TOL_2P, 0.0, 0.0, 0.005, 0.0025, Units.TOL_P1, 0.0005,
-		0.0, Units.TOL_20P, Units.TOL_10P, Units.TOL_5P
+		0.0, Units.TOL_20P, Units.TOL_5P, Units.TOL_10P
 	};
 	/**
 	 * Keeps a copy of the band objects on screen.
 	 */
 	private final ColorBand[] bands;
 
-	public ResColorCodeActivity() {
+	public ResColorActivity() {
 		super();
 		bands = new ColorBand[5];
 	}
@@ -96,31 +97,31 @@ public class ResColorCodeActivity extends ChildActivity {
 			// 5 band
 			value = value * 10 + bands[2].getValue();
 		// Calculate EIA series
-		final EIAResistorTable.EIASeries series;
+		final EIATable.EIASeries series;
 		switch (tol) {
 		case 2:
 			// Red = 2%
-			series = EIAResistorTable.EIASeries.E48;
+			series = EIATable.EIASeries.E48;
 			break;
 		case 10:
 			// None = 20%
-			series = EIAResistorTable.EIASeries.E6;
+			series = EIATable.EIASeries.E6;
 			break;
 		case 11:
 			// Gold = 5%
-			series = EIAResistorTable.EIASeries.E24;
+			series = EIATable.EIASeries.E24;
 			break;
 		case 12:
 			// Silver = 10%
-			series = EIAResistorTable.EIASeries.E12;
+			series = EIATable.EIASeries.E12;
 			break;
 		default:
 			// Most permissive
-			series = EIAResistorTable.EIASeries.E96;
+			series = EIATable.EIASeries.E96;
 			break;
 		}
 		// Calculate multiplier
-		final EIAResistorValue finalValue = new EIAResistorValue(value *
+		final EIAValue finalValue = new EIAValue(value *
 			MULTIPLIER[bands[3].getValue()], series, TOLERANCE[tol]);
 		output.setText(finalValue.toString());
 		// In EIA series?

@@ -26,41 +26,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 			  xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
 			  xmlns:ece="http://schemas.android.com/apk/res/com.stcarlso.goece"
-			  android:layout_width="match_parent" android:layout_height="match_parent">
+			  android:layout_width="match_parent" android:layout_height="match_parent"
+			  tools:context=".ImpedanceActivity">
 	<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
 									  android:layout_height="wrap_content" ece:units="Ω"
 									  android:id="@+id/guiImpedRes" ece:value="10"
 									  android:layout_gravity="center_horizontal"
 									  ece:description="@string/resist"/>
-	<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
-									  android:layout_height="wrap_content" ece:units="F"
-									  android:id="@+id/guiImpedCap" ece:value="1E-6"
-									  android:layout_gravity="center_horizontal"
-									  ece:description="@string/capacit"/>
-	<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
-									  android:layout_height="wrap_content" ece:units="H"
-									  android:id="@+id/guiImpedInd" ece:value="1E-6"
-									  android:layout_gravity="center_horizontal"
-									  ece:description="@string/induct"/>
+	<RadioGroup android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal" android:orientation="horizontal">
+		<RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+					 android:id="@+id/guiImpedSelCap" android:checked="true"
+					 android:layout_gravity="center_vertical" android:onClick="onClick"/>
+		<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
+										  android:layout_height="wrap_content" ece:units="F"
+										  android:id="@+id/guiImpedCap" ece:value="1E-6"
+										  android:layout_gravity="center_horizontal"
+										  ece:description="@string/capacit"/>
+		<RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+					 android:id="@+id/guiImpedSelInd" android:checked="false"
+					 android:layout_gravity="center_vertical" android:onClick="onClick"/>
+		<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
+										  android:layout_height="wrap_content" ece:units="H"
+										  android:id="@+id/guiImpedInd" ece:value="1E-6"
+										  android:layout_gravity="center_horizontal"
+										  ece:description="@string/induct"
+										  android:enabled="false"/>
+	</RadioGroup>
 	<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
 									  android:layout_height="wrap_content" ece:units="Hz"
 									  android:id="@+id/guiImpedFreq" ece:value="1000"
 									  android:layout_gravity="center_horizontal"
 									  ece:description="@string/freq"/>
+	<LinearLayout android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
+				  android:layout_height="wrap_content" android:layout_marginTop="40dp">
+		<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
+										  android:layout_height="wrap_content" ece:units="Ω"
+										  android:id="@+id/guiImpedReact" ece:value="0.001"
+										  android:layout_gravity="center_horizontal"
+										  ece:description="@string/react"/>
+		<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
+										  android:layout_height="wrap_content" ece:units="°"
+										  android:id="@+id/guiImpedPha" ece:value="0"
+										  android:layout_gravity="center_horizontal"
+										  ece:description="@string/phase" ece:sigfigs="3"
+										  android:layout_marginLeft="20dp"/>
+	</LinearLayout>
 	<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
-									  android:layout_marginTop="40dp"
 									  android:layout_height="wrap_content" ece:units="Ω"
-									  android:id="@+id/guiImpedReact" ece:value="0.001"
-									  android:layout_gravity="center_horizontal"
-									  ece:description="@string/react"/>
-	<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
-									  android:layout_height="wrap_content" ece:units="Ω"
-									  android:id="@+id/guiImpedImp" ece:value="0.001"
+									  android:id="@+id/guiImpedImp" ece:value="10.001"
 									  android:layout_gravity="center_horizontal"
 									  ece:description="@string/imped"/>
-	<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
-									  android:layout_height="wrap_content" ece:units="°"
-									  android:id="@+id/guiImpedPha" ece:value="0"
-									  android:layout_gravity="center_horizontal"
-									  ece:description="@string/phase"/>
 </LinearLayout>

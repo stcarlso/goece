@@ -29,9 +29,9 @@ package com.stcarlso.goece;
  */
 public interface Units {
 	/**
-	 * Indicate capacitance values with "C"
+	 * Indicate capacitance values with "F"
 	 */
-	String CAPACITANCE = "C";
+	String CAPACITANCE = "F";
 	/**
 	 * Indicate current values with "A"
 	 */

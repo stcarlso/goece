@@ -10,7 +10,7 @@
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
 		</activity>
-		<activity android:name="com.stcarlso.goece.ResColorCodeActivity"
+		<activity android:name="com.stcarlso.goece.ResColorActivity"
 				  android:label="@string/guiColorCode" android:windowSoftInputMode="adjustResize">
 			<meta-data android:name="android.support.PARENT_ACTIVITY"
 					   android:value="com.stcarlso.goece.ECEActivity"/>

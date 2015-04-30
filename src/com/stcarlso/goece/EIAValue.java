@@ -27,28 +27,28 @@ package com.stcarlso.goece;
 /**
  * Represents an engineering resistor value (convenience subclass of EngineeringValue)
  */
-public class EIAResistorValue extends EngineeringValue {
+public class EIAValue extends EngineeringValue {
 	private static final long serialVersionUID = 6556740813218260654L;
 	/**
 	 * 20 %
 	 */
-	public static final EIAResistorTable.EIASeries E6 = EIAResistorTable.EIASeries.E6;
+	public static final EIATable.EIASeries E6 = EIATable.EIASeries.E6;
 	/**
 	 * 10 %
 	 */
-	public static final EIAResistorTable.EIASeries E12 = EIAResistorTable.EIASeries.E12;
+	public static final EIATable.EIASeries E12 = EIATable.EIASeries.E12;
 	/**
 	 * 5 %
 	 */
-	public static final EIAResistorTable.EIASeries E24 = EIAResistorTable.EIASeries.E24;
+	public static final EIATable.EIASeries E24 = EIATable.EIASeries.E24;
 	/**
 	 * 2 %
 	 */
-	public static final EIAResistorTable.EIASeries E48 = EIAResistorTable.EIASeries.E48;
+	public static final EIATable.EIASeries E48 = EIATable.EIASeries.E48;
 	/**
 	 * 1 %
 	 */
-	public static final EIAResistorTable.EIASeries E96 = EIAResistorTable.EIASeries.E96;
+	public static final EIATable.EIASeries E96 = EIATable.EIASeries.E96;
 
 	/**
 	 * Converts an EIA series to its recommended tolerance.
@@ -56,7 +56,7 @@ public class EIAResistorValue extends EngineeringValue {
 	 * @param series the resistor series to convert
 	 * @return the recommended tolerance for that series
 	 */
-	public static double eiaSeriesToTolerance(final EIAResistorTable.EIASeries series) {
+	public static double eiaSeriesToTolerance(final EIATable.EIASeries series) {
 		final double tol;
 		switch (series) {
 		case E6:
@@ -85,37 +85,59 @@ public class EIAResistorValue extends EngineeringValue {
 	}
 
 	/**
-	 * The EIA resistor series which represents the tolerance of this value.
+	 * The EIA series which represents the tolerance of this value.
 	 */
-	protected EIAResistorTable.EIASeries series;
+	protected EIATable.EIASeries series;
 
 	/**
-	 * Create a new EIA resistor value.
+	 * Create a new EIA value. The units default to ohms.
 	 *
-	 * @param value the resistor value
-	 * @param series the resistor EIA series where this resistor was taken (used for tolerance)
+	 * @param value the component value
+	 * @param series the EIA series where this component was taken (used for tolerance)
 	 */
-	public EIAResistorValue(final double value, final EIAResistorTable.EIASeries series) {
-		this(value, series, eiaSeriesToTolerance(series));
+	public EIAValue(final double value, final EIATable.EIASeries series) {
+		this(value, series, eiaSeriesToTolerance(series), Units.RESISTANCE);
 	}
 	/**
-	 * Create a new EIA resistor value with a tolerance override.
+	 * Create a new EIA value.
 	 *
-	 * @param value the resistor value
-	 * @param series the resistor EIA series where this resistor was taken
+	 * @param value the component value
+	 * @param series the EIA series where this component was taken (used for tolerance)
+	 * @param units the units to assign to this value
+	 */
+	public EIAValue(final double value, final EIATable.EIASeries series, final String units) {
+		this(value, series, eiaSeriesToTolerance(series), units);
+	}
+	/**
+	 * Create a new EIA value with a tolerance override. The units default to ohms.
+	 *
+	 * @param value the component value
+	 * @param series the EIA series where this component was taken
 	 * @param tolerance the tolerance to apply (overrides series code)
 	 */
-	public EIAResistorValue(final double value, final EIAResistorTable.EIASeries series,
-							final double tolerance) {
-		super(value, tolerance, Units.RESISTANCE);
+	public EIAValue(final double value, final EIATable.EIASeries series,
+					final double tolerance) {
+		this(value, series, tolerance, Units.RESISTANCE);
+	}
+	/**
+	 * Create a new EIA value with an optional tolerance override.
+	 *
+	 * @param value the resistor value
+	 * @param series the EIA series where this resistor was taken
+	 * @param tolerance the tolerance to apply (overrides series code)
+	 * @param units the units to assign to this value
+	 */
+	public EIAValue(final double value, final EIATable.EIASeries series, final double tolerance,
+					final String units) {
+		super(value, tolerance, units);
 		this.series = series;
 	}
 	/**
-	 * Retrieves the series code of this resistor.
+	 * Retrieves the series code of this component.
 	 *
-	 * @return the resistor series code
+	 * @return the EIA series code
 	 */
-	public EIAResistorTable.EIASeries getSeries() {
+	public EIATable.EIASeries getSeries() {
 		return series;
 	}
 }
