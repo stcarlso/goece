@@ -22,27 +22,24 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece;
+package com.stcarlso.goece.ui;
 
-import android.content.SharedPreferences;
+import android.app.Activity;
+import android.content.Intent;
+import android.view.View;
 
 /**
- * A simple marker interface common to custom controls which allows their state to be saved
- * and restored to the application preferences.
+ * Listens for a button click, then launches a preset activity.
  */
-public interface Restorable {
-	/**
-	 * Loads the state of this control. If no state is available, nothing should happen. The
-	 * same ID as in saveState() must be used.
-	 *
-	 * @param prefs the location of the state to restore
-	 */
-	void loadState(SharedPreferences prefs);
-	/**
-	 * Save the state of this control. It should be saved with a unique ID, preferably the
-	 * integer ID of the field.
-	 *
-	 * @param prefs the location where the state will be stored
-	 */
-	void saveState(SharedPreferences.Editor prefs);
+public class ActivityClickListener implements View.OnClickListener {
+	private final Class<? extends Activity> destActivity;
+	private final Activity parentActivity;
+
+	public ActivityClickListener(final Activity parentActivity, final Class<? extends Activity> destActivity) {
+		this.destActivity = destActivity;
+		this.parentActivity = parentActivity;
+	}
+	public void onClick(View v) {
+		parentActivity.startActivity(new Intent(parentActivity, destActivity));
+	}
 }

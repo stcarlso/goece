@@ -24,10 +24,9 @@
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-				xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
 				xmlns:ece="http://schemas.android.com/apk/res/com.stcarlso.goece"
 				android:layout_width="match_parent" android:layout_height="match_parent"
-				tools:context=".ResColorActivity">
+				android:orientation="vertical">
 	<TextView android:textAppearance="?android:attr/textAppearanceLarge" android:textSize="40sp"
 			  android:text="" android:id="@+id/guiResValue" android:layout_height="wrap_content"
 			  android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
@@ -42,39 +41,39 @@
 				  android:layout_below="@id/guiResValue">
 		<ScrollView android:layout_width="wrap_content" android:layout_height="match_parent"
 					android:layout_gravity="center_horizontal">
-			<com.stcarlso.goece.ColorBand android:layout_width="wrap_content"
+			<com.stcarlso.goece.ui.ColorBand android:layout_width="wrap_content"
 										  android:layout_height="wrap_content"
 										  android:orientation="vertical" ece:pos="0"
-										  android:id="@+id/guiResBand1"/>
+										  android:id="@+id/guiResBand1" android:tag="resBand1"/>
 		</ScrollView>
 		<ScrollView android:layout_width="wrap_content" android:layout_height="match_parent"
 					android:layout_gravity="center_horizontal">
-			<com.stcarlso.goece.ColorBand android:layout_width="wrap_content"
+			<com.stcarlso.goece.ui.ColorBand android:layout_width="wrap_content"
 										  android:layout_height="wrap_content"
 										  android:orientation="vertical" ece:pos="1"
-										  android:id="@+id/guiResBand2"/>
+										  android:id="@+id/guiResBand2" android:tag="resBand2"/>
 		</ScrollView>
 		<ScrollView android:layout_width="wrap_content" android:layout_height="match_parent"
 					android:layout_gravity="center_horizontal">
-			<com.stcarlso.goece.ColorBand android:layout_width="wrap_content"
+			<com.stcarlso.goece.ui.ColorBand android:layout_width="wrap_content"
 										  android:layout_height="wrap_content"
 										  android:orientation="vertical" ece:pos="2"
-										  android:id="@+id/guiResBand3"/>
+										  android:id="@+id/guiResBand3" android:tag="resBand3"/>
 		</ScrollView>
 		<ScrollView android:layout_width="wrap_content" android:layout_height="match_parent"
 					android:layout_gravity="center_horizontal"
 					android:layout_marginRight="20dp">
-			<com.stcarlso.goece.ColorBand android:layout_width="wrap_content"
+			<com.stcarlso.goece.ui.ColorBand android:layout_width="wrap_content"
 										  android:layout_height="wrap_content"
 										  android:orientation="vertical" ece:pos="3"
-										  android:id="@+id/guiResBand4"/>
+										  android:id="@+id/guiResBand4" android:tag="resBand4"/>
 		</ScrollView>
 		<ScrollView android:layout_width="wrap_content" android:layout_height="match_parent"
 					android:layout_gravity="center_horizontal">
-			<com.stcarlso.goece.ColorBand android:layout_width="wrap_content"
+			<com.stcarlso.goece.ui.ColorBand android:layout_width="wrap_content"
 										  android:layout_height="wrap_content"
 										  android:orientation="vertical" ece:pos="4"
-										  android:id="@+id/guiResBand5"/>
+										  android:id="@+id/guiResBand5" android:tag="resBand5"/>
 		</ScrollView>
 	</LinearLayout>
 </RelativeLayout>

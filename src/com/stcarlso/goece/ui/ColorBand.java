@@ -22,7 +22,7 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece;
+package com.stcarlso.goece.ui;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -33,6 +33,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import com.stcarlso.goece.R;
+import com.stcarlso.goece.activity.ECEActivity;
+import com.stcarlso.goece.utility.Calculatable;
+import com.stcarlso.goece.utility.ECESavedState;
+import com.stcarlso.goece.utility.Restorable;
 
 /**
  * A component which displays colors on the screen and can be checked for the selected color.
@@ -146,12 +151,12 @@ public class ColorBand extends LinearLayout implements View.OnClickListener, Res
 		}
 	}
 	public void loadState(SharedPreferences prefs) {
-		final int idx = prefs.getInt(Integer.toString(getId()), -1);
+		final int idx = prefs.getInt(ECEActivity.getTag(this), -1);
 		if (idx >= 0 && idx < colors.length)
 			setValue(idx);
 	}
 	public void saveState(SharedPreferences.Editor prefs) {
-		prefs.putInt(Integer.toString(getId()), getValue());
+		prefs.putInt(ECEActivity.getTag(this), getValue());
 	}
 	public void onClick(View view) {
 		final int id = view.getId(), oldValue = value;

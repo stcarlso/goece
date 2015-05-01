@@ -22,11 +22,16 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece;
+package com.stcarlso.goece.activity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import com.stcarlso.goece.R;
+import com.stcarlso.goece.ui.ChildActivity;
+import com.stcarlso.goece.ui.ValueEntryBox;
+import com.stcarlso.goece.utility.EngineeringValue;
+import com.stcarlso.goece.utility.Units;
 
 /**
  * Very simple Ohm's law activity. Everyone should know it, but this adds engineering value

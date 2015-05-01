@@ -22,7 +22,7 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece;
+package com.stcarlso.goece.utility;
 
 import java.io.Serializable;
 
@@ -36,7 +36,7 @@ public class EngineeringValue implements Serializable {
 	/**
 	 * Formats a tolerance value as a string.
 	 *
-	 * @param tol the tolerance value to display
+	 * @param tolIn the tolerance value to display
 	 * @return the value with a reasonable number of decimal places and no extra sigfigs!
 	 */
 	public static String toleranceToString(final double tolIn) {
@@ -68,17 +68,17 @@ public class EngineeringValue implements Serializable {
 	/**
 	 * The plus/minus symbol. Do not localize.
 	 */
-	protected static final String P_M_SYMBOL = "\u00B1";
+	public static final String P_M_SYMBOL = "\u00B1";
 	/**
 	 * The prefix the unit gets for each cut-off below.
 	 */
-	protected static final String[] ENGR_NAMES = {
+	public static final String[] ENGR_NAMES = {
 		"f", "n", "\u03BC", "m", "", "K", "M", "G", "T", "E"
 	};
 	/**
 	 * Cut-off values for engineering formatting.
 	 */
-	protected static final double[] ENGR_THRESHOLD = {
+	public static final double[] ENGR_THRESHOLD = {
 		1e-12, 1e-9, 1e-6, 1e-3, 1, 1e3, 1e6, 1e9, 1e12, Double.MAX_VALUE
 	};
 

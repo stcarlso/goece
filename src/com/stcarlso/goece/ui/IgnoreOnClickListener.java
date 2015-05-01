@@ -22,19 +22,16 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece;
+package com.stcarlso.goece.ui;
 
-import android.view.View;
+import android.content.DialogInterface;
 
 /**
- * An event handler for recalculation events. This class is triggered by view classes when
- * recalculation is necessary.
+ * A dialog OnClickListener that does absolutely nothing. Intended for the cancel option
+ * on dialogs.
  */
-public interface Calculatable {
-	/**
-	 * Called when the activity should recalculate values.
-	 *
-	 * @param source the view which was modified to trigger this event
-	 */
-	void recalculate(final View source);
+public class IgnoreOnClickListener implements DialogInterface.OnClickListener {
+	public void onClick(DialogInterface dialog, int which) {
+		// Nothing
+	}
 }

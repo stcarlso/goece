@@ -22,7 +22,7 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece;
+package com.stcarlso.goece.ui;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -36,6 +36,13 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import com.stcarlso.goece.R;
+import com.stcarlso.goece.activity.ECEActivity;
+import com.stcarlso.goece.activity.ResColorActivity;
+import com.stcarlso.goece.utility.EIATable;
+import com.stcarlso.goece.utility.EIAValue;
+import com.stcarlso.goece.utility.EngineeringValue;
+import com.stcarlso.goece.utility.Units;
 
 /**
  * Represents a dialog box which can accept ECE values in scientific notation.

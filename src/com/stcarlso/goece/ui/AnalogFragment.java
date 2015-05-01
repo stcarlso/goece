@@ -22,12 +22,17 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece;
+package com.stcarlso.goece.ui;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import com.stcarlso.goece.R;
+import com.stcarlso.goece.activity.ImpedanceActivity;
+import com.stcarlso.goece.activity.OhmsLawActivity;
+import com.stcarlso.goece.activity.ResColorActivity;
+import com.stcarlso.goece.activity.SMDResistorActivity;
 
 /**
  * Fragment which displays all items on the Analog tab.

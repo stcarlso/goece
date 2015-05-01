@@ -51,24 +51,37 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0024cbc7-21cd-4014-805d-7a7fa0b06e96" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/AnalogFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/AnalogFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ChildActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ChildActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/EngineeringValue.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/EngineeringValue.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoECE.ipr" afterPath="$PROJECT_DIR$/GoECE.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoECE.iws" afterPath="$PROJECT_DIR$/GoECE.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ImpedanceActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ImpedanceActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/SMDResistorActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/SMDResistorActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/Units.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/Units.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ValueEntryBox.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ValueEntryBox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ValueEntryDialog.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ValueEntryDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/attrs.xml" afterPath="$PROJECT_DIR$/res/values/attrs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/analog.xml" afterPath="$PROJECT_DIR$/res/layout/analog.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/digital.xml" afterPath="$PROJECT_DIR$/res/layout/digital.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/impedance.xml" afterPath="$PROJECT_DIR$/res/layout/impedance.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/ohmslaw.xml" afterPath="$PROJECT_DIR$/res/layout/ohmslaw.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/rescolorcode.xml" afterPath="$PROJECT_DIR$/res/layout/rescolorcode.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/valueentry.xml" afterPath="$PROJECT_DIR$/res/layout/valueentry.xml" />
-      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\EIAResistorTable.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/EIATable.java" />
-      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\EIAResistorValue.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/EIAValue.java" />
-      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\ResColorCodeActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ResColorActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/smdresistor.xml" afterPath="$PROJECT_DIR$/res/layout/smdresistor.xml" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\ActivityClickListener.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ActivityClickListener.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\AnalogFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/AnalogFragment.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\Calculatable.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/Calculatable.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\ChildActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ChildActivity.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\ColorBand.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ColorBand.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\DigitalFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/DigitalFragment.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\ECEActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ECEActivity.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\ECESavedState.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/ECESavedState.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\EIATable.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/EIATable.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\EIAValue.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/EIAValue.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\EngineeringValue.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/EngineeringValue.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\EnterKeyListener.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/EnterKeyListener.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\FragmentTabListener.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/FragmentTabListener.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\IgnoreOnClickListener.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/IgnoreOnClickListener.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\ImpedanceActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ImpedanceActivity.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\MenuFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/MenuFragment.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\OhmsLawActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/OhmsLawActivity.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\ResColorActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ResColorActivity.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\Restorable.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/Restorable.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\SMDResistorActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/SMDResistorActivity.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\Units.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/Units.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\ValueEntryBox.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueEntryBox.java" />
+      <change type="MOVED" beforePath="U:\Users\Stephen\Documents\PRGM\GoECE\src\com\stcarlso\goece\ValueEntryDialog.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueEntryDialog.java" />
     </list>
     <ignored path="GoECE.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -90,49 +103,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ValueEntryDialog.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ValueEntryDialog.java">
+      <file leaf-file-name="SMDResistorActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/SMDResistorActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.1171875">
-              <caret line="187" column="5" selection-start-line="187" selection-start-column="5" selection-end-line="187" selection-end-column="5" />
-              <folding>
-                <element signature="e#4220#4221#0" expanded="true" />
-                <element signature="e#4239#4240#0" expanded="true" />
-                <element signature="e#6361#6362#0" expanded="true" />
-                <element signature="e#6384#6385#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EIAValue.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/EIAValue.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="130" column="41" selection-start-line="130" selection-start-column="41" selection-end-line="130" selection-end-column="41" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ImpedanceActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ImpedanceActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="impedance.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/layout/impedance.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-14.4827585">
-              <caret line="28" column="86" selection-start-line="28" selection-start-column="86" selection-end-line="28" selection-end-column="86" />
+            <state vertical-scroll-proportion="-0.16741072">
+              <caret line="40" column="3" selection-start-line="40" selection-start-column="3" selection-end-line="40" selection-end-column="3" />
               <folding />
             </state>
           </provider>
@@ -162,11 +137,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/res/layout/rescolorcode.xml" />
+        <option value="$PROJECT_DIR$/res/layout/digital.xml" />
         <option value="$PROJECT_DIR$/res/layout/impedance.xml" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/EngineeringValue.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/ResColorActivity.java" />
+        <option value="$PROJECT_DIR$/res/layout/ohmslaw.xml" />
+        <option value="$PROJECT_DIR$/res/layout/rescolorcode.xml" />
+        <option value="$PROJECT_DIR$/res/layout/smdresistor.xml" />
       </list>
     </option>
   </component>
@@ -226,7 +201,6 @@
     <panes>
       <pane id="PackagesPane" />
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -245,40 +219,9 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoECE" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoECE" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="goece" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoECE" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="GoECE" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -302,7 +245,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="last_opened_file_path" value="U:/Programs/Android/extras/android/support/v13/src" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.XML" />
+    <property name="settings.editor.selected.configurable" value="preferences.customizations" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
   <component name="RecentsManager">
@@ -437,7 +380,7 @@
     </configuration>
     <configuration default="false" name="GoECE" type="AndroidRunConfigurationType" factoryName="Android Application">
       <module name="GoECE" />
-      <option name="ACTIVITY_CLASS" value="com.stcarlso.goece.ECEActivity" />
+      <option name="ACTIVITY_CLASS" value="com.stcarlso.goece.activity.ECEActivity" />
       <option name="MODE" value="specific_activity" />
       <option name="DEPLOY" value="true" />
       <option name="ARTIFACT_NAME" value="" />
@@ -575,48 +518,55 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ImpedanceActivity.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/ohmslaw.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.48442906">
+          <caret line="28" column="45" selection-start-line="28" selection-start-column="45" selection-end-line="28" selection-end-column="45" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/rescolorcode.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4152249">
+          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/smdresistor.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46712804">
+          <caret line="27" column="46" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/valueentry.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/EIAValue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="130" column="41" selection-start-line="130" selection-start-column="41" selection-end-line="130" selection-end-column="41" />
-          <folding />
-        </state>
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/EngineeringValue.java">
+    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/SMDResistorActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3515625">
-          <caret line="43" column="41" selection-start-line="43" selection-start-column="41" selection-end-line="43" selection-end-column="41" />
+        <state vertical-scroll-proportion="-0.16741072">
+          <caret line="40" column="3" selection-start-line="40" selection-start-column="3" selection-end-line="40" selection-end-column="3" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ResColorActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.96651787">
-          <caret line="134" column="55" selection-start-line="134" selection-start-column="55" selection-end-line="134" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ValueEntryDialog.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.1171875">
-          <caret line="187" column="5" selection-start-line="187" selection-start-column="5" selection-end-line="187" selection-end-column="5" />
-          <folding>
-            <element signature="e#4220#4221#0" expanded="true" />
-            <element signature="e#4239#4240#0" expanded="true" />
-            <element signature="e#6361#6362#0" expanded="true" />
-            <element signature="e#6384#6385#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

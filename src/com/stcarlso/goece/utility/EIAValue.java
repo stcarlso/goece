@@ -22,7 +22,7 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece;
+package com.stcarlso.goece.utility;
 
 /**
  * Represents an engineering resistor value (convenience subclass of EngineeringValue)

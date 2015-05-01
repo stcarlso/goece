@@ -22,7 +22,7 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece;
+package com.stcarlso.goece.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -30,6 +30,11 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import com.stcarlso.goece.R;
+import com.stcarlso.goece.ui.ChildActivity;
+import com.stcarlso.goece.ui.EnterKeyListener;
+import com.stcarlso.goece.utility.EIATable;
+import com.stcarlso.goece.utility.EIAValue;
 
 /**
  * Tab for the SMD resistor code calculator.

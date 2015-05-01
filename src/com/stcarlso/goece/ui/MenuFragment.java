@@ -22,22 +22,26 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece;
+package com.stcarlso.goece.ui;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v4.app.Fragment;
 import android.view.View;
-import android.view.ViewGroup;
 
 /**
- * Fragment which displays all items on the Digital tab.
+ * Parent of all fragments in the menu.
  */
-public class DigitalFragment extends MenuFragment {
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final View view = inflater.inflate(R.layout.digital, container, false);
-		// Configure all buttons
-		//setButtonEvent(view, R.id.guiKMapper, ResColorCodeActivity.class);
-		return view;
+public class MenuFragment extends Fragment {
+	/**
+	 * Sets a view to be opened when the button is clicked.
+	 *
+	 * @param view the inflated view
+	 * @param buttonId the button ID to modify
+	 * @param activity the activity to launch when clicked
+	 */
+	protected void setButtonEvent(final View view, final int buttonId,
+								  final Class<? extends ChildActivity> activity) {
+		final View button = view.findViewById(buttonId);
+		if (button != null)
+			button.setOnClickListener(new ActivityClickListener(getActivity(), activity));
 	}
 }

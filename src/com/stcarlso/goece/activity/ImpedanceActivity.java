@@ -22,12 +22,14 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece;
+package com.stcarlso.goece.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
+import com.stcarlso.goece.R;
+import com.stcarlso.goece.ui.ChildActivity;
+import com.stcarlso.goece.ui.ValueEntryBox;
 
 /**
  * Calculate the reactance of capacitors and inductors at a given frequency, and perform angle

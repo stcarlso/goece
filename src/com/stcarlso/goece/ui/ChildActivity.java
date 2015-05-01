@@ -22,7 +22,7 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece;
+package com.stcarlso.goece.ui;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -35,6 +35,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import com.stcarlso.goece.activity.ECEActivity;
+import com.stcarlso.goece.utility.Calculatable;
+import com.stcarlso.goece.utility.EngineeringValue;
+import com.stcarlso.goece.utility.Restorable;
 
 import java.util.*;
 
@@ -97,10 +101,10 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 */
 	protected void loadPrefsCheckBox(final SharedPreferences prefs, final int id) {
 		final CheckBox view = (CheckBox)findViewById(id);
-		final String idS = Integer.toString(id);
+		final String tag = ECEActivity.getTag(view);
 		// Only change if the preferences are initialized
-		if (prefs.contains(idS))
-			view.setChecked(prefs.getBoolean(idS, false));
+		if (prefs.contains(tag))
+			view.setChecked(prefs.getBoolean(tag, false));
 	}
 	/**
 	 * Loads the text of a TextView object from the preferences. This works for EditText too.
@@ -110,10 +114,10 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 */
 	protected void loadPrefsTextView(final SharedPreferences prefs, final int id) {
 		final TextView view = (TextView)findViewById(id);
-		final String idS = Integer.toString(id);
+		final String tag = ECEActivity.getTag(view);
 		// Only change if the preferences are initialized
-		if (prefs.contains(idS))
-			view.setText(prefs.getString(idS, ""));
+		if (prefs.contains(tag))
+			view.setText(prefs.getString(tag, ""));
 	}
 	/**
 	 * Returns the view ID of the registered view which was most recently changed.
@@ -216,7 +220,7 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 */
 	protected void savePrefsCheckBox(final SharedPreferences.Editor prefs, final int id) {
 		final CheckBox view = (CheckBox)findViewById(id);
-		prefs.putBoolean(Integer.toString(id), view.isChecked());
+		prefs.putBoolean(ECEActivity.getTag(view), view.isChecked());
 	}
 	/**
 	 * Saves the text of a TextView object in the preferences. This works for EditText too.
@@ -226,7 +230,7 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 */
 	protected void savePrefsTextView(final SharedPreferences.Editor prefs, final int id) {
 		final TextView view = (TextView)findViewById(id);
-		prefs.putString(Integer.toString(id), view.getText().toString());
+		prefs.putString(ECEActivity.getTag(view), view.getText().toString());
 	}
 	/**
 	 * Sets the listener and parent activity of the specified value entry box. Useful for the

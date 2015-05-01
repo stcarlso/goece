@@ -22,24 +22,19 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece;
+package com.stcarlso.goece.utility;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.view.View;
 
 /**
- * Listens for a button click, then launches a preset activity.
+ * An event handler for recalculation events. This class is triggered by view classes when
+ * recalculation is necessary.
  */
-public class ActivityClickListener implements View.OnClickListener {
-	private final Class<? extends Activity> destActivity;
-	private final Activity parentActivity;
-
-	public ActivityClickListener(final Activity parentActivity, final Class<? extends Activity> destActivity) {
-		this.destActivity = destActivity;
-		this.parentActivity = parentActivity;
-	}
-	public void onClick(View v) {
-		parentActivity.startActivity(new Intent(parentActivity, destActivity));
-	}
+public interface Calculatable {
+	/**
+	 * Called when the activity should recalculate values.
+	 *
+	 * @param source the view which was modified to trigger this event
+	 */
+	void recalculate(final View source);
 }

@@ -22,16 +22,59 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece;
-
-import android.content.DialogInterface;
+package com.stcarlso.goece.utility;
 
 /**
- * A dialog OnClickListener that does absolutely nothing. Intended for the cancel option
- * on dialogs.
+ * A class listing available units for EngineeringValue.
  */
-public class IgnoreOnClickListener implements DialogInterface.OnClickListener {
-	public void onClick(DialogInterface dialog, int which) {
-		// Nothing
-	}
+public interface Units {
+	/**
+	 * Indicate capacitance values with "F"
+	 */
+	String CAPACITANCE = "F";
+	/**
+	 * Indicate current values with "A"
+	 */
+	String CURRENT = "A";
+	/**
+	 * Indicate inductance values with "H"
+	 */
+	String INDUCTANCE = "H";
+	/**
+	 * Indicate power units with "W"
+	 */
+	String POWER = "W";
+	/**
+	 * Indicate resistance values with the Greek capital omega (ohm) symbol.
+	 */
+	String RESISTANCE = "\u03A9";
+	/**
+	 * Indicate voltage values with "V"
+	 */
+	String VOLTAGE = "V";
+
+	/**
+	 * 20% tolerance
+	 */
+	double TOL_20P = 0.2;
+	/**
+	 * 10% tolerance
+	 */
+	double TOL_10P = 0.1;
+	/**
+	 * 5% tolerance, fairly common
+	 */
+	double TOL_5P = 0.05;
+	/**
+	 * 2% tolerance
+	 */
+	double TOL_2P = 0.02;
+	/**
+	 * 1% tolerance
+	 */
+	double TOL_1P = 0.01;
+	/**
+	 * 0.1% tolerance
+	 */
+	double TOL_P1 = 0.001;
 }

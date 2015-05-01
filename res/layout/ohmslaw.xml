@@ -24,26 +24,24 @@
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  xmlns:tools="http://schemas.android.com/tools" android:orientation="vertical"
 			  xmlns:ece="http://schemas.android.com/apk/res/com.stcarlso.goece"
 			  android:layout_width="match_parent" android:layout_height="match_parent"
-			  tools:context=".OhmsLawActivity">
-
-	<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
+			  android:orientation="vertical">
+	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
 									  android:layout_height="wrap_content" ece:units="V"
 									  android:layout_gravity="center_horizontal"
 									  android:id="@+id/guiOhmsVoltage" ece:value="1.0"
-									  ece:description="@string/voltage"/>
-	<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
+									  ece:description="@string/voltage" android:tag="ohmsVolt"/>
+	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
 									  android:layout_height="wrap_content" ece:units="A"
 									  android:layout_gravity="center_horizontal"
 									  android:id="@+id/guiOhmsCurrent" ece:value="1.0"
-									  ece:description="@string/current"/>
-	<com.stcarlso.goece.ValueEntryBox android:layout_width="wrap_content"
+									  ece:description="@string/current" android:tag="ohmsCur"/>
+	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
 									  android:layout_height="wrap_content" ece:units="Ω"
 									  android:layout_gravity="center_horizontal"
 									  android:id="@+id/guiOhmsResistance" ece:value="1.0"
-									  ece:description="@string/resist"/>
+									  ece:description="@string/resist" android:tag="ohmsRes"/>
 	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  android:id="@+id/guiOhmsPower" android:layout_gravity="center_horizontal"
 			  android:layout_marginTop="40dp"

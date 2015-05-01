@@ -22,7 +22,7 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece;
+package com.stcarlso.goece.ui;
 
 import android.app.Activity;
 import android.content.Context;
@@ -32,11 +32,16 @@ import android.os.Parcelable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
-import android.text.style.TextAppearanceSpan;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import com.stcarlso.goece.R;
+import com.stcarlso.goece.activity.ECEActivity;
+import com.stcarlso.goece.utility.Calculatable;
+import com.stcarlso.goece.utility.ECESavedState;
+import com.stcarlso.goece.utility.EngineeringValue;
+import com.stcarlso.goece.utility.Restorable;
 
 /**
  * A button with units that when clicked brings up a ValueEntryDialog.
@@ -133,7 +138,7 @@ public class ValueEntryBox extends Button implements View.OnClickListener, Resto
 		setValue(new EngineeringValue(iv, 0.0, sf, units));
 	}
 	public void loadState(SharedPreferences prefs) {
-		final String idS = Integer.toString(getId());
+		final String idS = ECEActivity.getTag(this);
 		if (prefs.contains(idS)) {
 			final double ld = Double.longBitsToDouble(prefs.getLong(idS, 0L));
 			// Why floats? Why no doubles in preferences? Android you make me sad!
@@ -142,7 +147,7 @@ public class ValueEntryBox extends Button implements View.OnClickListener, Resto
 		}
 	}
 	public void saveState(SharedPreferences.Editor prefs) {
-		prefs.putLong(Integer.toString(getId()), Double.doubleToLongBits(getRawValue()));
+		prefs.putLong(ECEActivity.getTag(this), Double.doubleToLongBits(getRawValue()));
 	}
 	public void onClick(View v) {
 		if (activity != null) {

@@ -22,12 +22,19 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece;
+package com.stcarlso.goece.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import com.stcarlso.goece.R;
+import com.stcarlso.goece.ui.ChildActivity;
+import com.stcarlso.goece.ui.ColorBand;
+import com.stcarlso.goece.utility.EIATable;
+import com.stcarlso.goece.utility.EIAValue;
+import com.stcarlso.goece.utility.EngineeringValue;
+import com.stcarlso.goece.utility.Units;
 
 /**
  * Tab for a resistor color code (PTH) value calculator.
