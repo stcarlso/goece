@@ -159,28 +159,25 @@ public final class EIATable {
 			final double denom = Math.pow(10., Math.floor(Math.log10(res)) - 2.0);
 			final double significand = res / denom;
 			// Round it off to the 0.1th place
-			final int value = (int)Math.round(significand * 10.0);
-			if (value % 10 == 0) {
-				// Close enough for government work
-				final int[] candidates = EIA_VALUES[series.ordinal()];
-				final int nv = value / 10, index = Arrays.binarySearch(candidates, nv);
-				// Exact matches need not go here
-				if (index < 0) {
-					final int intendedIndex = -index - 1;
-					// Find the nearest above and below
-					final int below, above;
-					if (intendedIndex > 0)
-						below = candidates[intendedIndex - 1];
-					else
-						below = candidates[candidates.length - 1] / 10;
-					if (intendedIndex < candidates.length)
-						above = candidates[intendedIndex];
-					else
-						above = 1000;
-					// Closest significand
-					final int closeSig = (above - nv > nv - below) ? below : above;
-					closest = (double)closeSig * denom;
-				}
+			final int[] candidates = EIA_VALUES[series.ordinal()];
+			final int value = (int)Math.round(significand), index =
+				Arrays.binarySearch(candidates, value);
+			// Exact matches need not go here
+			if (index < 0) {
+				final int intendedIndex = -index - 1;
+				// Find the nearest above and below
+				final int below, above;
+				if (intendedIndex > 0)
+					below = candidates[intendedIndex - 1];
+				else
+					below = candidates[candidates.length - 1] / 10;
+				if (intendedIndex < candidates.length)
+					above = candidates[intendedIndex];
+				else
+					above = 1000;
+				// Closest significand
+				final int closeSig = (above - value > value - below) ? below : above;
+				closest = (double)closeSig * denom;
 			}
 		}
 		return closest;

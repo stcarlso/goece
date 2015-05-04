@@ -221,15 +221,16 @@ public class ValueEntryDialog extends DialogFragment implements
 		// Update visibility
 		for (TextView tv : pct)
 			tv.setVisibility(use ? View.VISIBLE : View.GONE);
-		if (use) {
-			// Parse the value, do nothing if not yet valid
-			final double entry = getEnteredValue();
-			// For each one, grab the index and check it
-			for (int i = 0; i < pct.length; i++)
-				// Display nearest value
-				ResColorActivity.checkEIATable(new EIAValue(entry, SERIES[i], units),
-					pct[i]);
-		}
+		if (use)
+			try {
+				// Parse the value, do nothing if not yet valid
+				final double entry = getEnteredValue();
+				// For each one, grab the index and check it
+				for (int i = 0; i < pct.length; i++)
+					// Display nearest value
+					ResColorActivity.checkEIATable(new EIAValue(entry, SERIES[i], units),
+						pct[i]);
+			} catch (NumberFormatException ignore) { }
 	}
 
 	/**

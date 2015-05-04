@@ -24,44 +24,81 @@
 
 package com.stcarlso.goece.activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.RadioButton;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.ui.ChildActivity;
+import com.stcarlso.goece.ui.InAndOutActivity;
 import com.stcarlso.goece.ui.ValueEntryBox;
 
 /**
  * Calculate the reactance of capacitors and inductors at a given frequency, and perform angle
  * and magnitude calculations of the complex impedance.
  */
-public class ImpedanceActivity extends ChildActivity implements View.OnClickListener {
+public class ImpedanceActivity extends InAndOutActivity implements View.OnClickListener {
+	/**
+	 * Recalculates 2 of the bottom 3 fields from the updated value of the just changed field.
+	 */
+	private void doBottomFromLRU() {
+		final double r = ((ValueEntryBox)findViewById(R.id.guiImpedRes)).getRawValue();
+		final ValueEntryBox imp = (ValueEntryBox)findViewById(R.id.guiImpedImp);
+		final ValueEntryBox pha = (ValueEntryBox)findViewById(R.id.guiImpedPha);
+		final ValueEntryBox react = (ValueEntryBox)findViewById(R.id.guiImpedReact);
+		switch (mostRecentlyChanged()) {
+		case R.id.guiImpedPha:
+			// Use the phase
+			doBottomFromReactance(r * Math.tan(Math.toRadians(pha.getRawValue())),
+				R.string.guiImpedImpError);
+			break;
+		case R.id.guiImpedImp:
+			// Use the impedance
+			final double z = imp.getRawValue();
+			doBottomFromReactance(Math.sqrt(z * z - r * r), R.string.guiImpedImpError);
+			break;
+		case R.id.guiImpedReact:
+			// Use the reactance
+			doBottomFromReactance(react.getRawValue(), R.string.guiImpedReactError);
+			break;
+		default:
+			// Invalid!
+			break;
+		}
+	}
 	/**
 	 * Recalculates the bottom 3 fields, given the value of reactance.
 	 *
 	 * @param react the reactance value to use
+	 * @param errorID the string to display if the values are invalid
 	 */
-	private void doBottomFromReactance(final double react) {
+	private void doBottomFromReactance(final double react, final int errorID) {
 		final double r = ((ValueEntryBox)findViewById(R.id.guiImpedRes)).getRawValue();
 		final double mag = Math.hypot(r, react), phase = Math.toDegrees(Math.atan2(react, r));
 		// Update reactance
-		setValueEntry(findViewById(R.id.guiImpedReact), react);
+		setValueEntry(findViewById(R.id.guiImpedReact), react, errorID);
 		// Impedance is magnitude of resistance and reactance
-		setValueEntry(findViewById(R.id.guiImpedImp), mag);
+		setValueEntry(findViewById(R.id.guiImpedImp), mag, errorID);
 		// Phase is direction of resistance and reactance (atan2)
-		setValueEntry(findViewById(R.id.guiImpedPha), phase);
+		setValueEntry(findViewById(R.id.guiImpedPha), phase, errorID);
+	}
+	@Override
+	protected void loadCustomPrefs(SharedPreferences prefs) {
+		super.loadCustomPrefs(prefs);
+		loadPrefsCheckBox(prefs, R.id.guiImpedSelCap);
+		loadPrefsCheckBox(prefs, R.id.guiImpedSelInd);
 	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.impedance);
+		// Resistance is always futile!
 		setupValueEntryBox(R.id.guiImpedRes);
-		setupValueEntryBox(R.id.guiImpedCap);
-		setupValueEntryBox(R.id.guiImpedInd);
-		setupValueEntryBox(R.id.guiImpedFreq);
-		setupValueEntryBox(R.id.guiImpedPha);
-		setupValueEntryBox(R.id.guiImpedReact);
-		setupValueEntryBox(R.id.guiImpedImp);
+		setupValueEntryBox(R.id.guiImpedCap, true);
+		setupValueEntryBox(R.id.guiImpedInd, true);
+		setupValueEntryBox(R.id.guiImpedFreq, true);
+		setupValueEntryBox(R.id.guiImpedPha, false);
+		setupValueEntryBox(R.id.guiImpedReact, false);
+		setupValueEntryBox(R.id.guiImpedImp, false);
 		loadPrefs();
 		// "Click" the check box (does not matter which one, the state is set by isChecked)
 		onClick(findViewById(R.id.guiImpedSelCap));
@@ -76,33 +113,62 @@ public class ImpedanceActivity extends ChildActivity implements View.OnClickList
 	public void recalculate(View source) {
 		// Capacitance or inductance?
 		final boolean isCap = ((RadioButton)findViewById(R.id.guiImpedSelCap)).isChecked();
+		final ValueEntryBox cap = (ValueEntryBox)findViewById(R.id.guiImpedCap);
+		final ValueEntryBox ind = (ValueEntryBox)findViewById(R.id.guiImpedInd);
+		final ValueEntryBox freq = (ValueEntryBox)findViewById(R.id.guiImpedFreq);
+		final ValueEntryBox react = (ValueEntryBox)findViewById(R.id.guiImpedReact);
 		// Was the control on the bottom half or the top half?
 		final int id = pushAdjustment(source);
 		switch (id) {
-		case R.id.guiImpedRes:
-			// Resistance
-			break;
 		case R.id.guiImpedCap:
 			// Capacitance
+			doBottomFromLRU();
+			if (freq.getRawValue() == 0.0)
+				setErrorEntry(cap, R.string.guiImpedFreqError);
+			else
+				setValueEntry(react, 1.0 / (react.getRawValue() * freq.getRawValue()),
+					R.string.guiImpedReactError);
 			break;
 		case R.id.guiImpedInd:
 			// Inductance
+			doBottomFromLRU();
+			setValueEntry(freq, react.getRawValue() / freq.getRawValue(),
+				R.string.guiImpedFreqError);
 			break;
 		case R.id.guiImpedFreq:
 			// Frequency
+			doBottomFromLRU();
+			if (isCap)
+				// Set from capacitance
+				setValueEntry(freq, 1.0 / (react.getRawValue() * cap.getRawValue()),
+					R.string.guiImpedReactError);
+			else
+				// Set from inductance
+				setValueEntry(freq, react.getRawValue() / ind.getRawValue(),
+					R.string.guiImpedIndError);
 			break;
 		case R.id.guiImpedReact:
-			// Reactance
-			break;
 		case R.id.guiImpedPha:
-			// Phase
-			break;
 		case R.id.guiImpedImp:
-			// Impedance
+			// Reactance, phase, or impedance (recalculate all outputs)
+			if (isCap) {
+				if (cap.getRawValue() == 0.0)
+					doBottomFromReactance(Double.NaN, R.string.guiImpedCapError);
+				else
+					doBottomFromReactance(1.0 / (cap.getRawValue() * freq.getRawValue()),
+						R.string.guiImpedFreqError);
+			} else
+				doBottomFromReactance(ind.getRawValue() * freq.getRawValue(), 0);
 			break;
 		default:
 			// Invalid
 			break;
 		}
+	}
+	@Override
+	protected void saveCustomPrefs(SharedPreferences.Editor prefs) {
+		super.saveCustomPrefs(prefs);
+		savePrefsCheckBox(prefs, R.id.guiImpedSelCap);
+		savePrefsCheckBox(prefs, R.id.guiImpedSelInd);
 	}
 }

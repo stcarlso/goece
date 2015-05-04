@@ -24,6 +24,7 @@
 
 package com.stcarlso.goece.ui;
 
+import android.R;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -34,6 +35,7 @@ import android.support.v4.app.TaskStackBuilder;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import com.stcarlso.goece.activity.ECEActivity;
 import com.stcarlso.goece.utility.Calculatable;
@@ -48,32 +50,37 @@ import java.util.*;
  */
 public abstract class ChildActivity extends Activity implements Calculatable {
 	/**
-	 * Changes the value of the specified value entry box.
-	 *
-	 * @param box the entry box to modify
-	 * @param newValue the value to be set
+	 * List of fields registered for save/restore using registerAdjustable.
 	 */
-	protected static void setValueEntry(final View box, final double newValue) {
-		final ValueEntryBox ve = (ValueEntryBox)box;
-		ve.updateValue(newValue);
-		ve.setError(null);
-	}
+	protected LinkedList<Integer> fields;
 
 	/**
-	 * History of fields that were changed, with the most recently changed at the front.
+	 * Initialize this activity.
 	 */
-	private LinkedList<Integer> recalcHistory;
-
 	protected ChildActivity() {
-		recalcHistory = new LinkedList<Integer>();
+		fields = new LinkedList<Integer>();
 	}
 	/**
-	 * Returns the view ID of the registered view which was least recently changed.
+	 * Implementation behind pushAdjustment in subclasses
 	 *
-	 * @return the ID of the registered view with the oldest value
+	 * @param list the list to search
+	 * @param id the ID of the view which was mutated
+	 * @return the ID of the view to be updated
 	 */
-	protected int leastRecentlyChanged() {
-		return recalcHistory.getLast();
+	protected int doPushAdjustment(final LinkedList<Integer> list, final int id) {
+		int idx = -1;
+		// Iterate through and pull it to the front
+		final Iterator<Integer> lookup = list.iterator();
+		while (idx < 0 && lookup.hasNext()) {
+			final int newID = lookup.next();
+			if (id == newID) {
+				// Found it
+				lookup.remove();
+				list.addFirst(id);
+				idx = list.getLast();
+			}
+		}
+		return idx;
 	}
 	/**
 	 * Method for subclasses to override for restoration of standard Android objects not loaded
@@ -88,7 +95,7 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 */
 	protected void loadPrefs() {
 		final SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-		for (int id : recalcHistory)
+		for (int id : fields)
 			// Restore all items marked as Restorable
 			((Restorable)findViewById(id)).loadState(prefs);
 		loadCustomPrefs(prefs);
@@ -100,7 +107,7 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 * @param id the ID of the control to load
 	 */
 	protected void loadPrefsCheckBox(final SharedPreferences prefs, final int id) {
-		final CheckBox view = (CheckBox)findViewById(id);
+		final CompoundButton view = (CompoundButton)findViewById(id);
 		final String tag = ECEActivity.getTag(view);
 		// Only change if the preferences are initialized
 		if (prefs.contains(tag))
@@ -119,14 +126,6 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 		if (prefs.contains(tag))
 			view.setText(prefs.getString(tag, ""));
 	}
-	/**
-	 * Returns the view ID of the registered view which was most recently changed.
-	 *
-	 * @return the ID of the view that was just changed
-	 */
-	protected int mostRecentlyChanged() {
-		return recalcHistory.getFirst();
-	}
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		final ActionBar bar = getActionBar();
@@ -136,7 +135,7 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	}
 	public boolean onOptionsItemSelected(final MenuItem item) {
 		switch (item.getItemId()) {
-		case android.R.id.home:
+		case R.id.home:
 			// Find the parent activity
 			final Intent upIntent = NavUtils.getParentActivityIntent(this);
 			if (NavUtils.shouldUpRecreateTask(this, upIntent))
@@ -161,36 +160,12 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 		loadPrefs();
 	}
 	/**
-	 * Call when a view is changed to moves it to the front of the adjustable list.
+	 * Registers the control to have its value saved and loaded.
 	 *
-	 * @param view the view which was just modified
-	 * @return the value of leastRecentlyChanged(), or -1 if the view argument was not found
+	 * @param view the control to add to the list
 	 */
-	protected int pushAdjustment(final View view) {
-		final int id = view.getId();
-		int idx = -1;
-		// Iterate through and pull it to the front
-		final Iterator<Integer> lookup = recalcHistory.iterator();
-		while (idx < 0 && lookup.hasNext()) {
-			final int newID = lookup.next();
-			if (id == newID) {
-				// Found it
-				lookup.remove();
-				recalcHistory.addFirst(id);
-				idx = leastRecentlyChanged();
-			}
-		}
-		return idx;
-	}
-	/**
-	 * Registers the control as an adjustable that will follow the LRU rules (least recently
-	 * used) rules to determine the value to be calculated.
-	 *
-	 * @param view the control to add to the list; the last control added initially is the
-	 * first to be adjusted!
-	 */
-	protected void registerAdjustable(final View view) {
-		recalcHistory.add(view.getId());
+	protected void registerAdjustable(final Restorable view) {
+		fields.add(view.getId());
 	}
 	/**
 	 * Method for subclasses to override for the saving of standard Android objects not stored
@@ -207,7 +182,7 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 		final SharedPreferences prefs = getPreferences(MODE_PRIVATE);
 		final SharedPreferences.Editor editor = prefs.edit();
 		// Save all items registered as Restorable
-		for (int id : recalcHistory)
+		for (int id : fields)
 			((Restorable)findViewById(id)).saveState(editor);
 		saveCustomPrefs(editor);
 		editor.apply();
@@ -219,7 +194,7 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 * @param id the ID of the control to save
 	 */
 	protected void savePrefsCheckBox(final SharedPreferences.Editor prefs, final int id) {
-		final CheckBox view = (CheckBox)findViewById(id);
+		final CompoundButton view = (CompoundButton)findViewById(id);
 		prefs.putBoolean(ECEActivity.getTag(view), view.isChecked());
 	}
 	/**
@@ -231,6 +206,22 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	protected void savePrefsTextView(final SharedPreferences.Editor prefs, final int id) {
 		final TextView view = (TextView)findViewById(id);
 		prefs.putString(ECEActivity.getTag(view), view.getText().toString());
+	}
+	/**
+	 * Changes the value of the specified value entry box.
+	 *
+	 * @param box the entry box to modify
+	 * @param newValue the value to be set
+	 * @param errorID the error message to display if newValue is infinite or NaN
+	 */
+	protected void setValueEntry(final View box, final double newValue, final int errorID) {
+		final ValueEntryBox ve = (ValueEntryBox)box;
+		if (Double.isNaN(newValue) || Double.isInfinite(newValue))
+			ve.setError(getString(errorID));
+		else {
+			ve.updateValue(newValue);
+			ve.setError(null);
+		}
 	}
 	/**
 	 * Sets the listener and parent activity of the specified value entry box. Useful for the

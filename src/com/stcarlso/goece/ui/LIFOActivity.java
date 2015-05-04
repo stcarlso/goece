@@ -22,33 +22,40 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece.utility;
+package com.stcarlso.goece.ui;
 
-import android.content.SharedPreferences;
+import android.view.View;
+
+import java.util.*;
 
 /**
- * A simple marker interface common to custom controls which allows their state to be saved
- * and restored to the application preferences.
+ * Abstract parent of all activities which use a single flat structure of calculation boxes
+ * (where the least recently used is changed)
  */
-public interface Restorable {
+public abstract class LIFOActivity extends ChildActivity {
 	/**
-	 * Standard Android call. Used for type safety...
+	 * Returns the view ID of the registered view which was least recently changed.
 	 *
-	 * @return the ID of this component
+	 * @return the ID of the registered view with the oldest value
 	 */
-	int getId();
+	protected int leastRecentlyChanged() {
+		return fields.getLast();
+	}
 	/**
-	 * Loads the state of this control. If no state is available, nothing should happen. The
-	 * same ID as in saveState() must be used.
+	 * Returns the view ID of the registered view which was most recently changed.
 	 *
-	 * @param prefs the location of the state to restore
+	 * @return the ID of the view that was just changed
 	 */
-	void loadState(SharedPreferences prefs);
+	protected int mostRecentlyChanged() {
+		return fields.getFirst();
+	}
 	/**
-	 * Save the state of this control. It should be saved with a unique ID, preferably the
-	 * integer ID of the field.
+	 * Call when a view is changed to moves it to the front of the adjustable list.
 	 *
-	 * @param prefs the location where the state will be stored
+	 * @param view the view which was just modified
+	 * @return the value of leastRecentlyChanged(), or -1 if the view argument was not found
 	 */
-	void saveState(SharedPreferences.Editor prefs);
+	protected int pushAdjustment(final View view) {
+		return doPushAdjustment(fields, view.getId());
+	}
 }

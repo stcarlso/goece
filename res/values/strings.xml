@@ -63,4 +63,10 @@
 	<!-- Ohm's law -->
 	<string name="guiOhmsResError">Resistance cannot be zero.</string>
 	<string name="guiOhmsCurError">Current cannot be zero.</string>
+	<!-- Impedance -->
+	<string name="guiImpedFreqError">Frequency cannot be zero.</string>
+	<string name="guiImpedCapError">Capacitance cannot be zero.</string>
+	<string name="guiImpedIndError">Inductance cannot be zero.</string>
+	<string name="guiImpedReactError">Reactance cannot be zero.</string>
+	<string name="guiImpedImpError">Impedance cannot be zero.</string>
 </resources>

@@ -36,7 +36,8 @@
 				android:layout_gravity="center_horizontal" android:orientation="horizontal">
 		<RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
 					 android:id="@+id/guiImpedSelCap" android:checked="true"
-					 android:layout_gravity="center_vertical" android:onClick="onClick"/>
+					 android:layout_gravity="center_vertical" android:onClick="onClick"
+					 android:tag="impedSelCap"/>
 		<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
 										  android:layout_height="wrap_content" ece:units="F"
 										  android:id="@+id/guiImpedCap" ece:value="1E-6"
@@ -44,7 +45,8 @@
 										  ece:description="@string/capacit" android:tag="impedCap"/>
 		<RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
 					 android:id="@+id/guiImpedSelInd" android:checked="false"
-					 android:layout_gravity="center_vertical" android:onClick="onClick"/>
+					 android:layout_gravity="center_vertical" android:onClick="onClick"
+					 android:tag="impedSelInd"/>
 		<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
 										  android:layout_height="wrap_content" ece:units="H"
 										  android:id="@+id/guiImpedInd" ece:value="1E-6"

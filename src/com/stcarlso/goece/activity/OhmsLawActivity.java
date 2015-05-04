@@ -29,6 +29,7 @@ import android.view.View;
 import android.widget.TextView;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.ChildActivity;
+import com.stcarlso.goece.ui.LIFOActivity;
 import com.stcarlso.goece.ui.ValueEntryBox;
 import com.stcarlso.goece.utility.EngineeringValue;
 import com.stcarlso.goece.utility.Units;
@@ -37,7 +38,7 @@ import com.stcarlso.goece.utility.Units;
  * Very simple Ohm's law activity. Everyone should know it, but this adds engineering value
  * goodness! (uA, mV, Gohm anyone?)
  */
-public class OhmsLawActivity extends ChildActivity {
+public class OhmsLawActivity extends LIFOActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ohmslaw);
@@ -59,32 +60,22 @@ public class OhmsLawActivity extends ChildActivity {
 		switch (id) {
 		case R.id.guiOhmsVoltage:
 			// Update voltage
-			setValueEntry(volts, i * r);
+			setValueEntry(volts, i * r, 0);
 			updatePower(i * i * r);
 			amps.setError(null);
 			ohms.setError(null);
 			break;
 		case R.id.guiOhmsCurrent:
 			// Update current
-			if (r > 0.0) {
-				setValueEntry(amps, v / r);
-				updatePower(v * v / r);
-			} else {
-				setErrorEntry(amps, R.string.guiOhmsResError);
-				updatePower(Double.NaN);
-			}
+			setValueEntry(amps, v / r, R.string.guiOhmsResError);
+			updatePower(v * v / r);
 			volts.setError(null);
 			ohms.setError(null);
 			break;
 		case R.id.guiOhmsResistance:
 			// Update resistance
-			if (i > 0.0) {
-				setValueEntry(ohms, v / i);
-				updatePower(v * i);
-			} else {
-				setErrorEntry(ohms, R.string.guiOhmsCurError);
-				updatePower(Double.NaN);
-			}
+			setValueEntry(ohms, v / i, R.string.guiOhmsCurError);
+			updatePower(i == 0.0 ? Double.NaN : v * i);
 			volts.setError(null);
 			amps.setError(null);
 			break;
@@ -102,7 +93,7 @@ public class OhmsLawActivity extends ChildActivity {
 		final String label = getString(R.string.power), data;
 		final TextView view = (TextView)findViewById(R.id.guiOhmsPower);
 		// Power overwhelming
-		if (Double.isNaN(power)) {
+		if (Double.isNaN(power) || Double.isInfinite(power)) {
 			data = "Overwhelming!";
 			view.setError("Power overwhelming!");
 		} else {
