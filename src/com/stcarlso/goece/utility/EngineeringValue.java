@@ -73,13 +73,13 @@ public class EngineeringValue implements Serializable {
 	 * The prefix the unit gets for each cut-off below.
 	 */
 	public static final String[] ENGR_NAMES = {
-		"f", "p", "n", "\u03BC", "m", "", "K", "M", "G", "T", "E"
+		"a", "f", "p", "n", "\u03BC", "m", "", "K", "M", "G", "T", "P", "E"
 	};
 	/**
 	 * Cut-off values for engineering formatting.
 	 */
 	public static final double[] ENGR_THRESHOLD = {
-		1e-15, 1e-12, 1e-9, 1e-6, 1e-3, 1, 1e3, 1e6, 1e9, 1e12, Double.MAX_VALUE
+		1e-18, 1e-15, 1e-12, 1e-9, 1e-6, 1e-3, 1, 1e3, 1e6, 1e9, 1e12, 1e15, 1e18
 	};
 
 	/**
@@ -158,8 +158,8 @@ public class EngineeringValue implements Serializable {
 	public EngineeringValue(final double value, final double tolerance, final int sigfigs,
 							final String units) {
 		final double absValue = Math.abs(value);
-		// Do not allow NaN or inf
-		if (Double.isNaN(value) || Double.isInfinite(value))
+		// Do not allow NaN
+		if (Double.isNaN(value))
 			throw new IllegalArgumentException("value: " + value);
 		if (units == null)
 			throw new NullPointerException("units");
@@ -172,17 +172,26 @@ public class EngineeringValue implements Serializable {
 		this.sigfigs = sigfigs;
 		this.tolerance = tolerance;
 		this.units = units;
-		int code = 4;
+		int code = 6;
 		double engr = value;
 		// Look for the prefix
-		if (absValue > 0.0)
-			for (int i = 0; i < ENGR_THRESHOLD.length && i < ENGR_NAMES.length; i++)
-				if (absValue < ENGR_THRESHOLD[i + 1]) {
-					// Found correct prefix
-					code = i;
-					engr = value / ENGR_THRESHOLD[code];
-					break;
-				}
+		if (absValue > 0.0 && !Double.isInfinite(value)) {
+			if (absValue >= ENGR_THRESHOLD[ENGR_THRESHOLD.length - 1])
+				// Infinite enough
+				engr = (value > 0) ? Double.POSITIVE_INFINITY : Double.NEGATIVE_INFINITY;
+			else if (absValue < ENGR_THRESHOLD[0])
+				// Flush to zero
+				engr = 0.0;
+			else
+				// Somewhere in between
+				for (int i = 0; i < ENGR_THRESHOLD.length && i < ENGR_NAMES.length; i++)
+					if (absValue < ENGR_THRESHOLD[i + 1]) {
+						// Found correct prefix
+						code = i;
+						engr = value / ENGR_THRESHOLD[code];
+						break;
+					}
+		}
 		// Assign significand and prefix code
 		prefix = code;
 		significand = engr;
@@ -282,18 +291,25 @@ public class EngineeringValue implements Serializable {
 	 */
 	public String significandToString(final int sf) {
 		final double sig = getSignificand(), absSig = Math.abs(sig);
-		final int decimals;
-		// Calculate number of decimal places to show
-		if (absSig >= 100.0)
-			decimals = sf - 3;
-		else if (absSig >= 10.0)
-			decimals = sf - 2;
-		else if (absSig >= 1.0)
-			decimals = sf - 1;
-		else
-			decimals = sf;
-		// Compose format string
-		return String.format("%." + decimals + "f", sig);
+		final String out;
+		if (Double.isInfinite(sig))
+			// If infinite, display it that way
+			out = (sig > 0.0) ? "\u221E" : "-\u221E";
+		else {
+			final int decimals;
+			// Calculate number of decimal places to show
+			if (absSig >= 100.0)
+				decimals = sf - 3;
+			else if (absSig >= 10.0)
+				decimals = sf - 2;
+			else if (absSig >= 1.0)
+				decimals = sf - 1;
+			else
+				decimals = sf;
+			// Compose format string
+			out = String.format("%." + decimals + "f", sig);
+		}
+		return out;
 	}
 	public String toString() {
 		final StringBuilder format = new StringBuilder(significandToString());

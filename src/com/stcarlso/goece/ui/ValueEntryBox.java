@@ -41,21 +41,34 @@ import com.stcarlso.goece.activity.ECEActivity;
 import com.stcarlso.goece.utility.Calculatable;
 import com.stcarlso.goece.utility.ECESavedState;
 import com.stcarlso.goece.utility.EngineeringValue;
-import com.stcarlso.goece.utility.Restorable;
+import com.stcarlso.goece.utility.ValueControl;
 
 /**
  * A button with units that when clicked brings up a ValueEntryDialog.
  */
-public class ValueEntryBox extends Button implements View.OnClickListener, Restorable,
+public class ValueEntryBox extends Button implements View.OnClickListener, ValueControl,
 		ValueEntryDialog.OnCalculateListener {
 	/**
 	 * Why android why?
 	 */
 	private Activity activity;
 	/**
+	 * When this box is changed, this field is used to determine which group is affected.
+	 */
+	private String affects;
+	/**
+	 * Listens for long presses and copies the value.
+	 */
+	private CopyListener copyListener;
+	/**
 	 * The description requested for this value box ("Leakage Current", "Turn-On Voltage", ...)
 	 */
 	private String description;
+	/**
+	 * The group assigned to this value entry box. All members in a group are LRUed to
+	 * determine which one is changed when the group is affected.
+	 */
+	private String group;
 	/**
 	 * The listener to be called each time the user changes this value.
 	 */
@@ -84,6 +97,9 @@ public class ValueEntryBox extends Button implements View.OnClickListener, Resto
 		if (listener != null)
 			listener.recalculate(this);
 	}
+	public String getAffects() {
+		return affects;
+	}
 	/**
 	 * Gets the description of this value box.
 	 *
@@ -91,6 +107,9 @@ public class ValueEntryBox extends Button implements View.OnClickListener, Resto
 	 */
 	public String getDescription() {
 		return description;
+	}
+	public String getGroup() {
+		return group;
 	}
 	/**
 	 * Returns the raw value entered in this value box.
@@ -109,7 +128,7 @@ public class ValueEntryBox extends Button implements View.OnClickListener, Resto
 		return value;
 	}
 	private void init(final Context context, final AttributeSet attrs) {
-		String units = "", desc = "Value";
+		String units = "", desc = "Value", newGroup = "", willAffect = "";
 		double iv = 0.0;
 		int sf = 3;
 		activity = null;
@@ -127,12 +146,16 @@ public class ValueEntryBox extends Button implements View.OnClickListener, Resto
 				desc = values.getString(R.styleable.ValueEntryBox_description);
 				iv = values.getFloat(R.styleable.ValueEntryBox_value, 0.0f);
 				sf = values.getInt(R.styleable.ValueEntryBox_sigfigs, 3);
+				newGroup = values.getString(R.styleable.ValueEntryBox_group);
+				willAffect = values.getString(R.styleable.ValueEntryBox_affects);
 			} catch (Exception e) {
 				Log.e("ValueEntryBox", "Invalid attributes:", e);
 			}
 		} else
 			// Probably not good
 			Log.w("ValueEntryBox", "No units specified, defaulting to unitless!");
+		group = newGroup;
+		affects = willAffect;
 		// Create value and set text
 		description = desc;
 		setValue(new EngineeringValue(iv, 0.0, sf, units));
@@ -143,7 +166,7 @@ public class ValueEntryBox extends Button implements View.OnClickListener, Resto
 			final double ld = Double.longBitsToDouble(prefs.getLong(idS, 0L));
 			// Why floats? Why no doubles in preferences? Android you make me sad!
 			if (!Double.isInfinite(ld) && !Double.isNaN(ld))
-				setValue(getValue().newValue(ld));
+				updateValue(ld);
 		}
 	}
 	public void saveState(SharedPreferences.Editor prefs) {
@@ -215,8 +238,13 @@ public class ValueEntryBox extends Button implements View.OnClickListener, Resto
 	 * @param activity the parent activity
 	 */
 	public void setParentActivity(final Activity activity) {
-		if (activity != null)
+		if (activity != null) {
 			this.activity = activity;
+			// Update the copy listener
+			copyListener = new CopyListener(activity, getDescription());
+			copyListener.setValue(getValue());
+			setOnLongClickListener(copyListener);
+		}
 	}
 	/**
 	 * Changes the currently selected index. Does not fire the calculation listener but updates
@@ -227,6 +255,8 @@ public class ValueEntryBox extends Button implements View.OnClickListener, Resto
 	public void setValue(final EngineeringValue newValue) {
 		if (newValue != value) {
 			value = newValue;
+			if (copyListener != null)
+				copyListener.setValue(newValue);
 			updateText();
 		}
 	}

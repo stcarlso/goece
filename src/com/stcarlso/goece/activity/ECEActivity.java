@@ -46,19 +46,6 @@ import com.stcarlso.goece.utility.EngineeringValue;
  */
 public final class ECEActivity extends FragmentActivity {
 	/**
-	 * Formats the string as an engineering value (with K, M, G, ...) and a tolerance.
-	 *
-	 * @param value the value to format
-	 * @param units the units (F, V, A, ...)
-	 * @param tolerance the tolerance of the value (0.1 = 10%, 0.01 = 1%) or 0 to suppress
-	 * @return the string formatted very nicely
-	 */
-	@Deprecated
-	public static String engineeringFormat(final double value, final String units,
-										   final double tolerance) {
-		return new EngineeringValue(value, tolerance, units).toString();
-	}
-	/**
 	 * Displays an error message popup.
 	 *
 	 * @param activity the activity showing the error
@@ -83,7 +70,7 @@ public final class ECEActivity extends FragmentActivity {
 			idS = tag.toString();
 		else {
 			idS = Integer.toString(view.getId());
-			Log.w("ChildActivity", "Component is missing tag: " + view.getId());
+			Log.w("ECEActivity", "Component is missing tag: " + view.getId());
 		}
 		return idS;
 	}

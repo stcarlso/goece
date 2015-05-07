@@ -37,16 +37,25 @@ import com.stcarlso.goece.R;
 import com.stcarlso.goece.activity.ECEActivity;
 import com.stcarlso.goece.utility.Calculatable;
 import com.stcarlso.goece.utility.ECESavedState;
-import com.stcarlso.goece.utility.Restorable;
+import com.stcarlso.goece.utility.ValueControl;
 
 /**
  * A component which displays colors on the screen and can be checked for the selected color.
  */
-public class ColorBand extends LinearLayout implements View.OnClickListener, Restorable {
+public class ColorBand extends LinearLayout implements View.OnClickListener, ValueControl {
+	/**
+	 * When this box is changed, this field is used to determine which group is affected.
+	 */
+	private String affects;
 	/**
 	 * Copies of the buttons on the screen.
 	 */
 	private Button[] colors;
+	/**
+	 * The group assigned to this value entry box. All members in a group are LRUed to
+	 * determine which one is changed when the group is affected.
+	 */
+	private String group;
 	/**
 	 * Called when a new value is selected
 	 */
@@ -74,6 +83,12 @@ public class ColorBand extends LinearLayout implements View.OnClickListener, Res
 	protected void callOnCalculateListener() {
 		if (listener != null)
 			listener.recalculate(this);
+	}
+	public String getAffects() {
+		return affects;
+	}
+	public String getGroup() {
+		return group;
 	}
 	private void init(final Context context, final AttributeSet attrs) {
 		View.inflate(context, R.layout.colorband, this);
@@ -108,12 +123,17 @@ public class ColorBand extends LinearLayout implements View.OnClickListener, Res
 		final TypedArray values = context.getTheme().obtainStyledAttributes(attrs,
 			R.styleable.ColorBand, 0, 0);
 		int pos = 0;
+		String newGroup = "", willAffect = "";
 		try {
 			// Read the values and substitute defaults
 			pos = values.getInteger(R.styleable.ColorBand_pos, 0);
+			newGroup = values.getString(R.styleable.ColorBand_group);
+			willAffect = values.getString(R.styleable.ColorBand_affects);
 		} catch (Exception e) {
 			Log.e("ColorBand", "Invalid attributes:", e);
 		}
+		group = newGroup;
+		affects = willAffect;
 		// Show or hide colors
 		colors[0].setVisibility(pos >= 1 && pos <= 3 ? VISIBLE : INVISIBLE);
 		for (int i = 1; i < 8; i++) {

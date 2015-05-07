@@ -24,13 +24,23 @@
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 <resources>
+	<attr name="group" format="string"/>
+	<attr name="affects" format="string"/>
 	<declare-styleable name="ColorBand">
 		<attr name="pos" format="integer"/>
+		<attr name="group"/>
+		<attr name="affects"/>
 	</declare-styleable>
 	<declare-styleable name="ValueEntryBox">
 		<attr name="units" format="string"/>
 		<attr name="value" format="float"/>
 		<attr name="description" format="string"/>
 		<attr name="sigfigs" format="integer"/>
+		<attr name="group"/>
+		<attr name="affects"/>
+	</declare-styleable>
+	<declare-styleable name="ValueTextBox">
+		<attr name="group"/>
+		<attr name="affects"/>
 	</declare-styleable>
 </resources>

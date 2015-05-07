@@ -28,11 +28,9 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.TextView;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.ui.ChildActivity;
-import com.stcarlso.goece.ui.EnterKeyListener;
+import com.stcarlso.goece.ui.*;
 import com.stcarlso.goece.utility.EIATable;
 import com.stcarlso.goece.utility.EIAValue;
 
@@ -109,11 +107,28 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	}
 
 	/**
+	 * Handles long presses on the output text box.
+	 */
+	private final CopyListener copyListener;
+	/**
 	 * The last successfully calculated resistor code.
 	 */
 	private String lastCode;
+	/**
+	 * Cached reference to the output text box.
+	 */
+	private TextView outputCtrl;
+	/**
+	 * Cached reference to the standard value box.
+	 */
+	private TextView stdCtrl;
+	/**
+	 * Cached reference to the underline selection control.
+	 */
+	private CheckBox underlineCtrl;
 
 	public SMDResistorActivity() {
+		copyListener = new CopyListener(this, "Resistance");
 		lastCode = "000";
 	}
 	/**
@@ -150,7 +165,6 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	}
 	protected void loadCustomPrefs(SharedPreferences prefs) {
 		loadPrefsCheckBox(prefs, R.id.guiResLine);
-		loadPrefsTextView(prefs, R.id.guiResSMDCode);
 	}
 	/**
 	 * Receive click events from the calculate button and recalculate.
@@ -158,14 +172,20 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	 * @param v the source view
 	 */
 	public void onClick(View v) {
-		recalculate(v);
+		recalculate(findValueById(R.id.guiResSMDCode));
 	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.smdresistor);
+		underlineCtrl = asCheckBox(R.id.guiResLine);
+		// Load and register the input code box
+		final ValueTextBox codeIn = (ValueTextBox)findViewById(R.id.guiResSMDCode);
+		outputCtrl = asTextView(R.id.guiResValue);
+		outputCtrl.setOnLongClickListener(copyListener);
+		stdCtrl = asTextView(R.id.guiResIsStandard);
+		registerAdjustable(codeIn);
 		// Add listener to calculate on press
-		final View codeIn = findViewById(R.id.guiResSMDCode);
 		EnterKeyListener.addListener(this, R.id.guiResSMDCode, this);
 		loadPrefs();
 		if (savedInstanceState != null && savedInstanceState.containsKey("lastCode")) {
@@ -188,18 +208,17 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 		super.onSaveInstanceState(outState);
 		outState.putString("lastCode", lastCode);
 	}
-	public void recalculate(final View source) {
-		final EditText input = (EditText)findViewById(R.id.guiResSMDCode);
-		final boolean underline = ((CheckBox)findViewById(R.id.guiResLine)).isChecked();
+	public void recalculate(final ValueGroup source) {
+		// Group has one item
+		final ValueTextBox input = (ValueTextBox)source.get(R.id.guiResSMDCode);
 		// If underlined, prepend "R"
 		String code = input.getText().toString();
-		if (underline)
+		if (underlineCtrl.isChecked())
 			code = "R" + code;
 		calculate(code, true);
 	}
 	protected void saveCustomPrefs(SharedPreferences.Editor prefs) {
 		savePrefsCheckBox(prefs, R.id.guiResLine);
-		savePrefsTextView(prefs, R.id.guiResSMDCode);
 	}
 	/**
 	 * Display the resistor value on screen.
@@ -207,7 +226,10 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	 * @param value the calculated value
 	 */
 	private void showValue(final EIAValue value) {
-		((TextView)findViewById(R.id.guiResValue)).setText(value.toString());
-		ResColorActivity.checkEIATable(value, (TextView)findViewById(R.id.guiResIsStandard));
+		outputCtrl.setText(value.toString());
+		ResColorActivity.checkEIATable(value, stdCtrl);
+		copyListener.setValue(value);
 	}
+	// All work is done in recalculate()
+	protected void update(ValueGroup group) { }
 }

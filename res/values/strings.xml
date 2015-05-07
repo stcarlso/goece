@@ -30,6 +30,11 @@
 	<string name="error">Error</string>
 	<string name="ok">OK</string>
 	<string name="calculate">Calculate</string>
+	<string name="copy">Copy</string>
+	<string name="copyRaw">%.3g</string>
+	<string name="copySig">%.3f</string>
+	<string name="copyUnits">%s</string>
+	<string name="copyAll">%s</string>
 	<!-- These show up pretty often -->
 	<string name="voltage">Voltage</string>
 	<string name="current">Current</string>
@@ -60,13 +65,4 @@
 	<string name="guiResLine">Value is underlined</string>
 	<string name="guiResInvalid">Invalid resistor code.</string>
 	<string name="guiResInitialValue">103</string>
-	<!-- Ohm's law -->
-	<string name="guiOhmsResError">Resistance cannot be zero.</string>
-	<string name="guiOhmsCurError">Current cannot be zero.</string>
-	<!-- Impedance -->
-	<string name="guiImpedFreqError">Frequency cannot be zero.</string>
-	<string name="guiImpedCapError">Capacitance cannot be zero.</string>
-	<string name="guiImpedIndError">Inductance cannot be zero.</string>
-	<string name="guiImpedReactError">Reactance cannot be zero.</string>
-	<string name="guiImpedImpError">Impedance cannot be zero.</string>
 </resources>

@@ -28,20 +28,23 @@
 			  android:layout_width="match_parent" android:layout_height="match_parent"
 			  android:orientation="vertical">
 	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
-									  android:layout_height="wrap_content" ece:units="V"
-									  android:layout_gravity="center_horizontal"
-									  android:id="@+id/guiOhmsVoltage" ece:value="1.0"
-									  ece:description="@string/voltage" android:tag="ohmsVolt"/>
+										 android:layout_height="wrap_content" ece:units="V"
+										 android:layout_gravity="center_horizontal"
+										 android:id="@+id/guiOhmsVoltage" ece:value="1.0"
+										 ece:description="@string/voltage" ece:group="all"
+										 android:tag="ohmsVolt" ece:affects="all"/>
 	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
-									  android:layout_height="wrap_content" ece:units="A"
-									  android:layout_gravity="center_horizontal"
-									  android:id="@+id/guiOhmsCurrent" ece:value="1.0"
-									  ece:description="@string/current" android:tag="ohmsCur"/>
+										 android:layout_height="wrap_content" ece:units="A"
+										 android:layout_gravity="center_horizontal"
+										 android:id="@+id/guiOhmsCurrent" ece:value="1.0"
+										 ece:description="@string/current" ece:group="all"
+										 android:tag="ohmsCur" ece:affects="all"/>
 	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
-									  android:layout_height="wrap_content" ece:units="Ω"
-									  android:layout_gravity="center_horizontal"
-									  android:id="@+id/guiOhmsResistance" ece:value="1.0"
-									  ece:description="@string/resist" android:tag="ohmsRes"/>
+										 android:layout_height="wrap_content" ece:units="Ω"
+										 android:layout_gravity="center_horizontal"
+										 android:id="@+id/guiOhmsResistance" ece:value="1.0"
+										 ece:description="@string/resist" ece:group="all"
+										 android:tag="ohmsRes" ece:affects="all"/>
 	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  android:id="@+id/guiOhmsPower" android:layout_gravity="center_horizontal"
 			  android:layout_marginTop="40dp"

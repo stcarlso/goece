@@ -24,6 +24,7 @@
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				xmlns:ece="http://schemas.android.com/apk/res/com.stcarlso.goece"
 				android:layout_width="match_parent" android:layout_height="match_parent"
 				android:orientation="vertical">
 	<TextView android:textAppearance="?android:attr/textAppearanceLarge" android:textSize="40sp"
@@ -40,11 +41,14 @@
 	<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
 				  android:layout_centerHorizontal="true" android:layout_below="@id/guiResLine"
 				  android:layout_above="@id/guiResIsStandard">
-		<EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
-				  android:inputType="textNoSuggestions|textCapCharacters|textVisiblePassword"
-				  android:maxLength="4" android:imeOptions="actionDone" android:tag="smdRes"
-				  android:id="@+id/guiResSMDCode" android:layout_marginRight="20dp"
-				  android:text="@string/guiResInitialValue" android:selectAllOnFocus="true" android:ems="4"/>
+		<com.stcarlso.goece.ui.ValueTextBox android:layout_width="wrap_content"
+											android:layout_height="wrap_content"
+											android:inputType="textNoSuggestions|textCapCharacters|textVisiblePassword"
+											android:imeOptions="actionDone" android:tag="smdRes"
+											android:id="@+id/guiResSMDCode" ece:affects="all"
+											android:layout_marginRight="20dp" ece:group="all"
+											android:text="@string/guiResInitialValue" android:maxLength="4"
+											android:selectAllOnFocus="true" android:ems="4"/>
 		<Button android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:text="@string/calculate" android:onClick="onClick"/>
 	</LinearLayout>

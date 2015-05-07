@@ -24,8 +24,6 @@
 
 package com.stcarlso.goece.utility;
 
-import android.view.View;
-
 /**
  * An event handler for recalculation events. This class is triggered by view classes when
  * recalculation is necessary.
@@ -36,5 +34,5 @@ public interface Calculatable {
 	 *
 	 * @param source the view which was modified to trigger this event
 	 */
-	void recalculate(final View source);
+	void recalculate(final ValueControl source);
 }

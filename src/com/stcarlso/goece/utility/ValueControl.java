@@ -28,9 +28,21 @@ import android.content.SharedPreferences;
 
 /**
  * A simple marker interface common to custom controls which allows their state to be saved
- * and restored to the application preferences.
+ * and restored to the application preferences, along with group management.
  */
-public interface Restorable {
+public interface ValueControl {
+	/**
+	 * Gets the group affected by this control.
+	 *
+	 * @return the group which should be updated when this control is changed
+	 */
+	String getAffects();
+	/**
+	 * Gets the group of this value box.
+	 *
+	 * @return the least-recently-used group of related values (inputs, outputs)
+	 */
+	String getGroup();
 	/**
 	 * Standard Android call. Used for type safety...
 	 *

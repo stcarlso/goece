@@ -26,11 +26,12 @@ package com.stcarlso.goece.activity;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.TextView;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.ChildActivity;
 import com.stcarlso.goece.ui.ColorBand;
+import com.stcarlso.goece.ui.CopyListener;
+import com.stcarlso.goece.ui.ValueGroup;
 import com.stcarlso.goece.utility.EIATable;
 import com.stcarlso.goece.utility.EIAValue;
 import com.stcarlso.goece.utility.EngineeringValue;
@@ -40,6 +41,20 @@ import com.stcarlso.goece.utility.Units;
  * Tab for a resistor color code (PTH) value calculator.
  */
 public class ResColorActivity extends ChildActivity {
+	/**
+	 * The resistor power-of-10 multiplier for each possible 3rd (4th) band value.
+	 */
+	protected static final double[] MULTIPLIER = new double[] {
+		1.0, 10.0, 100.0, 1000.0, 1e4, 1e5, 1e6, 1e7, 1.0, 1.0, 1.0, 0.1, 0.01
+	};
+	/**
+	 * The tolerance for each possible 4th (5th) band value.
+	 */
+	protected static final double[] TOLERANCE = new double[] {
+		0.0, Units.TOL_1P, Units.TOL_2P, 0.0, 0.0, 0.005, 0.0025, Units.TOL_P1, 0.0005,
+		0.0, Units.TOL_20P, Units.TOL_5P, Units.TOL_10P
+	};
+
 	/**
 	 * Shared code between color code and SMD to indicate standard/non-standard values.
 	 *
@@ -74,35 +89,33 @@ public class ResColorActivity extends ChildActivity {
 	}
 
 	/**
-	 * The resistor power-of-10 multiplier for each possible 3rd (4th) band value.
+	 * Cached reference to the band objects on screen.
 	 */
-	public static final double[] MULTIPLIER = new double[] {
-		1.0, 10.0, 100.0, 1000.0, 1e4, 1e5, 1e6, 1e7, 1.0, 1.0, 1.0, 0.1, 0.01
-	};
+	private final ColorBand[] bandCtrl;
 	/**
-	 * The tolerance for each possible 4th (5th) band value.
+	 * Handles long presses on the output text box.
 	 */
-	public static final double[] TOLERANCE = new double[] {
-		0.0, Units.TOL_1P, Units.TOL_2P, 0.0, 0.0, 0.005, 0.0025, Units.TOL_P1, 0.0005,
-		0.0, Units.TOL_20P, Units.TOL_5P, Units.TOL_10P
-	};
+	private final CopyListener copyListener;
 	/**
-	 * Keeps a copy of the band objects on screen.
+	 * Cached reference to the output text box.
 	 */
-	private final ColorBand[] bands;
+	private TextView outputCtrl;
+	/**
+	 * Cached reference to the standard value box.
+	 */
+	private TextView stdCtrl;
 
 	public ResColorActivity() {
-		super();
-		bands = new ColorBand[5];
+		bandCtrl = new ColorBand[5];
+		copyListener = new CopyListener(this, "Resistance");
 	}
-	public void recalculate(final View source) {
-		final TextView output = (TextView)findViewById(R.id.guiResValue);
-		final int tol = bands[4].getValue();
+	public void recalculate(final ValueGroup group) {
+		final int tol = bandCtrl[4].getValue();
 		// Calculate prefix
-		int value = bands[0].getValue() * 10 + bands[1].getValue();
-		if (bands[2].getValue() < 10)
+		int value = bandCtrl[0].getValue() * 10 + bandCtrl[1].getValue();
+		if (bandCtrl[2].getValue() < 10)
 			// 5 band
-			value = value * 10 + bands[2].getValue();
+			value = value * 10 + bandCtrl[2].getValue();
 		// Calculate EIA series
 		final EIATable.EIASeries series;
 		switch (tol) {
@@ -128,28 +141,35 @@ public class ResColorActivity extends ChildActivity {
 			break;
 		}
 		// Calculate multiplier
-		final EIAValue finalValue = new EIAValue(value *
-			MULTIPLIER[bands[3].getValue()], series, TOLERANCE[tol]);
-		output.setText(finalValue.toString());
+		final EIAValue finalValue = new EIAValue(value * MULTIPLIER[bandCtrl[3].getValue()],
+			series, TOLERANCE[tol]);
+		outputCtrl.setText(finalValue.toString());
+		copyListener.setValue(finalValue);
 		// In EIA series?
-		checkEIATable(finalValue, (TextView)findViewById(R.id.guiResIsStandard));
+		checkEIATable(finalValue, stdCtrl);
 	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.rescolorcode);
-		// Find band objects
-		bands[0] = (ColorBand)findViewById(R.id.guiResBand1);
-		bands[1] = (ColorBand)findViewById(R.id.guiResBand2);
-		bands[2] = (ColorBand)findViewById(R.id.guiResBand3);
-		bands[3] = (ColorBand)findViewById(R.id.guiResBand4);
-		bands[4] = (ColorBand)findViewById(R.id.guiResBand5);
+		// Load band objects
+		bandCtrl[0] = (ColorBand)findViewById(R.id.guiResBand1);
+		bandCtrl[1] = (ColorBand)findViewById(R.id.guiResBand2);
+		bandCtrl[2] = (ColorBand)findViewById(R.id.guiResBand3);
+		bandCtrl[3] = (ColorBand)findViewById(R.id.guiResBand4);
+		bandCtrl[4] = (ColorBand)findViewById(R.id.guiResBand5);
+		outputCtrl = asTextView(R.id.guiResValue);
+		outputCtrl.setOnLongClickListener(copyListener);
+		stdCtrl = asTextView(R.id.guiResIsStandard);
 		// Add click listeners
-		for (ColorBand band : bands) {
+		for (ColorBand band : bandCtrl) {
 			band.setOnCalculateListener(this);
 			registerAdjustable(band);
 		}
+		// Display initial value
 		loadPrefs();
-		recalculate(bands[4]);
+		recalculate(bandCtrl[4]);
 	}
+	// All work is done in recalculate()
+	protected void update(ValueGroup group) { }
 }

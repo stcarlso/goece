@@ -24,7 +24,6 @@
 
 package com.stcarlso.goece.ui;
 
-import android.R;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -32,16 +31,19 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
+import android.util.Log;
+import android.util.SparseArray;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.RadioButton;
 import android.widget.TextView;
+import com.stcarlso.goece.R;
 import com.stcarlso.goece.activity.ECEActivity;
 import com.stcarlso.goece.utility.Calculatable;
 import com.stcarlso.goece.utility.EngineeringValue;
-import com.stcarlso.goece.utility.Restorable;
-
+import com.stcarlso.goece.utility.ValueControl;
 import java.util.*;
 
 /**
@@ -50,37 +52,57 @@ import java.util.*;
  */
 public abstract class ChildActivity extends Activity implements Calculatable {
 	/**
-	 * List of fields registered for save/restore using registerAdjustable.
+	 * List of fields registered with registerAdjustable.
 	 */
-	protected LinkedList<Integer> fields;
+	protected ValueGroup fields;
+	/**
+	 * List of fields again, but mapped by group.
+	 */
+	protected Map<String, ValueGroup> groups;
 
 	/**
 	 * Initialize this activity.
 	 */
 	protected ChildActivity() {
-		fields = new LinkedList<Integer>();
+		fields = new ValueGroup("");
+		groups = new HashMap<String, ValueGroup>(32);
 	}
 	/**
-	 * Implementation behind pushAdjustment in subclasses
+	 * Retrieves a checkbox by its ID.
 	 *
-	 * @param list the list to search
-	 * @param id the ID of the view which was mutated
-	 * @return the ID of the view to be updated
+	 * @param id the ID of the checkbox
+	 * @return the checkbox control
 	 */
-	protected int doPushAdjustment(final LinkedList<Integer> list, final int id) {
-		int idx = -1;
-		// Iterate through and pull it to the front
-		final Iterator<Integer> lookup = list.iterator();
-		while (idx < 0 && lookup.hasNext()) {
-			final int newID = lookup.next();
-			if (id == newID) {
-				// Found it
-				lookup.remove();
-				list.addFirst(id);
-				idx = list.getLast();
-			}
-		}
-		return idx;
+	protected CheckBox asCheckBox(final int id) {
+		return (CheckBox)findViewById(id);
+	}
+	/**
+	 * Retrieves a radio button by its ID.
+	 *
+	 * @param id the ID of the radio button
+	 * @return the radio button control
+	 */
+	protected RadioButton asRadioButton(final int id) {
+		return (RadioButton)findViewById(id);
+	}
+	/**
+	 * Retrieves a label by its ID.
+	 *
+	 * @param id the ID of the label
+	 * @return the label control
+	 */
+	protected TextView asTextView(final int id) {
+		return (TextView)findViewById(id);
+	}
+	/**
+	 * Slightly stronger typed version of findViewById that is also much faster, but only works
+	 * on value controls registered with registerAdjustable.
+	 *
+	 * @param id the control ID to look up
+	 * @return the control with that ID, or null if no registered control has that ID
+	 */
+	protected ValueControl findValueById(final int id) {
+		return fields.get(id);
 	}
 	/**
 	 * Method for subclasses to override for restoration of standard Android objects not loaded
@@ -95,9 +117,9 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 */
 	protected void loadPrefs() {
 		final SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-		for (int id : fields)
+		for (ValueControl control : fields)
 			// Restore all items marked as Restorable
-			((Restorable)findViewById(id)).loadState(prefs);
+			control.loadState(prefs);
 		loadCustomPrefs(prefs);
 	}
 	/**
@@ -113,19 +135,6 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 		if (prefs.contains(tag))
 			view.setChecked(prefs.getBoolean(tag, false));
 	}
-	/**
-	 * Loads the text of a TextView object from the preferences. This works for EditText too.
-	 *
-	 * @param prefs the preference location to read the preferences
-	 * @param id the ID of the control to load
-	 */
-	protected void loadPrefsTextView(final SharedPreferences prefs, final int id) {
-		final TextView view = (TextView)findViewById(id);
-		final String tag = ECEActivity.getTag(view);
-		// Only change if the preferences are initialized
-		if (prefs.contains(tag))
-			view.setText(prefs.getString(tag, ""));
-	}
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		final ActionBar bar = getActionBar();
@@ -135,7 +144,7 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	}
 	public boolean onOptionsItemSelected(final MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.home:
+		case android.R.id.home:
 			// Find the parent activity
 			final Intent upIntent = NavUtils.getParentActivityIntent(this);
 			if (NavUtils.shouldUpRecreateTask(this, upIntent))
@@ -159,13 +168,52 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 		super.onResume();
 		loadPrefs();
 	}
+	public void recalculate(ValueControl source) {
+		// Extract the group and execute that group
+		final String group = source.getGroup();
+		final String target = source.getAffects();
+		if (group != null && target != null) {
+			final ValueGroup src = groups.get(group);
+			if (src != null) {
+				final ValueGroup dest = groups.get(target);
+				// Update MRU list and request group update
+				src.use(source.getId());
+				update(src);
+				if (dest != null)
+					recalculate(dest);
+				else
+					// Target not found
+					Log.w("ChildActivity", "Target \"" + target + "\" not found");
+			} else
+				// Group not found
+				Log.w("ChildActivity", "Group \"" + group + "\" not found");
+		}
+	}
+	/**
+	 * Recalculates the values in the specified group.
+	 *
+	 * @param group the value group to recalculate
+	 */
+	protected abstract void recalculate(ValueGroup group);
 	/**
 	 * Registers the control to have its value saved and loaded.
 	 *
 	 * @param view the control to add to the list
 	 */
-	protected void registerAdjustable(final Restorable view) {
-		fields.add(view.getId());
+	protected void registerAdjustable(final ValueControl view) {
+		final String group = view.getGroup();
+		if (group != null) {
+			// If the item has a group
+			ValueGroup items = groups.get(group);
+			if (items == null) {
+				// New group
+				items = new ValueGroup(group);
+				groups.put(group, items);
+			}
+			items.add(view);
+		}
+		// Add to all fields list (if no group, will still be saved/restored)
+		fields.add(view);
 	}
 	/**
 	 * Method for subclasses to override for the saving of standard Android objects not stored
@@ -179,11 +227,10 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 * registerAdjustable.
 	 */
 	protected void savePrefs() {
-		final SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-		final SharedPreferences.Editor editor = prefs.edit();
+		final SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
 		// Save all items registered as Restorable
-		for (int id : fields)
-			((Restorable)findViewById(id)).saveState(editor);
+		for (ValueControl control : fields)
+			control.saveState(editor);
 		saveCustomPrefs(editor);
 		editor.apply();
 	}
@@ -198,32 +245,6 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 		prefs.putBoolean(ECEActivity.getTag(view), view.isChecked());
 	}
 	/**
-	 * Saves the text of a TextView object in the preferences. This works for EditText too.
-	 *
-	 * @param prefs the preference location to store the preferences
-	 * @param id the ID of the control to save
-	 */
-	protected void savePrefsTextView(final SharedPreferences.Editor prefs, final int id) {
-		final TextView view = (TextView)findViewById(id);
-		prefs.putString(ECEActivity.getTag(view), view.getText().toString());
-	}
-	/**
-	 * Changes the value of the specified value entry box.
-	 *
-	 * @param box the entry box to modify
-	 * @param newValue the value to be set
-	 * @param errorID the error message to display if newValue is infinite or NaN
-	 */
-	protected void setValueEntry(final View box, final double newValue, final int errorID) {
-		final ValueEntryBox ve = (ValueEntryBox)box;
-		if (Double.isNaN(newValue) || Double.isInfinite(newValue))
-			ve.setError(getString(errorID));
-		else {
-			ve.updateValue(newValue);
-			ve.setError(null);
-		}
-	}
-	/**
 	 * Sets the listener and parent activity of the specified value entry box. Useful for the
 	 * vast majority of activities.
 	 *
@@ -236,14 +257,9 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 		registerAdjustable(box);
 	}
 	/**
-	 * Shows a red indicator on the value indicating that an error occurred during calculation.
-	 * Less intrusive than a dialog yet still noticeable.
+	 * Called when a control in a particular group is updated.
 	 *
-	 * @param box the entry box to show the error
-	 * @return the current value in that box
+	 * @param group the value group to perform the update
 	 */
-	protected EngineeringValue setErrorEntry(final ValueEntryBox box, final int errorID) {
-		box.setError(getString(errorID));
-		return box.getValue();
-	}
+	protected abstract void update(ValueGroup group);
 }
