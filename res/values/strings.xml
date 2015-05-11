@@ -65,4 +65,6 @@
 	<string name="guiResLine">Value is underlined</string>
 	<string name="guiResInvalid">Invalid resistor code.</string>
 	<string name="guiResInitialValue">103</string>
+	<!-- Ohm's law -->
+	<string name="cirohms">Circuit diagram</string>
 </resources>

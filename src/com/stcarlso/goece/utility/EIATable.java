@@ -98,7 +98,7 @@ public final class EIATable {
 	 * @return whether the value (within a small tolerance) is available in that series
 	 */
 	public static boolean isEIAValue(final double value, final EIASeries series) {
-		return value >= 0.0 && Math.abs(nearestEIAValue(value, series) - value) < value * 1E-5;
+		return value >= 0.0 && Math.abs(nearestEIAValue(value, series) - value) <= value * 1E-5;
 	}
 	/**
 	 * Convert an SMD EIA-96 letter suffix to the correct multiplier.
@@ -155,7 +155,7 @@ public final class EIATable {
 	 */
 	public static double nearestEIAValue(final double res, final EIASeries series) {
 		double closest = res;
-		if (res >= 0.) {
+		if (res > 0.) {
 			final double denom = Math.pow(10., Math.floor(Math.log10(res)) - 2.0);
 			final double significand = res / denom;
 			// Round it off to the 0.1th place

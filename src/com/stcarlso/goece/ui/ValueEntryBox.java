@@ -165,7 +165,7 @@ public class ValueEntryBox extends Button implements View.OnClickListener, Value
 		if (prefs.contains(idS)) {
 			final double ld = Double.longBitsToDouble(prefs.getLong(idS, 0L));
 			// Why floats? Why no doubles in preferences? Android you make me sad!
-			if (!Double.isInfinite(ld) && !Double.isNaN(ld))
+			if (!Double.isNaN(ld))
 				updateValue(ld);
 		}
 	}

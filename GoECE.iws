@@ -13,6 +13,9 @@
       <config>
         <devices>
           <device id="HTC One M7" />
+          <device id="Nexus One" />
+          <device id="Nexus 7" />
+          <device id="Nexus 6" />
           <device id="Nexus 5" />
         </devices>
       </config>
@@ -51,17 +54,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0024cbc7-21cd-4014-805d-7a7fa0b06e96" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/CopyListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ChildActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ChildActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/EngineeringValue.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/EngineeringValue.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/EIATable.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/EIATable.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoECE.iws" afterPath="$PROJECT_DIR$/GoECE.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ImpedanceActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ImpedanceActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/OhmsLawActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/OhmsLawActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ResColorActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ResColorActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/SMDResistorActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/SMDResistorActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueBoxContainer.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueBoxContainer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueEntryBox.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueEntryBox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueGroup.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueGroup.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/ohmslaw.xml" afterPath="$PROJECT_DIR$/res/layout/ohmslaw.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
     </list>
     <ignored path="GoECE.iws" />
@@ -83,7 +79,18 @@
     <favorites_list name="GoECE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.25487944">
+              <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -107,11 +114,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueGroup.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/activity/SMDResistorActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/activity/OhmsLawActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/utility/EngineeringValue.java" />
         <option value="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ImpedanceActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/utility/EIATable.java" />
+        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueEntryBox.java" />
+        <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/res/layout/ohmslaw.xml" />
       </list>
     </option>
   </component>
@@ -170,6 +177,7 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -238,10 +246,27 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GoECE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="GoECE" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -476,7 +501,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -489,12 +514,12 @@
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39935064" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32995737" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32900432" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32972974" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.3300866" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.3300866" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.3300866" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15458423" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32972974" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15458423" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.1391258" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
@@ -538,52 +563,48 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/SMDResistorActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueEntryBox.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53125">
-          <caret line="212" column="78" selection-start-line="212" selection-start-column="78" selection-end-line="212" selection-end-column="78" />
+        <state vertical-scroll-proportion="1.0367893">
+          <caret line="180" column="43" selection-start-line="180" selection-start-column="43" selection-end-line="180" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/OhmsLawActivity.java">
+    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/utility/EIATable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3325893">
-          <caret line="68" column="48" selection-start-line="68" selection-start-column="48" selection-end-line="68" selection-end-column="48" />
+        <state vertical-scroll-proportion="0.7190635">
+          <caret line="130" column="25" selection-start-line="130" selection-start-column="25" selection-end-line="130" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/impedance.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="android-designer">
+    <entry file="file://$PROJECT_DIR$/res/drawable/ohmslaw.png">
+      <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/utility/EngineeringValue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.03348214">
-          <caret line="155" column="44" selection-start-line="155" selection-start-column="44" selection-end-line="155" selection-end-column="44" />
+    <entry file="file://$PROJECT_DIR$/res/layout/ohmslaw.xml">
+      <provider selected="true" editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="40" column="81" selection-start-line="40" selection-start-column="81" selection-end-line="40" selection-end-column="81" />
           <folding>
-            <element signature="e#4393#4394#0" expanded="true" />
-            <element signature="e#4423#4424#0" expanded="true" />
+            <element signature="e#1931#1948#0" expanded="true" />
+            <element signature="e#2220#2237#0" expanded="true" />
+            <element signature="e#2703#2720#0" expanded="true" />
+            <element signature="e#3180#3196#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/ImpedanceActivity.java">
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4642857">
-          <caret line="146" column="0" selection-start-line="146" selection-start-column="0" selection-end-line="146" selection-end-column="0" />
-          <folding>
-            <element signature="e#2158#2159#0" expanded="true" />
-            <element signature="e#2199#2200#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.25487944">
+          <caret line="30" column="33" selection-start-line="30" selection-start-column="33" selection-end-line="30" selection-end-column="33" />
+          <folding />
         </state>
       </provider>
     </entry>
