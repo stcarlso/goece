@@ -147,7 +147,7 @@ public final class EIATable {
 		return multiplier;
 	}
 	/**
-	 * Calculats the nearest EIA standard value for the given component value.
+	 * Calculates the nearest EIA standard value for the given component value.
 	 *
 	 * @param res the required component value
 	 * @param series the EIA series to search
@@ -181,6 +181,19 @@ public final class EIATable {
 			}
 		}
 		return closest;
+	}
+	/**
+	 * Returns the available values in the EIA series. These are integer values with the first
+	 * three digits being significant.
+	 *
+	 * @param series the resistor series
+	 * @return the values in that series
+	 */
+	public static int[] seriesValues(final EIASeries series) {
+		final int[] src = EIA_VALUES[series.ordinal()], ret = new int[src.length];
+		// Avoid some caller inadvertently modifying the originals
+		System.arraycopy(src, 0, ret, 0, ret.length);
+		return ret;
 	}
 
 	/**

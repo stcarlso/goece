@@ -35,5 +35,9 @@
 				android:text="@string/guiOhmsLaw" android:id="@+id/guiOhmsLaw"/>
 		<Button android:layout_width="fill_parent" android:layout_height="wrap_content"
 				android:text="@string/guiImpedance" android:id="@+id/guiImpedance"/>
+		<Button android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:text="@string/guiSerPar" android:id="@+id/guiSerPar"/>
+		<Button android:layout_width="fill_parent" android:layout_height="wrap_content"
+				android:text="@string/guiVDiv" android:id="@+id/guiVDiv"/>
 	</LinearLayout>
 </ScrollView>

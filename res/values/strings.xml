@@ -51,6 +51,7 @@
 	<string name="amplit">Amplitude</string>
 	<string name="pktopk">Peak-to-Peak</string>
 	<string name="rms">RMS</string>
+	<string name="resSeries">Values available: </string>
 	<!-- Activity names and titles -->
 	<string name="guiTabAnalog">Analog</string>
 	<string name="guiTabDigital">Digital</string>
@@ -60,6 +61,8 @@
 	<string name="guiSMDResistor">SMD Resistor Code</string>
 	<string name="guiOhmsLaw">Ohm\'s Law and Power</string>
 	<string name="guiImpedance">Impedance</string>
+	<string name="guiSerPar">Series/Parallel Resistance</string>
+	<string name="guiVDiv">Voltage Divider</string>
 	<!-- Resources for individual activities -->
 	<!-- SMD resistor code -->
 	<string name="guiResLine">Value is underlined</string>
@@ -67,4 +70,23 @@
 	<string name="guiResInitialValue">103</string>
 	<!-- Ohm's law -->
 	<string name="cirohms">Circuit diagram</string>
+	<!-- Series/parallel resistance -->
+	<string name="guiSerSeries1">R1</string>
+	<string name="guiSerSeries2">R2</string>
+	<string name="guiSerParallel1">R3</string>
+	<string name="guiSerParallel2">R4</string>
+	<string name="cirseries">Series circuit diagram</string>
+	<string name="cirparallel">Parallel circuit diagram</string>
+	<string-array name="guiSerResSeries">
+		<item>1%</item>
+		<item>5%</item>
+		<item>10%</item>
+		<item>20%</item>
+	</string-array>
+	<!-- Voltage division -->
+	<string name="guiDivInput">Vin</string>
+	<string name="guiDivOutput">Vout</string>
+	<string name="guiDivTop">R1</string>
+	<string name="guiDivBottom">R2</string>
+	<string name="guiDivLoad">Rl</string>
 </resources>

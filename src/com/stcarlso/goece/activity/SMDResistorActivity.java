@@ -66,7 +66,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 				else {
 					// The vast majority of resistors fit this pattern
 					final int prefix = Integer.parseInt(code.substring(0, 2));
-					if (Character.isDigit(multChar))
+					if (Character.isDigit(multChar) && multChar < '8')
 						// 10 ^ x
 						value = new EIAValue(prefix * Math.pow(10.0, multChar - '0'),
 							EIAValue.E24);
@@ -97,7 +97,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 				if (code.indexOf('R') >= 0)
 					// 33R0
 					value = new EIAValue(parseRValue(code), EIAValue.E96);
-				else if (Character.isDigit(multChar))
+				else if (Character.isDigit(multChar) && multChar < '8')
 					// The vast majority of resistors fit this pattern
 					value = new EIAValue(Integer.parseInt(code.substring(0, 3)) *
 						Math.pow(10.0, multChar - '0'), EIAValue.E96);

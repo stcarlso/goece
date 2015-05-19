@@ -44,8 +44,8 @@ public class ValueTextBox extends EditText implements ValueControl {
 	 */
 	private String affects;
 	/**
-	 * The group assigned to this value entry box. All members in a group are LRUed to
-	 * determine which one is changed when the group is affected.
+	 * The group assigned to this textbox. All members in a group are LRUed to determine which
+	 * one is changed when the group is affected.
 	 */
 	private String group;
 
@@ -70,7 +70,7 @@ public class ValueTextBox extends EditText implements ValueControl {
 	private void init(final Context context, final AttributeSet attrs) {
 		String newGroup = "", willAffect = "";
 		if (attrs != null) {
-			// Read attributes for units
+			// Read attributes for affects and group
 			final TypedArray values = context.getTheme().obtainStyledAttributes(attrs,
 				R.styleable.ValueTextBox, 0, 0);
 			try {

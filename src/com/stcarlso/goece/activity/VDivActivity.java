@@ -22,29 +22,44 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece.ui;
+package com.stcarlso.goece.activity;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.activity.*;
+import com.stcarlso.goece.ui.ChildActivity;
+import com.stcarlso.goece.ui.ValueBoxContainer;
+import com.stcarlso.goece.ui.ValueGroup;
 
 /**
- * Fragment which displays all items on the Analog tab.
+ * Allows computations of voltage dividers, and determination of resistor values to make a
+ * certain ratio.
  */
-public class AnalogFragment extends MenuFragment {
+public class VDivActivity extends ChildActivity {
+	/**
+	 * Contains all data entry controls.
+	 */
+	private final ValueBoxContainer controls;
+
+	public VDivActivity() {
+		controls = new ValueBoxContainer();
+	}
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final View view = inflater.inflate(R.layout.analog, container, false);
-		// Configure all buttons
-		setButtonEvent(view, R.id.guiColorCode, ResColorActivity.class);
-		setButtonEvent(view, R.id.guiSMDResistor, SMDResistorActivity.class);
-		setButtonEvent(view, R.id.guiOhmsLaw, OhmsLawActivity.class);
-		setButtonEvent(view, R.id.guiImpedance, ImpedanceActivity.class);
-		setButtonEvent(view, R.id.guiSerPar, SerParActivity.class);
-		setButtonEvent(view, R.id.guiVDiv, VDivActivity.class);
-		return view;
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.vdiv);
+		// Load controls and preferences
+		controls.add(findViewById(R.id.guiDivTop));
+		controls.add(findViewById(R.id.guiDivBottom));
+		controls.add(findViewById(R.id.guiDivInput));
+		controls.add(findViewById(R.id.guiDivOutput));
+		controls.setupAll(this);
+		loadPrefs();
+		// Recalculate everything
+	}
+	protected void recalculate(ValueGroup group) {
+
+	}
+	protected void update(ValueGroup group) {
+
 	}
 }

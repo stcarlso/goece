@@ -43,4 +43,8 @@
 		<attr name="group"/>
 		<attr name="affects"/>
 	</declare-styleable>
+	<declare-styleable name="ResSeriesSpinner">
+		<attr name="group"/>
+		<attr name="affects"/>
+	</declare-styleable>
 </resources>

@@ -532,13 +532,13 @@
   <component name="libraryTable">
     <library name="Android Support Library">
       <CLASSES>
-        <root url="jar://U:/Programs/Android/extras/android/support/v13/android-support-v13.jar!/" />
+        <root url="jar://$APPLICATION_HOME_DIR$/android-sdk/extras/android/support/v13/android-support-v13.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="file://U:/Programs/Android/extras/android/support/v13/src/ics" />
-        <root url="file://U:/Programs/Android/extras/android/support/v13/src/ics-mr1" />
-        <root url="file://U:/Programs/Android/extras/android/support/v13/src/java" />
+        <root url="file://$APPLICATION_HOME_DIR$/android-sdk/extras/android/support/v13/src/ics" />
+        <root url="file://$APPLICATION_HOME_DIR$/android-sdk/extras/android/support/v13/src/ics-mr1" />
+        <root url="file://$APPLICATION_HOME_DIR$/android-sdk/extras/android/support/v13/src/java" />
       </SOURCES>
     </library>
   </component>

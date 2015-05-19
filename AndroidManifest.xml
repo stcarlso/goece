@@ -15,7 +15,8 @@
 			<meta-data android:name="android.support.PARENT_ACTIVITY"
 					   android:value=".activity.ECEActivity"/>
 		</activity>
-		<activity android:name=".activity.SMDResistorActivity" android:label="@string/guiSMDResistor"
+		<activity android:name=".activity.SMDResistorActivity"
+				  android:label="@string/guiSMDResistor"
 				  android:windowSoftInputMode="adjustResize">
 			<meta-data android:name="android.support.PARENT_ACTIVITY"
 					   android:value=".activity.ECEActivity"/>
@@ -25,7 +26,18 @@
 			<meta-data android:name="android.support.PARENT_ACTIVITY"
 					   android:value=".activity.ECEActivity"/>
 		</activity>
-		<activity android:name=".activity.ImpedanceActivity" android:label="@string/guiImpedance"
+		<activity android:name=".activity.ImpedanceActivity"
+				  android:label="@string/guiImpedance"
+				  android:windowSoftInputMode="adjustResize">
+			<meta-data android:name="android.support.PARENT_ACTIVITY"
+					   android:value=".activity.ECEActivity"/>
+		</activity>
+		<activity android:name=".activity.SerParActivity" android:label="@string/guiSerPar"
+				  android:windowSoftInputMode="adjustResize">
+			<meta-data android:name="android.support.PARENT_ACTIVITY"
+					   android:value=".activity.ECEActivity"/>
+		</activity>
+		<activity android:name=".activity.VDivActivity" android:label="@string/guiVDiv"
 				  android:windowSoftInputMode="adjustResize">
 			<meta-data android:name="android.support.PARENT_ACTIVITY"
 					   android:value=".activity.ECEActivity"/>

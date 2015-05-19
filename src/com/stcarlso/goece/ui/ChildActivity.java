@@ -1,4 +1,5 @@
-/***********************************************************************************************
+/**
+ * ********************************************************************************************
  * The MIT License (MIT)
  *
  * Copyright (c) 2015 Stephen Carlson
@@ -20,7 +21,8 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- **********************************************************************************************/
+ * ********************************************************************************************
+ */
 
 package com.stcarlso.goece.ui;
 
@@ -32,18 +34,12 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
-import android.util.SparseArray;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.RadioButton;
-import android.widget.TextView;
-import com.stcarlso.goece.R;
+import android.widget.*;
 import com.stcarlso.goece.activity.ECEActivity;
 import com.stcarlso.goece.utility.Calculatable;
-import com.stcarlso.goece.utility.EngineeringValue;
 import com.stcarlso.goece.utility.ValueControl;
+
 import java.util.*;
 
 /**
@@ -86,6 +82,15 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 		return (RadioButton)findViewById(id);
 	}
 	/**
+	 * Retrieves a spinner by its ID.
+	 *
+	 * @param id the ID of the spinner
+	 * @return the spinner control
+	 */
+	protected Spinner asSpinner(final int id) {
+		return (Spinner)findViewById(id);
+	}
+	/**
 	 * Retrieves a label by its ID.
 	 *
 	 * @param id the ID of the label
@@ -110,7 +115,8 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 *
 	 * @param prefs the preference location to read the preferences
 	 */
-	protected void loadCustomPrefs(SharedPreferences prefs) { }
+	protected void loadCustomPrefs(SharedPreferences prefs) {
+	}
 	/**
 	 * Loads from application settings the values of all fields registered with
 	 * registerAdjustable.
@@ -134,6 +140,19 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 		// Only change if the preferences are initialized
 		if (prefs.contains(tag))
 			view.setChecked(prefs.getBoolean(tag, false));
+	}
+	/**
+	 * Loads the state of a Spinner object from the preferences.
+	 *
+	 * @param prefs the preference location to read the preferences
+	 * @param id the ID of the control to load
+	 */
+	protected void loadPrefsSpinner(final SharedPreferences prefs, final int id) {
+		final Spinner view = (Spinner)findViewById(id);
+		final String tag = ECEActivity.getTag(view);
+		// Only change if the preferences are initialized
+		if (prefs.contains(tag))
+			view.setSelection(prefs.getInt(tag, 0), false);
 	}
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -171,19 +190,25 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	public void recalculate(ValueControl source) {
 		// Extract the group and execute that group
 		final String group = source.getGroup();
-		final String target = source.getAffects();
-		if (group != null && target != null) {
+		final String targets = source.getAffects();
+		if (group != null && targets != null) {
 			final ValueGroup src = groups.get(group);
 			if (src != null) {
-				final ValueGroup dest = groups.get(target);
-				// Update MRU list and request group update
-				src.use(source.getId());
-				update(src);
-				if (dest != null)
-					recalculate(dest);
-				else
-					// Target not found
-					Log.w("ChildActivity", "Target \"" + target + "\" not found");
+				// Much faster than regex (split)
+				final StringTokenizer str = new StringTokenizer(targets, ",");
+				String target;
+				// Allow multi-targeting
+				while (str.hasMoreTokens() && (target = str.nextToken()) != null) {
+					final ValueGroup dest = groups.get(target);
+					// Update MRU list and request group update
+					src.use(source.getId());
+					update(src);
+					if (dest != null)
+						recalculate(dest);
+					else
+						// Target not found
+						Log.w("ChildActivity", "Target \"" + target + "\" not found");
+				}
 			} else
 				// Group not found
 				Log.w("ChildActivity", "Group \"" + group + "\" not found");
@@ -221,7 +246,8 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 *
 	 * @param prefs the preference location to store the preferences
 	 */
-	protected void saveCustomPrefs(SharedPreferences.Editor prefs) { }
+	protected void saveCustomPrefs(SharedPreferences.Editor prefs) {
+	}
 	/**
 	 * Saves to application settings the values of all fields registered with
 	 * registerAdjustable.
@@ -243,6 +269,16 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	protected void savePrefsCheckBox(final SharedPreferences.Editor prefs, final int id) {
 		final CompoundButton view = (CompoundButton)findViewById(id);
 		prefs.putBoolean(ECEActivity.getTag(view), view.isChecked());
+	}
+	/**
+	 * Saves the state of a Spinner object in the preferences.
+	 *
+	 * @param prefs the preference location to store the preferences
+	 * @param id the ID of the control to save
+	 */
+	protected void savePrefsSpinner(final SharedPreferences.Editor prefs, final int id) {
+		final Spinner view = (Spinner)findViewById(id);
+		prefs.putInt(ECEActivity.getTag(view), view.getSelectedItemPosition());
 	}
 	/**
 	 * Sets the listener and parent activity of the specified value entry box. Useful for the

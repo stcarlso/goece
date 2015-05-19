@@ -29,7 +29,7 @@
 			  android:orientation="vertical">
 	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
 										 android:layout_height="wrap_content" ece:units="Ω"
-										 android:id="@+id/guiImpedRes" ece:value="10"
+										 android:id="@+id/guiImpedRes" ece:value="1000"
 										 android:layout_gravity="center_horizontal"
 										 ece:description="@string/resist" ece:group="none"
 										 android:tag="impedRes" ece:affects="outputs"/>
