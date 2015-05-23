@@ -40,10 +40,6 @@ public class OhmsLawActivity extends ChildActivity {
 	 * Contains all data entry controls.
 	 */
 	private final ValueBoxContainer controls;
-	/**
-	 * Cached reference to the power output box.
-	 */
-	private TextView powerCtrl;
 
 	public OhmsLawActivity() {
 		controls = new ValueBoxContainer();
@@ -51,16 +47,49 @@ public class OhmsLawActivity extends ChildActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ohmslaw);
-		powerCtrl = asTextView(R.id.guiOhmsPower);
 		// Register value entry boxes
 		controls.add(findViewById(R.id.guiOhmsCurrent));
 		controls.add(findViewById(R.id.guiOhmsResistance));
 		controls.add(findViewById(R.id.guiOhmsVoltage));
+		controls.add(findViewById(R.id.guiOhmsPower));
 		controls.setupAll(this);
 		loadPrefs();
 		recalculate(findValueById(R.id.guiOhmsVoltage));
 	}
 	public void recalculate(final ValueGroup group) {
+		// Raw values
+		final double v = controls.getRawValue(R.id.guiOhmsVoltage);
+		final double i = controls.getRawValue(R.id.guiOhmsCurrent);
+		final double r = controls.getRawValue(R.id.guiOhmsResistance);
+		final double p = controls.getRawValue(R.id.guiOhmsPower);
+		// Push onto stack
+		final int id = group.mostRecentlyUsed();
+		switch (id) {
+		case R.id.guiOhmsVoltage:
+			// Update current, resistance from voltage, power
+			controls.setRawValue(R.id.guiOhmsCurrent, p / v);
+			controls.setRawValue(R.id.guiOhmsResistance, v * v / p);
+			break;
+		case R.id.guiOhmsCurrent:
+			// Update voltage, resistance from current, power
+			controls.setRawValue(R.id.guiOhmsVoltage, p / i);
+			controls.setRawValue(R.id.guiOhmsResistance, p / (i * i));
+			break;
+		case R.id.guiOhmsResistance:
+			// Update voltage, current from resistance, power
+			controls.setRawValue(R.id.guiOhmsVoltage, Math.sqrt(p * r));
+			controls.setRawValue(R.id.guiOhmsCurrent, Math.sqrt(p / r));
+			break;
+		case R.id.guiOhmsPower:
+			// Calculate power
+			controls.setRawValue(R.id.guiOhmsPower, v * i);
+			break;
+		default:
+			// Invalid
+			break;
+		}
+	}
+	protected void update(ValueGroup group) {
 		// Raw values
 		final double v = controls.getRawValue(R.id.guiOhmsVoltage);
 		final double i = controls.getRawValue(R.id.guiOhmsCurrent);
@@ -71,33 +100,18 @@ public class OhmsLawActivity extends ChildActivity {
 		case R.id.guiOhmsVoltage:
 			// Update voltage
 			controls.setRawValue(R.id.guiOhmsVoltage, i * r);
-			updatePower(i * i * r);
 			break;
 		case R.id.guiOhmsCurrent:
 			// Update current
 			controls.setRawValue(R.id.guiOhmsCurrent, v / r);
-			updatePower(v * v / r);
 			break;
 		case R.id.guiOhmsResistance:
 			// Update resistance
 			controls.setRawValue(R.id.guiOhmsResistance, v / i);
-			updatePower(v * i);
 			break;
 		default:
 			// Invalid
 			break;
 		}
 	}
-	/**
-	 * Update the text area with the power dissipated.
-	 *
-	 * @param power the calculated power in W
-	 */
-	private void updatePower(final double power) {
-		// Power overwhelming
-		powerCtrl.setText(getString(R.string.power) + ": " + new EngineeringValue(power,
-			Units.POWER).toString());
-	}
-	// All work is done in recalculate()
-	protected void update(ValueGroup group) { }
 }

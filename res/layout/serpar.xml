@@ -42,7 +42,6 @@
 												android:tag="serResSeries" ece:affects="outputs"
 												android:id="@+id/guiSerResSeries"
 												android:layout_gravity="center_vertical"
-												android:spinnerMode="dropdown"
 												ece:group="inputs"/>
 	</LinearLayout>
 	<LinearLayout android:layout_width="wrap_content" android:layout_below="@id/guiSerResTemp"

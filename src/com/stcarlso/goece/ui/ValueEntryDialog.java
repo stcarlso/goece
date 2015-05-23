@@ -30,6 +30,7 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -171,7 +172,7 @@ public class ValueEntryDialog extends DialogFragment implements
 		valueEntry.selectAll();
 		updateValidValues(dialog);
 		ECEActivity.initShowSoftKeyboard(valueEntry);
-		builder.setTitle(desc);
+		builder.setTitle(Html.fromHtml(desc));
 		// Create OK and Cancel buttons
 		builder.setPositiveButton(R.string.ok, this);
 		builder.setNegativeButton(R.string.cancel, new IgnoreOnClickListener());

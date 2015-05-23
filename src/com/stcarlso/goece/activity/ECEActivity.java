@@ -1,4 +1,5 @@
-/***********************************************************************************************
+/**
+ * ********************************************************************************************
  * The MIT License (MIT)
  *
  * Copyright (c) 2015 Stephen Carlson
@@ -20,7 +21,8 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- **********************************************************************************************/
+ * ********************************************************************************************
+ */
 
 package com.stcarlso.goece.activity;
 
@@ -39,7 +41,6 @@ import com.stcarlso.goece.ui.AnalogFragment;
 import com.stcarlso.goece.ui.DigitalFragment;
 import com.stcarlso.goece.ui.FragmentTabListener;
 import com.stcarlso.goece.ui.IgnoreOnClickListener;
-import com.stcarlso.goece.utility.EngineeringValue;
 
 /**
  * Make it your pastime, make it your mission!
@@ -117,7 +118,7 @@ public final class ECEActivity extends FragmentActivity {
 	private <T extends Fragment> ActionBar.Tab addTab(final int resId, Class<T> target) {
 		final ActionBar tabBar = getActionBar();
 		// Uh?
-		assert(tabBar != null);
+		assert (tabBar != null);
 		// Create a tab
 		final ActionBar.Tab newTab = tabBar.newTab();
 		newTab.setText(resId);
@@ -130,10 +131,13 @@ public final class ECEActivity extends FragmentActivity {
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		// Why Android why?
+		if (savedInstanceState != null)
+			savedInstanceState.remove("android:support:fragments");
 		super.onCreate(savedInstanceState);
 		final ActionBar tabBar = getActionBar();
 		// Uh?
-		assert(tabBar != null);
+		assert (tabBar != null);
 		tabBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		// Analog, digital, circuits, pinouts, resources tabs
 		tabBar.selectTab(addTab(R.string.guiTabAnalog, AnalogFragment.class));

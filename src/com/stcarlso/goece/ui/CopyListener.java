@@ -77,7 +77,7 @@ public class CopyListener implements View.OnLongClickListener {
 	public boolean onLongClick(View v) {
 		// "Copy" options
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		final String[] options = new String[value.getTolerance() > 0.0 ? 4 : 3],
+		final String[] options = new String[value.getTolerance() > 0.0 ? 3 : 2],
 			copyOptions = new String[options.length];
 		// Zero out the tolerance to allow unit copy without carrying that
 		final EngineeringValue noTol = new EngineeringValue(value.getValue(), 0.0,
@@ -86,10 +86,9 @@ public class CopyListener implements View.OnLongClickListener {
 		builder.setTitle(R.string.copy);
 		// Build copied text
 		options[0] = activity.getString(R.string.copyRaw, value.getValue());
-		options[1] = activity.getString(R.string.copySig, value.getSignificand());
-		options[2] = activity.getString(R.string.copyUnits, noTol);
-		if (options.length > 3)
-			options[3] = activity.getString(R.string.copyAll, value);
+		options[1] = activity.getString(R.string.copyUnits, noTol);
+		if (options.length > 2)
+			options[2] = activity.getString(R.string.copyAll, value);
 		// Build text presented to user
 		for (int i = 0; i < copyOptions.length; i++)
 			copyOptions[i] = copy + " \"" + options[i] + "\"";

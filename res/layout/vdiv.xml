@@ -53,13 +53,22 @@
 										 ece:affects="all" ece:value="2.5"/>
 	<LinearLayout android:layout_width="wrap_content" android:orientation="horizontal"
 				  android:layout_height="wrap_content" android:layout_centerHorizontal="true"
-				  android:layout_below="@id/guiDivBottom">
+				  android:layout_below="@id/guiDivBottom" android:id="@+id/guiDivTemp">
 		<TextView android:layout_width="wrap_content" android:layout_gravity="center_vertical"
 				  android:text="@string/resSeries" android:layout_height="wrap_content"/>
 		<com.stcarlso.goece.ui.ResSeriesSpinner android:layout_width="wrap_content"
 												android:layout_height="wrap_content"
-												android:spinnerMode="dropdown" ece:group="all"
-												android:tag="guiDivResSeries" ece:affects="all"
+												android:tag="guiDivResSeries"
+												ece:affects="all" ece:group="all"
 												android:id="@+id/guiDivResSeries"/>
 	</LinearLayout>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:id="@+id/guiDivEquiv" android:layout_centerHorizontal="true"
+			  android:layout_below="@id/guiDivTemp"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:id="@+id/guiDivCurrent" android:layout_centerHorizontal="true"
+			  android:layout_below="@id/guiDivEquiv"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:id="@+id/guiDivPower" android:layout_centerHorizontal="true"
+			  android:layout_below="@id/guiDivCurrent"/>
 </RelativeLayout>

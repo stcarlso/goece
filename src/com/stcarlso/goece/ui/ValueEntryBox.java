@@ -29,6 +29,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.os.Parcelable;
+import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.RelativeSizeSpan;
@@ -159,6 +160,9 @@ public class ValueEntryBox extends Button implements View.OnClickListener, Value
 		// Create value and set text
 		description = desc;
 		setValue(new EngineeringValue(iv, 0.0, sf, units));
+		// Get rid of the all-caps on lollipop material design devices which interferes with the
+		// color, resize, and superscript/subscript on these buttons
+		setTransformationMethod(null);
 	}
 	public void loadState(SharedPreferences prefs) {
 		final String idS = ECEActivity.getTag(this);
@@ -265,13 +269,13 @@ public class ValueEntryBox extends Button implements View.OnClickListener, Value
 	 */
 	protected void updateText() {
 		// Get text
-		final String dest = getDescription(), val = getValue().toString();
+		final CharSequence desc = Html.fromHtml(getDescription()), val = getValue().toString();
 		final SpannableStringBuilder text = new SpannableStringBuilder();
-		text.append(dest);
+		text.append(desc);
 		text.append('\n');
 		text.append(val);
 		// Make the name a bit smaller
-		text.setSpan(new RelativeSizeSpan(0.8f), 0, dest.length(),
+		text.setSpan(new RelativeSizeSpan(0.8f), 0, desc.length(),
 			Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		setText(text);
 	}

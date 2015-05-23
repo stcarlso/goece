@@ -7,12 +7,12 @@
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
   ~ of this software and associated documentation files (the "Software"), to deal
   ~ in the Software without restriction, including without limitation the rights
-  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ to use, copy, modify, merge, publish, distribute, smalllicense, and/or sell
   ~ copies of the Software, and to permit persons to whom the Software is
-  ~ furnished to do so, subject to the following conditions:
+  ~ furnished to do so, smallject to the following conditions:
   ~
   ~ The above copyright notice and this permission notice shall be included in all
-  ~ copies or substantial portions of the Software.
+  ~ copies or smallstantial portions of the Software.
   ~
   ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
   ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
@@ -71,10 +71,10 @@
 	<!-- Ohm's law -->
 	<string name="cirohms">Circuit diagram</string>
 	<!-- Series/parallel resistance -->
-	<string name="guiSerSeries1">R1</string>
-	<string name="guiSerSeries2">R2</string>
-	<string name="guiSerParallel1">R3</string>
-	<string name="guiSerParallel2">R4</string>
+	<string name="guiSerSeries1">R&lt;small&gt;1&lt;/small&gt;</string>
+	<string name="guiSerSeries2">R&lt;small&gt;2&lt;/small&gt;</string>
+	<string name="guiSerParallel1">R&lt;small&gt;3&lt;/small&gt;</string>
+	<string name="guiSerParallel2">R&lt;small&gt;4&lt;/small&gt;</string>
 	<string name="cirseries">Series circuit diagram</string>
 	<string name="cirparallel">Parallel circuit diagram</string>
 	<string-array name="guiSerResSeries">
@@ -84,9 +84,9 @@
 		<item>20%</item>
 	</string-array>
 	<!-- Voltage division -->
-	<string name="guiDivInput">Vin</string>
-	<string name="guiDivOutput">Vout</string>
-	<string name="guiDivTop">R1</string>
-	<string name="guiDivBottom">R2</string>
-	<string name="guiDivLoad">Rl</string>
+	<string name="guiDivInput">V&lt;small&gt;in&lt;/small&gt;</string>
+	<string name="guiDivOutput">V&lt;small&gt;out&lt;/small&gt;</string>
+	<string name="guiDivTop">R&lt;small&gt;1&lt;/small&gt;</string>
+	<string name="guiDivBottom">R&lt;small&gt;2&lt;/small&gt;</string>
+	<string name="guiDivLoad">R&lt;small&gt;L&lt;/small&gt;</string>
 </resources>

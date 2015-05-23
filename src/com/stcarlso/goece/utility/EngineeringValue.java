@@ -73,13 +73,13 @@ public class EngineeringValue implements Serializable {
 	 * The prefix the unit gets for each cut-off below.
 	 */
 	public static final String[] ENGR_NAMES = {
-		"a", "f", "p", "n", "\u03BC", "m", "", "K", "M", "G", "T", "P", "E"
+		"f", "p", "n", "\u03BC", "m", "", "K", "M", "G", "T", "P", "E"
 	};
 	/**
 	 * Cut-off values for engineering formatting.
 	 */
 	public static final double[] ENGR_THRESHOLD = {
-		1e-18, 1e-15, 1e-12, 1e-9, 1e-6, 1e-3, 1, 1e3, 1e6, 1e9, 1e12, 1e15, 1e18
+		1e-15, 1e-12, 1e-9, 1e-6, 1e-3, 1, 1e3, 1e6, 1e9, 1e12, 1e15, 1e18
 	};
 
 	/**

@@ -67,15 +67,16 @@ public class ResSeriesSpinner extends Spinner implements ValueControl,
 	private Calculatable listener;
 
 	public ResSeriesSpinner(Context context) {
-		super(context);
+		super(context, Spinner.MODE_DROPDOWN);
 		init(context, null);
 	}
 	public ResSeriesSpinner(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		// We believe that the adapter will pick the right style
 		init(context, attrs);
 	}
 	public ResSeriesSpinner(Context context, AttributeSet attrs, int defStyle) {
-		super(context, attrs, defStyle);
+		super(context, attrs, defStyle, Spinner.MODE_DROPDOWN);
 		init(context, attrs);
 	}
 	/**
@@ -114,6 +115,7 @@ public class ResSeriesSpinner extends Spinner implements ValueControl,
 				Log.e("ResSeriesSpinner", "Invalid attributes:", e);
 			}
 		}
+
 		group = newGroup;
 		affects = willAffect;
 		listener = null;
