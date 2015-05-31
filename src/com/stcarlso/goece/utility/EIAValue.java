@@ -87,7 +87,7 @@ public class EIAValue extends EngineeringValue {
 	/**
 	 * The EIA series which represents the tolerance of this value.
 	 */
-	protected EIATable.EIASeries series;
+	protected final EIATable.EIASeries series;
 
 	/**
 	 * Create a new EIA value. The units default to ohms.

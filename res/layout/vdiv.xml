@@ -34,7 +34,7 @@
 		<com.stcarlso.goece.ui.ResSeriesSpinner android:layout_width="wrap_content"
 												android:layout_height="wrap_content"
 												android:tag="divResSeries" ece:affects="res"
-												ece:group="res"
+												ece:group="other"
 												android:id="@+id/guiDivResSeries"/>
 	</LinearLayout>
 	<ImageView android:layout_width="108dp" android:layout_height="160dp"
@@ -67,9 +67,22 @@
 										 android:layout_height="wrap_content"
 										 android:layout_below="@id/guiDivInput"
 										 android:layout_toRightOf="@id/guiDivCircuit"
-										 android:tag="divOutput" android:id="@+id/guiDivOutput"
+										 android:tag="divLoad" android:id="@+id/guiDivOutput"
 										 ece:description="@string/guiDivOutput" ece:group="volt"
 										 ece:affects="res" ece:value="2.5"/>
+	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content" ece:units="Ω"
+										 android:layout_height="wrap_content"
+										 android:tag="divOutput" ece:group="other"
+										 android:layout_toRightOf="@id/guiDivCircuit"
+										 android:layout_below="@id/guiDivOutput"
+										 ece:description="@string/guiDivLoad"
+										 ece:affects="res" ece:value="1E+308"
+										 android:id="@+id/guiDivLoad"
+										 android:enabled="false"/>
+	<CheckBox android:id="@+id/guiDivIsLoad" android:layout_height="wrap_content"
+			  android:layout_width="wrap_content" android:checked="false"
+			  android:layout_alignBaseline="@id/guiDivLoad" android:onClick="onClick"
+			  android:layout_toLeftOf="@id/guiDivLoad" android:tag="divIsLoad"/>
 	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  android:id="@+id/guiDivEquiv" android:layout_centerHorizontal="true"
 			  android:layout_below="@id/guiDivCircuit"/>

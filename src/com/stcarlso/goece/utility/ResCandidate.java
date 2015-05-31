@@ -31,30 +31,6 @@ import java.util.*;
  */
 public abstract class ResCandidate implements Comparable<ResCandidate> {
 	/**
-	 * Resistors get an "ordinal" value for a particular iteration that goes from 0 to 8 *
-	 * values.length to allow triangle iteration.
-	 *
-	 * @param index the ordinal index
-	 * @param values the 3-digit values from EIATable.seriesValues
-	 * @return that resistor value (index 0 is 0 ohms)
-	 */
-	public static double ordinalValue(final int index, final int[] values) {
-		final double ret;
-		final int idx = index - 1, len = values.length;
-		if (index == 0)
-			// Make sure that this exists
-			ret = 0.0;
-		else
-			// Values are striped through the periods, with exponent increasing on each wrap
-			ret = values[idx % len] * Math.pow(10.0, (idx / len) - 3);
-		return ret;
-	}
-
-	/**
-	 * Relative error value (so 1% = 0.01).
-	 */
-	private final double error;
-	/**
 	 * The first resistor value.
 	 */
 	private final double r1;
@@ -81,20 +57,14 @@ public abstract class ResCandidate implements Comparable<ResCandidate> {
 	 */
 	protected ResCandidate(final double r1, final double r2, final double value,
 						   final double target) {
-		final double absError = value - target;
 		this.r1 = r1;
 		this.r2 = r2;
 		this.target = target;
 		this.value = value;
-		// Do not divide by zero
-		if (target == 0.0)
-			error = absError;
-		else
-			error = absError / target;
 	}
 	public int compareTo(ResCandidate other) {
 		// Compare using absolute value of error for quick drill down
-		int ret = Double.compare(Math.abs(error), Math.abs(other.error));
+		int ret = Double.compare(Math.abs(getError()), Math.abs(other.getError()));
 		if (ret == 0) {
 			final boolean r1r2 = Double.compare(getR1(), getR2()) == 0,
 				r2r1 = Double.compare(other.getR1(), other.getR2()) == 0;
@@ -144,6 +114,12 @@ public abstract class ResCandidate implements Comparable<ResCandidate> {
 	 * @return the relative error, not as a percentage (0-1)
 	 */
 	public double getError() {
+		final double t = getTarget(), num = getValue() - t, error;
+		// Do not divide by zero, round errors off to allow really equal values to be equal
+		if (t == 0.0)
+			error = ECECalc.ieeeRound(num);
+		else
+			error = ECECalc.ieeeRound(num / t);
 		return error;
 	}
 	/**
@@ -179,7 +155,7 @@ public abstract class ResCandidate implements Comparable<ResCandidate> {
 		return value;
 	}
 	public int hashCode() {
-		final long temp = Double.doubleToLongBits(Math.abs(error));
+		final long temp = Double.doubleToLongBits(Math.abs(getError()));
 		return (int)(temp ^ (temp >>> 32));
 	}
 	/**

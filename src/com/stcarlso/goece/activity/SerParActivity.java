@@ -33,6 +33,7 @@ import com.stcarlso.goece.ui.ChildActivity;
 import com.stcarlso.goece.ui.ResSeriesSpinner;
 import com.stcarlso.goece.ui.ValueBoxContainer;
 import com.stcarlso.goece.ui.ValueGroup;
+import com.stcarlso.goece.utility.ECECalc;
 import com.stcarlso.goece.utility.ResCandidate;
 
 import java.util.*;
@@ -219,7 +220,7 @@ public class SerParActivity extends ChildActivity {
 		protected void populateValues(int[] values, List<Double> candidates) {
 			final int maxIndex = 8 * values.length + 1;
 			for (int i = 0; i < maxIndex; i++) {
-				final double cv = ordinalValue(i, values);
+				final double cv = ECECalc.ordinalResistor(i, values);
 				// Include the value that fails
 				candidates.add(cv);
 				if (!possible(cv)) break;
@@ -236,29 +237,6 @@ public class SerParActivity extends ChildActivity {
 	 */
 	protected static class ParallelResCandidate extends ResCandidate {
 		/**
-		 * Calculates the equivalent resistance of two resistors.
-		 *
-		 * @param r1 the first resistor value
-		 * @param r2 the second resistor value
-		 * @return the equivalent parallel resistance
-		 */
-		private static double parallel(final double r1, final double r2) {
-			final double denom = r1 + r2, ret;
-			if (denom == 0.0)
-				// Do not divide by zero
-				ret = 0.0;
-			else if (Double.isInfinite(r1))
-				// r1 = +inf, return r2
-				ret = r2;
-			else if (Double.isInfinite(r2))
-				// r2 = +inf, return r1
-				ret = r1;
-			else
-				ret = (r1 * r2) / denom;
-			return ret;
-		}
-
-		/**
 		 * Creates a new candidate resistor pair.
 		 *
 		 * @param r1 the first resistor value
@@ -266,7 +244,7 @@ public class SerParActivity extends ChildActivity {
 		 * @param target the target value to be achieved
 		 */
 		protected ParallelResCandidate(final double r1, final double r2, final double target) {
-			super(r1, r2, parallel(r1, r2), target);
+			super(r1, r2, ECECalc.parallelResistance(r1, r2), target);
 		}
 		public ResCandidate create(double r1, double r2) {
 			return new ParallelResCandidate(r1, r2, getTarget());
@@ -274,7 +252,7 @@ public class SerParActivity extends ChildActivity {
 		protected void populateValues(int[] values, List<Double> candidates) {
 			final int maxIndex = 8 * values.length + 1;
 			for (int i = maxIndex - 1; i >= 0; i--) {
-				final double cv = ordinalValue(i, values);
+				final double cv = ECECalc.ordinalResistor(i, values);
 				// Include the value that fails
 				candidates.add(cv);
 				if (!possible(cv)) break;

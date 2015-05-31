@@ -113,7 +113,7 @@ public final class ECEActivity extends FragmentActivity {
 	/**
 	 * Adds a tab to the menu.
 	 *
-	 * @param resId string resource ID of the tab name
+	 * @param resId the string resource ID of the tab name
 	 */
 	private <T extends Fragment> ActionBar.Tab addTab(final int resId, Class<T> target) {
 		final ActionBar tabBar = getActionBar();

@@ -129,10 +129,11 @@ public class ResSeriesSpinner extends Spinner implements ValueControl,
 			adapter = ArrayAdapter.createFromResource(context, R.array.guiSerResSeries,
 				android.R.layout.simple_spinner_item);
 			setOnItemSelectedListener(this);
-			setSelection(1);
 		}
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		setAdapter(adapter);
+		if (!isInEditMode())
+			setSelection(1, false);
 	}
 	public void loadState(SharedPreferences prefs) {
 		final String tag = ECEActivity.getTag(this);
