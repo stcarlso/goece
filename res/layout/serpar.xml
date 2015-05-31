@@ -44,9 +44,14 @@
 												android:layout_gravity="center_vertical"
 												ece:group="inputs"/>
 	</LinearLayout>
+	<ImageView android:layout_width="120dp" android:layout_height="160dp"
+			   android:contentDescription="@string/cirserpar" android:id="@+id/guiSerCircuit"
+			   android:src="@drawable/serpar" android:layout_centerHorizontal="true"
+			   android:layout_below="@id/guiSerResTemp"/>
 	<LinearLayout android:layout_width="wrap_content" android:layout_below="@id/guiSerResTemp"
 				  android:layout_height="wrap_content" android:orientation="vertical"
-				  android:layout_alignParentLeft="true" android:layout_margin="10dp">
+				  android:layout_alignParentLeft="true" android:layout_margin="10dp"
+				  android:layout_toLeftOf="@id/guiSerCircuit">
 		<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content" ece:units="Ω"
 											 android:layout_height="wrap_content"
 											 android:layout_gravity="center_horizontal"
@@ -66,7 +71,8 @@
 	</LinearLayout>
 	<LinearLayout android:layout_width="wrap_content" android:layout_below="@id/guiSerResTemp"
 				  android:layout_height="wrap_content" android:orientation="vertical"
-				  android:layout_alignParentRight="true" android:layout_margin="10dp">
+				  android:layout_alignParentRight="true" android:layout_margin="10dp"
+				  android:layout_toRightOf="@id/guiSerCircuit">
 		<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content" ece:units="Ω"
 											 android:layout_height="wrap_content"
 											 android:layout_gravity="center_horizontal"

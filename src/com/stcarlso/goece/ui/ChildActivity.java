@@ -50,11 +50,11 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	/**
 	 * List of fields registered with registerAdjustable.
 	 */
-	protected ValueGroup fields;
+	protected final ValueGroup fields;
 	/**
 	 * List of fields again, but mapped by group.
 	 */
-	protected Map<String, ValueGroup> groups;
+	protected final Map<String, ValueGroup> groups;
 
 	/**
 	 * Initialize this activity.

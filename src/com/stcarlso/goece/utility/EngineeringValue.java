@@ -172,7 +172,7 @@ public class EngineeringValue implements Serializable {
 		this.sigfigs = sigfigs;
 		this.tolerance = tolerance;
 		this.units = units;
-		int code = 6;
+		int code = 5;
 		double engr = value;
 		// Look for the prefix
 		if (absValue > 0.0 && !Double.isInfinite(value)) {
@@ -302,7 +302,7 @@ public class EngineeringValue implements Serializable {
 				decimals = sf - 3;
 			else if (absSig >= 10.0)
 				decimals = sf - 2;
-			else if (absSig >= 1.0)
+			else if (absSig >= 1.0 || absSig == 0.0)
 				decimals = sf - 1;
 			else
 				decimals = sf;

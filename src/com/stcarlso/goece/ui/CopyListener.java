@@ -114,7 +114,7 @@ public class CopyListener implements View.OnLongClickListener {
 		/**
 		 * The text available to copy.
 		 */
-		private String[] copyText;
+		private final String[] copyText;
 
 		protected CopyItemsListener(final String[] copyText) {
 			this.copyText = copyText;

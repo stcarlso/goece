@@ -34,7 +34,7 @@
 										 android:tag="ohmsCur" ece:affects="power"
 										 android:layout_alignParentTop="true"
 										 android:layout_centerHorizontal="true"/>
-	<ImageView android:layout_width="120dp" android:layout_height="120dp"
+	<ImageView android:layout_width="105dp" android:layout_height="120dp"
 			   android:contentDescription="@string/cirohms" android:id="@+id/guiOhmsCircuit"
 			   android:src="@drawable/ohmslaw" android:layout_centerHorizontal="true"
 			   android:layout_below="@id/guiOhmsCurrent" android:layout_margin="5dp"/>

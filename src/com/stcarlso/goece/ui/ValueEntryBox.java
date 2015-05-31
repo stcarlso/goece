@@ -31,8 +31,6 @@ import android.content.res.TypedArray;
 import android.os.Parcelable;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
-import android.text.Spanned;
-import android.text.style.RelativeSizeSpan;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -257,7 +255,7 @@ public class ValueEntryBox extends Button implements View.OnClickListener, Value
 	 * @param newValue the new value
 	 */
 	public void setValue(final EngineeringValue newValue) {
-		if (newValue != value) {
+		if (newValue != null && (value == null || !value.equals(newValue))) {
 			value = newValue;
 			if (copyListener != null)
 				copyListener.setValue(newValue);
@@ -275,8 +273,8 @@ public class ValueEntryBox extends Button implements View.OnClickListener, Value
 		text.append('\n');
 		text.append(val);
 		// Make the name a bit smaller
-		text.setSpan(new RelativeSizeSpan(0.8f), 0, desc.length(),
-			Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+		/*text.setSpan(new RelativeSizeSpan(0.8f), 0, desc.length(),
+			Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);*/
 		setText(text);
 	}
 	/**

@@ -102,6 +102,7 @@ public class ResSeriesSpinner extends Spinner implements ValueControl,
 		return SERIES[getSelectedItemPosition()];
 	}
 	private void init(final Context context, final AttributeSet attrs) {
+		final ArrayAdapter<CharSequence> adapter;
 		String newGroup = "", willAffect = "";
 		if (attrs != null) {
 			// Read attributes for affects and group
@@ -115,24 +116,29 @@ public class ResSeriesSpinner extends Spinner implements ValueControl,
 				Log.e("ResSeriesSpinner", "Invalid attributes:", e);
 			}
 		}
-
 		group = newGroup;
 		affects = willAffect;
 		listener = null;
-		if (context != null && !isInEditMode()) {
+		if (isInEditMode()) {
+			// Sample data
+			adapter = new ArrayAdapter<CharSequence>(context, android.R.layout.
+				simple_spinner_item);
+			adapter.add("X%");
+		} else {
 			// Load the options, if we have a context
-			final ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(context,
-				R.array.guiSerResSeries, android.R.layout.simple_spinner_item);
-			adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-			setAdapter(adapter);
+			adapter = ArrayAdapter.createFromResource(context, R.array.guiSerResSeries,
+				android.R.layout.simple_spinner_item);
 			setOnItemSelectedListener(this);
+			setSelection(1);
 		}
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		setAdapter(adapter);
 	}
 	public void loadState(SharedPreferences prefs) {
 		final String tag = ECEActivity.getTag(this);
 		// Only change if the preferences are initialized
 		if (prefs.contains(tag))
-			setSelection(prefs.getInt(tag, 0), false);
+			setSelection(prefs.getInt(tag, 1), false);
 	}
 	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 		callOnCalculateListener();

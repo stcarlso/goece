@@ -75,8 +75,7 @@
 	<string name="guiSerSeries2">R&lt;small&gt;2&lt;/small&gt;</string>
 	<string name="guiSerParallel1">R&lt;small&gt;3&lt;/small&gt;</string>
 	<string name="guiSerParallel2">R&lt;small&gt;4&lt;/small&gt;</string>
-	<string name="cirseries">Series circuit diagram</string>
-	<string name="cirparallel">Parallel circuit diagram</string>
+	<string name="cirserpar">Series and parallel circuit diagram</string>
 	<string-array name="guiSerResSeries">
 		<item>1%</item>
 		<item>5%</item>
@@ -89,4 +88,5 @@
 	<string name="guiDivTop">R&lt;small&gt;1&lt;/small&gt;</string>
 	<string name="guiDivBottom">R&lt;small&gt;2&lt;/small&gt;</string>
 	<string name="guiDivLoad">R&lt;small&gt;L&lt;/small&gt;</string>
+	<string name="cirvdiv">Voltage divider circuit diagram</string>
 </resources>

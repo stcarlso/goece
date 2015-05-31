@@ -165,6 +165,8 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	}
 	protected void loadCustomPrefs(SharedPreferences prefs) {
 		loadPrefsCheckBox(prefs, R.id.guiResLine);
+		if (prefs.contains("lastCode"))
+			lastCode = prefs.getString("lastCode", lastCode);
 	}
 	/**
 	 * Receive click events from the calculate button and recalculate.
@@ -192,9 +194,13 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 			// Retrieve the code from a saved execution
 			lastCode = savedInstanceState.getString("lastCode", lastCode);
 			calculate(lastCode, false);
-		} else
+		} else {
 			// Will set the last value appropriately
-			recalculate(codeIn);
+			String code = codeIn.getText().toString();
+			if (code.length() < 1)
+				code = lastCode;
+			calculate(code, false);
+		}
 		ECEActivity.initShowSoftKeyboard(codeIn);
 	}
 	@Override
@@ -219,6 +225,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	}
 	protected void saveCustomPrefs(SharedPreferences.Editor prefs) {
 		savePrefsCheckBox(prefs, R.id.guiResLine);
+		prefs.putString("lastCode", lastCode);
 	}
 	/**
 	 * Display the resistor value on screen.

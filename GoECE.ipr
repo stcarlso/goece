@@ -191,6 +191,10 @@
         <option name="m_ignoreInvisibleFields" value="true" />
         <option name="m_ignoreStaticMethods" value="true" />
       </inspection_tool>
+      <inspection_tool class="LoggerInitializedWithForeignClass" enabled="false" level="WARNING" enabled_by_default="false">
+        <option name="loggerClassName" value="org.apache.log4j.Logger,org.slf4j.LoggerFactory,org.apache.commons.logging.LogFactory,java.util.logging.Logger" />
+        <option name="loggerFactoryMethodName" value="getLogger,getLogger,getLog,getLogger" />
+      </inspection_tool>
       <inspection_tool class="LoopConditionNotUpdatedInsideLoop" enabled="true" level="INFO" enabled_by_default="true">
         <option name="ignoreIterators" value="true" />
       </inspection_tool>
@@ -288,7 +292,7 @@
       <inspection_tool class="SimplifiableConditionalExpression" enabled="true" level="INFO" enabled_by_default="true" />
       <inspection_tool class="SimplifiableIfStatement" enabled="true" level="INFO" enabled_by_default="true" />
       <inspection_tool class="Since15" enabled="true" level="INFO" enabled_by_default="true">
-        <effectiveLL value="JDK_1_5" />
+        <effectiveLL value="JDK_1_6" />
       </inspection_tool>
       <inspection_tool class="SleepWhileHoldingLock" enabled="true" level="WARNING" enabled_by_default="true" />
       <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
@@ -530,16 +534,17 @@
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
   </component>
   <component name="libraryTable">
-    <library name="Android Support Library">
+    <library name="Android Support">
       <CLASSES>
-        <root url="jar://$APPLICATION_HOME_DIR$/android-sdk/extras/android/support/v13/android-support-v13.jar!/" />
+        <root url="file://U:/Programs/Android/extras/android/support/v13" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="file://$APPLICATION_HOME_DIR$/android-sdk/extras/android/support/v13/src/ics" />
-        <root url="file://$APPLICATION_HOME_DIR$/android-sdk/extras/android/support/v13/src/ics-mr1" />
-        <root url="file://$APPLICATION_HOME_DIR$/android-sdk/extras/android/support/v13/src/java" />
+        <root url="file://U:/Programs/Android/extras/android/support/v13/src/ics" />
+        <root url="file://U:/Programs/Android/extras/android/support/v13/src/ics-mr1" />
+        <root url="file://U:/Programs/Android/extras/android/support/v13/src/java" />
       </SOURCES>
+      <jarDirectory url="file://U:/Programs/Android/extras/android/support/v13" recursive="false" />
     </library>
   </component>
 </project>

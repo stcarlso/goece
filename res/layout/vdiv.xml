@@ -26,45 +26,53 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 				xmlns:ece="http://schemas.android.com/apk/res/com.stcarlso.goece"
 				android:layout_width="match_parent" android:layout_height="match_parent">
-	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content" ece:units="V"
-										 android:layout_height="wrap_content"
-										 android:layout_centerHorizontal="true"
-										 android:tag="divInput" android:id="@+id/guiDivInput"
-										 ece:description="@string/guiDivInput" ece:group="all"
-										 ece:affects="all" ece:value="5"/>
-	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content" ece:units="Ω"
-										 android:layout_height="wrap_content" ece:group="all"
-										 android:layout_below="@id/guiDivInput"
-										 android:tag="divTop" ece:value="1000"
-										 android:id="@+id/guiDivTop" ece:affects="all"
-										 ece:description="@string/guiDivTop"/>
-	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content" ece:units="Ω"
-										 android:layout_height="wrap_content" ece:group="all"
-										 android:layout_below="@id/guiDivTop"
-										 android:tag="divBottom" ece:value="1000"
-										 android:id="@+id/guiDivBottom" ece:affects="all"
-										 ece:description="@string/guiDivBottom"/>
-	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content" ece:units="V"
-										 android:layout_height="wrap_content"
-										 android:layout_below="@id/guiDivInput"
-										 android:layout_toRightOf="@id/guiDivTop"
-										 android:tag="divOutput" android:id="@+id/guiDivOutput"
-										 ece:description="@string/guiDivOutput" ece:group="all"
-										 ece:affects="all" ece:value="2.5"/>
 	<LinearLayout android:layout_width="wrap_content" android:orientation="horizontal"
 				  android:layout_height="wrap_content" android:layout_centerHorizontal="true"
-				  android:layout_below="@id/guiDivBottom" android:id="@+id/guiDivTemp">
+				  android:id="@+id/guiDivTemp">
 		<TextView android:layout_width="wrap_content" android:layout_gravity="center_vertical"
 				  android:text="@string/resSeries" android:layout_height="wrap_content"/>
 		<com.stcarlso.goece.ui.ResSeriesSpinner android:layout_width="wrap_content"
 												android:layout_height="wrap_content"
-												android:tag="guiDivResSeries"
-												ece:affects="all" ece:group="all"
+												android:tag="divResSeries" ece:affects="res"
+												ece:group="res"
 												android:id="@+id/guiDivResSeries"/>
 	</LinearLayout>
+	<ImageView android:layout_width="108dp" android:layout_height="160dp"
+			   android:contentDescription="@string/cirvdiv" android:id="@+id/guiDivCircuit"
+			   android:src="@drawable/vdiv" android:layout_centerHorizontal="true"
+			   android:layout_margin="10dp" android:layout_below="@id/guiDivTemp"/>
+	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content" ece:units="V"
+										 android:layout_height="wrap_content"
+										 android:layout_centerHorizontal="true"
+										 android:layout_toLeftOf="@id/guiDivCircuit"
+										 android:layout_below="@id/guiDivTemp"
+										 android:tag="divInput" android:id="@+id/guiDivInput"
+										 ece:description="@string/guiDivInput" ece:group="volt"
+										 ece:affects="res" ece:value="5"/>
+	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content" ece:units="Ω"
+										 android:layout_height="wrap_content" ece:group="res"
+										 android:layout_below="@id/guiDivInput"
+										 android:layout_toLeftOf="@id/guiDivCircuit"
+										 android:tag="divTop" ece:value="1000"
+										 android:id="@+id/guiDivTop" ece:affects="volt"
+										 ece:description="@string/guiDivTop"/>
+	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content" ece:units="Ω"
+										 android:layout_height="wrap_content" ece:group="res"
+										 android:layout_below="@id/guiDivTop"
+										 android:layout_toLeftOf="@id/guiDivCircuit"
+										 android:tag="divBottom" ece:value="1000"
+										 android:id="@+id/guiDivBottom" ece:affects="volt"
+										 ece:description="@string/guiDivBottom"/>
+	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content" ece:units="V"
+										 android:layout_height="wrap_content"
+										 android:layout_below="@id/guiDivInput"
+										 android:layout_toRightOf="@id/guiDivCircuit"
+										 android:tag="divOutput" android:id="@+id/guiDivOutput"
+										 ece:description="@string/guiDivOutput" ece:group="volt"
+										 ece:affects="res" ece:value="2.5"/>
 	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  android:id="@+id/guiDivEquiv" android:layout_centerHorizontal="true"
-			  android:layout_below="@id/guiDivTemp"/>
+			  android:layout_below="@id/guiDivCircuit"/>
 	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  android:id="@+id/guiDivCurrent" android:layout_centerHorizontal="true"
 			  android:layout_below="@id/guiDivEquiv"/>

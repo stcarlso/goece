@@ -25,11 +25,10 @@
 package com.stcarlso.goece.activity;
 
 import android.os.Bundle;
-import android.widget.TextView;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.ui.*;
-import com.stcarlso.goece.utility.EngineeringValue;
-import com.stcarlso.goece.utility.Units;
+import com.stcarlso.goece.ui.ChildActivity;
+import com.stcarlso.goece.ui.ValueBoxContainer;
+import com.stcarlso.goece.ui.ValueGroup;
 
 /**
  * Very simple Ohm's law activity. Everyone should know it, but this adds engineering value
