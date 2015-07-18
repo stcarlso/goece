@@ -30,8 +30,11 @@ import android.view.View;
 import android.widget.RadioButton;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.ChildActivity;
+import com.stcarlso.goece.ui.ComplexEntryBox;
 import com.stcarlso.goece.ui.ValueBoxContainer;
 import com.stcarlso.goece.ui.ValueGroup;
+import com.stcarlso.goece.utility.ComplexValue;
+import com.stcarlso.goece.utility.EngineeringValue;
 
 /**
  * Calculate the reactance of capacitors and inductors at a given frequency, and perform angle
@@ -50,21 +53,6 @@ public class ImpedanceActivity extends ChildActivity implements View.OnClickList
 	public ImpedanceActivity() {
 		controls = new ValueBoxContainer();
 	}
-	/**
-	 * Recalculates the bottom 3 fields, given the value of reactance.
-	 *
-	 * @param react the reactance value to use
-	 */
-	private void doOutputs(final double react) {
-		final double r = controls.getRawValue(R.id.guiImpedRes);
-		// atan2 handles infinite arguments, hypot should be fine too
-		final double mag = Math.hypot(r, react), phase = Math.toDegrees(Math.atan2(react, r));
-		controls.setRawValue(R.id.guiImpedReact, react);
-		// Impedance is magnitude of resistance and reactance
-		controls.setRawValue(R.id.guiImpedImp, mag);
-		// Phase is direction of resistance and reactance (atan2)
-		controls.setRawValue(R.id.guiImpedPha, phase);
-	}
 	@Override
 	protected void loadCustomPrefs(SharedPreferences prefs) {
 		super.loadCustomPrefs(prefs);
@@ -81,8 +69,6 @@ public class ImpedanceActivity extends ChildActivity implements View.OnClickList
 		controls.add(findViewById(R.id.guiImpedCap));
 		controls.add(findViewById(R.id.guiImpedInd));
 		controls.add(findViewById(R.id.guiImpedFreq));
-		controls.add(findViewById(R.id.guiImpedPha));
-		controls.add(findViewById(R.id.guiImpedReact));
 		controls.add(findViewById(R.id.guiImpedImp));
 		controls.setupAll(this);
 		loadPrefs();
@@ -97,25 +83,31 @@ public class ImpedanceActivity extends ChildActivity implements View.OnClickList
 		recalculate(controls.get(isCap ? R.id.guiImpedCap : R.id.guiImpedInd));
 	}
 	protected void recalculate(ValueGroup source) {
+		final ComplexEntryBox imped = (ComplexEntryBox)controls.get(R.id.guiImpedImp);
 		// Capacitance or inductance?
 		final boolean isCap = capSelCtrl.isChecked();
+		final double r = controls.getRawValue(R.id.guiImpedRes);
 		final double c = controls.getRawValue(R.id.guiImpedCap);
 		final double l = controls.getRawValue(R.id.guiImpedInd);
 		final double f = controls.getRawValue(R.id.guiImpedFreq);
-		final double y = controls.getRawValue(R.id.guiImpedReact);
+		final ComplexValue z = imped.getValue();
+		double y = z.getImaginary();
 		// Was the control on the bottom half or the top half?
 		final int id = source.leastRecentlyUsed();
 		switch (id) {
 		case R.id.guiImpedCap:
 			// Capacitance
+			controls.setRawValue(R.id.guiImpedRes, z.getReal());
 			controls.setRawValue(R.id.guiImpedCap, 1.0 / (y * f));
 			break;
 		case R.id.guiImpedInd:
 			// Inductance
+			controls.setRawValue(R.id.guiImpedRes, z.getReal());
 			controls.setRawValue(R.id.guiImpedInd, y / f);
 			break;
 		case R.id.guiImpedFreq:
 			// Frequency
+			controls.setRawValue(R.id.guiImpedRes, z.getReal());
 			if (isCap)
 				// Set from capacitance
 				controls.setRawValue(R.id.guiImpedFreq, 1.0 / (y * c));
@@ -123,14 +115,13 @@ public class ImpedanceActivity extends ChildActivity implements View.OnClickList
 				// Set from inductance
 				controls.setRawValue(R.id.guiImpedFreq, y / l);
 			break;
-		case R.id.guiImpedReact:
-		case R.id.guiImpedPha:
 		case R.id.guiImpedImp:
-			// Reactance, phase, or impedance (recalculate all outputs)
+			// Impedance
 			if (isCap)
-				doOutputs(1.0 / (c * f));
+				y = 1.0 / (c * f);
 			else
-				doOutputs(l * f);
+				y = l * f;
+			imped.setValue(z.newRectangularValue(r, y));
 			break;
 		default:
 			// Invalid
@@ -144,30 +135,6 @@ public class ImpedanceActivity extends ChildActivity implements View.OnClickList
 		savePrefsCheckBox(prefs, R.id.guiImpedSelInd);
 	}
 	protected void update(ValueGroup group) {
-		// Output group needs to stay in sync (TODO replace with angle and phase control)
-		if ("outputs".equals(group.getName())) {
-			final double r = controls.getRawValue(R.id.guiImpedRes);
-			final double z = controls.getRawValue(R.id.guiImpedImp);
-			final double theta = controls.getRawValue(R.id.guiImpedPha);
-			final double y = controls.getRawValue(R.id.guiImpedReact);
-			// Find the control which was changed
-			switch (group.mostRecentlyUsed()) {
-			case R.id.guiImpedPha:
-				// Use the phase
-				doOutputs(r * Math.tan(Math.toRadians(theta)));
-				break;
-			case R.id.guiImpedImp:
-				// Use the impedance
-				doOutputs(Math.sqrt(z * z - r * r));
-				break;
-			case R.id.guiImpedReact:
-				// Use the reactance
-				doOutputs(y);
-				break;
-			default:
-				// Invalid
-				break;
-			}
-		}
+		// Now that output group has only one element, everything is OK
 	}
 }

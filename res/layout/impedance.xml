@@ -63,26 +63,11 @@
 										 android:layout_gravity="center_horizontal"
 										 ece:description="@string/freq" ece:group="inputs"
 										 android:tag="impedFreq" ece:affects="outputs"/>
-	<LinearLayout android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
-				  android:layout_height="wrap_content" android:layout_marginTop="40dp">
-		<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
-											 android:layout_height="wrap_content" ece:units="Ω"
-											 android:id="@+id/guiImpedReact" ece:value="0.001"
-											 android:layout_gravity="center_horizontal"
-											 ece:description="@string/react" ece:group="outputs"
-											 android:tag="impedReact" ece:affects="inputs"/>
-		<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
-											 android:layout_height="wrap_content" ece:units="°"
-											 android:id="@+id/guiImpedPha" ece:value="0"
-											 android:layout_gravity="center_horizontal"
-											 ece:description="@string/phase" ece:group="outputs"
-											 android:tag="impedPha" ece:affects="inputs"
-											 android:layout_marginLeft="20dp" ece:sigfigs="3"/>
-	</LinearLayout>
-	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
-										 android:layout_height="wrap_content" ece:units="Ω"
-										 android:id="@+id/guiImpedImp" ece:value="10.001"
-										 android:layout_gravity="center_horizontal"
-										 ece:description="@string/imped" ece:group="outputs"
-										 android:tag="impedImp" ece:affects="inputs"/>
+	<com.stcarlso.goece.ui.ComplexEntryBox android:layout_width="wrap_content"
+										   android:layout_height="wrap_content" ece:units="Ω"
+										   android:id="@+id/guiImpedImp" ece:value="10"
+										   ece:phase="0" android:layout_marginTop="40dp"
+										   android:layout_gravity="center_horizontal"
+										   ece:description="@string/imped" ece:group="outputs"
+										   android:tag="impedImp" ece:affects="inputs"/>
 </LinearLayout>

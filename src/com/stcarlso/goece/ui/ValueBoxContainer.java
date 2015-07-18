@@ -26,13 +26,14 @@ package com.stcarlso.goece.ui;
 
 import android.util.SparseArray;
 import android.view.View;
+import com.stcarlso.goece.utility.ComplexValue;
 import com.stcarlso.goece.utility.EngineeringValue;
 
 /**
  * A really simple class intended to reduce the massive number of repeated casts and
  * findValueById calls by marshalling ValueEntryBox items into a shared class.
  */
-public class ValueBoxContainer extends SparseArray<ValueEntryBox> {
+public class ValueBoxContainer extends SparseArray<AbstractEntryBox<? extends EngineeringValue>> {
 	public ValueBoxContainer() {
 		super(32);
 	}
@@ -42,26 +43,56 @@ public class ValueBoxContainer extends SparseArray<ValueEntryBox> {
 	 * @param view the value entry box to add
 	 */
 	public void add(final View view) {
-		if (view instanceof ValueEntryBox) {
+		if (view instanceof AbstractEntryBox) {
 			// Only add valid items
-			final ValueEntryBox box = (ValueEntryBox)view;
+			final AbstractEntryBox<?> box = (AbstractEntryBox<?>)view;
 			put(box.getId(), box);
 		}
+	}
+	/**
+	 * Gets the raw imaginary component of a value entry box.
+	 *
+	 * @param id the ID of the control to look up
+	 * @return the imaginary component entered into that control, or 0 if the control only
+	 * accepts real numbers
+	 */
+	public double getImagValue(final int id) {
+		final EngineeringValue value = getValue(id);
+		final double ret;
+		if (value == null)
+			ret = Double.NaN;
+		else
+			ret = value.getImaginary();
+		return ret;
 	}
 	/**
 	 * Gets the raw value of a value entry box.
 	 *
 	 * @param id the ID of the control to look up
-	 * @return the raw value entered into that control
+	 * @return the raw value (magnitude for complex) entered into that control
 	 */
 	public double getRawValue(final int id) {
-		final ValueEntryBox box = get(id);
-		// Return NaN for invalid entries
+		final EngineeringValue value = getValue(id);
 		final double ret;
-		if (box != null)
-			ret = box.getRawValue();
-		else
+		if (value == null)
 			ret = Double.NaN;
+		else
+			ret = value.getValue();
+		return ret;
+	}
+	/**
+	 * Gets the raw real component of a value entry box.
+	 *
+	 * @param id the ID of the control to look up
+	 * @return the real component entered into that control
+	 */
+	public double getRealValue(final int id) {
+		final EngineeringValue value = getValue(id);
+		final double ret;
+		if (value == null)
+			ret = Double.NaN;
+		else
+			ret = value.getReal();
 		return ret;
 	}
 	/**
@@ -71,7 +102,7 @@ public class ValueBoxContainer extends SparseArray<ValueEntryBox> {
 	 * @return the value entered into that control
 	 */
 	public EngineeringValue getValue(final int id) {
-		final ValueEntryBox box = get(id);
+		final AbstractEntryBox<?> box = get(id);
 		final EngineeringValue value;
 		if (box != null)
 			value = box.getValue();
@@ -87,15 +118,16 @@ public class ValueBoxContainer extends SparseArray<ValueEntryBox> {
 	 * shown instead
 	 */
 	public void setRawValue(final int id, final double newValue) {
-		final ValueEntryBox box = get(id);
-		if (box != null) {
+		final AbstractEntryBox<?> box = get(id);
+		if (box != null && (box instanceof ValueEntryBox)) {
 			// Set up new value
 			if (Double.isNaN(newValue))
 				box.setError("NaN");
 			else {
 				// All good
 				box.setError(null);
-				box.updateValue(newValue);
+				// Ugly but for backwards compatibility
+				((ValueEntryBox)box).updateValue(newValue);
 			}
 		}
 	}
@@ -105,8 +137,7 @@ public class ValueBoxContainer extends SparseArray<ValueEntryBox> {
 	 * @param activity the parent activity which should own these components
 	 */
 	public void setupAll(final ChildActivity activity) {
-		for (int i = 0; i < size(); i++) {
+		for (int i = 0; i < size(); i++)
 			activity.setupValueEntryBox(keyAt(i));
-		}
 	}
 }

@@ -31,12 +31,18 @@
 			 android:entries="@array/guiCurOptions" android:spinnerMode="dropdown"
 			 android:tag="guiCurWhat" android:id="@+id/guiCurWhat"
 			 android:layout_centerHorizontal="true"/>
-	<GridLayout android:layout_width="wrap_content" android:layout_below="@id/guiCurWhat"
-				android:layout_height="wrap_content" android:id="@+id/guiCurWire"
-				android:orientation="vertical" android:visibility="visible"
-				android:rowCount="5" android:columnCount="2">
-		<TextView android:text=""/>
-	</GridLayout>
+	<RelativeLayout android:layout_width="wrap_content" android:layout_below="@id/guiCurWhat"
+					android:layout_height="wrap_content" android:id="@+id/guiCurWire"
+					android:orientation="vertical" android:visibility="visible"
+					android:rowCount="5" android:columnCount="2">
+		<Spinner android:layout_width="wrap_content" android:layout_height="wrap_content"
+				 android:entries="@array/guiCurMaterials" android:spinnerMode="dropdown"
+				 android:tag="guiCurMaterials" android:id="@+id/guiCurMaterials"/>
+		<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
+											 android:layout_height="wrap_content"
+											 android:tag="guiCurGauge"
+											 ece:description="@string/guiCurGauge"/>
+	</RelativeLayout>
 	<GridLayout android:layout_width="wrap_content" android:layout_below="@id/guiCurWhat"
 				android:layout_height="wrap_content" android:id="@+id/guiCurTrace"
 				android:orientation="vertical" android:visibility="invisible"

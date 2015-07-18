@@ -31,10 +31,15 @@
 	<string name="ok">OK</string>
 	<string name="calculate">Calculate</string>
 	<string name="copy">Copy</string>
-	<string name="copyRaw">%.3g</string>
-	<string name="copySig">%.3f</string>
-	<string name="copyUnits">%s</string>
-	<string name="copyAll">%s</string>
+	<string name="magpha">r * e<sup>θ<i>i</i></sup></string>
+	<string name="reim">a + b<i>i</i></string>
+	<string name="copyRaw">%1$.4g</string>
+	<string name="copySig">%1$.4f</string>
+	<string name="copyUnits">%1$s</string>
+	<string name="copyAll">%1$s</string>
+	<string name="copyAngle">%1$.2f°</string>
+	<string name="copyMagPha">%1$.4g @ %2$.2f°</string>
+	<string name="copyReIm">%1$.4g + %2$.4gi</string>
 	<!-- These show up pretty often -->
 	<string name="voltage">Voltage</string>
 	<string name="current">Current</string>
@@ -52,6 +57,7 @@
 	<string name="pktopk">Peak-to-Peak</string>
 	<string name="rms">RMS</string>
 	<string name="resSeries">Values available: </string>
+	<string name="degree">°</string>
 	<!-- Activity names and titles -->
 	<string name="guiTabAnalog">Analog</string>
 	<string name="guiTabDigital">Digital</string>

@@ -107,7 +107,7 @@ public class VDivActivity extends ChildActivity implements View.OnClickListener 
 		loadPrefsCheckBox(prefs, R.id.guiDivIsLoad);
 	}
 	public void onClick(View v) {
-		final ValueEntryBox loadR = controls.get(R.id.guiDivLoad);
+		final AbstractEntryBox<?> loadR = controls.get(R.id.guiDivLoad);
 		loadR.setEnabled(isLoadCtrl.isChecked());
 		recalculate(loadR);
 	}

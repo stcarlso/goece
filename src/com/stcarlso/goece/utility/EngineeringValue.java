@@ -34,6 +34,50 @@ public class EngineeringValue implements Serializable {
 	private static final long serialVersionUID = 3381934552647230468L;
 
 	/**
+	 * Creates a list of unit choices, with all of the valid unit prefixes prepended in
+	 * magnitude order to the specified suffix.
+	 *
+	 * @param suffix the base unit suffix (m, V, A...)
+	 * @return an array of unit choices from smallest to largest
+	 */
+	public static String[] buildUnitChoices(final String suffix) {
+		final String[] unitList = new String[ENGR_NAMES.length - 1];
+		for (int i = 0; i < unitList.length; i++)
+			unitList[i] = ENGR_NAMES[i] + suffix;
+		return unitList;
+	}
+	/**
+	 * Formats a significand from 0 (inclusive) to 1000 (exclusive!) as a string in engineering
+	 * notation.
+	 *
+	 * @param value the value to format
+	 * @param sigfigs the number of significant figures to use
+	 * @return the value formatted with the correct number of significant figures and the radix
+	 * point in the appropriate location
+	 */
+	public static String significandToString(final double value, final int sigfigs) {
+		final double absSig = Math.abs(value);
+		final String out;
+		if (Double.isInfinite(value))
+			// If infinite, display it that way
+			out = (value > 0.0) ? "\u221E" : "-\u221E";
+		else {
+			final int decimals;
+			// Calculate number of decimal places to show
+			if (absSig >= 100.0)
+				decimals = sigfigs - 3;
+			else if (absSig >= 10.0)
+				decimals = sigfigs - 2;
+			else if (absSig >= 1.0 || absSig == 0.0)
+				decimals = sigfigs - 1;
+			else
+				decimals = sigfigs;
+			// Compose format string
+			out = String.format("%." + decimals + "f", value);
+		}
+		return out;
+	}
+	/**
 	 * Formats a tolerance value as a string.
 	 *
 	 * @param tolIn the tolerance value to display
@@ -204,6 +248,30 @@ public class EngineeringValue implements Serializable {
 			value.getUnits());
 	}
 	/**
+	 * Retrieves the phase angle of this value.
+	 *
+	 * @return the phase angle in degrees
+	 */
+	public double getAngle() {
+		return 0.0;
+	}
+	/**
+	 * Retrieves the imaginary part of this value. This value is precomputed.
+	 *
+	 * @return the imaginary part, magnitude * sin(phase)
+	 */
+	public double getImaginary() {
+		return 0.0;
+	}
+	/**
+	 * Retrieves the real part of this value. This value is precomputed.
+	 *
+	 * @return the real part, magnitude * cos(phase)
+	 */
+	public double getReal() {
+		return raw;
+	}
+	/**
 	 * Retrieves the number of significant figures of this value.
 	 *
 	 * @return the total number of significant digits
@@ -290,26 +358,7 @@ public class EngineeringValue implements Serializable {
 	 * @return the significand of this value rounded to significant figures
 	 */
 	public String significandToString(final int sf) {
-		final double sig = getSignificand(), absSig = Math.abs(sig);
-		final String out;
-		if (Double.isInfinite(sig))
-			// If infinite, display it that way
-			out = (sig > 0.0) ? "\u221E" : "-\u221E";
-		else {
-			final int decimals;
-			// Calculate number of decimal places to show
-			if (absSig >= 100.0)
-				decimals = sf - 3;
-			else if (absSig >= 10.0)
-				decimals = sf - 2;
-			else if (absSig >= 1.0 || absSig == 0.0)
-				decimals = sf - 1;
-			else
-				decimals = sf;
-			// Compose format string
-			out = String.format("%." + decimals + "f", sig);
-		}
-		return out;
+		return significandToString(getSignificand(), sf);
 	}
 	public String toString() {
 		final StringBuilder format = new StringBuilder(significandToString());

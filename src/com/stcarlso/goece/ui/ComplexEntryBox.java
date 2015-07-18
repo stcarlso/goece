@@ -37,72 +37,100 @@ import android.view.View;
 import android.widget.Button;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.activity.ECEActivity;
-import com.stcarlso.goece.utility.Calculatable;
-import com.stcarlso.goece.utility.ECESavedState;
-import com.stcarlso.goece.utility.EngineeringValue;
-import com.stcarlso.goece.utility.ValueControl;
+import com.stcarlso.goece.utility.*;
 
 /**
- * A button with units that when clicked brings up a ValueEntryDialog.
+ * A button with units that when clicked brings up a ComplexEntryDialog.
+ *
+ * Yes, there is duplicate code with ValueEntryBox. No, since it is mostly boilerplate, it will
+ * not be fixed.
  */
-public class ValueEntryBox extends AbstractEntryBox<EngineeringValue> implements
-		ValueEntryDialog.OnCalculateListener {
-	public ValueEntryBox(Context context) {
+public class ComplexEntryBox extends AbstractEntryBox<ComplexValue> implements
+		ComplexEntryDialog.OnCalculateListener {
+	public ComplexEntryBox(Context context) {
 		super(context);
 	}
-	public ValueEntryBox(Context context, AttributeSet attrs) {
+	public ComplexEntryBox(Context context, AttributeSet attrs) {
 		super(context, attrs);
 	}
-	public ValueEntryBox(Context context, AttributeSet attrs, int defStyle) {
+	public ComplexEntryBox(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
+	}
+	/**
+	 * Returns the raw magnitude entered in this value box.
+	 *
+	 * @return the result of getValue() on the current value
+	 */
+	public double getRawMagnitude() {
+		return value.getValue();
+	}
+	/**
+	 * Returns the phase entered in this value box.
+	 *
+	 * @return the result of getAngle() on the current value
+	 */
+	public double getRawAngle() {
+		return value.getAngle();
+	}
+	/**
+	 * Gets the current value entered in this value box.
+	 *
+	 * @return the current value
+	 */
+	public ComplexValue getValue() {
+		return value;
 	}
 	@Override
 	protected void init(final Context context, final AttributeSet attrs) {
 		String units = "", desc = "Value", newGroup = "", willAffect = "";
-		double iv = 0.0;
+		double iv = 0.0, ip = 0.0;
 		int sf = 3;
 		super.init(context, attrs);
 		if (attrs != null) {
 			// Read attributes for units
 			final TypedArray values = context.getTheme().obtainStyledAttributes(attrs,
-				R.styleable.ValueEntryBox, 0, 0);
+				R.styleable.ComplexEntryBox, 0, 0);
 			try {
 				// Read the values and substitute defaults
-				units = values.getString(R.styleable.ValueEntryBox_units);
-				desc = values.getString(R.styleable.ValueEntryBox_description);
-				iv = values.getFloat(R.styleable.ValueEntryBox_value, 0.0f);
-				sf = values.getInt(R.styleable.ValueEntryBox_sigfigs, 3);
-				newGroup = values.getString(R.styleable.ValueEntryBox_group);
-				willAffect = values.getString(R.styleable.ValueEntryBox_affects);
+				units = values.getString(R.styleable.ComplexEntryBox_units);
+				desc = values.getString(R.styleable.ComplexEntryBox_description);
+				iv = values.getFloat(R.styleable.ComplexEntryBox_value, 0.0f);
+				ip = values.getFloat(R.styleable.ComplexEntryBox_phase, 0.0f);
+				sf = values.getInt(R.styleable.ComplexEntryBox_sigfigs, 3);
+				newGroup = values.getString(R.styleable.ComplexEntryBox_group);
+				willAffect = values.getString(R.styleable.ComplexEntryBox_affects);
 			} catch (Exception e) {
-				Log.e("ValueEntryBox", "Invalid attributes:", e);
+				Log.e("ComplexEntryBox", "Invalid attributes:", e);
 			}
 		} else
 			// Probably not good
-			Log.w("ValueEntryBox", "No units specified, defaulting to unitless!");
+			Log.w("ComplexEntryBox", "No units specified, defaulting to unitless!");
 		group = newGroup;
 		affects = willAffect;
 		// Create value and set text
 		description = desc;
-		setValue(new EngineeringValue(iv, 0.0, sf, units));
+		setValue(new ComplexValue(iv, ip, 0.0, sf, units));
 	}
 	public void loadState(SharedPreferences prefs) {
 		final String idS = ECEActivity.getTag(this);
-		if (prefs.contains(idS)) {
-			final double ld = Double.longBitsToDouble(prefs.getLong(idS, 0L));
+		if (prefs.contains(idS + "_mag") && prefs.contains(idS + "_pha")) {
+			final double mag = Double.longBitsToDouble(prefs.getLong(idS + "_mag", 0L));
+			final double pha = Double.longBitsToDouble(prefs.getLong(idS + "_pha", 0L));
 			// Why floats? Why no doubles in preferences? Android you make me sad!
-			if (!Double.isNaN(ld))
-				updateValue(ld);
+			if (!Double.isNaN(mag) && !Double.isNaN(pha))
+				updateValue(mag, pha);
 		}
 	}
 	public void saveState(SharedPreferences.Editor prefs) {
-		prefs.putLong(ECEActivity.getTag(this), Double.doubleToLongBits(getRawValue()));
+		final String tag = ECEActivity.getTag(this);
+		prefs.putLong(tag + "_mag", Double.doubleToLongBits(getRawMagnitude()));
+		prefs.putLong(tag + "_pha", Double.doubleToLongBits(getRawAngle()));
 	}
 	public void onClick(View v) {
 		if (activity != null) {
 			final String desc = getDescription();
 			// Create popup
-			final ValueEntryDialog mutate = ValueEntryDialog.create(value, desc);
+			final ComplexEntryDialog mutate = ComplexEntryDialog.create(value, desc);
 			mutate.setOnCalculateListener(this);
 			// Show it, popup will call oncalculate for us on OK
 			mutate.show(activity.getFragmentManager(), desc);
@@ -112,9 +140,10 @@ public class ValueEntryBox extends AbstractEntryBox<EngineeringValue> implements
 	 * Changes the raw value of this value entry box, keeping all other engineering parameters
 	 * the same.
 	 *
-	 * @param rawValue the new raw value to show in this entry box
+	 * @param rawMag the new raw magnitude value to show in this entry box
+	 * @param rawPhase the phase angle value to show in this entry box
 	 */
-	public void updateValue(final double rawValue) {
-		setValue(getValue().newValue(rawValue));
+	public void updateValue(final double rawMag, final double rawPhase) {
+		setValue(getValue().newValue(rawMag, rawPhase));
 	}
 }

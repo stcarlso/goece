@@ -35,6 +35,8 @@ import android.view.View;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.utility.EngineeringValue;
 
+import java.util.*;
+
 /**
  * A listener which can be added for long-presses to present a "Copy" dialog allowing the user
  * to copy the value of the field (textview, edittext, ValueEntryBox) to the clipboard.
@@ -77,21 +79,30 @@ public class CopyListener implements View.OnLongClickListener {
 	public boolean onLongClick(View v) {
 		// "Copy" options
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		final String[] options = new String[value.getTolerance() > 0.0 ? 3 : 2],
-			copyOptions = new String[options.length];
+		final List<String> options = new ArrayList<String>(8);
 		// Zero out the tolerance to allow unit copy without carrying that
-		final EngineeringValue noTol = new EngineeringValue(value.getValue(), 0.0,
-			value.getSigfigs(), value.getUnits());
+		final double angle = value.getAngle(), mag = value.getValue();
+		final EngineeringValue noTol = new EngineeringValue(mag, 0.0, value.getSigfigs(),
+			value.getUnits());
 		final String copy = activity.getString(R.string.copy);
 		builder.setTitle(R.string.copy);
 		// Build copied text
-		options[0] = activity.getString(R.string.copyRaw, value.getValue());
-		options[1] = activity.getString(R.string.copyUnits, noTol);
-		if (options.length > 2)
-			options[2] = activity.getString(R.string.copyAll, value);
+		options.add(activity.getString(R.string.copyRaw, mag));
+		options.add(activity.getString(R.string.copyUnits, noTol));
+		if (value.getTolerance() > 0.0)
+			options.add(activity.getString(R.string.copyAll, value));
+		// Complex value options
+		if (angle != 0.0) {
+			// Copy angle in degrees, mag + angle, re + im
+			options.add(activity.getString(R.string.copyAngle, angle));
+			options.add(activity.getString(R.string.copyMagPha, mag, angle));
+			options.add(activity.getString(R.string.copyReIm, value.getReal(),
+				value.getImaginary()));
+		}
 		// Build text presented to user
+		final String[] copyOptions = new String[options.size()];
 		for (int i = 0; i < copyOptions.length; i++)
-			copyOptions[i] = copy + " \"" + options[i] + "\"";
+			copyOptions[i] = copy + " \"" + options.get(i) + "\"";
 		builder.setItems(copyOptions, new CopyItemsListener(options));
 		final AlertDialog dialog = builder.create();
 		dialog.show();
@@ -114,17 +125,17 @@ public class CopyListener implements View.OnLongClickListener {
 		/**
 		 * The text available to copy.
 		 */
-		private final String[] copyText;
+		private final List<String> copyText;
 
-		protected CopyItemsListener(final String[] copyText) {
+		protected CopyItemsListener(final List<String> copyText) {
 			this.copyText = copyText;
 		}
 		public void onClick(DialogInterface dialog, int which) {
-			if (which >= 0 && which < copyText.length) {
+			if (which >= 0 && which < copyText.size()) {
 				// Copy the text to the system clipboard
 				final ClipboardManager manager = (ClipboardManager)activity.getSystemService(
 					Context.CLIPBOARD_SERVICE);
-				manager.setPrimaryClip(ClipData.newPlainText(description, copyText[which]));
+				manager.setPrimaryClip(ClipData.newPlainText(description, copyText.get(which)));
 			}
 			dialog.dismiss();
 		}

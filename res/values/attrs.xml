@@ -39,6 +39,19 @@
 		<attr name="group"/>
 		<attr name="affects"/>
 	</declare-styleable>
+	<declare-styleable name="ComplexEntryBox">
+		<attr name="units"/>
+		<attr name="value"/>
+		<attr name="phase" format="float"/>
+		<attr name="description"/>
+		<attr name="magDesc" format="string"/>
+		<attr name="phaDesc" format="string"/>
+		<attr name="realDesc" format="string"/>
+		<attr name="imagDesc" format="string"/>
+		<attr name="sigfigs"/>
+		<attr name="group"/>
+		<attr name="affects"/>
+	</declare-styleable>
 	<declare-styleable name="ValueTextBox">
 		<attr name="group"/>
 		<attr name="affects"/>

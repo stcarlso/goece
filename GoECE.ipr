@@ -164,8 +164,8 @@
       </inspection_tool>
       <inspection_tool class="IfCanBeSwitch" enabled="true" level="INFO" enabled_by_default="true">
         <option name="minimumBranches" value="3" />
-        <option name="suggestIntSwitches" value="false" />
-        <option name="suggestEnumSwitches" value="false" />
+        <option name="suggestIntSwitches" value="true" />
+        <option name="suggestEnumSwitches" value="true" />
       </inspection_tool>
       <inspection_tool class="IfStatementWithIdenticalBranches" enabled="true" level="INFO" enabled_by_default="true" />
       <inspection_tool class="ImplicitNumericConversion" enabled="true" level="INFO" enabled_by_default="true">
@@ -536,15 +536,15 @@
   <component name="libraryTable">
     <library name="Android Support">
       <CLASSES>
-        <root url="file://U:/Programs/Android/extras/android/support/v13" />
+        <root url="file://$APPLICATION_HOME_DIR$/android-sdk/extras/android/support/v13" />
       </CLASSES>
       <JAVADOC />
       <SOURCES>
-        <root url="file://U:/Programs/Android/extras/android/support/v13/src/ics" />
-        <root url="file://U:/Programs/Android/extras/android/support/v13/src/ics-mr1" />
-        <root url="file://U:/Programs/Android/extras/android/support/v13/src/java" />
+        <root url="file://$APPLICATION_HOME_DIR$/android-sdk/extras/android/support/v13/src/ics" />
+        <root url="file://$APPLICATION_HOME_DIR$/android-sdk/extras/android/support/v13/src/ics-mr1" />
+        <root url="file://$APPLICATION_HOME_DIR$/android-sdk/extras/android/support/v13/src/java" />
       </SOURCES>
-      <jarDirectory url="file://U:/Programs/Android/extras/android/support/v13" recursive="false" />
+      <jarDirectory url="file://$APPLICATION_HOME_DIR$/android-sdk/extras/android/support/v13" recursive="false" />
     </library>
   </component>
 </project>

@@ -287,7 +287,7 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 * @param id the entry box to configure
 	 */
 	protected void setupValueEntryBox(final int id) {
-		final ValueEntryBox box = ((ValueEntryBox)findViewById(id));
+		final AbstractEntryBox<?> box = ((AbstractEntryBox<?>)findViewById(id));
 		box.setParentActivity(this);
 		box.setOnCalculateListener(this);
 		registerAdjustable(box);
