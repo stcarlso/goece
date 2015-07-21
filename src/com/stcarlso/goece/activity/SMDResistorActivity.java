@@ -33,6 +33,7 @@ import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.*;
 import com.stcarlso.goece.utility.EIATable;
 import com.stcarlso.goece.utility.EIAValue;
+import com.stcarlso.goece.utility.UIFunctions;
 
 /**
  * Tab for the SMD resistor code calculator.
@@ -156,7 +157,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 		if (value == null) {
 			// Oh no!
 			if (showErrors)
-				ECEActivity.errorMessage(this, R.string.guiResInvalid);
+				UIFunctions.errorMessage(this, R.string.guiResInvalid);
 		} else {
 			// Display it!
 			showValue(value);
@@ -201,7 +202,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 				code = lastCode;
 			calculate(code, false);
 		}
-		ECEActivity.initShowSoftKeyboard(codeIn);
+		UIFunctions.initShowSoftKeyboard(codeIn);
 	}
 	@Override
 	protected void onRestoreInstanceState(Bundle state) {
@@ -234,7 +235,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	 */
 	private void showValue(final EIAValue value) {
 		outputCtrl.setText(value.toString());
-		ResColorActivity.checkEIATable(value, stdCtrl);
+		UIFunctions.checkEIATable(value, stdCtrl);
 		copyListener.setValue(value);
 	}
 	// All work is done in recalculate()

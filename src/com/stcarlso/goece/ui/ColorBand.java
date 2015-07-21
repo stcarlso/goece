@@ -34,9 +34,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.activity.ECEActivity;
 import com.stcarlso.goece.utility.Calculatable;
 import com.stcarlso.goece.utility.ECESavedState;
+import com.stcarlso.goece.utility.UIFunctions;
 import com.stcarlso.goece.utility.ValueControl;
 
 /**
@@ -171,12 +171,12 @@ public class ColorBand extends LinearLayout implements View.OnClickListener, Val
 		}
 	}
 	public void loadState(SharedPreferences prefs) {
-		final int idx = prefs.getInt(ECEActivity.getTag(this), -1);
+		final int idx = prefs.getInt(UIFunctions.getTag(this), -1);
 		if (idx >= 0 && idx < colors.length)
 			setValue(idx);
 	}
 	public void saveState(SharedPreferences.Editor prefs) {
-		prefs.putInt(ECEActivity.getTag(this), getValue());
+		prefs.putInt(UIFunctions.getTag(this), getValue());
 	}
 	public void onClick(View view) {
 		final int id = view.getId(), oldValue = value;

@@ -40,8 +40,18 @@
 				 android:tag="guiCurMaterials" android:id="@+id/guiCurMaterials"/>
 		<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
 											 android:layout_height="wrap_content"
-											 android:tag="guiCurGauge"
+											 android:tag="guiCurGauge" ece:group="inputs"
+											 ece:affects="outputs" ece:units=""
+											 android:layout_below="@id/guiCurMaterials"
+											 android:id="@+id/guiCurGauge" ece:value="18"
 											 ece:description="@string/guiCurGauge"/>
+		<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
+											 android:layout_height="wrap_content"
+											 android:tag="guiCurWireCur" ece:group="inputs"
+											 ece:affects="outputs" ece:units="A"
+											 android:layout_below="@id/guiCurGauge"
+											 android:id="@+id/guiCurWireCur" ece:value="1"
+											 ece:description="@string/current"/>
 	</RelativeLayout>
 	<GridLayout android:layout_width="wrap_content" android:layout_below="@id/guiCurWhat"
 				android:layout_height="wrap_content" android:id="@+id/guiCurTrace"

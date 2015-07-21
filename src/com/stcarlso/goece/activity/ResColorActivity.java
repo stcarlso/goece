@@ -24,7 +24,6 @@
 
 package com.stcarlso.goece.activity;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
 import com.stcarlso.goece.R;
@@ -34,7 +33,7 @@ import com.stcarlso.goece.ui.CopyListener;
 import com.stcarlso.goece.ui.ValueGroup;
 import com.stcarlso.goece.utility.EIATable;
 import com.stcarlso.goece.utility.EIAValue;
-import com.stcarlso.goece.utility.EngineeringValue;
+import com.stcarlso.goece.utility.UIFunctions;
 import com.stcarlso.goece.utility.Units;
 
 /**
@@ -54,39 +53,6 @@ public class ResColorActivity extends ChildActivity {
 		0.0, Units.TOL_1P, Units.TOL_2P, 0.0, 0.0, 0.005, 0.0025, Units.TOL_P1, 0.0005,
 		0.0, Units.TOL_20P, Units.TOL_5P, Units.TOL_10P
 	};
-
-	/**
-	 * Shared code between color code and SMD to indicate standard/non-standard values.
-	 *
-	 * @param value the component value
-	 * @param std the text box to update
-	 * @return true if the component was a standard value, or false otherwise
-	 */
-	public static boolean checkEIATable(final EIAValue value, final TextView std) {
-		final double res = value.getValue();
-		// Is it standard?
-		final EIATable.EIASeries series = value.getSeries();
-		final boolean isStandard = EIATable.isEIAValue(res, series);
-		final String tolStr = EngineeringValue.toleranceToString(value.getTolerance());
-		if (isStandard) {
-			// In standard series, say so
-			std.setTextColor(Color.GREEN);
-			std.setText(String.format("Standard %s%% value", tolStr));
-		} else {
-			// Not in standard series, indicate closest value
-			final double closest = EIATable.nearestEIAValue(res, series), errorPct;
-			// Calculate % error
-			if (res <= 0.0)
-				errorPct = 0.0;
-			else
-				errorPct = 100.0 * (closest - res) / res;
-			// Display appropriate message
-			std.setTextColor(Color.RED);
-			std.setText(String.format("Nearest %s%% value is %s [%+.1f%%]", tolStr,
-				new EIAValue(closest, series, 0.0, value.getUnits()), errorPct));
-		}
-		return isStandard;
-	}
 
 	/**
 	 * Cached reference to the band objects on screen.
@@ -146,7 +112,7 @@ public class ResColorActivity extends ChildActivity {
 		outputCtrl.setText(finalValue.toString());
 		copyListener.setValue(finalValue);
 		// In EIA series?
-		checkEIATable(finalValue, stdCtrl);
+		UIFunctions.checkEIATable(finalValue, stdCtrl);
 	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

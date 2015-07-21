@@ -26,18 +26,16 @@ package com.stcarlso.goece.ui;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.res.TypedArray;
 import android.os.Parcelable;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import com.stcarlso.goece.R;
-import com.stcarlso.goece.activity.ECEActivity;
-import com.stcarlso.goece.utility.*;
+import com.stcarlso.goece.utility.Calculatable;
+import com.stcarlso.goece.utility.ECESavedState;
+import com.stcarlso.goece.utility.EngineeringValue;
+import com.stcarlso.goece.utility.ValueControl;
 
 /**
  * Skeleton class for a button with units that when clicked brings up a dialog.

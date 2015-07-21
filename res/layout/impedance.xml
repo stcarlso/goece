@@ -64,10 +64,13 @@
 										 ece:description="@string/freq" ece:group="inputs"
 										 android:tag="impedFreq" ece:affects="outputs"/>
 	<com.stcarlso.goece.ui.ComplexEntryBox android:layout_width="wrap_content"
-										   android:layout_height="wrap_content" ece:units="Ω"
-										   android:id="@+id/guiImpedImp" ece:value="10"
-										   ece:phase="0" android:layout_marginTop="40dp"
+										   android:layout_height="wrap_content"
+										   android:id="@+id/guiImpedImp" android:tag="impedImp"
+										   android:layout_marginTop="40dp" ece:affects="inputs"
 										   android:layout_gravity="center_horizontal"
-										   ece:description="@string/imped" ece:group="outputs"
-										   android:tag="impedImp" ece:affects="inputs"/>
+										   ece:description="@string/imped"
+										   ece:imagDesc="@string/react" ece:units="Ω"
+										   ece:phaDesc="@string/phase" ece:phase="0"
+										   ece:realDesc="@string/resist" ece:value="10"
+										   ece:magDesc="@string/imped" ece:group="outputs"/>
 </LinearLayout>

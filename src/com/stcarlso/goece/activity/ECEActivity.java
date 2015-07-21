@@ -27,89 +27,16 @@
 package com.stcarlso.goece.activity;
 
 import android.app.ActionBar;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
-import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.ui.AnalogFragment;
-import com.stcarlso.goece.ui.DigitalFragment;
 import com.stcarlso.goece.ui.FragmentTabListener;
-import com.stcarlso.goece.ui.IgnoreOnClickListener;
 
 /**
  * Make it your pastime, make it your mission!
  */
 public final class ECEActivity extends FragmentActivity {
-	/**
-	 * Displays an error message popup.
-	 *
-	 * @param activity the activity showing the error
-	 * @param messageID the string ID of the message
-	 */
-	public static void errorMessage(final Activity activity, final int messageID) {
-		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		builder.setMessage(messageID);
-		builder.setPositiveButton(R.string.ok, new IgnoreOnClickListener());
-		builder.create().show();
-	}
-	/**
-	 * Retrieves the tag from a visual element.
-	 *
-	 * @param view the view to check
-	 * @return the view tag, or the view ID as a string if no tag was defined (bad!)
-	 */
-	public static String getTag(final View view) {
-		final Object tag = view.getTag();
-		final String idS;
-		if (tag != null)
-			idS = tag.toString();
-		else {
-			idS = Integer.toString(view.getId());
-			Log.w("ECEActivity", "Component is missing tag: " + view.getId());
-		}
-		return idS;
-	}
-	/**
-	 * Shows the soft keyboard after a short delay. Why android why?
-	 *
-	 * @param view the view which is requesting IME changes
-	 */
-	public static void initShowSoftKeyboard(final View view) {
-		view.postDelayed(new Runnable() {
-			public void run() {
-				view.requestFocus();
-				showSoftKeyboard(view, true);
-			}
-		}, 200L);
-	}
-	/**
-	 * Shows or hides the soft keyboard for a given view.
-	 *
-	 * @param view the view which is requesting IME changes
-	 * @param show whether the keyboard should be shown
-	 */
-	public static void showSoftKeyboard(final View view, final boolean show) {
-		final Context context;
-		if (view != null && (context = view.getContext()) != null) {
-			// Mixed reviews as to this or setSoftInputMode
-			final InputMethodManager manager = (InputMethodManager)context.
-				getSystemService(Context.INPUT_METHOD_SERVICE);
-			if (manager != null) {
-				// Show or hide the keyboard
-				if (show)
-					manager.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
-				else
-					manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-			}
-		}
-	}
-
 	/**
 	 * Adds a tab to the menu.
 	 *

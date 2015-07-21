@@ -34,7 +34,6 @@ import com.stcarlso.goece.ui.ComplexEntryBox;
 import com.stcarlso.goece.ui.ValueBoxContainer;
 import com.stcarlso.goece.ui.ValueGroup;
 import com.stcarlso.goece.utility.ComplexValue;
-import com.stcarlso.goece.utility.EngineeringValue;
 
 /**
  * Calculate the reactance of capacitors and inductors at a given frequency, and perform angle

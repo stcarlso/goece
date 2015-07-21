@@ -25,11 +25,8 @@
 package com.stcarlso.goece.activity;
 
 import android.os.Bundle;
-import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.ChildActivity;
-import com.stcarlso.goece.ui.EnterKeyListener;
 import com.stcarlso.goece.ui.ValueGroup;
-import com.stcarlso.goece.ui.ValueTextBox;
 
 /**
  * Calculate the current capacity of wires and PCB traces.

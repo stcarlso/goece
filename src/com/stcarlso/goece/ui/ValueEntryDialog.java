@@ -38,12 +38,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.activity.ECEActivity;
-import com.stcarlso.goece.activity.ResColorActivity;
-import com.stcarlso.goece.utility.EIATable;
-import com.stcarlso.goece.utility.EIAValue;
-import com.stcarlso.goece.utility.EngineeringValue;
-import com.stcarlso.goece.utility.Units;
+import com.stcarlso.goece.utility.*;
 
 /**
  * Represents a dialog box which can accept ECE values in scientific notation.
@@ -167,7 +162,7 @@ public class ValueEntryDialog extends DialogFragment implements
 		valueEntry.setText(value.significandToString(6));
 		valueEntry.selectAll();
 		updateValidValues(dialog);
-		ECEActivity.initShowSoftKeyboard(valueEntry);
+		UIFunctions.initShowSoftKeyboard(valueEntry);
 		builder.setTitle(Html.fromHtml(desc));
 		// Create OK and Cancel buttons
 		builder.setPositiveButton(R.string.ok, this);
@@ -225,7 +220,7 @@ public class ValueEntryDialog extends DialogFragment implements
 				// For each one, grab the index and check it
 				for (int i = 0; i < pct.length; i++)
 					// Display nearest value
-					ResColorActivity.checkEIATable(new EIAValue(entry, SERIES[i], units),
+					UIFunctions.checkEIATable(new EIAValue(entry, SERIES[i], units),
 						pct[i]);
 			} catch (NumberFormatException ignore) { }
 	}

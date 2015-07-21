@@ -37,8 +37,9 @@
 	</RadioGroup>
 	<GridLayout android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
 				android:layout_height="wrap_content" android:rowCount="2"
-				android:columnCount="3" android:id="@+id/guiValueReIm">
-		<TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+				android:columnCount="3" android:id="@+id/guiValueReIm"
+				android:visibility="gone">
+		<TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
 				  android:id="@+id/guiValueReDesc" android:layout_marginRight="5dp"
 				  android:layout_gravity="right"/>
 		<EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -47,7 +48,7 @@
 		<Spinner android:layout_width="wrap_content" android:layout_height="wrap_content"
 				 android:id="@+id/guiValueReExp" android:spinnerMode="dropdown"
 				 android:layout_row="0" android:layout_column="2"/>
-		<TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+		<TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
 				  android:id="@+id/guiValueImDesc" android:layout_marginRight="5dp"
 				  android:layout_gravity="right"/>
 		<EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -59,9 +60,8 @@
 	</GridLayout>
 	<GridLayout android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
 				android:layout_height="wrap_content" android:rowCount="2"
-				android:columnCount="3" android:id="@+id/guiValueMagPha"
-				android:visibility="gone">
-		<TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+				android:columnCount="3" android:id="@+id/guiValueMagPha">
+		<TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
 				  android:id="@+id/guiValueMagDesc" android:layout_marginRight="5dp"
 				  android:layout_gravity="right"/>
 		<EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
 		<Spinner android:layout_width="wrap_content" android:layout_height="wrap_content"
 				 android:id="@+id/guiValueMagExp" android:spinnerMode="dropdown"
 				 android:layout_row="0" android:layout_column="2"/>
-		<TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+		<TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
 				  android:id="@+id/guiValuePhaDesc" android:layout_marginRight="5dp"
 				  android:layout_gravity="right"/>
 		<EditText android:layout_width="wrap_content" android:layout_height="wrap_content"

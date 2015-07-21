@@ -34,11 +34,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.activity.ECEActivity;
-import com.stcarlso.goece.utility.Calculatable;
-import com.stcarlso.goece.utility.EIATable;
-import com.stcarlso.goece.utility.EIAValue;
-import com.stcarlso.goece.utility.ValueControl;
+import com.stcarlso.goece.utility.*;
 
 /**
  * A combo box wrapper which allows selection of a resistor series.
@@ -136,7 +132,7 @@ public class ResSeriesSpinner extends Spinner implements ValueControl,
 			setSelection(1, false);
 	}
 	public void loadState(SharedPreferences prefs) {
-		final String tag = ECEActivity.getTag(this);
+		final String tag = UIFunctions.getTag(this);
 		// Only change if the preferences are initialized
 		if (prefs.contains(tag))
 			setSelection(prefs.getInt(tag, 1), false);
@@ -148,7 +144,7 @@ public class ResSeriesSpinner extends Spinner implements ValueControl,
 		callOnCalculateListener();
 	}
 	public void saveState(SharedPreferences.Editor prefs) {
-		prefs.putInt(ECEActivity.getTag(this), getSelectedItemPosition());
+		prefs.putInt(UIFunctions.getTag(this), getSelectedItemPosition());
 	}
 	/**
 	 * Changes the listener fired when the value is changed and recalculation is required.

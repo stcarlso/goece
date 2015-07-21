@@ -36,8 +36,8 @@ import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.*;
-import com.stcarlso.goece.activity.ECEActivity;
 import com.stcarlso.goece.utility.Calculatable;
+import com.stcarlso.goece.utility.UIFunctions;
 import com.stcarlso.goece.utility.ValueControl;
 
 import java.util.*;
@@ -136,7 +136,7 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 */
 	protected void loadPrefsCheckBox(final SharedPreferences prefs, final int id) {
 		final CompoundButton view = (CompoundButton)findViewById(id);
-		final String tag = ECEActivity.getTag(view);
+		final String tag = UIFunctions.getTag(view);
 		// Only change if the preferences are initialized
 		if (prefs.contains(tag))
 			view.setChecked(prefs.getBoolean(tag, false));
@@ -149,7 +149,7 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 */
 	protected void loadPrefsSpinner(final SharedPreferences prefs, final int id) {
 		final Spinner view = (Spinner)findViewById(id);
-		final String tag = ECEActivity.getTag(view);
+		final String tag = UIFunctions.getTag(view);
 		// Only change if the preferences are initialized
 		if (prefs.contains(tag))
 			view.setSelection(prefs.getInt(tag, 0), false);
@@ -268,7 +268,7 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 */
 	protected void savePrefsCheckBox(final SharedPreferences.Editor prefs, final int id) {
 		final CompoundButton view = (CompoundButton)findViewById(id);
-		prefs.putBoolean(ECEActivity.getTag(view), view.isChecked());
+		prefs.putBoolean(UIFunctions.getTag(view), view.isChecked());
 	}
 	/**
 	 * Saves the state of a Spinner object in the preferences.
@@ -278,7 +278,7 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 */
 	protected void savePrefsSpinner(final SharedPreferences.Editor prefs, final int id) {
 		final Spinner view = (Spinner)findViewById(id);
-		prefs.putInt(ECEActivity.getTag(view), view.getSelectedItemPosition());
+		prefs.putInt(UIFunctions.getTag(view), view.getSelectedItemPosition());
 	}
 	/**
 	 * Sets the listener and parent activity of the specified value entry box. Useful for the

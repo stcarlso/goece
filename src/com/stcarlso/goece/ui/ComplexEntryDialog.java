@@ -32,12 +32,15 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
-import android.widget.*;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.Spinner;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.activity.ECEActivity;
-import com.stcarlso.goece.utility.*;
-
-import java.util.regex.Pattern;
+import com.stcarlso.goece.utility.ComplexValue;
+import com.stcarlso.goece.utility.EngineeringValue;
+import com.stcarlso.goece.utility.IgnoreOnClickListener;
+import com.stcarlso.goece.utility.UIFunctions;
 
 /**
  * Represents a dialog box which can accept ECE values in scientific notation for real and
@@ -45,11 +48,6 @@ import java.util.regex.Pattern;
  */
 public class ComplexEntryDialog extends DialogFragment implements
 		DialogInterface.OnClickListener, View.OnClickListener {
-	private static final Pattern COLON_PATTERN = Pattern.compile(":");
-	private static final int[] DESC_ID_LIST = new int[] {
-		R.id.guiValueMagDesc, R.id.guiValuePhaDesc, R.id.guiValueReDesc, R.id.guiValueImDesc
-	};
-
 	/**
 	 * Creates and shows a value entry dialog.
 	 *
@@ -57,7 +55,8 @@ public class ComplexEntryDialog extends DialogFragment implements
 	 * @param desc the description of the value to be entered
 	 * @return the dialog object for event attachment and eventual show()
 	 */
-	public static ComplexEntryDialog create(final ComplexValue value, final String desc) {
+	public static ComplexEntryDialog create(final ComplexValue value,
+											final ComplexEntryDescriptions desc) {
 		final ComplexEntryDialog dialog;
 		if (value != null) {
 			// Create dialog and set description/value
@@ -92,7 +91,7 @@ public class ComplexEntryDialog extends DialogFragment implements
 	/**
 	 * The title of this dialog describing the value to be entered.
 	 */
-	private String desc;
+	private ComplexEntryDescriptions desc;
 	/**
 	 * The optional listener to be fired when the value is changed.
 	 */
@@ -136,7 +135,7 @@ public class ComplexEntryDialog extends DialogFragment implements
 	private ComplexValue value;
 
 	public ComplexEntryDialog() {
-		desc = "Enter new value:Magnitude:Phase:Real:Imaginary";
+		desc = new ComplexEntryDescriptions("Enter new value");
 		unitSelect = new Spinner[3];
 		imagEntry = null;
 		magEntry = null;
@@ -275,13 +274,13 @@ public class ComplexEntryDialog extends DialogFragment implements
 		loadData();
 		// Show the keyboard
 		magEntry.selectAll();
-		ECEActivity.initShowSoftKeyboard(magEntry);
+		UIFunctions.initShowSoftKeyboard(magEntry);
 		// Split up and load all descriptions (must have at least one element in return!)
-		String[] parts = COLON_PATTERN.split(desc, 5);
-		builder.setTitle(Html.fromHtml(parts[0]));
-		for (int i = 1; i < 5; i++)
-			if (parts.length > i)
-				((TextView)dialog.findViewById(DESC_ID_LIST[i - 1])).setText(parts[i]);
+		builder.setTitle(Html.fromHtml(desc.getTitle()));
+		UIFunctions.setLabelText(dialog, R.id.guiValueMagDesc, desc.getMagnitudeDescription());
+		UIFunctions.setLabelText(dialog, R.id.guiValuePhaDesc, desc.getPhaseDescription());
+		UIFunctions.setLabelText(dialog, R.id.guiValueReDesc, desc.getRealDescription());
+		UIFunctions.setLabelText(dialog, R.id.guiValueImDesc, desc.getImaginaryDescription());
 		// Create OK and Cancel buttons
 		builder.setPositiveButton(R.string.ok, this);
 		builder.setNegativeButton(R.string.cancel, new IgnoreOnClickListener());
@@ -293,7 +292,7 @@ public class ComplexEntryDialog extends DialogFragment implements
 	 *
 	 * @param desc A short description of the value to be entered
 	 */
-	protected void setDescription(final String desc) {
+	protected void setDescription(final ComplexEntryDescriptions desc) {
 		this.desc = desc;
 	}
 	/**
@@ -314,6 +313,100 @@ public class ComplexEntryDialog extends DialogFragment implements
 			this.value = value;
 	}
 
+	/**
+	 * A shell class which carries around the 4 extended descriptions for the individual
+	 * entry fields of a ComplexEntryDialog.
+	 */
+	public static class ComplexEntryDescriptions {
+		/**
+		 * Description of the imaginary part field, e.g. Reactance.
+		 */
+		protected final String imagDesc;
+		/**
+		 * Description of the magnitude field, e.g. Impedance.
+		 */
+		protected final String magDesc;
+		/**
+		 * Description of the phase field, e.g. Phase.
+		 */
+		protected final String phaDesc;
+		/**
+		 * Description of the real part field, e.g. Resistance.
+		 */
+		protected final String realDesc;
+		/**
+		 * The dialog title.
+		 */
+		protected final String title;
+
+		/**
+		 * Creates a wrapper for the complex field descriptions, but with all values except the
+		 * title set to the empty string.
+		 *
+		 * @param title the dialog title
+		 */
+		public ComplexEntryDescriptions(final String title) {
+			this(null, null, null, null, title);
+		}
+		/**
+		 * Creates a wrapper for the complex field descriptions.
+		 *
+		 * @param magDesc the magnitude description
+		 * @param phaDesc the phase description
+		 * @param realDesc the real part description
+		 * @param imagDesc the imaginary part description
+		 * @param title the dialog title
+		 */
+		public ComplexEntryDescriptions(final String magDesc, final String phaDesc,
+										final String realDesc, final String imagDesc,
+										final String title) {
+			this.imagDesc = (imagDesc == null) ? "" : imagDesc;
+			this.magDesc = (magDesc == null) ? "" : magDesc;
+			this.phaDesc = (phaDesc == null) ? "" : phaDesc;
+			this.realDesc = (realDesc == null) ? "" : realDesc;
+			this.title = (title == null) ? "" : title;
+		}
+		/**
+		 * Retrieves the description of the imaginary part field.
+		 *
+		 * @return the imaginary part description
+		 */
+		public String getImaginaryDescription() {
+			return imagDesc;
+		}
+		/**
+		 * Retrieves the description of the magnitude field.
+		 *
+		 * @return the magnitude description
+		 */
+		public String getMagnitudeDescription() {
+			return magDesc;
+		}
+		/**
+		 * Retrieves the description of the phase field.
+		 *
+		 * @return the phase description
+		 */
+		public String getPhaseDescription() {
+			return phaDesc;
+		}
+		/**
+		 * Retrieves the description of the real part field.
+		 *
+		 * @return the real part description
+		 */
+		public String getRealDescription() {
+			return realDesc;
+		}
+		/**
+		 * Retrieves the dialog title.
+		 *
+		 * @return the dialog title
+		 */
+		public String getTitle() {
+			return title;
+		}
+	}
 	/**
 	 * Since ComplexEntryDialog is usually created and left for dead, the Calculatable listener
 	 * will do us no good as the receiver will have no records of our existence (sob). So we

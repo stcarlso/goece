@@ -22,7 +22,7 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece.ui;
+package com.stcarlso.goece.utility;
 
 import android.content.DialogInterface;
 

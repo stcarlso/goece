@@ -60,4 +60,10 @@
 		<attr name="group"/>
 		<attr name="affects"/>
 	</declare-styleable>
+	<declare-styleable name="CustomEntryBox">
+		<attr name="units"/>
+		<attr name="value"/>
+		<attr name="group"/>
+		<attr name="affects"/>
+	</declare-styleable>
 </resources>

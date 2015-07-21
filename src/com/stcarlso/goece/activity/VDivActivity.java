@@ -31,7 +31,10 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.*;
-import com.stcarlso.goece.utility.*;
+import com.stcarlso.goece.utility.ECECalc;
+import com.stcarlso.goece.utility.EIATable;
+import com.stcarlso.goece.utility.EngineeringValue;
+import com.stcarlso.goece.utility.Units;
 
 import java.util.*;
 

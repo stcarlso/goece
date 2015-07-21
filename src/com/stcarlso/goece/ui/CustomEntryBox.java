@@ -25,72 +25,47 @@
 package com.stcarlso.goece.ui;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
 import android.util.Log;
-import android.widget.EditText;
+import android.widget.RelativeLayout;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.utility.UIFunctions;
-import com.stcarlso.goece.utility.ValueControl;
 
 /**
- * A version of EditText which implements value control semantics, allowing easy save/restore
- * and group edit effects.
+ * A text box with a related spinner that lets the user enter the value with a choice of units.
+ * These units can be non-standard such as kcmil, inches, foot pounds, etc. Conversion factors
+ * for the units need to be specified.
+ *
+ * In addition, this box can be placed into a string entry mode for items such as AWG (which has
+ * 000 etc.)
  */
-public class ValueTextBox extends EditText implements ValueControl {
-	/**
-	 * When this box is changed, this field is used to determine which group is affected.
-	 */
-	private String affects;
-	/**
-	 * The group assigned to this textbox. All members in a group are LRUed to determine which
-	 * one is changed when the group is affected.
-	 */
-	private String group;
-
-	public ValueTextBox(Context context) {
+public class CustomEntryBox extends RelativeLayout {
+	public CustomEntryBox(Context context) {
 		super(context);
-		init(context, null);
 	}
-	public ValueTextBox(Context context, AttributeSet attrs) {
+	public CustomEntryBox(Context context, AttributeSet attrs) {
 		super(context, attrs);
-		init(context, attrs);
 	}
-	public ValueTextBox(Context context, AttributeSet attrs, int defStyle) {
+	public CustomEntryBox(Context context, AttributeSet attrs, int defStyle) {
 		super(context, attrs, defStyle);
-		init(context, attrs);
-	}
-	public String getAffects() {
-		return affects;
-	}
-	public String getGroup() {
-		return group;
 	}
 	private void init(final Context context, final AttributeSet attrs) {
-		String newGroup = "", willAffect = "";
+		String units = "", iv = "", newGroup = "", willAffect = "";
 		if (attrs != null) {
-			// Read attributes for affects and group
+			// Read attributes for units
 			final TypedArray values = context.getTheme().obtainStyledAttributes(attrs,
-				R.styleable.ValueTextBox, 0, 0);
+				R.styleable.CustomEntryBox, 0, 0);
 			try {
 				// Read the values and substitute defaults
-				newGroup = values.getString(R.styleable.ValueTextBox_group);
-				willAffect = values.getString(R.styleable.ValueTextBox_affects);
+				units = values.getString(R.styleable.CustomEntryBox_units);
+				iv = values.getString(R.styleable.CustomEntryBox_value);
+				newGroup = values.getString(R.styleable.CustomEntryBox_group);
+				willAffect = values.getString(R.styleable.CustomEntryBox_affects);
 			} catch (Exception e) {
-				Log.e("ValueTextBox", "Invalid attributes:", e);
+				Log.e("CustomEntryBox", "Invalid attributes:", e);
 			}
-		}
-		group = newGroup;
-		affects = willAffect;
-	}
-	public void loadState(SharedPreferences prefs) {
-		final String tag = UIFunctions.getTag(this);
-		// Only change if the preferences are initialized
-		if (prefs.contains(tag))
-			setText(prefs.getString(tag, ""));
-	}
-	public void saveState(SharedPreferences.Editor prefs) {
-		prefs.putString(UIFunctions.getTag(this), getText().toString());
+		} else
+			// Probably not good
+			Log.w("CustomEntryBox", "No units specified, defaulting to unitless!");
 	}
 }

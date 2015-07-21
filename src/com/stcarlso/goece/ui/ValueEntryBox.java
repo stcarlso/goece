@@ -24,23 +24,15 @@
 
 package com.stcarlso.goece.ui;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
-import android.os.Parcelable;
-import android.text.Html;
-import android.text.SpannableStringBuilder;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.activity.ECEActivity;
-import com.stcarlso.goece.utility.Calculatable;
-import com.stcarlso.goece.utility.ECESavedState;
 import com.stcarlso.goece.utility.EngineeringValue;
-import com.stcarlso.goece.utility.ValueControl;
+import com.stcarlso.goece.utility.UIFunctions;
 
 /**
  * A button with units that when clicked brings up a ValueEntryDialog.
@@ -87,7 +79,7 @@ public class ValueEntryBox extends AbstractEntryBox<EngineeringValue> implements
 		setValue(new EngineeringValue(iv, 0.0, sf, units));
 	}
 	public void loadState(SharedPreferences prefs) {
-		final String idS = ECEActivity.getTag(this);
+		final String idS = UIFunctions.getTag(this);
 		if (prefs.contains(idS)) {
 			final double ld = Double.longBitsToDouble(prefs.getLong(idS, 0L));
 			// Why floats? Why no doubles in preferences? Android you make me sad!
@@ -96,7 +88,7 @@ public class ValueEntryBox extends AbstractEntryBox<EngineeringValue> implements
 		}
 	}
 	public void saveState(SharedPreferences.Editor prefs) {
-		prefs.putLong(ECEActivity.getTag(this), Double.doubleToLongBits(getRawValue()));
+		prefs.putLong(UIFunctions.getTag(this), Double.doubleToLongBits(getRawValue()));
 	}
 	public void onClick(View v) {
 		if (activity != null) {

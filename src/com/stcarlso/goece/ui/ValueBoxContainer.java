@@ -26,7 +26,6 @@ package com.stcarlso.goece.ui;
 
 import android.util.SparseArray;
 import android.view.View;
-import com.stcarlso.goece.utility.ComplexValue;
 import com.stcarlso.goece.utility.EngineeringValue;
 
 /**

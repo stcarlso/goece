@@ -22,23 +22,29 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece.ui;
+package com.stcarlso.goece.activity;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.stcarlso.goece.R;
+import com.stcarlso.goece.ui.MenuFragment;
 
 /**
- * Fragment which displays all items on the Digital tab.
+ * Fragment which displays all items on the Analog tab.
  */
-public class DigitalFragment extends MenuFragment {
+public class AnalogFragment extends MenuFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final View view = inflater.inflate(R.layout.digital, container, false);
+		final View view = inflater.inflate(R.layout.analog, container, false);
 		// Configure all buttons
-		//setButtonEvent(view, R.id.guiKMapper, ResColorCodeActivity.class);
+		setButtonEvent(view, R.id.guiColorCode, ResColorActivity.class);
+		setButtonEvent(view, R.id.guiSMDResistor, SMDResistorActivity.class);
+		setButtonEvent(view, R.id.guiOhmsLaw, OhmsLawActivity.class);
+		setButtonEvent(view, R.id.guiImpedance, ImpedanceActivity.class);
+		setButtonEvent(view, R.id.guiSerPar, SerParActivity.class);
+		setButtonEvent(view, R.id.guiVDiv, VDivActivity.class);
 		return view;
 	}
 }
