@@ -26,12 +26,10 @@ package com.stcarlso.goece.utility;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.graphics.Color;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import com.stcarlso.goece.R;
 
@@ -101,19 +99,6 @@ public final class UIFunctions {
 		return idS;
 	}
 	/**
-	 * Shows the soft keyboard after a short delay. Why android why?
-	 *
-	 * @param view the view which is requesting IME changes
-	 */
-	public static void initShowSoftKeyboard(final View view) {
-		view.postDelayed(new Runnable() {
-			public void run() {
-				view.requestFocus();
-				showSoftKeyboard(view, true);
-			}
-		}, 200L);
-	}
-	/**
 	 * Assigns text to a static text field.
 	 *
 	 * @param dialog the root view
@@ -122,26 +107,5 @@ public final class UIFunctions {
 	 */
 	public static void setLabelText(final View dialog, final int id, final String text) {
 		((TextView)dialog.findViewById(id)).setText(Html.fromHtml(text));
-	}
-	/**
-	 * Shows or hides the soft keyboard for a given view.
-	 *
-	 * @param view the view which is requesting IME changes
-	 * @param show whether the keyboard should be shown
-	 */
-	public static void showSoftKeyboard(final View view, final boolean show) {
-		final Context context;
-		if (view != null && (context = view.getContext()) != null) {
-			// Mixed reviews as to this or setSoftInputMode
-			final InputMethodManager manager = (InputMethodManager)context.
-				getSystemService(Context.INPUT_METHOD_SERVICE);
-			if (manager != null) {
-				// Show or hide the keyboard
-				if (show)
-					manager.showSoftInput(view, InputMethodManager.SHOW_IMPLICIT);
-				else
-					manager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-			}
-		}
 	}
 }

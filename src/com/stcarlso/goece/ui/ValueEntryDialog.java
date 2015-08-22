@@ -33,6 +33,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.WindowManager.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -162,12 +163,14 @@ public class ValueEntryDialog extends DialogFragment implements
 		valueEntry.setText(value.significandToString(6));
 		valueEntry.selectAll();
 		updateValidValues(dialog);
-		UIFunctions.initShowSoftKeyboard(valueEntry);
 		builder.setTitle(Html.fromHtml(desc));
 		// Create OK and Cancel buttons
 		builder.setPositiveButton(R.string.ok, this);
 		builder.setNegativeButton(R.string.cancel, new IgnoreOnClickListener());
-		return builder.create();
+		// Create dialog, show keyboard
+		final Dialog window = builder.create();
+		window.getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+		return window;
 	}
 	/**
 	 * Changes the description of this dialog box.

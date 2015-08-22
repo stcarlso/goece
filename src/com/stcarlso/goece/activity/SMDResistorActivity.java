@@ -202,7 +202,6 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 				code = lastCode;
 			calculate(code, false);
 		}
-		UIFunctions.initShowSoftKeyboard(codeIn);
 	}
 	@Override
 	protected void onRestoreInstanceState(Bundle state) {

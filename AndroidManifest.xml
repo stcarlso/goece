@@ -17,7 +17,7 @@
 		</activity>
 		<activity android:name=".activity.SMDResistorActivity"
 				  android:label="@string/guiSMDResistor"
-				  android:windowSoftInputMode="adjustResize">
+				  android:windowSoftInputMode="adjustResize|stateVisible">
 			<meta-data android:name="android.support.PARENT_ACTIVITY"
 					   android:value=".activity.ECEActivity"/>
 		</activity>

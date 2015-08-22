@@ -101,7 +101,7 @@ public class ValueGroup implements Iterable<ValueControl> {
 	 * @return the ID of the control with the oldest data
 	 */
 	public int leastRecentlyUsed() {
-		return mru.getLast();
+		return searchEnabledControl(mru.descendingIterator(), mru.getLast());
 	}
 	/**
 	 * Returns the control which was most recently used.
@@ -109,7 +109,7 @@ public class ValueGroup implements Iterable<ValueControl> {
 	 * @return the ID of the control with the newest data
 	 */
 	public int mostRecentlyUsed() {
-		return mru.getFirst();
+		return searchEnabledControl(mru.iterator(), mru.getFirst());
 	}
 	public Iterator<ValueControl> iterator() {
 		return new Iterator<ValueControl>() {
@@ -128,6 +128,24 @@ public class ValueGroup implements Iterable<ValueControl> {
 				throw new UnsupportedOperationException("Read-only iterator");
 			}
 		};
+	}
+	/**
+	 * Searches for an enabled control in the iterable elements
+	 *
+	 * @param it the list of controls to check
+	 * @param lastResort the ID to use if no matches are found
+	 * @return the ID of the first enabled control in the list
+	 */
+	protected int searchEnabledControl(final Iterator<Integer> it, final int lastResort) {
+		int ctrl = lastResort;
+		while (it.hasNext()) {
+			final int id = it.next();
+			if (get(id).isEnabled()) {
+				ctrl = id;
+				break;
+			}
+		}
+		return ctrl;
 	}
 	/**
 	 * Marks a control as used, updating the most-recently-used list.

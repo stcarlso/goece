@@ -49,7 +49,7 @@ public final class ECEActivity extends FragmentActivity {
 		// Create a tab
 		final ActionBar.Tab newTab = tabBar.newTab();
 		newTab.setText(resId);
-		newTab.setTabListener(new FragmentTabListener<T>(this, "", target));
+		newTab.setTabListener(new FragmentTabListener<T>(this, target.getSimpleName(), target));
 		tabBar.addTab(newTab);
 		return newTab;
 	}
@@ -58,16 +58,23 @@ public final class ECEActivity extends FragmentActivity {
 	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		// Why Android why?
-		if (savedInstanceState != null)
-			savedInstanceState.remove("android:support:fragments");
 		super.onCreate(savedInstanceState);
 		final ActionBar tabBar = getActionBar();
 		// Uh?
 		assert (tabBar != null);
 		tabBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 		// Analog, digital, circuits, pinouts, resources tabs
-		tabBar.selectTab(addTab(R.string.guiTabAnalog, AnalogFragment.class));
+		final ActionBar.Tab analogTab = addTab(R.string.guiTabAnalog, AnalogFragment.class);
 		addTab(R.string.guiTabDigital, DigitalFragment.class);
+		if (savedInstanceState == null || !savedInstanceState.containsKey("tab"))
+			tabBar.selectTab(analogTab);
+		else
+			tabBar.setSelectedNavigationItem(savedInstanceState.getInt("tab"));
+	}
+	protected void onSaveInstanceState(Bundle outState) {
+		// Save where the user was
+		final ActionBar tabBar = getActionBar();
+		assert (tabBar != null);
+		outState.putInt("tab", tabBar.getSelectedTab().getPosition());
 	}
 }

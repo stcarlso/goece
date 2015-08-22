@@ -50,6 +50,12 @@ public interface ValueControl {
 	 */
 	int getId();
 	/**
+	 * Returns true if this control is enabled, or false otherwise.
+	 *
+	 * @return whether the control is able to accept input
+	 */
+	boolean isEnabled();
+	/**
 	 * Loads the state of this control. If no state is available, nothing should happen. The
 	 * same ID as in saveState() must be used.
 	 *

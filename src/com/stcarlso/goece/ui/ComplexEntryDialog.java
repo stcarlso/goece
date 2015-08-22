@@ -32,6 +32,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.view.WindowManager.LayoutParams;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -274,7 +275,6 @@ public class ComplexEntryDialog extends DialogFragment implements
 		loadData();
 		// Show the keyboard
 		magEntry.selectAll();
-		UIFunctions.initShowSoftKeyboard(magEntry);
 		// Split up and load all descriptions (must have at least one element in return!)
 		builder.setTitle(Html.fromHtml(desc.getTitle()));
 		UIFunctions.setLabelText(dialog, R.id.guiValueMagDesc, desc.getMagnitudeDescription());
@@ -285,7 +285,9 @@ public class ComplexEntryDialog extends DialogFragment implements
 		builder.setPositiveButton(R.string.ok, this);
 		builder.setNegativeButton(R.string.cancel, new IgnoreOnClickListener());
 		// Load the values
-		return builder.create();
+		final Dialog window = builder.create();
+		window.getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE);
+		return window;
 	}
 	/**
 	 * Changes the description of this dialog box.
