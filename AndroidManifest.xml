@@ -42,5 +42,10 @@
 			<meta-data android:name="android.support.PARENT_ACTIVITY"
 					   android:value=".activity.ECEActivity"/>
 		</activity>
+		<activity android:name=".activity.CurCapActivity" android:label="@string/guiCurCap"
+				  android:windowSoftInputMode="adjustResize">
+			<meta-data android:name="android.support.PARENT_ACTIVITY"
+					   android:value=".activity.ECEActivity"/>
+		</activity>
 	</application>
 </manifest>

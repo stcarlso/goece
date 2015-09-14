@@ -138,7 +138,7 @@ public class ComplexEntryBox extends AbstractEntryBox<ComplexValue> implements
 		if (activity != null) {
 			final String desc = getDescription();
 			// Create popup
-			final ComplexEntryDialog mutate = ComplexEntryDialog.create(value, complexDesc);
+			final ComplexEntryDialog mutate = ComplexEntryDialog.create(getValue(), complexDesc);
 			mutate.setOnCalculateListener(this);
 			// Show it, popup will call oncalculate for us on OK
 			mutate.show(activity.getFragmentManager(), desc);
@@ -153,5 +153,8 @@ public class ComplexEntryBox extends AbstractEntryBox<ComplexValue> implements
 	 */
 	public void updateValue(final double rawMag, final double rawPhase) {
 		setValue(getValue().newValue(rawMag, rawPhase));
+	}
+	public void updateValue(final double rawValue) {
+		updateValue(rawValue, getValue().getAngle());
 	}
 }

@@ -45,6 +45,7 @@ public class AnalogFragment extends MenuFragment {
 		setButtonEvent(view, R.id.guiImpedance, ImpedanceActivity.class);
 		setButtonEvent(view, R.id.guiSerPar, SerParActivity.class);
 		setButtonEvent(view, R.id.guiVDiv, VDivActivity.class);
+		setButtonEvent(view, R.id.guiCurCap, CurCapActivity.class);
 		return view;
 	}
 }

@@ -224,4 +224,11 @@ public abstract class AbstractEntryBox<T extends EngineeringValue> extends Butto
 		// Make the name a bit smaller
 		setText(text);
 	}
+	/**
+	 * Changes the raw value of this value entry box, keeping all other engineering parameters
+	 * the same.
+	 *
+	 * @param rawValue the new raw value to show in this entry box
+	 */
+	public abstract void updateValue(final double rawValue);
 }

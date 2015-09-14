@@ -41,14 +41,12 @@
 	<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
 				  android:layout_centerHorizontal="true" android:layout_below="@id/guiResLine"
 				  android:layout_above="@id/guiResIsStandard">
-		<com.stcarlso.goece.ui.ValueTextBox android:layout_width="wrap_content"
-											android:layout_height="wrap_content"
-											android:inputType="textNoSuggestions|textCapCharacters|textVisiblePassword"
-											android:imeOptions="actionDone" android:tag="smdRes"
-											android:id="@+id/guiResSMDCode" ece:affects="all"
-											android:layout_marginRight="20dp" ece:group="all"
-											android:text="@string/guiResInitialValue" android:maxLength="4"
-											android:selectAllOnFocus="true" android:ems="4"/>
+		<view class="com.stcarlso.goece.ui.ValueTextBox" android:id="@+id/guiResSMDCode"
+			  android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:inputType="textNoSuggestions|textCapCharacters|textVisiblePassword"
+			  android:imeOptions="actionDone" android:tag="smdRes" ece:affects="all"
+			  ece:group="all" android:layout_marginRight="20dp" android:selectAllOnFocus="true"
+			  android:text="@string/guiResInitialValue" android:maxLength="4" android:ems="4"/>
 		<Button android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:text="@string/calculate" android:onClick="onClick"/>
 	</LinearLayout>

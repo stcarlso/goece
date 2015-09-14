@@ -33,10 +33,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.view.WindowManager.LayoutParams;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.Spinner;
+import android.widget.*;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.utility.ComplexValue;
 import com.stcarlso.goece.utility.EngineeringValue;
@@ -110,10 +107,6 @@ public class ComplexEntryDialog extends DialogFragment implements
 	 */
 	private RadioButton magPhaseMode;
 	/**
-	 * Panel displaying the magnitude and phase entry boxes.
-	 */
-	private View magPhaPanel;
-	/**
 	 * Reference to the edit box containing the user's new phase angle.
 	 */
 	private EditText phaEntry;
@@ -122,9 +115,9 @@ public class ComplexEntryDialog extends DialogFragment implements
 	 */
 	private EditText realEntry;
 	/**
-	 * Panel displaying the real and imaginary entry boxes.
+	 * Panel displaying the magnitude and phase entry boxes.
 	 */
-	private View reImPanel;
+	private ViewSwitcher reImSwitcher;
 	/**
 	 * Reference to the drop-down list of unit selections. There are 3 of these, one for each
 	 * of magnitude, real and imaginary part.
@@ -230,8 +223,12 @@ public class ComplexEntryDialog extends DialogFragment implements
 	}
 	public void onClick(View v) {
 		boolean magPhase = magPhaseMode.isChecked();
-		magPhaPanel.setVisibility(magPhase ? View.VISIBLE : View.GONE);
-		reImPanel.setVisibility(magPhase ? View.GONE : View.VISIBLE);
+		final View which = reImSwitcher.getCurrentView();
+		// If on the wrong page, move the view switcher
+		if (magPhase && which.getId() != R.id.guiValueMagPha)
+			reImSwitcher.showPrevious();
+		if (!magPhase && which.getId() != R.id.guiValueReIm)
+			reImSwitcher.showNext();
 		try {
 			final ComplexValue tempValue;
 			// Exception here is non fatal, it will just result in the fields being mis matched
@@ -249,7 +246,7 @@ public class ComplexEntryDialog extends DialogFragment implements
 		final Activity act = getActivity();
 		final AlertDialog.Builder builder = new AlertDialog.Builder(act);
 		// Load layout
-		final View dialog = act.getLayoutInflater().inflate(R.layout.cplxentry, null);
+		final View dialog = View.inflate(act, R.layout.cplxentry, null);
 		builder.setView(dialog);
 		// Create array adapter shared between all 3 instances
 		final ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
@@ -269,8 +266,7 @@ public class ComplexEntryDialog extends DialogFragment implements
 		imagEntry = (EditText)dialog.findViewById(R.id.guiValueIm);
 		magPhaseMode = (RadioButton)dialog.findViewById(R.id.guiValueModeMagPha);
 		magPhaseMode.setOnClickListener(this);
-		magPhaPanel = dialog.findViewById(R.id.guiValueMagPha);
-		reImPanel = dialog.findViewById(R.id.guiValueReIm);
+		reImSwitcher = (ViewSwitcher)dialog.findViewById(R.id.guiValueView);
 		dialog.findViewById(R.id.guiValueModeReIm).setOnClickListener(this);
 		loadData();
 		// Show the keyboard

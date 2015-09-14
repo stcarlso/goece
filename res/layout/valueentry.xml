@@ -31,7 +31,8 @@
 		<EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
 				  android:inputType="numberDecimal" android:id="@+id/guiValue" android:ems="7"/>
 		<Spinner android:layout_width="wrap_content" android:layout_height="wrap_content"
-				 android:id="@+id/guiValueExp" android:spinnerMode="dropdown"/>
+				 android:id="@+id/guiValueExp"
+                 android:spinnerStyle="@android:style/Widget.Spinner.DropDown"/>
 	</LinearLayout>
 	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  android:id="@+id/guiValid1Pct" android:visibility="gone"

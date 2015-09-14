@@ -27,37 +27,28 @@
 				xmlns:ece="http://schemas.android.com/apk/res/com.stcarlso.goece"
 				android:layout_width="match_parent" android:layout_height="match_parent"
 				android:orientation="vertical">
-	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
-										 android:layout_height="wrap_content" ece:units="A"
-										 android:id="@+id/guiOhmsCurrent" ece:value="1.0"
-										 ece:description="@string/current" ece:group="vir"
-										 android:tag="ohmsCur" ece:affects="power"
-										 android:layout_alignParentTop="true"
-										 android:layout_centerHorizontal="true"/>
+	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiOhmsCurrent"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content" ece:units="A"
+		  ece:value="1.0" ece:description="@string/current" android:layout_alignParentTop="true"
+		  android:tag="ohmsCur" ece:affects="power" android:layout_centerHorizontal="true"
+		  ece:group="vir"/>
 	<ImageView android:layout_width="105dp" android:layout_height="120dp"
 			   android:contentDescription="@string/cirohms" android:id="@+id/guiOhmsCircuit"
 			   android:src="@drawable/ohmslaw" android:layout_centerHorizontal="true"
 			   android:layout_below="@id/guiOhmsCurrent" android:layout_margin="5dp"/>
-	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
-										 android:layout_height="wrap_content" ece:units="V"
-										 android:id="@+id/guiOhmsVoltage" ece:value="1.0"
-										 ece:description="@string/voltage" ece:group="vir"
-										 android:tag="ohmsVolt" ece:affects="power"
-										 android:layout_toLeftOf="@id/guiOhmsCircuit"
-										 android:layout_below="@id/guiOhmsCurrent"/>
-	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
-										 android:layout_height="wrap_content" ece:units="Ω"
-										 android:id="@+id/guiOhmsResistance" ece:value="1.0"
-										 ece:description="@string/resist" ece:group="vir"
-										 android:tag="ohmsRes" ece:affects="power"
-										 android:layout_toRightOf="@id/guiOhmsCircuit"
-										 android:layout_below="@id/guiOhmsCurrent"/>
-	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
-										 android:layout_height="wrap_content" ece:units="W"
-										 android:id="@+id/guiOhmsPower" ece:value="1.0"
-										 ece:description="@string/power" ece:group="power"
-										 android:tag="ohmsPower" ece:affects="vir"
-										 android:layout_marginTop="30dp"
-										 android:layout_centerHorizontal="true"
-										 android:layout_below="@id/guiOhmsCircuit"/>
+	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiOhmsVoltage"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content" ece:units="V"
+		  ece:value="1.0" ece:description="@string/voltage" ece:group="vir"
+		  android:tag="ohmsVolt" ece:affects="power" android:layout_below="@id/guiOhmsCurrent"
+		  android:layout_toLeftOf="@id/guiOhmsCircuit"/>
+	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiOhmsResistance"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content" ece:units="Ω"
+		  ece:value="1.0" ece:description="@string/resist" ece:group="vir"
+		  android:tag="ohmsRes" ece:affects="power" android:layout_below="@id/guiOhmsCurrent"
+		  android:layout_toRightOf="@id/guiOhmsCircuit"/>
+	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiOhmsPower"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content" ece:units="W"
+		  ece:value="1.0" ece:description="@string/power" ece:group="power"
+		  android:tag="ohmsPower" ece:affects="vir" android:layout_centerHorizontal="true"
+		  android:layout_marginTop="30dp" android:layout_below="@id/guiOhmsCircuit"/>
 </RelativeLayout>

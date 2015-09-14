@@ -62,8 +62,10 @@
 	</declare-styleable>
 	<declare-styleable name="CustomEntryBox">
 		<attr name="units"/>
+		<attr name="description"/>
 		<attr name="value"/>
 		<attr name="group"/>
 		<attr name="affects"/>
+		<attr name="customUnits" format="reference"/>
 	</declare-styleable>
 </resources>

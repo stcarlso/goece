@@ -26,23 +26,23 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 				xmlns:ece="http://schemas.android.com/apk/res/com.stcarlso.goece"
 				android:layout_width="match_parent" android:layout_height="match_parent">
-	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content" ece:units="Ω"
-										 android:layout_height="wrap_content"
-										 android:layout_centerHorizontal="true"
-										 android:tag="serTarget" android:id="@+id/guiSerTarget"
-										 ece:description="@string/resist" ece:group="inputs"
-										 ece:affects="outputs" ece:value="100"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:textAppearance="?android:attr/textAppearanceMedium" android:text=""
+			  android:layout_gravity="center_horizontal" android:id="@+id/guiSerIsStandard"
+			  android:layout_alignParentBottom="true" android:layout_centerHorizontal="true"/>
+	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiSerTarget"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content" ece:units="Ω"
+		  android:layout_centerHorizontal="true" ece:description="@string/resist"
+		  android:tag="serTarget" ece:group="inputs" ece:affects="outputs" ece:value="100"/>
 	<LinearLayout android:layout_width="wrap_content" android:layout_centerHorizontal="true"
 				  android:layout_height="wrap_content" android:id="@+id/guiSerResTemp"
 				  android:layout_below="@id/guiSerTarget" android:orientation="horizontal">
 		<TextView android:layout_width="wrap_content" android:layout_gravity="center_vertical"
 				  android:text="@string/resSeries" android:layout_height="wrap_content"/>
-		<com.stcarlso.goece.ui.ResSeriesSpinner android:layout_width="wrap_content"
-												android:layout_height="wrap_content"
-												android:tag="serResSeries" ece:affects="outputs"
-												android:id="@+id/guiSerResSeries"
-												android:layout_gravity="center_vertical"
-												ece:group="inputs"/>
+		<view class="com.stcarlso.goece.ui.ResSeriesSpinner" android:id="@+id/guiSerResSeries"
+			  android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:tag="serResSeries" android:layout_gravity="center_vertical"
+			  ece:affects="outputs" ece:group="inputs"/>
 	</LinearLayout>
 	<ImageView android:layout_width="120dp" android:layout_height="160dp"
 			   android:contentDescription="@string/cirserpar" android:id="@+id/guiSerCircuit"
@@ -52,20 +52,16 @@
 				  android:layout_height="wrap_content" android:orientation="vertical"
 				  android:layout_alignParentLeft="true" android:layout_margin="10dp"
 				  android:layout_toLeftOf="@id/guiSerCircuit">
-		<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content" ece:units="Ω"
-											 android:layout_height="wrap_content"
-											 android:layout_gravity="center_horizontal"
-											 android:tag="serSeries1" ece:value="50"
-											 android:id="@+id/guiSerSeries1"
-											 ece:description="@string/guiSerSeries1"
-											 ece:group="outputs" ece:affects="inputs"/>
-		<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content" ece:units="Ω"
-											 android:layout_height="wrap_content"
-											 android:layout_gravity="center_horizontal"
-											 android:tag="serSeries2" ece:value="50"
-											 android:id="@+id/guiSerSeries2"
-											 ece:description="@string/guiSerSeries2"
-											 ece:group="outputs" ece:affects="inputs"/>
+		<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiSerSeries1"
+			  android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:layout_gravity="center_horizontal" android:tag="serSeries1" ece:value="50"
+			  ece:description="@string/guiSerSeries1" ece:group="outputs" ece:affects="inputs"
+			  ece:units="Ω"/>
+		<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiSerSeries2"
+			  android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:layout_gravity="center_horizontal" android:tag="serSeries2" ece:value="50"
+			  ece:description="@string/guiSerSeries2" ece:group="outputs" ece:affects="inputs"
+			  ece:units="Ω"/>
 		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 				  android:id="@+id/guiSerSeriesOut" android:layout_gravity="center_horizontal"/>
 	</LinearLayout>
@@ -73,20 +69,16 @@
 				  android:layout_height="wrap_content" android:orientation="vertical"
 				  android:layout_alignParentRight="true" android:layout_margin="10dp"
 				  android:layout_toRightOf="@id/guiSerCircuit">
-		<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content" ece:units="Ω"
-											 android:layout_height="wrap_content"
-											 android:layout_gravity="center_horizontal"
-											 android:tag="serParallel1" ece:value="200"
-											 android:id="@+id/guiSerParallel1"
-											 ece:description="@string/guiSerParallel1"
-											 ece:group="outputs" ece:affects="inputs"/>
-		<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content" ece:units="Ω"
-											 android:layout_height="wrap_content"
-											 android:layout_gravity="center_horizontal"
-											 android:tag="serParallel2" ece:value="200"
-											 android:id="@+id/guiSerParallel2"
-											 ece:description="@string/guiSerParallel2"
-											 ece:group="outputs" ece:affects="inputs"/>
+		<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiSerParallel1"
+			  android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:layout_gravity="center_horizontal" android:tag="serParallel1"
+			  ece:value="200" ece:units="Ω" ece:description="@string/guiSerParallel1"
+			  ece:group="outputs" ece:affects="inputs"/>
+		<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiSerParallel2"
+			  android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:layout_gravity="center_horizontal" android:tag="serParallel2"
+			  ece:value="200" ece:units="Ω" ece:description="@string/guiSerParallel2"
+			  ece:group="outputs" ece:affects="inputs"/>
 		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 				  android:id="@+id/guiSerParallelOut"
 				  android:layout_gravity="center_horizontal"/>

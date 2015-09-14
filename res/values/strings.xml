@@ -40,7 +40,10 @@
 	<string name="copyAngle">%1$.2f°</string>
 	<string name="copyMagPha">%1$.4g @ %2$.2f°</string>
 	<string name="copyReIm">%1$.4g + %2$.4gi</string>
+	<string name="editRaw">%1$.6f</string>
+	<string name="viewRaw">%1$.3g %2$s</string>
 	<!-- These show up pretty often -->
+	<string name="value">Value: </string>
 	<string name="voltage">Voltage</string>
 	<string name="current">Current</string>
 	<string name="resist">Resistance</string>
@@ -58,6 +61,8 @@
 	<string name="rms">RMS</string>
 	<string name="resSeries">Values available: </string>
 	<string name="degree">°</string>
+	<string name="degreeC">°C</string>
+	<string name="degreeF">°F</string>
 	<!-- Activity names and titles -->
 	<string name="guiTabAnalog">Analog</string>
 	<string name="guiTabDigital">Digital</string>
@@ -69,6 +74,7 @@
 	<string name="guiImpedance">Impedance</string>
 	<string name="guiSerPar">Series/Parallel Resistance</string>
 	<string name="guiVDiv">Voltage Divider</string>
+	<string name="guiCurCap">Current Capacity</string>
 	<!-- Resources for individual activities -->
 	<!-- SMD resistor code -->
 	<string name="guiResLine">Value is underlined</string>
@@ -96,18 +102,54 @@
 	<string name="guiDivLoad">R&lt;small&gt;L&lt;/small&gt;</string>
 	<string name="cirvdiv">Voltage divider circuit diagram</string>
 	<!-- Current capacity -->
-	<string name="guiCurWidth">Width</string>
-	<string name="guiCurRadius">Radius</string>
-	<string name="guiCurThickness">Thickness</string>
-	<string name="guiCurXArea">Cross Sectional Area</string>
-	<string name="guiCurGauge">Gauge (AWG)</string>
+	<string name="guiCurLength">Length</string>
+	<string name="guiCurWire">Wire</string>
+	<string name="guiCurTrace">PCB Trace (External layer)</string>
+	<string name="guiCurTemp">Temperature Rise</string>
+	<string name="guiCurWidth">Trace Width</string>
+	<string name="guiCurDiameter">Wire Diameter</string>
+	<string name="guiCurThickness">Trace Thickness</string>
+	<string name="guiCurXArea">Cross-Section Area</string>
+	<string name="guiCurGauge">Gauge</string>
 	<string-array name="guiCurMaterials">
 		<item>Aluminium</item>
 		<item>Copper</item>
 		<item>Steel</item>
+		<item>Gold</item>
+		<item>Silver</item>
 	</string-array>
-	<string-array name="guiCurOptions">
-		<item>Wire</item>
-		<item>PCB Trace</item>
+	<string-array name="guiCurPCBUnits">
+		<!-- mm is the base unit -->
+		<item>mil</item>
+		<item>0.0254</item>
+		<item>in</item>
+		<item>25.4</item>
+		<item>um</item>
+		<item>0.001</item>
+		<item>oz Cu</item>
+		<item>0.035</item>
 	</string-array>
+	<string-array name="guiCurDiaUnits">
+		<!-- mm is the base unit -->
+		<item>mil</item>
+		<item>0.0254</item>
+		<item>in</item>
+		<item>25.4</item>
+	</string-array>
+	<string name="guiCurAreaBase">mm&lt;sup&gt;&lt;small&gt;2&lt;/small&gt;&lt;/sup&gt;</string>
+	<string-array name="guiCurAreaUnits">
+		<!-- mm^2 is the base unit -->
+		<item>kcmil</item>
+		<item>0.5067</item>
+		<item>cm&lt;sup&gt;&lt;small&gt;2&lt;/small&gt;&lt;/sup&gt;</item>
+		<item>100</item>
+		<item>in&lt;sup&gt;&lt;small&gt;2&lt;/small&gt;&lt;/sup&gt;</item>
+		<item>645.16</item>
+	</string-array>
+	<string-array name="guiCurTempUnits">
+		<!-- °C is the base unit; this is relative so the offset is not relevant here -->
+		<item>°F</item>
+		<item>0.5555555555555555</item>
+	</string-array>
+	<string name="guiCurTraceWarn">Calculated trace width may be unrealistic for these parameters.</string>
 </resources>

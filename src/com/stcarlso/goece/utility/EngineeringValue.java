@@ -64,11 +64,11 @@ public class EngineeringValue implements Serializable {
 		else {
 			final int decimals;
 			// Calculate number of decimal places to show
-			if (absSig >= 100.0)
+			if (absSig >= 99.95)
 				decimals = sigfigs - 3;
-			else if (absSig >= 10.0)
+			else if (absSig >= 9.995)
 				decimals = sigfigs - 2;
-			else if (absSig >= 1.0 || absSig == 0.0)
+			else if (absSig >= 0.9995 || absSig == 0.0)
 				decimals = sigfigs - 1;
 			else
 				decimals = sigfigs;
@@ -229,7 +229,7 @@ public class EngineeringValue implements Serializable {
 			else
 				// Somewhere in between
 				for (int i = 0; i < ENGR_THRESHOLD.length && i < ENGR_NAMES.length; i++)
-					if (absValue < ENGR_THRESHOLD[i + 1]) {
+					if (absValue < ENGR_THRESHOLD[i + 1] * 0.9995) {
 						// Found correct prefix
 						code = i;
 						engr = value / ENGR_THRESHOLD[code];

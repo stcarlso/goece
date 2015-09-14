@@ -27,50 +27,39 @@
 			  xmlns:ece="http://schemas.android.com/apk/res/com.stcarlso.goece"
 			  android:layout_width="match_parent" android:layout_height="match_parent"
 			  android:orientation="vertical">
-	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
-										 android:layout_height="wrap_content" ece:units="Ω"
-										 android:id="@+id/guiImpedRes" ece:value="1000"
-										 android:layout_gravity="center_horizontal"
-										 ece:description="@string/resist" ece:group="none"
-										 android:tag="impedRes" ece:affects="outputs"/>
+	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiImpedRes"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content" ece:units="Ω"
+		  ece:value="1000" android:layout_gravity="center_horizontal" ece:affects="outputs"
+		  ece:description="@string/resist" ece:group="none" android:tag="impedRes"/>
 	<RadioGroup android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:layout_gravity="center_horizontal" android:orientation="horizontal">
 		<RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
 					 android:id="@+id/guiImpedSelCap" android:checked="true"
 					 android:layout_gravity="center_vertical" android:onClick="onClick"
 					 android:tag="impedSelCap"/>
-		<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
-											 android:layout_height="wrap_content" ece:units="F"
-											 android:id="@+id/guiImpedCap" ece:value="1E-6"
-											 android:layout_gravity="center_horizontal"
-											 ece:description="@string/capacit" ece:group="inputs"
-											 android:tag="impedCap" ece:affects="outputs"/>
+		<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiImpedCap"
+			  android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  ece:value="1E-6" android:layout_gravity="center_horizontal" ece:units="F"
+			  ece:description="@string/capacit" ece:group="inputs" android:tag="impedCap"
+			  ece:affects="outputs"/>
 		<RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
 					 android:id="@+id/guiImpedSelInd" android:checked="false"
 					 android:layout_gravity="center_vertical" android:onClick="onClick"
 					 android:tag="impedSelInd"/>
-		<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
-											 android:layout_height="wrap_content" ece:units="H"
-											 android:id="@+id/guiImpedInd" ece:value="1E-6"
-											 android:layout_gravity="center_horizontal"
-											 ece:description="@string/induct" ece:group="inputs"
-											 android:tag="impedInd" ece:affects="outputs"
-											 android:enabled="false"/>
+		<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiImpedInd"
+			  android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  ece:units="H" ece:value="1E-6" android:layout_gravity="center_horizontal"
+			  ece:description="@string/induct" ece:group="inputs" android:tag="impedInd"
+			  ece:affects="outputs" android:enabled="false"/>
 	</RadioGroup>
-	<com.stcarlso.goece.ui.ValueEntryBox android:layout_width="wrap_content"
-										 android:layout_height="wrap_content" ece:units="Hz"
-										 android:id="@+id/guiImpedFreq" ece:value="1000"
-										 android:layout_gravity="center_horizontal"
-										 ece:description="@string/freq" ece:group="inputs"
-										 android:tag="impedFreq" ece:affects="outputs"/>
-	<com.stcarlso.goece.ui.ComplexEntryBox android:layout_width="wrap_content"
-										   android:layout_height="wrap_content"
-										   android:id="@+id/guiImpedImp" android:tag="impedImp"
-										   android:layout_marginTop="40dp" ece:affects="inputs"
-										   android:layout_gravity="center_horizontal"
-										   ece:description="@string/imped"
-										   ece:imagDesc="@string/react" ece:units="Ω"
-										   ece:phaDesc="@string/phase" ece:phase="0"
-										   ece:realDesc="@string/resist" ece:value="10"
-										   ece:magDesc="@string/imped" ece:group="outputs"/>
+	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiImpedFreq"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content"
+		  ece:affects="outputs" ece:group="inputs" android:layout_gravity="center_horizontal"
+		  ece:description="@string/freq" ece:value="1000" android:tag="impedFreq" ece:units="Hz"/>
+	<view class="com.stcarlso.goece.ui.ComplexEntryBox" android:id="@+id/guiImpedImp"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content" ece:phase="0"
+		  android:tag="impedImp" android:layout_marginTop="40dp" ece:affects="inputs"
+		  android:layout_gravity="center_horizontal" ece:description="@string/imped"
+		  ece:imagDesc="@string/react" ece:phaDesc="@string/phase" ece:units="Ω" ece:value="10"
+		  ece:realDesc="@string/resist" ece:magDesc="@string/imped" ece:group="outputs"/>
 </LinearLayout>

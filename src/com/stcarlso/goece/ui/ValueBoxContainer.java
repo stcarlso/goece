@@ -118,7 +118,7 @@ public class ValueBoxContainer extends SparseArray<AbstractEntryBox<? extends En
 	 */
 	public void setRawValue(final int id, final double newValue) {
 		final AbstractEntryBox<?> box = get(id);
-		if (box != null && (box instanceof ValueEntryBox)) {
+		if (box != null) {
 			// Set up new value
 			if (Double.isNaN(newValue))
 				box.setError("NaN");
@@ -126,7 +126,7 @@ public class ValueBoxContainer extends SparseArray<AbstractEntryBox<? extends En
 				// All good
 				box.setError(null);
 				// Ugly but for backwards compatibility
-				((ValueEntryBox)box).updateValue(newValue);
+				box.updateValue(newValue);
 			}
 		}
 	}

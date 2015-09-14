@@ -34,7 +34,9 @@ import com.stcarlso.goece.ui.ResSeriesSpinner;
 import com.stcarlso.goece.ui.ValueBoxContainer;
 import com.stcarlso.goece.ui.ValueGroup;
 import com.stcarlso.goece.utility.ECECalc;
+import com.stcarlso.goece.utility.EIAValue;
 import com.stcarlso.goece.utility.ResCandidate;
+import com.stcarlso.goece.utility.UIFunctions;
 
 import java.util.*;
 
@@ -48,7 +50,7 @@ public class SerParActivity extends ChildActivity {
 	 */
 	private final ValueBoxContainer controls;
 	/**
-	 * Reference to parallel resistor output info.
+	 * Cached reference to the parallel resistor error output box.
 	 */
 	private TextView parOutCtrl;
 	/**
@@ -56,32 +58,16 @@ public class SerParActivity extends ChildActivity {
 	 */
 	private ResSeriesSpinner seriesCtrl;
 	/**
-	 * Reference to series resistor output info.
+	 * Cached reference to the series resistor error output box.
 	 */
 	private TextView serOutCtrl;
+	/**
+	 * Cached reference to whether the resistor is a standard value.
+	 */
+	private TextView stdCtrl;
 
 	public SerParActivity() {
 		controls = new ValueBoxContainer();
-	}
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.serpar);
-		parOutCtrl = asTextView(R.id.guiSerParallelOut);
-		seriesCtrl = (ResSeriesSpinner)findViewById(R.id.guiSerResSeries);
-		serOutCtrl = asTextView(R.id.guiSerSeriesOut);
-		// Load controls and preferences
-		controls.add(findViewById(R.id.guiSerTarget));
-		controls.add(findViewById(R.id.guiSerSeries1));
-		controls.add(findViewById(R.id.guiSerSeries2));
-		controls.add(findViewById(R.id.guiSerParallel1));
-		controls.add(findViewById(R.id.guiSerParallel2));
-		controls.setupAll(this);
-		seriesCtrl.setOnCalculateListener(this);
-		registerAdjustable(seriesCtrl);
-		loadPrefs();
-		// Recalculate everything
-		updateErrors();
 	}
 	/**
 	 * Recalculates the closest match of parallel resistors from the user specified series,
@@ -139,6 +125,27 @@ public class SerParActivity extends ChildActivity {
 		}
 		return best;
 	}
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.serpar);
+		parOutCtrl = asTextView(R.id.guiSerParallelOut);
+		seriesCtrl = (ResSeriesSpinner)findViewById(R.id.guiSerResSeries);
+		serOutCtrl = asTextView(R.id.guiSerSeriesOut);
+		stdCtrl = asTextView(R.id.guiSerIsStandard);
+		// Load controls and preferences
+		controls.add(findViewById(R.id.guiSerTarget));
+		controls.add(findViewById(R.id.guiSerSeries1));
+		controls.add(findViewById(R.id.guiSerSeries2));
+		controls.add(findViewById(R.id.guiSerParallel1));
+		controls.add(findViewById(R.id.guiSerParallel2));
+		controls.setupAll(this);
+		seriesCtrl.setOnCalculateListener(this);
+		registerAdjustable(seriesCtrl);
+		loadPrefs();
+		// Recalculate everything
+		updateErrors();
+	}
 	protected void recalculate(ValueGroup group) {
 		final int id = group.leastRecentlyUsed();
 		switch (id) {
@@ -192,12 +199,27 @@ public class SerParActivity extends ChildActivity {
 		final double r1 = controls.getRawValue(R.id.guiSerSeries1);
 		final double r2 = controls.getRawValue(R.id.guiSerSeries2);
 		final ResCandidate serCand = new SeriesResCandidate(r1, r2, target);
-		serOutCtrl.setText(String.format("%s [%+.1f%%]", serCand, 100.0 * serCand.getError()));
+		final double serErr = ECECalc.ieeeRound(serCand.getError());
+		if (serErr == 0.0)
+			// Perfect match
+			serOutCtrl.setText(serCand.toString());
+		else
+			// Small difference
+			serOutCtrl.setText(String.format("%s [%+.1f%%]", serCand, 100.0 * serErr));
 		// Parallel
 		final double r3 = controls.getRawValue(R.id.guiSerParallel1);
 		final double r4 = controls.getRawValue(R.id.guiSerParallel2);
 		final ResCandidate parCand = new ParallelResCandidate(r3, r4, target);
-		parOutCtrl.setText(String.format("%s [%+.1f%%]", parCand, 100.0 * parCand.getError()));
+		final double parErr = ECECalc.ieeeRound(parCand.getError());
+		if (parErr == 0.0)
+			// Perfect match
+			parOutCtrl.setText(parCand.toString());
+		else
+			// Small difference
+			parOutCtrl.setText(String.format("%s [%+.1f%%]", parCand, 100.0 * parErr));
+		// Overall fit
+		final EIAValue finalValue = new EIAValue(target, seriesCtrl.getSeries());
+		UIFunctions.checkEIATable(finalValue, stdCtrl);
 	}
 
 	/**

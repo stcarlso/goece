@@ -16,6 +16,7 @@
     <shared>
       <config>
         <devices>
+          <device id="HTC One M7" />
           <device id="Nexus 5" />
           <device id="Nexus 6" />
           <device id="Nexus One" />
@@ -30,58 +31,105 @@
     <layouts>
       <layout url="file://$PROJECT_DIR$/res/layout/analog.xml">
         <config>
-          <theme>@android:style/Theme.Holo</theme>
+          <theme>@android:style/Theme.Holo.NoActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/colorband.xml">
+        <config>
+          <theme>@android:style/Theme.Holo.NoActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/cplxentry.xml">
+        <config>
+          <theme>@android:style/Theme.Holo.NoActionBar</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/res/layout/curcap.xml">
         <config>
-          <theme>@android:style/Theme.Holo</theme>
+          <theme>@android:style/Theme.Holo.NoActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/customentry.xml">
+        <config>
+          <theme>@android:style/Theme.Holo.NoActionBar</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/res/layout/digital.xml">
         <config>
-          <theme>@android:style/Theme.Holo</theme>
+          <theme>@android:style/Theme.Holo.NoActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/impedance.xml">
+        <config>
+          <theme>@android:style/Theme.Holo.NoActionBar</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/res/layout/ohmslaw.xml">
         <config>
-          <theme>@android:style/Theme.Holo</theme>
+          <theme>@android:style/Theme.Holo.NoActionBar</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/res/layout/rescolorcode.xml">
         <config>
-          <theme>@android:style/Theme.Holo</theme>
+          <theme>@android:style/Theme.Holo.NoActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/serpar.xml">
+        <config>
+          <theme>@android:style/Theme.Holo.NoActionBar</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/res/layout/smdresistor.xml">
         <config>
-          <theme>@android:style/Theme.Holo</theme>
+          <theme>@android:style/Theme.Holo.NoActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/valueentry.xml">
+        <config>
+          <theme>@android:style/Theme.Holo.NoActionBar</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/res/layout/vdiv.xml">
         <config>
-          <theme>@android:style/Theme.Holo</theme>
+          <theme>@android:style/Theme.Holo.NoActionBar</theme>
         </config>
       </layout>
     </layouts>
   </component>
   <component name="AndroidLogFilters">
-    <option name="TOOL_WINDOW_LOG_LEVEL" value="INFO" />
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="WARN" />
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: com.stcarlso.goece" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0024cbc7-21cd-4014-805d-7a7fa0b06e96" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/AbstractEntryDialog.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/CustomEntryDialog.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/customentry.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/AbstractEntryBox.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/AbstractEntryBox.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/AnalogFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/AnalogFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ComplexEntryBox.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ComplexEntryBox.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ComplexEntryDialog.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ComplexEntryDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ECEActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ECEActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/FragmentTabListener.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/FragmentTabListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoECE.ipr" afterPath="$PROJECT_DIR$/GoECE.ipr" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/CurCapActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/CurCapActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/CustomEntryBox.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/CustomEntryBox.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/EngineeringValue.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/EngineeringValue.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoECE.iws" afterPath="$PROJECT_DIR$/GoECE.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/SMDResistorActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/SMDResistorActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/UIFunctions.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/UIFunctions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/ValueControl.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/ValueControl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/SerParActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/SerParActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueBoxContainer.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueBoxContainer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueEntryBox.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueEntryBox.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueEntryDialog.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueEntryDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueGroup.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueGroup.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/analog.xml" afterPath="$PROJECT_DIR$/res/layout/analog.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/attrs.xml" afterPath="$PROJECT_DIR$/res/values/attrs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/cplxentry.xml" afterPath="$PROJECT_DIR$/res/layout/cplxentry.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/curcap.xml" afterPath="$PROJECT_DIR$/res/layout/curcap.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/impedance.xml" afterPath="$PROJECT_DIR$/res/layout/impedance.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/ohmslaw.xml" afterPath="$PROJECT_DIR$/res/layout/ohmslaw.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/rescolorcode.xml" afterPath="$PROJECT_DIR$/res/layout/rescolorcode.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/serpar.xml" afterPath="$PROJECT_DIR$/res/layout/serpar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/smdresistor.xml" afterPath="$PROJECT_DIR$/res/layout/smdresistor.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/valueentry.xml" afterPath="$PROJECT_DIR$/res/layout/valueentry.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/vdiv.xml" afterPath="$PROJECT_DIR$/res/layout/vdiv.xml" />
     </list>
     <ignored path="GoECE.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -103,14 +151,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ECEActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/ECEActivity.java">
+      <file leaf-file-name="CurCapActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/CurCapActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.16722408">
-              <caret line="39" column="7" selection-start-line="39" selection-start-column="7" selection-end-line="39" selection-end-column="7" />
-              <folding>
-                <element signature="e#2656#2678#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="-0.9866221">
+              <caret line="166" column="58" selection-start-line="166" selection-start-column="58" selection-end-line="166" selection-end-column="58" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -149,11 +195,19 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/ui/AbstractEntryBox.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/utility/ValueControl.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueGroup.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ECEActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/ui/FragmentTabListener.java" />
+        <option value="$PROJECT_DIR$/res/layout/valueentry.xml" />
+        <option value="$PROJECT_DIR$/res/layout/cplxentry.xml" />
+        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ComplexEntryDialog.java" />
+        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/utility/EngineeringValue.java" />
+        <option value="$PROJECT_DIR$/res/layout/impedance.xml" />
+        <option value="$PROJECT_DIR$/res/layout/ohmslaw.xml" />
+        <option value="$PROJECT_DIR$/res/layout/rescolorcode.xml" />
+        <option value="$PROJECT_DIR$/res/layout/serpar.xml" />
+        <option value="$PROJECT_DIR$/res/layout/smdresistor.xml" />
+        <option value="$PROJECT_DIR$/res/layout/vdiv.xml" />
+        <option value="$PROJECT_DIR$/res/layout/curcap.xml" />
+        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/activity/CurCapActivity.java" />
+        <option value="$PROJECT_DIR$/res/values/strings.xml" />
       </list>
     </option>
   </component>
@@ -221,8 +275,9 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -251,17 +306,12 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="goece" />
+              <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -285,7 +335,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="last_opened_file_path" value="U:/Programs/Android/extras/android/support/v13" />
-    <property name="settings.editor.selected.configurable" value="preferences.updates" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Language Defaults" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="extract.method.default.visibility" value="protected" />
     <property name="SearchEverywhereHistoryKey" value="inspection&#9;ACTION&#9;ActivateInspectionToolWindow&#10;inspect&#9;ACTION&#9;ActivateInspectionToolWindow" />
@@ -308,14 +358,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Stephen\Documents\PRGM\GoECE\res\layout" />
       <recent name="U:\Users\Stephen\Documents\PRGM\GoECE\res\drawable" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="U:\Users\Stephen\Documents\PRGM\GoECE\res\drawable" />
     </key>
-    <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.stcarlso.goece.utility" />
+    <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="com.stcarlso.goece.ui" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.stcarlso.goece.ui" />
+      <recent name="com.stcarlso.goece.utility" />
       <recent name="com.stcarlso.goece" />
     </key>
   </component>
@@ -564,7 +618,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.3300866" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -573,18 +627,19 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32864866" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.33013588" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32955465" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32864866" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.3300866" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32972974" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.13856691" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="true" weight="0.13856691" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.3300866" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32864866" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18703899" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18440464" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32995737" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.39891893" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32324323" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -593,7 +648,6 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.3300866" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39757085" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.33013588" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -626,7 +680,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="12" />
+      <option name="time" value="19" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -635,47 +689,165 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ui/MenuFragment.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/digital.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15050167">
-          <caret line="32" column="38" selection-start-line="32" selection-start-column="38" selection-end-line="32" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.44930875">
+          <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/AnalogFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.15050167">
-          <caret line="36" column="40" selection-start-line="36" selection-start-column="40" selection-end-line="36" selection-end-column="40" />
-          <folding />
-        </state>
+    <entry file="file://$PROJECT_DIR$/res/layout/impedance.xml">
+      <provider editor-type-id="android-designer">
+        <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ui/AbstractEntryBox.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.28428093">
-          <caret line="50" column="7" selection-start-line="50" selection-start-column="7" selection-end-line="50" selection-end-column="7" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ui/FragmentTabListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8528428">
-          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.80990785">
+          <caret line="59" column="82" selection-start-line="59" selection-start-column="82" selection-end-line="59" selection-end-column="82" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#1933#1949#0" expanded="false" />
+            <element signature="e#2676#2693#0" expanded="false" />
+            <element signature="e#3283#3299#0" expanded="false" />
+            <element signature="e#3677#3691#0" expanded="false" />
+            <element signature="e#4067#4082#0" expanded="false" />
+            <element signature="e#4100#4115#0" expanded="false" />
+            <element signature="e#4128#4143#0" expanded="false" />
+            <element signature="e#4190#4206#0" expanded="false" />
+            <element signature="e#4219#4234#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/ECEActivity.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/ohmslaw.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16722408">
-          <caret line="39" column="7" selection-start-line="39" selection-start-column="7" selection-end-line="39" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.84447">
+          <caret line="50" column="42" selection-start-line="50" selection-start-column="42" selection-end-line="50" selection-end-column="42" />
           <folding>
-            <element signature="e#2656#2678#0" expanded="true" />
+            <element signature="e#3318#3333#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/rescolorcode.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.53571427">
+          <caret line="49" column="72" selection-start-line="49" selection-start-column="72" selection-end-line="49" selection-end-column="72" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/serpar.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.82718897">
+          <caret line="81" column="30" selection-start-line="81" selection-start-column="30" selection-end-line="81" selection-end-column="30" />
+          <folding>
+            <element signature="e#2185#2201#0" expanded="false" />
+            <element signature="e#2642#2661#0" expanded="false" />
+            <element signature="e#3110#3129#0" expanded="false" />
+            <element signature="e#3848#3871#0" expanded="false" />
+            <element signature="e#4205#4228#0" expanded="false" />
+            <element signature="e#5060#5085#0" expanded="false" />
+            <element signature="e#5424#5449#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/smdresistor.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.8294931">
+          <caret line="48" column="95" selection-start-line="48" selection-start-column="95" selection-end-line="48" selection-end-column="95" />
+          <folding>
+            <element signature="e#3239#3267#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/valueentry.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/vdiv.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3951613">
+          <caret line="50" column="47" selection-start-line="50" selection-start-column="47" selection-end-line="50" selection-end-column="47" />
+          <folding>
+            <element signature="e#1929#1948#0" expanded="false" />
+            <element signature="e#2346#2363#0" expanded="false" />
+            <element signature="e#3255#3274#0" expanded="false" />
+            <element signature="e#3696#3718#0" expanded="false" />
+            <element signature="e#4426#4446#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueBoxContainer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.632107">
+          <caret line="126" column="35" selection-start-line="126" selection-start-column="35" selection-end-line="126" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/ImpedanceActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.117056854">
+          <caret line="58" column="54" selection-start-line="58" selection-start-column="54" selection-end-line="58" selection-end-column="54" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/curcap.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17050691">
+          <caret line="33" column="70" selection-start-line="33" selection-start-column="70" selection-end-line="33" selection-end-column="70" />
+          <folding>
+            <element signature="e#3253#3273#0" expanded="true" />
+            <element signature="e#6737#6759#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.67241377">
+          <caret line="142" column="16" selection-start-line="142" selection-start-column="16" selection-end-line="142" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/CurCapActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.9866221">
+          <caret line="166" column="58" selection-start-line="166" selection-start-column="58" selection-end-line="166" selection-end-column="58" />
+          <folding />
         </state>
       </provider>
     </entry>

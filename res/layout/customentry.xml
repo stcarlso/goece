@@ -23,23 +23,13 @@
   ~ SOFTWARE.
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-			android:layout_width="match_parent" android:layout_height="match_parent">
-	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
-				  android:orientation="vertical">
-		<Button android:layout_width="fill_parent" android:layout_height="wrap_content"
-				android:text="@string/guiColorCode" android:id="@+id/guiColorCode"/>
-		<Button android:layout_width="fill_parent" android:layout_height="wrap_content"
-				android:text="@string/guiSMDResistor" android:id="@+id/guiSMDResistor"/>
-		<Button android:layout_width="fill_parent" android:layout_height="wrap_content"
-				android:text="@string/guiOhmsLaw" android:id="@+id/guiOhmsLaw"/>
-		<Button android:layout_width="fill_parent" android:layout_height="wrap_content"
-				android:text="@string/guiImpedance" android:id="@+id/guiImpedance"/>
-		<Button android:layout_width="fill_parent" android:layout_height="wrap_content"
-				android:text="@string/guiSerPar" android:id="@+id/guiSerPar"/>
-		<Button android:layout_width="fill_parent" android:layout_height="wrap_content"
-				android:text="@string/guiVDiv" android:id="@+id/guiVDiv"/>
-		<Button android:layout_width="fill_parent" android:layout_height="wrap_content"
-				android:text="@string/guiCurCap" android:id="@+id/guiCurCap"/>
-	</LinearLayout>
-</ScrollView>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  android:orientation="horizontal" android:layout_width="match_parent"
+			  android:layout_height="match_parent" android:gravity="center_horizontal">
+	<EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:inputType="numberDecimal" android:id="@+id/guiCustom"
+			  android:ems="7"/>
+	<Spinner android:layout_width="wrap_content" android:layout_height="wrap_content"
+			 android:id="@+id/guiCustomUnit"
+			 android:spinnerStyle="@android:style/Widget.Spinner.DropDown"/>
+</LinearLayout>

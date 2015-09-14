@@ -38,7 +38,7 @@ import com.stcarlso.goece.utility.UIFunctions;
  * A button with units that when clicked brings up a ValueEntryDialog.
  */
 public class ValueEntryBox extends AbstractEntryBox<EngineeringValue> implements
-		ValueEntryDialog.OnCalculateListener {
+		AbstractEntryDialog.OnCalculateListener {
 	public ValueEntryBox(Context context) {
 		super(context);
 	}
@@ -100,12 +100,6 @@ public class ValueEntryBox extends AbstractEntryBox<EngineeringValue> implements
 			mutate.show(activity.getFragmentManager(), desc);
 		}
 	}
-	/**
-	 * Changes the raw value of this value entry box, keeping all other engineering parameters
-	 * the same.
-	 *
-	 * @param rawValue the new raw value to show in this entry box
-	 */
 	public void updateValue(final double rawValue) {
 		setValue(getValue().newValue(rawValue));
 	}

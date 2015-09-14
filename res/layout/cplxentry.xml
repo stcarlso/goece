@@ -35,48 +35,52 @@
 					 android:id="@+id/guiValueModeReIm" android:tag="guiValueModeReIm"
 					 android:checked="false" android:text="@string/reim"/>
 	</RadioGroup>
-	<GridLayout android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
-				android:layout_height="wrap_content" android:rowCount="2"
-				android:columnCount="3" android:id="@+id/guiValueReIm"
-				android:visibility="gone">
-		<TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
-				  android:id="@+id/guiValueReDesc" android:layout_marginRight="5dp"
-				  android:layout_gravity="right"/>
-		<EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
-				  android:inputType="numberDecimal" android:id="@+id/guiValueRe"
-				  android:ems="7" android:layout_row="0" android:layout_column="1"/>
-		<Spinner android:layout_width="wrap_content" android:layout_height="wrap_content"
-				 android:id="@+id/guiValueReExp" android:spinnerMode="dropdown"
-				 android:layout_row="0" android:layout_column="2"/>
-		<TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
-				  android:id="@+id/guiValueImDesc" android:layout_marginRight="5dp"
-				  android:layout_gravity="right"/>
-		<EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
-				  android:inputType="numberDecimal" android:id="@+id/guiValueIm"
-				  android:ems="7" android:layout_row="1" android:layout_column="1"/>
-		<Spinner android:layout_width="wrap_content" android:layout_height="wrap_content"
-				 android:id="@+id/guiValueImExp" android:spinnerMode="dropdown"
-				 android:layout_row="1" android:layout_column="2"/>
-	</GridLayout>
-	<GridLayout android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
-				android:layout_height="wrap_content" android:rowCount="2"
-				android:columnCount="3" android:id="@+id/guiValueMagPha">
-		<TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
-				  android:id="@+id/guiValueMagDesc" android:layout_marginRight="5dp"
-				  android:layout_gravity="right"/>
-		<EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
-				  android:inputType="numberDecimal" android:id="@+id/guiValueMag"
-				  android:ems="7" android:layout_row="0" android:layout_column="1"/>
-		<Spinner android:layout_width="wrap_content" android:layout_height="wrap_content"
-				 android:id="@+id/guiValueMagExp" android:spinnerMode="dropdown"
-				 android:layout_row="0" android:layout_column="2"/>
-		<TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
-				  android:id="@+id/guiValuePhaDesc" android:layout_marginRight="5dp"
-				  android:layout_gravity="right"/>
-		<EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
-				  android:inputType="numberDecimal" android:id="@+id/guiValuePha"
-				  android:ems="7" android:layout_row="1" android:layout_column="1"/>
-		<TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-				  android:text="@string/degree" android:layout_gravity="left"/>
-	</GridLayout>
+	<ViewSwitcher android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
+				  android:layout_height="wrap_content" android:id="@+id/guiValueView">
+		<GridLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:rowCount="2" android:columnCount="3"
+					android:id="@+id/guiValueMagPha">
+			<TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+					  android:id="@+id/guiValueMagDesc" android:layout_marginRight="5dp"
+					  android:layout_gravity="right"/>
+			<EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+					  android:inputType="numberDecimal" android:id="@+id/guiValueMag"
+					  android:ems="7" android:layout_row="0" android:layout_column="1"/>
+			<Spinner android:layout_width="wrap_content" android:layout_height="wrap_content"
+					 android:id="@+id/guiValueMagExp" android:layout_row="0"
+					 android:spinnerStyle="@android:style/Widget.Spinner.DropDown"
+					 android:layout_column="2"/>
+			<TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+					  android:id="@+id/guiValuePhaDesc" android:layout_marginRight="5dp"
+					  android:layout_gravity="right"/>
+			<EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+					  android:inputType="numberDecimal" android:id="@+id/guiValuePha"
+					  android:ems="7" android:layout_row="1" android:layout_column="1"/>
+			<TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+					  android:text="@string/degree" android:layout_gravity="left"/>
+		</GridLayout>
+		<GridLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:rowCount="2" android:columnCount="3" android:id="@+id/guiValueReIm">
+			<TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+					  android:id="@+id/guiValueReDesc" android:layout_marginRight="5dp"
+					  android:layout_gravity="right"/>
+			<EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+					  android:inputType="numberDecimal" android:id="@+id/guiValueRe"
+					  android:ems="7" android:layout_row="0" android:layout_column="1"/>
+			<Spinner android:layout_width="wrap_content" android:layout_height="wrap_content"
+					 android:id="@+id/guiValueReExp" android:layout_row="0"
+					 android:spinnerStyle="@android:style/Widget.Spinner.DropDown"
+					 android:layout_column="2"/>
+			<TextView android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+					  android:id="@+id/guiValueImDesc" android:layout_marginRight="5dp"
+					  android:layout_gravity="right"/>
+			<EditText android:layout_width="wrap_content" android:layout_height="wrap_content"
+					  android:inputType="numberDecimal" android:id="@+id/guiValueIm"
+					  android:ems="7" android:layout_row="1" android:layout_column="1"/>
+			<Spinner android:layout_width="wrap_content" android:layout_height="wrap_content"
+					 android:id="@+id/guiValueImExp" android:layout_row="1"
+					 android:spinnerStyle="@android:style/Widget.Spinner.DropDown"
+					 android:layout_column="2"/>
+		</GridLayout>
+	</ViewSwitcher>
 </LinearLayout>
