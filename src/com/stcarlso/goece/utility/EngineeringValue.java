@@ -212,7 +212,7 @@ public class EngineeringValue implements Serializable {
 		if (sigfigs < 1 || sigfigs > 14)
 			throw new IllegalArgumentException("significant figures: " + sigfigs);
 		// Initialize tolerance and units
-		raw = value;
+		raw = ECECalc.ieeeRound(value);
 		this.sigfigs = sigfigs;
 		this.tolerance = tolerance;
 		this.units = units;

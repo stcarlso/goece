@@ -33,13 +33,15 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 import com.stcarlso.goece.R;
+import com.stcarlso.goece.utility.CustomUnit;
 import com.stcarlso.goece.utility.EngineeringValue;
 import com.stcarlso.goece.utility.UIFunctions;
 
 import java.util.*;
 
 /**
- * A button with user settable units that when clicked brings up a CustomEntryDialog.
+ * A button with user settable units that when clicked brings up a CustomEntryDialog. The value
+ * is always stored in a consistent base unit, but the unit used for display can be changed.
  */
 public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implements
 		AbstractEntryDialog.OnCalculateListener {
@@ -49,16 +51,15 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 	 * @param units the custom unit names and conversion factors (name, factor, name, factor...)
 	 * @return a list of CustomUnit objects populated with the right information
 	 */
-	private static List<CustomEntryDialog.CustomUnit> createUnits(final String[] units) {
-		final List<CustomEntryDialog.CustomUnit> ret = new LinkedList<CustomEntryDialog.
-			CustomUnit>();
+	private static Map<String, CustomUnit> createUnits(final String[] units) {
+		final Map<String, CustomUnit> ret = new LinkedHashMap<String, CustomUnit>(units.length);
 		for (int i = 0; i < units.length - 1; i += 2) {
 			final String name = units[i], factorS = units[i + 1];
 			try {
 				// Convert to double and instantiate unit
 				final double factor = Double.parseDouble(factorS);
 				if (name.length() > 0)
-					ret.add(new CustomEntryDialog.CustomUnit(name, factor));
+					ret.put(name, new CustomUnit(name, factor));
 				else
 					Log.w("CustomEntryBox", "Empty unit name!");
 			} catch (RuntimeException e) {
@@ -72,7 +73,11 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 	 * List of custom unit options.
 	 * If none are provided, only the base unit will be available.
 	 */
-	protected List<CustomEntryDialog.CustomUnit> customUnits;
+	protected Map<String, CustomUnit> customUnits;
+	/**
+	 * The unit used for display. If null or invalid, the base unit is used.
+	 */
+	protected CustomUnit displayUnit;
 
 	public CustomEntryBox(Context context) {
 		super(context);
@@ -89,6 +94,7 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 		double iv = 0.0;
 		super.init(context, attrs);
 		customUnits = null;
+		displayUnit = null;
 		if (attrs != null) {
 			// Read attributes for units
 			final TypedArray values = context.getTheme().obtainStyledAttributes(attrs,
@@ -121,13 +127,23 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 		final String idS = UIFunctions.getTag(this);
 		if (prefs.contains(idS)) {
 			final double ld = Double.longBitsToDouble(prefs.getLong(idS, 0L));
+			final String unit = prefs.getString(idS + "_unit", null);
+			if (unit != null)
+				// null if no match found
+				displayUnit = customUnits.get(unit);
 			// Why floats? Why no doubles in preferences? Android you make me sad!
 			if (!Double.isNaN(ld))
 				updateValue(ld);
 		}
 	}
 	public void saveState(SharedPreferences.Editor prefs) {
-		prefs.putLong(UIFunctions.getTag(this), Double.doubleToLongBits(getRawValue()));
+		final String idS = UIFunctions.getTag(this);
+		prefs.putLong(idS, Double.doubleToLongBits(getRawValue()));
+		// Only store unit if necessary
+		if (displayUnit == null)
+			prefs.remove(idS + "_unit");
+		else
+			prefs.putString(idS + "_unit", displayUnit.getUnit());
 	}
 	public void onClick(View v) {
 		if (activity != null) {
@@ -135,12 +151,33 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 			// Create popup
 			final CustomEntryDialog mutate = CustomEntryDialog.create(value, desc);
 			mutate.setOnCalculateListener(this);
-			if (customUnits != null)
+			if (customUnits != null) {
 				// Add custom units
-				for (CustomEntryDialog.CustomUnit unit : customUnits)
+				for (CustomUnit unit : customUnits.values())
 					mutate.addCustomUnit(unit);
+				// Preselect the right unit
+				if (displayUnit != null)
+					mutate.setSelectedUnit(displayUnit);
+			}
 			// Show it, popup will call oncalculate for us on OK
 			mutate.show(activity.getFragmentManager(), desc);
+		}
+	}
+	public void onValueChange(EngineeringValue newValue) {
+		final EngineeringValue oldValue = value;
+		if (newValue != null) {
+			final String newUnits = newValue.getUnits();
+			if (customUnits == null || oldValue.getUnits().equals(newUnits))
+				// No sense in storing "mm" if the base unit is mm!
+				displayUnit = null;
+			else
+				displayUnit = customUnits.get(newUnits);
+			// Copy the value only, always update the text in case the unit changed
+			setValue(oldValue.newValue(newValue.getValue()));
+			updateText();
+			// Call listener if needed
+			if (!newValue.equals(oldValue))
+				callOnCalculateListener();
 		}
 	}
 	/**
@@ -148,10 +185,15 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 	 */
 	protected void updateText() {
 		final EngineeringValue ev = getValue();
-		// Get text
 		final CharSequence desc = Html.fromHtml(getDescription());
-		final CharSequence val = Html.fromHtml(getResources().getString(R.string.viewRaw,
-			ev.getValue(), ev.getUnits()));
+		// Try to find the display unit, if we fail use the default unit
+		final CustomUnit unit = displayUnit;
+		double dv = ev.getValue();
+		if (unit != null)
+			dv = unit.fromBase(dv);
+		// Get text
+		final CharSequence val = Html.fromHtml(getResources().getString(R.string.viewRaw, dv,
+			(unit != null) ? unit.getUnit() : ev.getUnits()));
 		final SpannableStringBuilder text = new SpannableStringBuilder();
 		text.append(desc);
 		text.append('\n');

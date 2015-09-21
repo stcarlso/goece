@@ -32,11 +32,13 @@ import android.widget.RadioButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import com.stcarlso.goece.R;
+import com.stcarlso.goece.ui.AbstractEntryBox;
 import com.stcarlso.goece.ui.ChildActivity;
 import com.stcarlso.goece.ui.ValueBoxContainer;
 import com.stcarlso.goece.ui.ValueGroup;
 import com.stcarlso.goece.utility.EngineeringValue;
 import com.stcarlso.goece.utility.Units;
+import com.stcarlso.goece.utility.ValueControl;
 
 /**
  * Calculate the current capacity of wires and PCB traces.
@@ -60,20 +62,21 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 	 */
 	private static final double IPC_K = 0.048;
 	/**
-	 * Lookup table for diameter (mm) for NEC
+	 * The maximum valid value for the current flow for the IPC equation.
 	 */
-	private static final double[] NEC_DIA = new double[] {
-		11.68, 10.40, 9.27, 8.25, 7.35, 6.54, 5.83, 5.19, 4.62, 4.11, 3.67, 3.26, 2.91, 2.59,
-		2.30, 2.05, 1.83, 1.63, 1.45, 1.29, 1.15, 1.02, 0.91, 0.81, 0.72, 0.65, 0.57, 0.51,
-		0.45, 0.40, 0.36, 0.32, 0.29, 0.25, 0.23, 0.20, 0.18, 0.16, 0.14, 0.13, 0.11, 0.10,
-		0.09, 0.08
-	};
-	private static final double[] NEC_AMPS = new double[] {
-		380.00, 328.00, 283.00, 245.00, 211.00, 181.00, 158.00, 135.00, 118.00, 101.00, 89.00,
-		73.00, 64.00, 55.00, 47.00, 41.00, 35.00, 32.00, 28.00, 22.00, 19.00, 16.00, 14.00,
-		11.00, 9.00, 7.00, 4.70, 3.50, 2.70, 2.20, 1.70, 1.40, 1.20, 0.86, 0.70, 0.53, 0.43,
-		0.33, 0.27, 0.21, 0.17, 0.13, 0.11, 0.09
-	};
+	private static final double IPC_MAX_CUR = 35.0;
+	/**
+	 * The maximum temperature rise for the IPC equation.
+	 */
+	private static final double IPC_MAX_TEMP = 100.0;
+	/**
+	 * The maximum trace width for the IPC equation.
+	 */
+	private static final double IPC_MAX_WIDTH = 10.16;
+	/**
+	 * The minimum temperature rise for the IPC equation.
+	 */
+	private static final double IPC_MIN_TEMP = 10.0;
 	/**
 	 * Resistivity of copper.
 	 */
@@ -84,6 +87,10 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 	private static final double[] RESIST = new double[] {
 		2.82E-8, RESIST_CU, 1.43E-7, 2.44E-8, 1.59E-8
 	};
+	/**
+	 * Converts mils^2 to mm^2 = 0.0254 ^ 2
+	 */
+	private static final double SQ_MILS_TO_MM = 0.00064516;
 
 	/**
 	 * Calculates the AWG wire whose radius is at least the specified value.
@@ -159,14 +166,57 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 	public void onNothingSelected(AdapterView<?> parent) { }
 	protected void recalculate(ValueGroup group) {
 		final String name = group.getName();
-		final double resist = RESIST[materialsCtrl.getSelectedItemPosition()];
+		final double resist = RESIST[materialsCtrl.getSelectedItemPosition()] / RESIST_CU;
 		if (name.equals("outputs")) {
+			final AbstractEntryBox<?> widthCtrl = controls.get(R.id.guiCurWidth);
 			// Update all outputs
+			final double width = widthCtrl.getRawValue(), pcbXArea = width * controls.
+				getRawValue(R.id.guiCurThickness) / SQ_MILS_TO_MM, i, dt;
+			widthCtrl.setError(null);
 			switch (group.leastRecentlyUsed()) {
 			case R.id.guiCurTemp:
+				final AbstractEntryBox<?> curCtrl = controls.get(R.id.guiCurCurrent);
 				// This can only be true in PCB trace mode
+				// dt = (i / (area ^ (1 / IPC_C) * IPC_K)) ^ (1 / IPC_B)
+				dt = Math.pow(curCtrl.getRawValue() / (Math.pow(pcbXArea / resist, 1.0 /
+					IPC_C) * IPC_K), 1.0 / IPC_B);
+				controls.setRawValue(R.id.guiCurTemp, dt);
+				curCtrl.setError(null);
+				if (dt < IPC_MIN_TEMP || dt > IPC_MAX_TEMP || width > IPC_MAX_WIDTH)
+					// Warn the user if the temperature rise is extreme
+					controls.get(R.id.guiCurTemp).setError(getResources().getString(R.string.
+						guiCurCapWarn));
 				break;
 			case R.id.guiCurCurrent:
+				boolean fault = false;
+				if (wireSelCtrl.isChecked()) {
+					// Curve fit from http://www.powerstream.com/Wire_Size.htm
+					// amps = 21.554968 * dia ^ 2 - 4.180921 * dia + 0.410266 for dia < 1 mm
+					// amps = 0.999231 * dia ^ 2 + 21.700890 * dia - 5.387531 for dia > 1 mm
+					//  ~= dia ^ 2 + 21.7 * dia - 5.387
+					final double diameter = controls.getRawValue(R.id.guiCurDiameter) /
+						Math.sqrt(resist);
+					if (diameter < 1.0)
+						// Need to get small gauges right to better precision
+						i = Math.max(21.555 * diameter * diameter - 4.181 * diameter + 0.41,
+							0.0);
+					else
+						// Does really well at mid to high ampacities
+						i = diameter * diameter + 21.7 * diameter - 5.387;
+				} else {
+					// i = area ^ (1 / IPC_C) * IPC_K * dt ^ IPC_B
+					final AbstractEntryBox<?> tempCtrl = controls.get(R.id.guiCurTemp);
+					dt = tempCtrl.getRawValue();
+					i = Math.pow(pcbXArea / resist, 1.0 / IPC_C) * IPC_K * Math.pow(dt, IPC_B);
+					// Clear temperature errors if present
+					tempCtrl.setError(null);
+					fault = width > IPC_MAX_WIDTH || dt < IPC_MIN_TEMP || dt > IPC_MAX_TEMP;
+				}
+				controls.setRawValue(R.id.guiCurCurrent, i);
+				if (fault || i <= 0.0)
+					// Warn the user if we go under 0 A
+					controls.get(R.id.guiCurCurrent).setError(getResources().getString(
+						R.string.guiCurCapWarn));
 				break;
 			default:
 				// Should not happen
@@ -174,23 +224,29 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 			}
 		} else if (name.equals("inputs")) {
 			// Inputs need to be recalculated
+			final AbstractEntryBox<?> tempRiseCtl = controls.get(R.id.guiCurTemp),
+				currentCtrl = controls.get(R.id.guiCurCurrent);
+			final double i = currentCtrl.getRawValue();
 			switch (group.leastRecentlyUsed()) {
 			case R.id.guiCurWidth:
 				// Only available input in trace mode
-				final double tempRise = controls.getRawValue(R.id.guiCurTemp);
-				final double i = controls.getRawValue(R.id.guiCurCurrent);
+				final double dt = tempRiseCtl.getRawValue();
 				final double thick = controls.getRawValue(R.id.guiCurThickness);
 				// From http://www.4pcb.com/trace-width-calculator.html
+				// area = (i / (IPC_K * dt ^ IPC_B)) ^ IPC_C
 				// Their formula puts it out in mils^2, we need mm^2
-				final double areaMil = Math.pow((i / (IPC_K * Math.pow(tempRise, IPC_B))),
-					IPC_C);
+				final double areaMil = Math.pow((i / (IPC_K * Math.pow(dt, IPC_B))), IPC_C);
 				// Scale by conductivity
-				final double width = areaMil * 0.0254 * 0.0254 * resist / (RESIST_CU * thick);
-				controls.setRawValue(R.id.guiCurWidth, width);
+				final double width = areaMil * SQ_MILS_TO_MM * resist / thick;
+				currentCtrl.setError(null);
+				tempRiseCtl.setError(null);
+				if (!Double.isNaN(width))
+					// If the user enters 0 degrees rise or 0 thickness, we could crash, fix it
+					controls.setRawValue(R.id.guiCurWidth, width);
 				// If the current is over 35 A, width over 10 mm, dt < 10 or dt > 100, or
 				// thickness < 0.017 or thickness > 0.105, then warn the user
-				if (i > 35.0 || width > 10.16 || tempRise < 10.0 || tempRise > 100.0 ||
-						thick < 0.017 || thick > 0.105)
+				if (i > IPC_MAX_CUR || width > IPC_MAX_WIDTH || dt < IPC_MIN_TEMP ||
+						dt > IPC_MAX_TEMP || thick < 0.017 || thick > 0.105)
 					controls.get(R.id.guiCurWidth).setError(getResources().getString(R.string.
 						guiCurTraceWarn));
 				break;
@@ -198,13 +254,21 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 			case R.id.guiCurXArea:
 			case R.id.guiCurDiameter:
 				// All of these are recalculated together
-				// Maybe try a curve fit from http://www.powerstream.com/Wire_Size.htm
-				// TODO Right now we cheat and use 500 cmils per amp
-				final double area = controls.getRawValue(R.id.guiCurCurrent) * 0.5 * 0.5067;
-				final double radius = Math.sqrt(area / Math.PI);
-				controls.setRawValue(R.id.guiCurXArea, area);
-				controls.setRawValue(R.id.guiCurDiameter, radius * 2);
-				controls.setRawValue(R.id.guiCurGauge, calculateAWG(radius));
+				double diameter;
+				if (i < 17.5)
+					// diameter = (4.181 + sqrt(4.181 * 4.181 - 4 * 21.555 * (0.41 - amps))) /
+					//     (2 * 21.555)
+					//  ~= sqrt(amps / 21.555 - 0.009615) + 0.09698
+					diameter = Math.sqrt(i / 21.555 - 0.009615) + 0.09698;
+				else
+					// diameter = (-21.7 + sqrt(21.7 * 21.7 + 4 * (5.387 + amps))) / 2 else
+					//  ~= sqrt(123.1125 + amps) - 10.85
+					diameter = Math.sqrt(123.1125 + i) - 10.85;
+				// Rescale for material
+				diameter *= Math.sqrt(resist);
+				controls.setRawValue(R.id.guiCurXArea, Math.PI * diameter * diameter * 0.25);
+				controls.setRawValue(R.id.guiCurDiameter, diameter);
+				controls.setRawValue(R.id.guiCurGauge, calculateAWG(diameter * 0.5));
 				break;
 			default:
 				// Should not happen

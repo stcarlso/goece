@@ -150,8 +150,7 @@ public abstract class AbstractEntryBox<T extends EngineeringValue> extends Butto
 	}
 	@Override
 	public Parcelable onSaveInstanceState() {
-		Parcelable parentState = super.onSaveInstanceState();
-		return new ECESavedState<T>(parentState, value);
+		return new ECESavedState<T>(super.onSaveInstanceState(), value);
 	}
 	public void onValueChange(T newValue) {
 		final T oldValue = value;

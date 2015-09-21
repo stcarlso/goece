@@ -33,10 +33,12 @@ import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import com.stcarlso.goece.R;
+import com.stcarlso.goece.utility.CustomUnit;
 import com.stcarlso.goece.utility.EngineeringValue;
 import com.stcarlso.goece.utility.IgnoreOnClickListener;
 
@@ -46,7 +48,8 @@ import java.util.*;
  * A dialog box similar to ValueEntryDialog, but which supplies a list of custom units.
  * The returned value is always kept in a consistent unit.
  */
-public class CustomEntryDialog extends AbstractEntryDialog {
+public class CustomEntryDialog extends AbstractEntryDialog implements
+		AdapterView.OnItemSelectedListener {
 	/**
 	 * Creates a custom entry dialog.
 	 *
@@ -71,10 +74,15 @@ public class CustomEntryDialog extends AbstractEntryDialog {
 	 * If none are provided, only the base unit will be available.
 	 */
 	protected final List<CustomUnit> customUnits;
+	/**
+	 * The initially selected custom unit. If null or invalid, the base unit is selected.
+	 */
+	protected CustomUnit initialUnit;
 
 	public CustomEntryDialog() {
 		super();
 		customUnits = new ArrayList<CustomUnit>(8);
+		initialUnit = null;
 	}
 	/**
 	 * Adds a custom unit option to the choices in this dialog.
@@ -86,11 +94,26 @@ public class CustomEntryDialog extends AbstractEntryDialog {
 	}
 	protected double getEnteredValue() {
 		double raw = Double.parseDouble(valueEntry.getText().toString());
-		// If unit index is 0, return directly, otherwise convert value
-		final int index = unitSelect.getSelectedItemPosition();
-		if (index > 0 && index <= customUnits.size())
-			raw = customUnits.get(index - 1).toBase(raw);
+		final CustomUnit unit = getSelectedUnit();
+		if (unit != null)
+			raw = unit.toBase(raw);
 		return raw;
+	}
+	/**
+	 * Returns the currently selected unit for entry.
+	 *
+	 * @return the currently selected custom unit in the combo box, or null if the default unit
+	 * is selected
+	 */
+	public CustomUnit getSelectedUnit() {
+		final int index = unitSelect.getSelectedItemPosition();
+		final CustomUnit unit;
+		// Slot 0 contains the default unit
+		if (index > 0 && index <= customUnits.size())
+			unit = customUnits.get(index - 1);
+		else
+			unit = null;
+		return unit;
 	}
 	/**
 	 * Builds a list of unit choices from the current value and custom user units.
@@ -119,7 +142,12 @@ public class CustomEntryDialog extends AbstractEntryDialog {
 		// Assign to dropdown
 		unitSelect = (Spinner)dialog.findViewById(R.id.guiCustomUnit);
 		unitSelect.setAdapter(adapter);
-		unitSelect.setSelection(0);
+		unitSelect.setOnItemSelectedListener(this);
+		// If not found, -1 + 1 = 0
+		if (initialUnit != null)
+			unitSelect.setSelection(customUnits.indexOf(initialUnit) + 1);
+		else
+			unitSelect.setSelection(0);
 		// Load text, allow editing of a few more sigfigs than usual
 		valueEntry = (EditText)dialog.findViewById(R.id.guiCustom);
 		valueEntry.setText(act.getString(R.string.editRaw, value.getValue()));
@@ -133,100 +161,46 @@ public class CustomEntryDialog extends AbstractEntryDialog {
 		window.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 		return window;
 	}
-
+	public void onClick(DialogInterface dialog, int which) {
+		// Load value and unit
+		if (valueEntry != null && unitSelect != null)
+			try {
+				// Set return units according to the units selected
+				String unitOut = value.getUnits();
+				final CustomUnit unit = getSelectedUnit();
+				if (unit != null)
+					unitOut = unit.getUnit();
+				// Load the new value
+				value = new EngineeringValue(getEnteredValue(), value.getTolerance(), unitOut);
+				// If we fail, do not close the dialog
+				callOnCalculateListener();
+				dismiss();
+			} catch (NumberFormatException ignore) { }
+	}
+	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+		// Only trigger if the field value is selected
+		if (valueEntry.getSelectionStart() == 0 && valueEntry.getSelectionEnd() ==
+				valueEntry.getText().length()) {
+			// Convert value to the new unit choice
+			double raw = getValue().getValue();
+			final CustomUnit unit = getSelectedUnit();
+			if (unit != null)
+				raw = unit.fromBase(raw);
+			// Update contents
+			valueEntry.setText(getActivity().getString(R.string.editRaw, raw));
+			valueEntry.selectAll();
+		}
+	}
+	public void onNothingSelected(AdapterView<?> parent) {
+		// This is not really possible with the units spinner
+	}
 	/**
-	 * Denotes a custom unit which can be used for this dialog. Stores the unit name and the
-	 * conversion factor (the custom value is <i>multiplied</i> by the factor).
+	 * Selects a unit for entry. If null or an invalid unit is supplied, the base unit will be
+	 * selected.
+	 *
+	 * @param unit the unit to select
 	 */
-	public static class CustomUnit {
-		/**
-		 * The multiplicative conversion factor for this unit.
-		 */
-		public final double factor;
-		/**
-		 * The unit name shown in the dropdown and entry box.
-		 */
-		public final String unit;
-
-		/**
-		 * Creates a new custom unit.
-		 *
-		 * @param unit the unit name
-		 * @param factor the unit conversion factor
-		 */
-		public CustomUnit(final String unit, final double factor) {
-			if (unit == null)
-				throw new NullPointerException("unit");
-			if (factor <= 0.0 || Double.isInfinite(factor) || Double.isNaN(factor))
-				throw new IllegalArgumentException("conversion factor");
-			this.factor = factor;
-			this.unit = unit;
-		}
-		public boolean equals(Object o) {
-			return this == o || !(o == null || getClass() != o.getClass()) &&
-				unit.equals(((CustomUnit)o).unit);
-		}
-		/**
-		 * Converts from the base unit to this unit.
-		 *
-		 * @param baseValue the value to convert in the base unit
-		 * @return the value in this unit
-		 */
-		public double fromBase(final double baseValue) {
-			return baseValue / factor;
-		}
-		/**
-		 * Converts from the base unit to this unit.
-		 *
-		 * @param baseValue the value to convert in the base unit
-		 * @return the value in this unit
-		 */
-		public EngineeringValue fromBase(final EngineeringValue baseValue) {
-			// Tolerance is a % so it is not multiplied!
-			return new EngineeringValue(baseValue.getValue() / factor, baseValue.getTolerance(),
-				baseValue.getSigfigs(), unit);
-		}
-		/**
-		 * Gets the conversion factor for this unit.
-		 *
-		 * @return the unit multiplicative conversion factor
-		 */
-		public double getFactor() {
-			return factor;
-		}
-		/**
-		 * Gets the unit name for this unit.
-		 *
-		 * @return the unit name
-		 */
-		public String getUnit() {
-			return unit;
-		}
-		public int hashCode() {
-			return unit.hashCode();
-		}
-		/**
-		 * Converts from this unit to the base unit.
-		 *
-		 * @param unitValue the value to convert in this unit
-		 * @return the value in the base unit
-		 */
-		public double toBase(final double unitValue) {
-			return unitValue * factor;
-		}
-		/**
-		 * Converts from this unit to the base unit.
-		 *
-		 * @param unitValue the value to convert in this unit
-		 * @return the value in the base unit
-		 */
-		public EngineeringValue toBase(final EngineeringValue unitValue) {
-			// Tolerance is a % so it is not multiplied!
-			return new EngineeringValue(unitValue.getValue() * factor, unitValue.getTolerance(),
-				unitValue.getSigfigs(), unit);
-		}
-		public String toString() {
-			return unit;
-		}
+	public void setSelectedUnit(final CustomUnit unit) {
+		initialUnit = unit;
 	}
 }

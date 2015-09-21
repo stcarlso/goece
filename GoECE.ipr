@@ -507,6 +507,9 @@
     </option>
     <option name="PREFERRED_PROJECT_CODE_STYLE" value="Eclipse" />
   </component>
+  <component name="ProjectDictionaryState">
+    <dictionary name="stcarlso" />
+  </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
     <OptionsSetting value="true" id="Remove" />
@@ -544,5 +547,9 @@
       </SOURCES>
       <jarDirectory url="file://U:/Programs/Android/extras/android/support/v13" recursive="false" />
     </library>
+  </component>
+  <component name="uidesigner-configuration">
+    <option name="INSTRUMENT_CLASSES" value="false" />
+    <option name="DEFAULT_LAYOUT_MANAGER" value="GridBagLayout" />
   </component>
 </project>

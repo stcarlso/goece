@@ -151,5 +151,6 @@
 		<item>°F</item>
 		<item>0.5555555555555555</item>
 	</string-array>
-	<string name="guiCurTraceWarn">Calculated trace width may be unrealistic for these parameters.</string>
+	<string name="guiCurTraceWarn">Calculated trace width may be unrealistic for these parameters</string>
+	<string name="guiCurCapWarn">Current value may be unrealistic for these parameters</string>
 </resources>
