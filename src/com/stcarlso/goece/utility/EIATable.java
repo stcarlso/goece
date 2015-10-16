@@ -86,8 +86,8 @@ public final class EIATable {
 	 */
 	public static int e96SMDCode(final int code) {
 		int value = 0;
-		if (code >= 0 && code < E96_VALUES.length)
-			value = E96_VALUES[code];
+		if (code >= 1 && code <= E96_VALUES.length)
+			value = E96_VALUES[code - 1];
 		return value;
 	}
 	/**
