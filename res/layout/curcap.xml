@@ -36,11 +36,11 @@
 		<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
 					  android:layout_gravity="center_horizontal" android:id="@+id/guiCurOutputs"
 					  android:orientation="horizontal">
-			<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:description="@string/current"
+			<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="inputs,len"
 				  android:layout_width="wrap_content" android:layout_height="wrap_content"
 				  android:tag="guiCurCurrent" ece:value="1" android:layout_marginRight="10dp"
 				  android:id="@+id/guiCurCurrent" ece:group="outputs" ece:units="A"
-				  ece:affects="inputs,len"/>
+				  ece:description="@string/guiCurCurrentRating"/>
 			<view class="com.stcarlso.goece.ui.CustomEntryBox" android:id="@+id/guiCurTemp"
 				  android:layout_width="wrap_content" android:layout_height="wrap_content"
 				  android:tag="guiCurTemp" ece:value="30" ece:units="@string/degreeC"
@@ -59,7 +59,7 @@
 			<view class="com.stcarlso.goece.ui.CustomEntryBox" android:id="@+id/guiCurGauge"
 				  android:layout_width="wrap_content" android:layout_height="wrap_content"
 				  android:tag="guiCurGauge" ece:units="AWG" android:layout_marginRight="10dp"
-				  ece:affects="outputs,len" ece:group="inputs" ece:value="18"
+				  ece:affects="outputs,len" ece:group="inputs" ece:value="18" ece:sigfigs="0"
 				  ece:description="@string/guiCurGauge"/>
 			<view class="com.stcarlso.goece.ui.CustomEntryBox" android:id="@+id/guiCurDiameter"
 				  android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -96,9 +96,14 @@
 					  android:orientation="horizontal">
 			<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiCurLength"
 				  android:layout_width="wrap_content" android:layout_height="wrap_content"
-				  android:tag="guiCurLength" ece:units="m" android:layout_marginRight="10dp"
+				  android:tag="guiCurLength" ece:units="m" android:layout_marginRight="5dp"
 				  ece:affects="len" ece:group="len" android:layout_gravity="center_vertical"
 				  ece:value="0.5" ece:description="@string/guiCurLength"/>
+			<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiCurTest"
+				  android:layout_width="wrap_content" android:layout_height="wrap_content"
+				  android:tag="guiCurTest" ece:units="A" android:layout_marginRight="10dp"
+				  ece:affects="len" ece:group="len" android:layout_gravity="center_vertical"
+				  ece:value="0.5" ece:description="@string/current"/>
 			<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 					  android:text="" android:id="@+id/guiCurLenInfo"
 					  android:layout_gravity="center_vertical"/>

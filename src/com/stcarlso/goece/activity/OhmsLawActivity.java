@@ -24,89 +24,179 @@
 
 package com.stcarlso.goece.activity;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.RadioButton;
+import android.widget.TextView;
 import com.stcarlso.goece.R;
+import com.stcarlso.goece.ui.AbstractEntryBox;
 import com.stcarlso.goece.ui.ChildActivity;
 import com.stcarlso.goece.ui.ValueBoxContainer;
 import com.stcarlso.goece.ui.ValueGroup;
+import com.stcarlso.goece.utility.ComplexValue;
+import com.stcarlso.goece.utility.EngineeringValue;
 
 /**
  * Very simple Ohm's law activity. Everyone should know it, but this adds engineering value
  * goodness! (uA, mV, Gohm anyone?)
  */
-public class OhmsLawActivity extends ChildActivity {
+public class OhmsLawActivity extends ChildActivity implements View.OnClickListener {
 	/**
 	 * Contains all data entry controls.
 	 */
 	private final ValueBoxContainer controls;
+	/**
+	 * Cached reference to the "DC" radio button (AC is the opposite)
+	 */
+	private RadioButton dcCtrl;
+	/**
+	 * Cached reference to the power factor label.
+	 */
+	private TextView powerFactorCtrl;
 
 	public OhmsLawActivity() {
 		controls = new ValueBoxContainer();
 	}
+	protected void loadCustomPrefs(SharedPreferences prefs) {
+		super.loadCustomPrefs(prefs);
+		loadPrefsCheckBox(prefs, R.id.guiOhmsSelAC);
+		loadPrefsCheckBox(prefs, R.id.guiOhmsSelDC);
+	}
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ohmslaw);
+		// Update references
+		dcCtrl = (RadioButton)findViewById(R.id.guiOhmsSelDC);
+		powerFactorCtrl = (TextView)findViewById(R.id.guiOhmsPowerFactor);
 		// Register value entry boxes
-		controls.add(findViewById(R.id.guiOhmsCurrent));
-		controls.add(findViewById(R.id.guiOhmsResistance));
-		controls.add(findViewById(R.id.guiOhmsVoltage));
-		controls.add(findViewById(R.id.guiOhmsPower));
+		controls.add(findViewById(R.id.guiOhmsCurrentDC));
+		controls.add(findViewById(R.id.guiOhmsResistanceDC));
+		controls.add(findViewById(R.id.guiOhmsVoltageDC));
+		controls.add(findViewById(R.id.guiOhmsCurrentAC));
+		controls.add(findViewById(R.id.guiOhmsResistanceAC));
+		controls.add(findViewById(R.id.guiOhmsVoltageAC));
+		controls.add(findViewById(R.id.guiOhmsPowerDC));
+		controls.add(findViewById(R.id.guiOhmsPowerAC));
 		controls.setupAll(this);
 		loadPrefs();
-		recalculate(findValueById(R.id.guiOhmsVoltage));
+		// onClick handles initial calculations
+		onClick(dcCtrl);
+	}
+	public void onClick(View v) {
+		final boolean isDC = dcCtrl.isChecked();
+		// Show/hide controls and set enabled/disabled based on option
+		// Volts
+		pick(isDC, R.id.guiOhmsVoltageDC, R.id.guiOhmsVoltageAC);
+		// Amps
+		pick(isDC, R.id.guiOhmsCurrentDC, R.id.guiOhmsCurrentAC);
+		// Ohms
+		pick(isDC, R.id.guiOhmsResistanceDC, R.id.guiOhmsResistanceAC);
+		// DC power
+		final AbstractEntryBox<?> pdc = controls.get(R.id.guiOhmsPowerDC);
+		pdc.setEnabled(isDC);
+		pdc.setVisibility(isDC ? View.VISIBLE : View.GONE);
+		// AC power
+		final AbstractEntryBox<?> pac = controls.get(R.id.guiOhmsPowerAC);
+		pac.setEnabled(!isDC);
+		pac.setVisibility(isDC ? View.GONE : View.VISIBLE);
+		powerFactorCtrl.setVisibility(isDC ? View.GONE : View.VISIBLE);
+		// Recalculating...
+		recalculate(findValueById(isDC ? R.id.guiOhmsVoltageDC : R.id.guiOhmsVoltageAC));
+	}
+	// Sets the visibility and enable flags of the AC and DC input boxes
+	private void pick(final boolean isDC, final int dc, final int ac) {
+		final AbstractEntryBox<?> edc = controls.get(dc);
+		edc.setEnabled(isDC);
+		edc.setVisibility(isDC ? View.VISIBLE : View.INVISIBLE);
+		final AbstractEntryBox<?> eac = controls.get(ac);
+		eac.setEnabled(!isDC);
+		eac.setVisibility(isDC ? View.INVISIBLE : View.VISIBLE);
 	}
 	public void recalculate(final ValueGroup group) {
+		// Select DC or AC
+		final boolean isDC = dcCtrl.isChecked();
+		final int vID = isDC ? R.id.guiOhmsVoltageDC : R.id.guiOhmsVoltageAC;
+		final int iID = isDC ? R.id.guiOhmsCurrentDC : R.id.guiOhmsCurrentAC;
+		final int rID = isDC ? R.id.guiOhmsResistanceDC : R.id.guiOhmsResistanceAC;
+		final int pID = isDC ? R.id.guiOhmsPowerDC : R.id.guiOhmsPowerAC;
 		// Raw values
-		final double v = controls.getRawValue(R.id.guiOhmsVoltage);
-		final double i = controls.getRawValue(R.id.guiOhmsCurrent);
-		final double r = controls.getRawValue(R.id.guiOhmsResistance);
-		final double p = controls.getRawValue(R.id.guiOhmsPower);
+		final EngineeringValue v = controls.getValue(vID);
+		final EngineeringValue i = controls.getValue(iID);
+		final EngineeringValue r = controls.getValue(rID);
+		final EngineeringValue p = controls.getValue(pID), power;
 		// Push onto stack
 		final int id = group.mostRecentlyUsed();
 		switch (id) {
-		case R.id.guiOhmsVoltage:
+		case R.id.guiOhmsVoltageDC:
+		case R.id.guiOhmsVoltageAC:
 			// Update current, resistance from voltage, power
-			controls.setRawValue(R.id.guiOhmsCurrent, p / v);
-			controls.setRawValue(R.id.guiOhmsResistance, v * v / p);
+			power = new ComplexValue(p.getValue(), 2 * v.getAngle() - p.getAngle());
+			controls.setValue(iID, power.divide(v));
+			controls.setValue(rID, v.multiply(v).divide(power));
 			break;
-		case R.id.guiOhmsCurrent:
+		case R.id.guiOhmsCurrentDC:
+		case R.id.guiOhmsCurrentAC:
 			// Update voltage, resistance from current, power
-			controls.setRawValue(R.id.guiOhmsVoltage, p / i);
-			controls.setRawValue(R.id.guiOhmsResistance, p / (i * i));
+			power = new ComplexValue(p.getValue(), 2 * i.getAngle() + p.getAngle());
+			controls.setValue(vID, power.divide(i));
+			controls.setValue(rID, power.divide(i.multiply(i)));
 			break;
-		case R.id.guiOhmsResistance:
+		case R.id.guiOhmsResistanceDC:
+		case R.id.guiOhmsResistanceAC:
 			// Update voltage, current from resistance, power
-			controls.setRawValue(R.id.guiOhmsVoltage, Math.sqrt(p * r));
-			controls.setRawValue(R.id.guiOhmsCurrent, Math.sqrt(p / r));
+			// Since the resistance and the power factor have the same magnitude, no further
+			// information is available to absolutely set voltage and current phases
+			power = p.multiply(r).pow(0.5);
+			controls.setValue(vID, power);
+			controls.setValue(iID, new ComplexValue(p.divide(r).pow(0.5).getValue(),
+				power.getAngle() - r.getAngle()));
 			break;
-		case R.id.guiOhmsPower:
-			// Calculate power
-			controls.setRawValue(R.id.guiOhmsPower, v * i);
+		case R.id.guiOhmsPowerDC:
+		case R.id.guiOhmsPowerAC:
+			// Update power from other values
+			power = new ComplexValue(v.getValue() * i.getValue(), r.getAngle());
+			controls.setValue(pID, power);
+			final double powerFactor = Math.abs(power.getReal()) / power.getValue();
+			powerFactorCtrl.setText(getString(R.string.guiOhmsPFactor, powerFactor));
 			break;
 		default:
 			// Invalid
 			break;
 		}
 	}
+	protected void saveCustomPrefs(SharedPreferences.Editor prefs) {
+		super.saveCustomPrefs(prefs);
+		savePrefsCheckBox(prefs, R.id.guiOhmsSelAC);
+		savePrefsCheckBox(prefs, R.id.guiOhmsSelDC);
+	}
 	protected void update(ValueGroup group) {
+		// Select DC or AC
+		final boolean isDC = dcCtrl.isChecked();
+		final int vID = isDC ? R.id.guiOhmsVoltageDC : R.id.guiOhmsVoltageAC;
+		final int iID = isDC ? R.id.guiOhmsCurrentDC : R.id.guiOhmsCurrentAC;
+		final int rID = isDC ? R.id.guiOhmsResistanceDC : R.id.guiOhmsResistanceAC;
 		// Raw values
-		final double v = controls.getRawValue(R.id.guiOhmsVoltage);
-		final double i = controls.getRawValue(R.id.guiOhmsCurrent);
-		final double r = controls.getRawValue(R.id.guiOhmsResistance);
+		final EngineeringValue v = controls.getValue(vID);
+		final EngineeringValue i = controls.getValue(iID);
+		final EngineeringValue r = controls.getValue(rID);
 		// Push onto stack
 		final int id = group.leastRecentlyUsed();
 		switch (id) {
-		case R.id.guiOhmsVoltage:
+		case R.id.guiOhmsVoltageDC:
+		case R.id.guiOhmsVoltageAC:
 			// Update voltage
-			controls.setRawValue(R.id.guiOhmsVoltage, i * r);
+			controls.setValue(vID, i.multiply(r));
 			break;
-		case R.id.guiOhmsCurrent:
+		case R.id.guiOhmsCurrentDC:
+		case R.id.guiOhmsCurrentAC:
 			// Update current
-			controls.setRawValue(R.id.guiOhmsCurrent, v / r);
+			controls.setValue(iID, v.divide(r));
 			break;
-		case R.id.guiOhmsResistance:
+		case R.id.guiOhmsResistanceDC:
+		case R.id.guiOhmsResistanceAC:
 			// Update resistance
-			controls.setRawValue(R.id.guiOhmsResistance, v / i);
+			controls.setValue(rID, v.divide(i));
 			break;
 		default:
 			// Invalid

@@ -104,6 +104,7 @@ public class ValueEntryDialog extends AbstractEntryDialog implements View.OnKeyL
 		// Create OK and Cancel buttons
 		builder.setPositiveButton(R.string.ok, this);
 		builder.setNegativeButton(R.string.cancel, new IgnoreOnClickListener());
+		restoreState(savedInstanceState);
 		// Create dialog, show keyboard
 		final Dialog window = builder.create();
 		window.getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE);

@@ -241,6 +241,11 @@ public class ComplexEntryDialog extends DialogFragment implements
 			setValue(tempValue);
 			loadData();
 		} catch (NumberFormatException ignore) { }
+		// Get focus where it belongs
+		if (magPhase)
+			realEntry.selectAll();
+		else
+			magEntry.selectAll();
 	}
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		final Activity act = getActivity();

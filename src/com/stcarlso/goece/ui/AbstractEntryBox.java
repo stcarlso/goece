@@ -230,4 +230,14 @@ public abstract class AbstractEntryBox<T extends EngineeringValue> extends Butto
 	 * @param rawValue the new raw value to show in this entry box
 	 */
 	public abstract void updateValue(final double rawValue);
+	/**
+	 * Changes the raw value of this value entry box, keeping all other engineering parameters
+	 * the same.
+	 *
+	 * @param rawMag the new raw magnitude value to show in this entry box
+	 * @param rawPhase the phase angle value to show in this entry box
+	 */
+	public void updateValue(final double rawMag, final double rawPhase) {
+		updateValue(rawMag);
+	}
 }

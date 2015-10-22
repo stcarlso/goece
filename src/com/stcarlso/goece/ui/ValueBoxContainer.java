@@ -49,22 +49,6 @@ public class ValueBoxContainer extends SparseArray<AbstractEntryBox<? extends En
 		}
 	}
 	/**
-	 * Gets the raw imaginary component of a value entry box.
-	 *
-	 * @param id the ID of the control to look up
-	 * @return the imaginary component entered into that control, or 0 if the control only
-	 * accepts real numbers
-	 */
-	public double getImagValue(final int id) {
-		final EngineeringValue value = getValue(id);
-		final double ret;
-		if (value == null)
-			ret = Double.NaN;
-		else
-			ret = value.getImaginary();
-		return ret;
-	}
-	/**
 	 * Gets the raw value of a value entry box.
 	 *
 	 * @param id the ID of the control to look up
@@ -77,21 +61,6 @@ public class ValueBoxContainer extends SparseArray<AbstractEntryBox<? extends En
 			ret = Double.NaN;
 		else
 			ret = value.getValue();
-		return ret;
-	}
-	/**
-	 * Gets the raw real component of a value entry box.
-	 *
-	 * @param id the ID of the control to look up
-	 * @return the real component entered into that control
-	 */
-	public double getRealValue(final int id) {
-		final EngineeringValue value = getValue(id);
-		final double ret;
-		if (value == null)
-			ret = Double.NaN;
-		else
-			ret = value.getReal();
 		return ret;
 	}
 	/**
@@ -128,6 +97,23 @@ public class ValueBoxContainer extends SparseArray<AbstractEntryBox<? extends En
 				// Ugly but for backwards compatibility
 				box.updateValue(newValue);
 			}
+		}
+	}
+	/**
+	 * Changes the value of a value entry box. This override is meant for ComplexEntryBox but
+	 * can be used on either instance. Note that get().setValue() will not work due to
+	 * EngineeringValue not matching "capture of EngineeringValue".
+	 *
+	 * @param id the ID of the control to change
+	 * @param value the new value to put into that control, only the magnitude and phase are
+	 * taken (units, tolerance, and significant figures are retained)
+	 */
+	public void setValue(final int id, final EngineeringValue value) {
+		final AbstractEntryBox<?> box = get(id);
+		if (box != null) {
+			// Set up new value
+			box.setError(null);
+			box.updateValue(value.getValue(), value.getAngle());
 		}
 	}
 	/**

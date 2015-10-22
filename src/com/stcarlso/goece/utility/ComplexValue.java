@@ -100,11 +100,30 @@ public class ComplexValue extends EngineeringValue implements Serializable {
 	 */
 	public ComplexValue(final double mag, final double phase, final double tolerance,
 						final int sigfigs, final String units) {
-		super(mag, tolerance, sigfigs, units);
+		super(Math.abs(mag), tolerance, sigfigs, units);
 		final double angleRad = Math.toRadians(phase);
-		angle = phase;
-		real = mag * Math.cos(angleRad);
-		imag = mag * Math.sin(angleRad);
+		// Compensate for negative magnitude
+		double phaseNormal = phase;
+		if (mag < 0.0)
+			phaseNormal += 180.0;
+		// Normalize to [0, 360)
+		phaseNormal %= 360.0;
+		if (phaseNormal < 0.0) phaseNormal += 360.0;
+		angle = phaseNormal;
+		real = ECECalc.ieeeRound(mag * Math.cos(angleRad));
+		imag = ECECalc.ieeeRound(mag * Math.sin(angleRad));
+	}
+	@Override
+	public EngineeringValue add(final EngineeringValue other) {
+		return newRectangularValue(getReal() + other.getReal(),
+			getImaginary() + other.getImaginary());
+	}
+	@Override
+	public EngineeringValue divide(final EngineeringValue other) {
+		final double divisor = other.getValue();
+		if (divisor == 0.0)
+			throw new ArithmeticException("Complex-valued division by zero");
+		return newValue(getValue() / divisor, getAngle() - other.getAngle());
 	}
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -124,6 +143,14 @@ public class ComplexValue extends EngineeringValue implements Serializable {
 	@Override
 	public double getReal() {
 		return real;
+	}
+	public int hashCode() {
+		final long temp = Double.doubleToLongBits(getAngle());
+		return 31 * (int)(temp ^ (temp >>> 32)) + super.hashCode();
+	}
+	@Override
+	public EngineeringValue multiply(final EngineeringValue other) {
+		return newValue(getValue() * other.getValue(), getAngle() + other.getAngle());
 	}
 	/**
 	 * Convenience method to copy the metadata of this value into a new object.
@@ -150,9 +177,26 @@ public class ComplexValue extends EngineeringValue implements Serializable {
 	public ComplexValue newValue(final double newMag, final double newPhase) {
 		return new ComplexValue(newMag, newPhase, this);
 	}
-	public int hashCode() {
-		final long temp = Double.doubleToLongBits(getAngle());
-		return 31 * (int)(temp ^ (temp >>> 32)) + super.hashCode();
+	@Override
+	public EngineeringValue pow(final double exponent) {
+		// Complex values have more than one of these -- return the first
+		EngineeringValue ret;
+		if (exponent == 0.0)
+			ret = newValue(1.0);
+		else {
+			// Non-trivial case
+			final double absExponent = Math.abs(exponent);
+			ret = newValue(Math.pow(getValue(), absExponent), getAngle() * absExponent);
+			if (exponent < 0.0)
+				// Handle negative exponents correctly
+				ret = newValue(1.0, 0.0).divide(ret);
+		}
+		return ret;
+	}
+	@Override
+	public EngineeringValue subtract(final EngineeringValue other) {
+		return newRectangularValue(getReal() - other.getReal(),
+			getImaginary() - other.getImaginary());
 	}
 	public String toString() {
 		final StringBuilder format = new StringBuilder(significandToString());

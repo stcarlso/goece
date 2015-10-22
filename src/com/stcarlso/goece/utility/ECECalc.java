@@ -29,15 +29,15 @@ package com.stcarlso.goece.utility;
  */
 public final class ECECalc {
 	/**
-	 * Rounds the double-precision value to 30 bits. Essential for equalizing small calculation
+	 * Rounds the double-precision value to 40 bits. Essential for equalizing small calculation
 	 * errors from base-two rounding through calculation chains. This is about the 1E-9 decimal
 	 * place relative to the mantissa.
 	 *
 	 * @param value the value to round
-	 * @return the value rounded to 30 bits
+	 * @return the value rounded to 40 bits
 	 */
 	public static double ieeeRound(final double value) {
-		return Math.scalb(Math.rint(Math.scalb(value, 30)), -30);
+		return Math.scalb(Math.rint(Math.scalb(value, 40)), -40);
 	}
 	/**
 	 * Resistors get an "ordinal" value for a particular iteration that goes from 0 to 8 *

@@ -156,6 +156,7 @@ public class CustomEntryDialog extends AbstractEntryDialog implements
 		// Create OK and Cancel buttons
 		builder.setPositiveButton(R.string.ok, this);
 		builder.setNegativeButton(R.string.cancel, new IgnoreOnClickListener());
+		restoreState(savedInstanceState);
 		// Create dialog, show keyboard
 		final Dialog window = builder.create();
 		window.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);

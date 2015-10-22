@@ -26,9 +26,13 @@ package com.stcarlso.goece.ui;
 
 import android.app.DialogFragment;
 import android.content.DialogInterface;
+import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import com.stcarlso.goece.utility.EngineeringValue;
+
+import java.io.Serializable;
 
 /**
  * Abstract parent of ValueEntryDialog and CustomEntryDialog containing shared logic.
@@ -89,8 +93,10 @@ public abstract class AbstractEntryDialog extends DialogFragment implements
 	public EngineeringValue getValue() {
 		return value;
 	}
-	public void onClick(DialogInterface dialog, int which) {
-		// Load value and unit
+	/**
+	 * Performs processing as if the user had selected OK.
+	 */
+	protected void ok() {
 		if (valueEntry != null && unitSelect != null)
 			try {
 				// Load the new value
@@ -99,6 +105,45 @@ public abstract class AbstractEntryDialog extends DialogFragment implements
 				callOnCalculateListener();
 				dismiss();
 			} catch (NumberFormatException ignore) { }
+	}
+	public void onClick(DialogInterface dialog, int which) {
+		// Load value and unit
+		ok();
+	}
+	protected void restoreState(Bundle savedInstanceState) {
+		/*
+		if (savedInstanceState != null && valueEntry != null && unitSelect != null) {
+			// Restore dialog state if rotated
+			if (savedInstanceState.containsKey("description"))
+				setDescription(savedInstanceState.getString("description"));
+			if (savedInstanceState.containsKey("unit"))
+				unitSelect.setSelection(savedInstanceState.getInt("unit", 0));
+			if (savedInstanceState.containsKey("entry"))
+				valueEntry.setText(savedInstanceState.getString("entry"));
+			if (savedInstanceState.containsKey("value")) {
+				final Serializable ov = savedInstanceState.getSerializable("value");
+				if (ov instanceof EngineeringValue)
+					value = (EngineeringValue)ov;
+			}
+		}
+		*/
+	}
+	public void onPause() {
+		super.onPause();
+		dismiss();
+	}
+	public void onSaveInstanceState(Bundle outState) {
+		// NOTE Cancel dialog, because restoring the listener reference is not worth it now
+		super.onSaveInstanceState(outState);
+		/*
+		if (valueEntry != null && unitSelect != null) {
+			// If the screen is rotated while a dialog is up, save our state
+			outState.putString("description", desc);
+			outState.putInt("unit", unitSelect.getSelectedItemPosition());
+			outState.putString("entry", valueEntry.getText().toString());
+			outState.putSerializable("value", value);
+		}
+		*/
 	}
 	/**
 	 * Changes the description of this dialog box.

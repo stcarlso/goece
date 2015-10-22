@@ -79,10 +79,10 @@ public class ImpedanceActivity extends ChildActivity implements View.OnClickList
 		final boolean isCap = capSelCtrl.isChecked();
 		controls.get(R.id.guiImpedCap).setEnabled(isCap);
 		controls.get(R.id.guiImpedInd).setEnabled(!isCap);
-		recalculate(controls.get(isCap ? R.id.guiImpedCap : R.id.guiImpedInd));
+		recalculate(findValueById(isCap ? R.id.guiImpedCap : R.id.guiImpedInd));
 	}
 	protected void recalculate(ValueGroup source) {
-		final ComplexEntryBox imped = (ComplexEntryBox)controls.get(R.id.guiImpedImp);
+		final ComplexEntryBox imped = (ComplexEntryBox)findValueById(R.id.guiImpedImp);
 		// Capacitance or inductance?
 		final boolean isCap = capSelCtrl.isChecked();
 		final double r = controls.getRawValue(R.id.guiImpedRes);

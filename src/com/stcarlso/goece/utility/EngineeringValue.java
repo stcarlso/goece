@@ -24,6 +24,8 @@
 
 package com.stcarlso.goece.utility;
 
+import android.service.wallpaper.WallpaperService;
+
 import java.io.Serializable;
 
 /**
@@ -65,9 +67,9 @@ public class EngineeringValue implements Serializable {
 			final int decimals;
 			// Calculate number of decimal places to show
 			if (absSig >= 99.95)
-				decimals = sigfigs - 3;
+				decimals = Math.max(sigfigs - 3, 0);
 			else if (absSig >= 9.995)
-				decimals = sigfigs - 2;
+				decimals = Math.max(sigfigs - 2, 0);
 			else if (absSig >= 0.9995 || absSig == 0.0)
 				decimals = sigfigs - 1;
 			else
@@ -117,13 +119,13 @@ public class EngineeringValue implements Serializable {
 	 * The prefix the unit gets for each cut-off below.
 	 */
 	public static final String[] ENGR_NAMES = {
-		"f", "p", "n", "\u03BC", "m", "", "K", "M", "G", "T", "P", "E"
+		"f", "p", "n", "\u03BC", "m", "", "K", "M", "G", "T", "P"
 	};
 	/**
 	 * Cut-off values for engineering formatting.
 	 */
 	public static final double[] ENGR_THRESHOLD = {
-		1e-15, 1e-12, 1e-9, 1e-6, 1e-3, 1, 1e3, 1e6, 1e9, 1e12, 1e15, 1e18
+		1e-15, 1e-12, 1e-9, 1e-6, 1e-3, 1, 1e3, 1e6, 1e9, 1e12, 1e15
 	};
 
 	/**
@@ -204,7 +206,7 @@ public class EngineeringValue implements Serializable {
 		final double absValue = Math.abs(value);
 		// Do not allow NaN
 		if (Double.isNaN(value))
-			throw new IllegalArgumentException("value: " + value);
+			throw new IllegalArgumentException("value: NaN");
 		if (units == null)
 			throw new NullPointerException("units");
 		if (tolerance < 0.0 || tolerance >= 1.0)
@@ -212,7 +214,7 @@ public class EngineeringValue implements Serializable {
 		if (sigfigs < 1 || sigfigs > 14)
 			throw new IllegalArgumentException("significant figures: " + sigfigs);
 		// Initialize tolerance and units
-		raw = ECECalc.ieeeRound(value);
+		raw = value;
 		this.sigfigs = sigfigs;
 		this.tolerance = tolerance;
 		this.units = units;
@@ -239,6 +241,36 @@ public class EngineeringValue implements Serializable {
 		// Assign significand and prefix code
 		prefix = code;
 		significand = engr;
+	}
+	/**
+	 * Adds this EngineeringValue to another. This is really only useful in the ComplexValue
+	 * instance, but still works for the real valued case.
+	 *
+	 * The type (real vs complex), units, tolerance, and significant figures are inherited from
+	 * the left-hand side value.
+	 *
+	 * @param other the addend
+	 * @return the sum
+	 */
+	public EngineeringValue add(final EngineeringValue other) {
+		return newValue(getValue() + other.getReal());
+	}
+	/**
+	 * Divides this EngineeringValue by another. This is really only useful in the
+	 * ComplexValue instance, but still works for the real valued case.
+	 *
+	 * The type (real vs complex), units, tolerance, and significant figures are inherited from
+	 * the left-hand side value.
+	 *
+	 * @param other the divisor
+	 * @return the quotient
+	 * @throws ArithmeticException if the divisor's magnitude is zero
+	 */
+	public EngineeringValue divide(final EngineeringValue other) {
+		final double divisor = other.getReal();
+		if (divisor == 0.0)
+			throw new ArithmeticException("Real-valued division by zero");
+		return newValue(getValue() / divisor);
 	}
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -333,6 +365,19 @@ public class EngineeringValue implements Serializable {
 		return 31 * (int)(temp ^ (temp >>> 32)) + getUnits().hashCode();
 	}
 	/**
+	 * Multiplies this EngineeringValue by another. This is really only useful in the
+	 * ComplexValue instance, but still works for the real valued case.
+	 *
+	 * The type (real vs complex), units, tolerance, and significant figures are inherited from
+	 * the left-hand side value.
+	 *
+	 * @param other the multiplicand
+	 * @return the product
+	 */
+	public EngineeringValue multiply(final EngineeringValue other) {
+		return newValue(getValue() * other.getReal());
+	}
+	/**
 	 * Convenience method to copy the metadata of this value into a new object.
 	 *
 	 * @param newRaw the new raw value
@@ -340,6 +385,19 @@ public class EngineeringValue implements Serializable {
 	 */
 	public EngineeringValue newValue(final double newRaw) {
 		return new EngineeringValue(newRaw, this);
+	}
+	/**
+	 * Raises this value to the power of the exponent. For real values, equivalent of
+	 * Math.pow(), but applies DeMoivre's Theorem for complex values.
+	 *
+	 * The type (real vs complex), units, tolerance, and significant figures are inherited from
+	 * this value.
+	 *
+	 * @param exponent the power to raise this value
+	 * @return this value raised to the specified power
+	 */
+	public EngineeringValue pow(final double exponent) {
+		return newValue(Math.pow(getValue(), exponent));
 	}
 	/**
 	 * Returns the significand of this value rounded to the significant figures places. Does
@@ -359,6 +417,16 @@ public class EngineeringValue implements Serializable {
 	 */
 	public String significandToString(final int sf) {
 		return significandToString(getSignificand(), sf);
+	}
+	/**
+	 * Subtracts this EngineeringValue from another. This is really only useful in the
+	 * ComplexValue instance, but still works for the real valued case.
+	 *
+	 * @param other the subtrahend
+	 * @return the difference
+	 */
+	public EngineeringValue subtract(final EngineeringValue other) {
+		return newValue(getValue() - other.getReal());
 	}
 	public String toString() {
 		final StringBuilder format = new StringBuilder(significandToString());

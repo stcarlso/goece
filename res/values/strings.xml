@@ -56,9 +56,15 @@
 	<string name="period">Period</string>
 	<string name="mag">Magnitude</string>
 	<string name="phase">Phase</string>
+	<string name="angle">Angle</string>
 	<string name="amplit">Amplitude</string>
 	<string name="pktopk">Peak-to-Peak</string>
+	<string name="real">Real</string>
+	<string name="imag">Imaginary</string>
 	<string name="rms">RMS</string>
+	<string name="dc">DC</string>
+	<string name="ac">AC</string>
+	<string name="phase3">3-Phase</string>
 	<string name="resSeries">Values available: </string>
 	<string name="degree">°</string>
 	<string name="degreeC">°C</string>
@@ -82,6 +88,12 @@
 	<string name="guiResInitialValue">103</string>
 	<!-- Ohm's law -->
 	<string name="cirohms">Circuit diagram</string>
+	<string name="guiOhmsVRMS">Voltage (RMS)</string>
+	<string name="guiOhmsIRMS">Current (RMS)</string>
+	<string name="guiOhmsPReal">Real Power</string>
+	<string name="guiOhmsPImag">Reactive Power</string>
+	<string name="guiOhmsPApp">Apparent Power</string>
+	<string name="guiOhmsPFactor">Power Factor: %1$.2f</string>
 	<!-- Series/parallel resistance -->
 	<string name="guiSerSeries1">R&lt;small&gt;1&lt;/small&gt;</string>
 	<string name="guiSerSeries2">R&lt;small&gt;2&lt;/small&gt;</string>
@@ -105,12 +117,13 @@
 	<string name="guiCurLength">Length</string>
 	<string name="guiCurWire">Wire</string>
 	<string name="guiCurTrace">PCB Trace (External layer)</string>
-	<string name="guiCurTemp">Temperature Rise</string>
+	<string name="guiCurTemp">Temp. Rise</string>
 	<string name="guiCurWidth">Trace Width</string>
 	<string name="guiCurDiameter">Wire Diameter</string>
 	<string name="guiCurThickness">Trace Thickness</string>
 	<string name="guiCurXArea">Cross-Section Area</string>
 	<string name="guiCurGauge">Gauge</string>
+	<string name="guiCurCurrentRating">Current Rating</string>
 	<string-array name="guiCurMaterials">
 		<item>Aluminium</item>
 		<item>Copper</item>
