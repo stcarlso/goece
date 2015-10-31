@@ -27,8 +27,11 @@ package com.stcarlso.goece.ui;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
+import android.graphics.Typeface;
 import android.text.Html;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
@@ -146,22 +149,20 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 			prefs.putString(idS + "_unit", displayUnit.getUnit());
 	}
 	public void onClick(View v) {
-		if (activity != null) {
-			final String desc = getDescription();
-			// Create popup
-			final CustomEntryDialog mutate = CustomEntryDialog.create(value, desc);
-			mutate.setOnCalculateListener(this);
-			if (customUnits != null) {
-				// Add custom units
-				for (CustomUnit unit : customUnits.values())
-					mutate.addCustomUnit(unit);
-				// Preselect the right unit
-				if (displayUnit != null)
-					mutate.setSelectedUnit(displayUnit);
-			}
-			// Show it, popup will call oncalculate for us on OK
-			mutate.show(activity.getFragmentManager(), desc);
+		final String desc = getDescription();
+		// Create popup
+		final CustomEntryDialog mutate = CustomEntryDialog.create(value, desc);
+		mutate.setOnCalculateListener(this);
+		if (customUnits != null) {
+			// Add custom units
+			for (CustomUnit unit : customUnits.values())
+				mutate.addCustomUnit(unit);
+			// Preselect the right unit
+			if (displayUnit != null)
+				mutate.setSelectedUnit(displayUnit);
 		}
+		// Show it, popup will call oncalculate for us on OK
+		mutate.show(UIFunctions.getActivity(this).getFragmentManager(), desc);
 	}
 	public void onValueChange(EngineeringValue newValue) {
 		final EngineeringValue oldValue = value;
@@ -185,20 +186,27 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 	 */
 	protected void updateText() {
 		final EngineeringValue ev = getValue();
-		final CharSequence desc = Html.fromHtml(getDescription());
+		final Spanned desc = Html.fromHtml(getDescription());
+		final SpannableStringBuilder text = new SpannableStringBuilder();
 		// Try to find the display unit, if we fail use the default unit
 		final CustomUnit unit = displayUnit;
+		final String displayVal;
 		double dv = ev.getValue();
 		if (unit != null)
 			dv = unit.fromBase(dv);
-		// Get text
-		final CharSequence val = Html.fromHtml(getResources().getString(R.string.viewRaw, dv,
-			(unit != null) ? unit.getUnit() : ev.getUnits()));
-		final SpannableStringBuilder text = new SpannableStringBuilder();
 		text.append(desc);
+		// Fix the display value if infinity is needed
+		if (Double.isInfinite(dv))
+			displayVal = (dv > 0.0) ? "\u221E" : "-\u221E";
+		else
+			displayVal = getResources().getString(R.string.viewRaw, dv);
+		// Italicize the name
+		text.setSpan(new StyleSpan(Typeface.ITALIC), 0, desc.length(),
+			Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		text.append('\n');
-		text.append(val);
-		// Make the name a bit smaller
+		text.append(displayVal);
+		text.append(' ');
+		text.append(Html.fromHtml((unit != null) ? unit.getUnit() : ev.getUnits()));
 		setText(text);
 	}
 	public void updateValue(final double rawValue) {

@@ -205,8 +205,7 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 			// thickness < 0.017 or thickness > 0.105, then warn the user
 			if (i > IPC_MAX_CUR || width > IPC_MAX_WIDTH || dt < IPC_MIN_TEMP ||
 					dt > IPC_MAX_TEMP || thick < 0.017 || thick > 0.105)
-				controls.get(R.id.guiCurWidth).setError(getResources().getString(R.string.
-					guiCurTraceWarn));
+				controls.get(R.id.guiCurWidth).setError(getString(R.string.guiCurTraceWarn));
 			break;
 		case R.id.guiCurGauge:
 		case R.id.guiCurXArea:
@@ -230,7 +229,7 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 			break;
 		default:
 			// Should not happen
-			throw new IllegalStateException("Need new case in recalculate() for inputs");
+			break;
 		}
 	}
 	/**
@@ -255,8 +254,7 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 			curCtrl.setError(null);
 			if (dt < IPC_MIN_TEMP || dt > IPC_MAX_TEMP || width > IPC_MAX_WIDTH)
 				// Warn the user if the temperature rise is extreme
-				controls.get(R.id.guiCurTemp).setError(getResources().getString(R.string.
-					guiCurCapWarn));
+				controls.get(R.id.guiCurTemp).setError(getString(R.string.guiCurCapWarn));
 			break;
 		case R.id.guiCurCurrent:
 			boolean fault = false;
@@ -286,12 +284,11 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 			controls.setRawValue(R.id.guiCurCurrent, i);
 			if (fault || i <= 0.0)
 				// Warn the user if we go under 0 A
-				controls.get(R.id.guiCurCurrent).setError(getResources().getString(
-					R.string.guiCurCapWarn));
+				controls.get(R.id.guiCurCurrent).setError(getString(R.string.guiCurCapWarn));
 			break;
 		default:
 			// Should not happen
-			throw new IllegalStateException("Need new case in recalculate() for outputs");
+			break;
 		}
 	}
 	protected void saveCustomPrefs(SharedPreferences.Editor prefs) {
@@ -327,12 +324,9 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 				controls.setRawValue(R.id.guiCurDiameter, radius * 2.0);
 				controls.setRawValue(R.id.guiCurGauge, calculateAWG(radius));
 				break;
-			case R.id.guiCurWidth:
-				// Nothing to do here
-				break;
 			default:
 				// Should not happen
-				throw new IllegalStateException("Need new case in update() for inputs");
+				break;
 			}
 		}
 	}

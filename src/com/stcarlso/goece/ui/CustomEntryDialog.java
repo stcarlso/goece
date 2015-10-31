@@ -148,6 +148,9 @@ public class CustomEntryDialog extends AbstractEntryDialog implements
 			unitSelect.setSelection(customUnits.indexOf(initialUnit) + 1);
 		else
 			unitSelect.setSelection(0);
+		if (customUnits.isEmpty() && getValue().getUnits().length() == 0)
+			// Hide unit select box if it has nothing to show us
+			unitSelect.setVisibility(View.GONE);
 		// Load text, allow editing of a few more sigfigs than usual
 		valueEntry = (EditText)dialog.findViewById(R.id.guiCustom);
 		valueEntry.setText(act.getString(R.string.editRaw, value.getValue()));

@@ -22,31 +22,19 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece.activity;
-
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import com.stcarlso.goece.R;
-import com.stcarlso.goece.ui.MenuFragment;
+package com.stcarlso.goece.utility;
 
 /**
- * Fragment which displays all items on the Analog tab.
+ * Represents an equation which can be solved with EquationSolver.solve(). The solve() method
+ * tries to solve the equation to zero.
  */
-public class AnalogFragment extends MenuFragment {
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final View view = inflater.inflate(R.layout.analog, container, false);
-		// Configure all buttons
-		setButtonEvent(view, R.id.guiColorCode, ResColorActivity.class);
-		setButtonEvent(view, R.id.guiSMDResistor, SMDResistorActivity.class);
-		setButtonEvent(view, R.id.guiOhmsLaw, OhmsLawActivity.class);
-		setButtonEvent(view, R.id.guiImpedance, ImpedanceActivity.class);
-		setButtonEvent(view, R.id.guiSerPar, SerParActivity.class);
-		setButtonEvent(view, R.id.guiVDiv, VDivActivity.class);
-		setButtonEvent(view, R.id.guiCurCap, CurCapActivity.class);
-		setButtonEvent(view, R.id.guiPcbWidth, PcbTraceActivity.class);
-		return view;
-	}
+public interface Equation {
+	/**
+	 * Computes the value of the function at the specified X coordinate.
+	 *
+	 * @param x the independent variable
+	 * @return the result of this function, or Double.NaN if the function is not defined at this
+	 * value of x
+	 */
+	double eval(double x);
 }

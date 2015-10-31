@@ -197,12 +197,12 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 				// Much faster than regex (split)
 				final StringTokenizer str = new StringTokenizer(targets, ",");
 				String target;
+				// Update MRU list and request group update
+				src.use(source.getId());
+				update(src);
 				// Allow multi-targeting
 				while (str.hasMoreTokens() && (target = str.nextToken()) != null) {
 					final ValueGroup dest = groups.get(target);
-					// Update MRU list and request group update
-					src.use(source.getId());
-					update(src);
 					if (dest != null)
 						recalculate(dest);
 					else
@@ -288,7 +288,6 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 */
 	protected void setupValueEntryBox(final int id) {
 		final AbstractEntryBox<?> box = ((AbstractEntryBox<?>)findViewById(id));
-		box.setParentActivity(this);
 		box.setOnCalculateListener(this);
 		registerAdjustable(box);
 	}

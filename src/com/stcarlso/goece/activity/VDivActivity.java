@@ -185,6 +185,9 @@ public class VDivActivity extends ChildActivity implements View.OnClickListener 
 			controls.setRawValue(R.id.guiDivBottom, bd);
 			recalcVout();
 			break;
+		case R.id.guiDivLoad:
+			// No update performed
+			break;
 		default:
 			// Invalid
 			break;

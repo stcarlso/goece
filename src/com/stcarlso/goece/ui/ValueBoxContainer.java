@@ -90,7 +90,7 @@ public class ValueBoxContainer extends SparseArray<AbstractEntryBox<? extends En
 		if (box != null) {
 			// Set up new value
 			if (Double.isNaN(newValue))
-				box.setError("NaN");
+				box.setError("");
 			else {
 				// All good
 				box.setError(null);
@@ -102,7 +102,8 @@ public class ValueBoxContainer extends SparseArray<AbstractEntryBox<? extends En
 	/**
 	 * Changes the value of a value entry box. This override is meant for ComplexEntryBox but
 	 * can be used on either instance. Note that get().setValue() will not work due to
-	 * EngineeringValue not matching "capture of EngineeringValue".
+	 * EngineeringValue not matching "capture of EngineeringValue"; get().updateValue()
+	 * would but would require unpacking of the components
 	 *
 	 * @param id the ID of the control to change
 	 * @param value the new value to put into that control, only the magnitude and phase are
@@ -111,7 +112,7 @@ public class ValueBoxContainer extends SparseArray<AbstractEntryBox<? extends En
 	public void setValue(final int id, final EngineeringValue value) {
 		final AbstractEntryBox<?> box = get(id);
 		if (box != null) {
-			// Set up new value
+			// Set up new value, EngineeringValue cannot have a NaN magnitude
 			box.setError(null);
 			box.updateValue(value.getValue(), value.getAngle());
 		}

@@ -77,4 +77,13 @@ public interface Units {
 	 * 0.1% tolerance
 	 */
 	double TOL_P1 = 0.001;
+
+	/**
+	 * 1 / pi
+	 */
+	double PI_INV = 1.0 / Math.PI;
+	/**
+	 * The impedance of free space divided by pi
+	 */
+	double Z_0 = 119.9169832;
 }

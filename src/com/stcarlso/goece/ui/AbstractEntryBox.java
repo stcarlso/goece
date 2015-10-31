@@ -26,26 +26,26 @@ package com.stcarlso.goece.ui;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Parcelable;
 import android.text.Html;
+import android.text.Spannable;
 import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.style.BackgroundColorSpan;
+import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
-import com.stcarlso.goece.utility.Calculatable;
-import com.stcarlso.goece.utility.ECESavedState;
-import com.stcarlso.goece.utility.EngineeringValue;
-import com.stcarlso.goece.utility.ValueControl;
+import android.widget.Toast;
+import com.stcarlso.goece.utility.*;
 
 /**
  * Skeleton class for a button with units that when clicked brings up a dialog.
  */
 public abstract class AbstractEntryBox<T extends EngineeringValue> extends Button implements
 		View.OnClickListener, ValueControl {
-	/**
-	 * Why android why?
-	 */
-	protected Activity activity;
 	/**
 	 * When this box is changed, this field is used to determine which group is affected.
 	 */
@@ -88,6 +88,8 @@ public abstract class AbstractEntryBox<T extends EngineeringValue> extends Butto
 	 * Fires the recalculate method of the attached listener, if it exists.
 	 */
 	protected void callOnCalculateListener() {
+		// Was just updated!
+		setError(null);
 		if (listener != null)
 			listener.recalculate(this);
 	}
@@ -129,7 +131,12 @@ public abstract class AbstractEntryBox<T extends EngineeringValue> extends Butto
 	 * @param attrs the attributes of this element
 	 */
 	protected void init(final Context context, final AttributeSet attrs) {
-		activity = null;
+		// Update the copy listener (no activity parent in edit mode!)
+		if (!isInEditMode()) {
+			copyListener = new CopyListener(UIFunctions.getActivity(this), getDescription());
+			copyListener.setValue(getValue());
+			setOnLongClickListener(copyListener);
+		}
 		// Initialize click listeners
 		listener = null;
 		setOnClickListener(this);
@@ -181,20 +188,11 @@ public abstract class AbstractEntryBox<T extends EngineeringValue> extends Butto
 			updateText();
 		}
 	}
-	/**
-	 * Changes the parent activity of this box. Required because Dialogs need a fragment manager
-	 * to be shown, and context is not reliably the correct parent Activity... why Android why?
-	 *
-	 * @param activity the parent activity
-	 */
-	public void setParentActivity(final Activity activity) {
-		if (activity != null) {
-			this.activity = activity;
-			// Update the copy listener
-			copyListener = new CopyListener(activity, getDescription());
-			copyListener.setValue(getValue());
-			setOnLongClickListener(copyListener);
-		}
+	public void setError(final CharSequence error) {
+		super.setError(error);
+		// Display toast to alert the user of failure, if not null or empty
+		if (error != null && error.length() > 0)
+			Toast.makeText(UIFunctions.getActivity(this), error, Toast.LENGTH_LONG).show();
 	}
 	/**
 	 * Changes the currently selected value. Does not fire the calculation listener but updates
@@ -214,13 +212,15 @@ public abstract class AbstractEntryBox<T extends EngineeringValue> extends Butto
 	 * Update the button text.
 	 */
 	protected void updateText() {
-		// Get text
-		final CharSequence desc = Html.fromHtml(getDescription()), val = getValue().toString();
 		final SpannableStringBuilder text = new SpannableStringBuilder();
+		// Calculate text
+		final Spanned desc = Html.fromHtml(getDescription());
 		text.append(desc);
+		// Italicize the name
+		text.setSpan(new StyleSpan(Typeface.ITALIC), 0, desc.length(),
+			Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 		text.append('\n');
-		text.append(val);
-		// Make the name a bit smaller
+		text.append(getValue().toString());
 		setText(text);
 	}
 	/**

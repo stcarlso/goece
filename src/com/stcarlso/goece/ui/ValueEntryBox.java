@@ -91,14 +91,12 @@ public class ValueEntryBox extends AbstractEntryBox<EngineeringValue> implements
 		prefs.putLong(UIFunctions.getTag(this), Double.doubleToLongBits(getRawValue()));
 	}
 	public void onClick(View v) {
-		if (activity != null) {
-			final String desc = getDescription();
-			// Create popup
-			final ValueEntryDialog mutate = ValueEntryDialog.create(value, desc);
-			mutate.setOnCalculateListener(this);
-			// Show it, popup will call oncalculate for us on OK
-			mutate.show(activity.getFragmentManager(), desc);
-		}
+		final String desc = getDescription();
+		// Create popup
+		final ValueEntryDialog mutate = ValueEntryDialog.create(value, desc);
+		mutate.setOnCalculateListener(this);
+		// Show it, popup will call oncalculate for us on OK
+		mutate.show(UIFunctions.getActivity(this).getFragmentManager(), desc);
 	}
 	public void updateValue(final double rawValue) {
 		setValue(getValue().newValue(rawValue));

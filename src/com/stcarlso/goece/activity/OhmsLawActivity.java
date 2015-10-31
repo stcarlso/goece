@@ -125,22 +125,37 @@ public class OhmsLawActivity extends ChildActivity implements View.OnClickListen
 		final EngineeringValue i = controls.getValue(iID);
 		final EngineeringValue r = controls.getValue(rID);
 		final EngineeringValue p = controls.getValue(pID), power;
+		final double pv = p.getValue();
 		// Push onto stack
 		final int id = group.mostRecentlyUsed();
 		switch (id) {
 		case R.id.guiOhmsVoltageDC:
 		case R.id.guiOhmsVoltageAC:
 			// Update current, resistance from voltage, power
-			power = new ComplexValue(p.getValue(), 2 * v.getAngle() - p.getAngle());
-			controls.setValue(iID, power.divide(v));
-			controls.setValue(rID, v.multiply(v).divide(power));
+			power = new ComplexValue(pv, 2 * v.getAngle() - p.getAngle());
+			if (v.getValue() <= 0.0) {
+				// That is impossible, if there is no voltage then there can be no power
+				if (pv > 0.0)
+					controls.setRawValue(pID, Double.NaN);
+			} else {
+				controls.setValue(iID, power.divide(v));
+				controls.setValue(rID, v.multiply(v).divide(power));
+			}
 			break;
 		case R.id.guiOhmsCurrentDC:
 		case R.id.guiOhmsCurrentAC:
 			// Update voltage, resistance from current, power
-			power = new ComplexValue(p.getValue(), 2 * i.getAngle() + p.getAngle());
-			controls.setValue(vID, power.divide(i));
-			controls.setValue(rID, power.divide(i.multiply(i)));
+			power = new ComplexValue(pv, 2 * i.getAngle() + p.getAngle());
+			if (i.getValue() <= 0.0) {
+				// That is impossible, if there is no current then there can be no power
+				if (pv > 0.0)
+					controls.setRawValue(pID, Double.NaN);
+			} else {
+				controls.setValue(vID, power.divide(i));
+				if (pv > 0.0)
+					// Only touch the resistance if necessary
+					controls.setValue(rID, power.divide(i.multiply(i)));
+			}
 			break;
 		case R.id.guiOhmsResistanceDC:
 		case R.id.guiOhmsResistanceAC:
@@ -149,16 +164,22 @@ public class OhmsLawActivity extends ChildActivity implements View.OnClickListen
 			// information is available to absolutely set voltage and current phases
 			power = p.multiply(r).pow(0.5);
 			controls.setValue(vID, power);
-			controls.setValue(iID, new ComplexValue(p.divide(r).pow(0.5).getValue(),
-				power.getAngle() - r.getAngle()));
+			if (r.getValue() <= 0.0) {
+				// Voltage was already zeroed out
+				controls.setRawValue(iID, 0.0);
+				// That is impossible, if there is no current then there can be no power
+				if (pv > 0.0)
+					controls.setRawValue(pID, Double.NaN);
+			} else
+				controls.setValue(iID, new ComplexValue(p.divide(r).pow(0.5).getValue(),
+					power.getAngle() - r.getAngle()));
 			break;
 		case R.id.guiOhmsPowerDC:
 		case R.id.guiOhmsPowerAC:
 			// Update power from other values
 			power = new ComplexValue(v.getValue() * i.getValue(), r.getAngle());
 			controls.setValue(pID, power);
-			final double powerFactor = Math.abs(power.getReal()) / power.getValue();
-			powerFactorCtrl.setText(getString(R.string.guiOhmsPFactor, powerFactor));
+			updatePowerFactor();
 			break;
 		default:
 			// Invalid
@@ -191,16 +212,41 @@ public class OhmsLawActivity extends ChildActivity implements View.OnClickListen
 		case R.id.guiOhmsCurrentDC:
 		case R.id.guiOhmsCurrentAC:
 			// Update current
-			controls.setValue(iID, v.divide(r));
+			if (r.getValue() <= 0.0)
+				controls.setRawValue(iID, Double.NaN);
+			else
+				controls.setValue(iID, v.divide(r));
 			break;
 		case R.id.guiOhmsResistanceDC:
 		case R.id.guiOhmsResistanceAC:
 			// Update resistance
-			controls.setValue(rID, v.divide(i));
+			if (i.getValue() <= 0.0)
+				controls.setRawValue(rID, Double.NaN);
+			else
+				controls.setValue(rID, v.divide(i));
+			break;
+		case R.id.guiOhmsPowerAC:
+		case R.id.guiOhmsPowerDC:
+			// Update the power factor box
+			updatePowerFactor();
 			break;
 		default:
 			// Invalid
 			break;
 		}
+	}
+	/**
+	 * Updates the "power factor" text box. Only visible in AC mode.
+	 */
+	private void updatePowerFactor() {
+		final int pID = dcCtrl.isChecked() ? R.id.guiOhmsPowerDC : R.id.guiOhmsPowerAC;
+		final EngineeringValue power = controls.getValue(pID);
+		final double powerFactor;
+		// No NaN power factors
+		if (power.getValue() > 0.0)
+			powerFactor = Math.abs(power.getReal()) / power.getValue();
+		else
+			powerFactor = 0.0;
+		powerFactorCtrl.setText(getString(R.string.guiOhmsPFactor, powerFactor));
 	}
 }

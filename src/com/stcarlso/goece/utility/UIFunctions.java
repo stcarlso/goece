@@ -26,6 +26,8 @@ package com.stcarlso.goece.utility;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.graphics.Color;
 import android.text.Html;
 import android.util.Log;
@@ -80,6 +82,23 @@ public final class UIFunctions {
 		builder.setMessage(messageID);
 		builder.setPositiveButton(R.string.ok, new IgnoreOnClickListener());
 		builder.create().show();
+	}
+	/**
+	 * Reports the parent activity of a View, or null if the view has no parent activity.
+	 *
+	 * @param view the view to investigate
+	 * @return the Activity object which is hosting the view
+	 */
+	public static Activity getActivity(final View view) {
+		Context context = view.getContext();
+		Activity parent = null;
+		while (parent == null && (context instanceof ContextWrapper)) {
+			if (context instanceof Activity)
+				parent = (Activity)context;
+			else
+				context = ((ContextWrapper)context).getBaseContext();
+		}
+		return parent;
 	}
 	/**
 	 * Retrieves the tag from a visual element.

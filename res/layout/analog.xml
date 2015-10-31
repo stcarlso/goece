@@ -25,21 +25,35 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 			android:layout_width="match_parent" android:layout_height="match_parent">
-	<LinearLayout android:layout_width="fill_parent" android:layout_height="wrap_content"
+	<LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
 				  android:orientation="vertical">
-		<Button android:layout_width="fill_parent" android:layout_height="wrap_content"
+		<TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+				  android:text="@string/guiCatPassive" android:layout_gravity="left"
+				  android:layout_marginLeft="5dp" android:maxLines="1"
+				  android:textAppearance="?android:attr/textAppearanceLarge"/>
+		<Button android:layout_width="match_parent" android:layout_height="wrap_content"
 				android:text="@string/guiColorCode" android:id="@+id/guiColorCode"/>
-		<Button android:layout_width="fill_parent" android:layout_height="wrap_content"
+		<Button android:layout_width="match_parent" android:layout_height="wrap_content"
 				android:text="@string/guiSMDResistor" android:id="@+id/guiSMDResistor"/>
-		<Button android:layout_width="fill_parent" android:layout_height="wrap_content"
-				android:text="@string/guiOhmsLaw" android:id="@+id/guiOhmsLaw"/>
-		<Button android:layout_width="fill_parent" android:layout_height="wrap_content"
+		<Button android:layout_width="match_parent" android:layout_height="wrap_content"
 				android:text="@string/guiImpedance" android:id="@+id/guiImpedance"/>
-		<Button android:layout_width="fill_parent" android:layout_height="wrap_content"
+		<TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+				  android:text="@string/guiCatECELaws" android:layout_gravity="left"
+				  android:layout_marginLeft="5dp" android:layout_marginTop="10dp"
+				  android:textAppearance="?android:attr/textAppearanceLarge"/>
+		<Button android:layout_width="match_parent" android:layout_height="wrap_content"
+				android:text="@string/guiOhmsLaw" android:id="@+id/guiOhmsLaw"/>
+		<Button android:layout_width="match_parent" android:layout_height="wrap_content"
 				android:text="@string/guiSerPar" android:id="@+id/guiSerPar"/>
-		<Button android:layout_width="fill_parent" android:layout_height="wrap_content"
+		<Button android:layout_width="match_parent" android:layout_height="wrap_content"
 				android:text="@string/guiVDiv" android:id="@+id/guiVDiv"/>
-		<Button android:layout_width="fill_parent" android:layout_height="wrap_content"
+		<TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+				  android:text="@string/guiCatDesignTools" android:layout_gravity="left"
+				  android:layout_marginLeft="5dp" android:layout_marginTop="10dp"
+				  android:textAppearance="?android:attr/textAppearanceLarge"/>
+		<Button android:layout_width="match_parent" android:layout_height="wrap_content"
 				android:text="@string/guiCurCap" android:id="@+id/guiCurCap"/>
+		<Button android:layout_width="match_parent" android:layout_height="wrap_content"
+				android:text="@string/guiPcbWidth" android:id="@+id/guiPcbWidth"/>
 	</LinearLayout>
 </ScrollView>

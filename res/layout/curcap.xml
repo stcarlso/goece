@@ -25,7 +25,7 @@
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
 			xmlns:ece="http://schemas.android.com/apk/res/com.stcarlso.goece"
-			android:layout_width="fill_parent" android:layout_height="fill_parent"
+			android:layout_width="match_parent" android:layout_height="match_parent"
 			android:scrollbars="vertical">
 	<RadioGroup android:layout_width="match_parent" android:layout_height="wrap_content"
 				android:orientation="vertical">
@@ -82,14 +82,14 @@
 					  android:orientation="horizontal">
 			<view class="com.stcarlso.goece.ui.CustomEntryBox" android:id="@+id/guiCurWidth"
 				  android:layout_width="wrap_content" android:layout_height="wrap_content"
-				  android:tag="guiCurWidth" ece:units="mm" ece:description="@string/guiCurWidth"
-				  ece:affects="outputs,len" ece:group="inputs" android:layout_marginRight="10dp"
-				  ece:customUnits="@array/guiCurPCBUnits" ece:value="1"/>
+				  android:tag="guiCurWidth" ece:units="mm" android:layout_marginRight="10dp"
+				  ece:affects="outputs,len" ece:description="@string/guiPcbTraceWidth"
+				  ece:group="inputs" ece:value="1" ece:customUnits="@array/guiPcbUnits"/>
 			<view class="com.stcarlso.goece.ui.CustomEntryBox" android:id="@+id/guiCurThickness"
 				  android:layout_width="wrap_content" android:layout_height="wrap_content"
 				  android:tag="guiCurThickness" ece:units="mm" ece:group="none"
-				  ece:affects="inputs,len" ece:customUnits="@array/guiCurPCBUnits"
-				  ece:value="0.07" ece:description="@string/guiCurThickness"/>
+				  ece:affects="inputs,len" ece:customUnits="@array/guiPcbUnits"
+				  ece:value="0.07" ece:description="@string/guiPcbTraceThick"/>
 		</LinearLayout>
 		<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
 					  android:layout_gravity="center_horizontal" android:layout_marginTop="10dp"

@@ -74,7 +74,8 @@ public class ComplexValue extends EngineeringValue implements Serializable {
 	 * @param tolerance the tolerance of this value (0.1 = 10%, 0.01 = 1%) or 0 to suppress
 	 * @param units the units to assign to this value
 	 */
-	public ComplexValue(final double mag, final double phase, final double tolerance, final String units) {
+	public ComplexValue(final double mag, final double phase, final double tolerance,
+						final String units) {
 		this(mag, phase, tolerance, 3, units);
 	}
 	/**
@@ -120,10 +121,10 @@ public class ComplexValue extends EngineeringValue implements Serializable {
 	}
 	@Override
 	public EngineeringValue divide(final EngineeringValue other) {
-		final double divisor = other.getValue();
-		if (divisor == 0.0)
+		final double divisor = other.getValue(), num = getValue();
+		if (divisor == 0.0 && num == 0.0)
 			throw new ArithmeticException("Complex-valued division by zero");
-		return newValue(getValue() / divisor, getAngle() - other.getAngle());
+		return newValue(num / divisor, getAngle() - other.getAngle());
 	}
 	public boolean equals(Object o) {
 		if (this == o) return true;

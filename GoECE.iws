@@ -68,6 +68,11 @@
           <theme>@android:style/Theme.Holo.NoActionBar</theme>
         </config>
       </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/pcbtrace.xml">
+        <config>
+          <theme>@android:style/Theme.Holo.NoActionBar</theme>
+        </config>
+      </layout>
       <layout url="file://$PROJECT_DIR$/res/layout/rescolorcode.xml">
         <config>
           <theme>@android:style/Theme.Holo.NoActionBar</theme>
@@ -79,6 +84,11 @@
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/res/layout/smdresistor.xml">
+        <config>
+          <theme>@android:style/Theme.Holo.NoActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/spinimgrow.xml">
         <config>
           <theme>@android:style/Theme.Holo.NoActionBar</theme>
         </config>
@@ -101,8 +111,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0024cbc7-21cd-4014-805d-7a7fa0b06e96" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/EIATable.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/EIATable.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/Equation.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/EquationSolver.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/PcbTraceActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/pcbtrace.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/spinimgrow.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/AbstractEntryBox.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/AbstractEntryBox.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/AnalogFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/AnalogFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ChildActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ChildActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ComplexEntryBox.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ComplexEntryBox.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/ComplexValue.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/ComplexValue.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/CurCapActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/CurCapActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/CustomEntryBox.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/CustomEntryBox.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/CustomEntryDialog.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/CustomEntryDialog.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoECE.iws" afterPath="$PROJECT_DIR$/GoECE.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/OhmsLawActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/OhmsLawActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/UIFunctions.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/UIFunctions.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/Units.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/Units.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/VDivActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/VDivActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueBoxContainer.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueBoxContainer.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueEntryBox.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueEntryBox.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/analog.xml" afterPath="$PROJECT_DIR$/res/layout/analog.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/cplxentry.xml" afterPath="$PROJECT_DIR$/res/layout/cplxentry.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/curcap.xml" afterPath="$PROJECT_DIR$/res/layout/curcap.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/digital.xml" afterPath="$PROJECT_DIR$/res/layout/digital.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/rescolorcode.xml" afterPath="$PROJECT_DIR$/res/layout/rescolorcode.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
     </list>
     <ignored path="GoECE.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -124,12 +159,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="SMDResistorActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/SMDResistorActivity.java">
+      <file leaf-file-name="PcbTraceActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/PcbTraceActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.08361204">
-              <caret line="71" column="70" selection-start-line="71" selection-start-column="70" selection-end-line="71" selection-end-column="70" />
-              <folding />
+            <state vertical-scroll-proportion="0.11725293">
+              <caret line="131" column="40" selection-start-line="131" selection-start-column="40" selection-end-line="131" selection-end-column="40" />
+              <folding>
+                <element signature="class#MicrostripEquation#0;class#PcbTraceActivity#0" expanded="true" />
+                <element signature="class#StriplineEquation#0;class#PcbTraceActivity#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -141,9 +179,10 @@
       <list>
         <option value="valueResourceFile" />
         <option value="Interface" />
-        <option value="Activity" />
         <option value="layoutResourceFile" />
+        <option value="Activity" />
         <option value="layoutResourceFile_vertical" />
+        <option value="resourceFile" />
         <option value="Class" />
       </list>
     </option>
@@ -162,18 +201,17 @@
     </option>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/SerParActivity.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/res/layout/serpar.xml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/SerParActivity.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/utility/EngineeringValue.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/ui/AbstractEntryBox.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/utility/CustomUnit.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/ui/CustomEntryDialog.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/ui/CustomEntryBox.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/utility/EIATable.java" />
+        <option value="$PROJECT_DIR$/res/layout/cplxentry.xml" />
+        <option value="$PROJECT_DIR$/res/layout/ohmslaw.xml" />
+        <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/res/layout/pcbtrace.xml" />
+        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/activity/PcbTraceActivity.java" />
       </list>
     </option>
   </component>
@@ -188,10 +226,10 @@
     <order />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1056" />
+    <option name="x" value="-11" />
+    <option name="y" value="-11" />
+    <option name="width" value="2582" />
+    <option name="height" value="1402" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -241,7 +279,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -270,11 +307,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="goece" />
+              <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -288,22 +321,19 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
+              <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="goece" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="activity" />
+              <option name="myItemId" value="layout" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -327,7 +357,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$APPLICATION_HOME_DIR$/android-sdk/extras/android/support/v13" />
-    <property name="settings.editor.selected.configurable" value="preferences.customizations" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="extract.method.default.visibility" value="protected" />
     <property name="SearchEverywhereHistoryKey" value="inspection&#9;ACTION&#9;ActivateInspectionToolWindow&#10;inspect&#9;ACTION&#9;ActivateInspectionToolWindow" />
@@ -609,36 +639,36 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="false" />
+    <frame x="-11" y="-11" width="2582" height="1402" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.3300866" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.3306255" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32864866" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32981315" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32864866" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.3300866" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32972974" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32981315" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32981315" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="true" weight="0.13856691" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.13868037" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.3300866" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18387777" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19241406" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32995737" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32324323" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32324323" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.3300866" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.3306255" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39757085" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.33013588" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32818848" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32818848" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -671,7 +701,8 @@
     <MESSAGE value="Significant refactoring to clean up dependencies and put things where they belong, along with actually fixing the description in the XML for complex value entry dialogs.&#10;" />
     <MESSAGE value="Finish current capacity tab calculations. Still could greatly benefit from custom unit display/conversion in CustomEntryBox." />
     <MESSAGE value="Finish current capacity tab calculations. Still could greatly benefit from custom unit display/conversion in CustomEntryBox.&#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Finish current capacity tab calculations. Still could greatly benefit from custom unit display/conversion in CustomEntryBox.&#10;" />
+    <MESSAGE value="Add AC section (SSS) to the Ohm's Law activity.&#10;Add separate Test Current to the Current Capacity activity.&#10;Fix egregious round off occurring on small numbers in EngineeringValue.&#10;Allow negative numbers in relevant fields for ComplexEntryDialog.&#10;Fix numerous other bugs." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add AC section (SSS) to the Ohm's Law activity.&#10;Add separate Test Current to the Current Capacity activity.&#10;Fix egregious round off occurring on small numbers in EngineeringValue.&#10;Allow negative numbers in relevant fields for ComplexEntryDialog.&#10;Fix numerous other bugs." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -684,59 +715,48 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ui/CustomEntryBox.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/ohmslaw.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.6574395">
+          <caret line="81" column="8" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="8" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ui/CustomEntryDialog.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/pcbtrace.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="149" column="0" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.75778544">
+          <caret line="78" column="50" selection-start-line="78" selection-start-column="50" selection-end-line="78" selection-end-column="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ui/AbstractEntryBox.java">
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.44723618">
-          <caret line="206" column="29" selection-start-line="206" selection-start-column="29" selection-end-line="206" selection-end-column="29" />
-          <folding />
+        <state vertical-scroll-proportion="0.8238342">
+          <caret line="184" column="50" selection-start-line="184" selection-start-column="50" selection-end-line="184" selection-end-column="50" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ui/CustomEntryBox.java">
+    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/utility/Units.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.89966553">
-          <caret line="207" column="0" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.8324958">
+          <caret line="85" column="46" selection-start-line="85" selection-start-column="46" selection-end-line="85" selection-end-column="46" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ui/CustomEntryDialog.java">
+    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/PcbTraceActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48494983">
-          <caret line="169" column="0" selection-start-line="169" selection-start-column="0" selection-end-line="169" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/utility/EIATable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.38350055">
-          <caret line="89" column="39" selection-start-line="89" selection-start-column="39" selection-end-line="89" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/SMDResistorActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.08361204">
-          <caret line="71" column="70" selection-start-line="71" selection-start-column="70" selection-end-line="71" selection-end-column="70" />
-          <folding />
+        <state vertical-scroll-proportion="0.11725293">
+          <caret line="131" column="40" selection-start-line="131" selection-start-column="40" selection-end-line="131" selection-end-column="40" />
+          <folding>
+            <element signature="class#MicrostripEquation#0;class#PcbTraceActivity#0" expanded="true" />
+            <element signature="class#StriplineEquation#0;class#PcbTraceActivity#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -817,6 +837,17 @@
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
           <last-edited>Android Support</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
           <splitter-proportions>
             <option name="proportions">
               <list>

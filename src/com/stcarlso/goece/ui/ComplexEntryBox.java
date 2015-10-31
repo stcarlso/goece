@@ -135,14 +135,12 @@ public class ComplexEntryBox extends AbstractEntryBox<ComplexValue> implements
 		prefs.putLong(tag + "_pha", Double.doubleToLongBits(getRawAngle()));
 	}
 	public void onClick(View v) {
-		if (activity != null) {
-			final String desc = getDescription();
-			// Create popup
-			final ComplexEntryDialog mutate = ComplexEntryDialog.create(getValue(), complexDesc);
-			mutate.setOnCalculateListener(this);
-			// Show it, popup will call oncalculate for us on OK
-			mutate.show(activity.getFragmentManager(), desc);
-		}
+		final String desc = getDescription();
+		// Create popup
+		final ComplexEntryDialog mutate = ComplexEntryDialog.create(getValue(), complexDesc);
+		mutate.setOnCalculateListener(this);
+		// Show it, popup will call oncalculate for us on OK
+		mutate.show(UIFunctions.getActivity(this).getFragmentManager(), desc);
 	}
 	@Override
 	public void updateValue(final double rawMag, final double rawPhase) {

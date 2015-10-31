@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ The MIT License (MIT)
+  ~
+  ~ Copyright (c) 2015 Stephen Carlson
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+			xmlns:ece="http://schemas.android.com/apk/res/com.stcarlso.goece"
+			android:layout_width="match_parent" android:layout_height="match_parent">
+	<RelativeLayout android:layout_width="match_parent" android:layout_height="wrap_content">
+		<Spinner android:layout_width="wrap_content" android:layout_height="wrap_content"
+				 android:entries="@array/guiPcbScenarios" android:id="@+id/guiPcbScenario"
+				 android:layout_gravity="center_horizontal" android:tag="guiPcbScenario"
+				 android:spinnerStyle="@android:style/Widget.Spinner.DropDown"
+				 android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
+		<RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+						android:layout_below="@id/guiPcbScenario" android:id="@+id/guiPcbGivens"
+						android:layout_centerHorizontal="true" android:layout_marginTop="10dp">
+			<ImageView android:layout_width="160dp" android:layout_height="120dp"
+					   android:id="@+id/guiPcbImage" android:layout_centerVertical="true"
+					   android:contentDescription="@string/guiPcbImage"/>
+			<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="outputs"
+				  android:id="@+id/guiPcbTraceHeight" android:tag="guiPcbTraceHeight"
+				  android:layout_width="wrap_content" ece:description="@string/guiPcbTraceThick"
+				  ece:customUnits="@array/guiPcbUnits" android:layout_height="wrap_content"
+				  android:layout_toRightOf="@id/guiPcbImage" ece:units="mm" ece:group="none"
+				  android:layout_alignRight="@+id/guiPcbThickness" ece:value="0.035"/>
+			<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="outputs"
+				  android:id="@+id/guiPcbThickness" android:tag="guiPcbThickness"
+				  android:layout_width="wrap_content" android:layout_height="wrap_content"
+				  ece:customUnits="@array/guiPcbUnits" ece:description="@string/guiPcbThickness"
+				  ece:group="none" android:layout_toRightOf="@id/guiPcbImage" ece:units="mm"
+				  android:layout_below="@id/guiPcbTraceHeight" ece:value="1.60"/>
+			<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="outputs"
+				  android:id="@+id/guiPcbDielectric" android:tag="guiPcbDielectric"
+				  android:layout_width="wrap_content" android:layout_height="wrap_content"
+				  ece:description="@string/guiPcbDielectric" ece:value="4.2"
+				  android:layout_toRightOf="@id/guiPcbImage" ece:group="none"
+				  android:layout_below="@id/guiPcbThickness" ece:units=""
+				  android:layout_alignRight="@+id/guiPcbTraceHeight"/>
+		</RelativeLayout>
+		<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+					  android:layout_below="@id/guiPcbGivens" android:layout_marginTop="10dp"
+					  android:layout_centerHorizontal="true" android:id="@+id/guiPcbInputs">
+			<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="outputs,outputs2"
+				  android:layout_width="wrap_content" android:layout_height="wrap_content"
+				  android:tag="guiPcbTraceWidth" android:id="@+id/guiPcbTraceWidth"
+				  ece:description="@string/guiPcbTraceWidth" ece:group="inputs" ece:value="0.1"
+				  ece:customUnits="@array/guiPcbUnits" ece:units="mm"/>
+			<view class="com.stcarlso.goece.ui.CustomEntryBox" android:visibility="gone"
+				  android:layout_width="wrap_content" android:layout_height="wrap_content"
+				  android:tag="guiPcbTraceSpace" android:id="@+id/guiPcbTraceSpace"
+				  ece:description="@string/guiPcbTraceSpace" ece:group="inputs2" ece:value="0.1"
+				  ece:customUnits="@array/guiPcbUnits" ece:units="mm" ece:affects="outputs2"/>
+		</LinearLayout>
+		<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+					  android:layout_below="@id/guiPcbInputs" android:layout_marginTop="10dp"
+					  android:layout_centerHorizontal="true">
+			<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiPcbImpedance1"
+				  android:layout_width="wrap_content" android:layout_height="wrap_content"
+				  android:tag="guiPcbImpedance1" ece:affects="inputs,outputs2" ece:value="50"
+				  ece:description="@string/guiPcbTraceZSingle" ece:group="outputs"
+				  ece:units="Ω"/>
+			<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiPcbImpedance2"
+				  android:layout_width="wrap_content" android:layout_height="wrap_content"
+				  android:tag="guiPcbImpedance2" ece:affects="inputs2" ece:value="50"
+				  ece:description="@string/guiPcbTraceZDiff" ece:group="outputs2" ece:units="Ω"
+				  android:visibility="gone"/>
+		</LinearLayout>
+	</RelativeLayout>
+</ScrollView>

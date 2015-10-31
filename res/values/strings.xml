@@ -41,7 +41,7 @@
 	<string name="copyMagPha">%1$.4g @ %2$.2f°</string>
 	<string name="copyReIm">%1$.4g + %2$.4gi</string>
 	<string name="editRaw">%1$.6f</string>
-	<string name="viewRaw">%1$.3g %2$s</string>
+	<string name="viewRaw">%1$.3g</string>
 	<!-- These show up pretty often -->
 	<string name="value">Value: </string>
 	<string name="voltage">Voltage</string>
@@ -69,18 +69,34 @@
 	<string name="degree">°</string>
 	<string name="degreeC">°C</string>
 	<string name="degreeF">°F</string>
+	<string-array name="guiPcbUnits">
+		<!-- mm is the base unit -->
+		<item>mil</item>
+		<item>0.0254</item>
+		<item>in</item>
+		<item>25.4</item>
+		<item>um</item>
+		<item>0.001</item>
+		<item>oz Cu</item>
+		<item>0.035</item>
+	</string-array>
 	<!-- Activity names and titles -->
 	<string name="guiTabAnalog">Analog</string>
 	<string name="guiTabDigital">Digital</string>
 	<string name="guiTabCircuits">Circuits</string>
-	<string name="guiKMapper">K-Map Generator</string>
+	<string name="guiCatPassive">Passives</string>
 	<string name="guiColorCode">Resistor Color Code</string>
 	<string name="guiSMDResistor">SMD Resistor Code</string>
-	<string name="guiOhmsLaw">Ohm\'s Law and Power</string>
 	<string name="guiImpedance">Impedance</string>
+	<string name="guiCatECELaws">ECE Fundamentals</string>
+	<string name="guiOhmsLaw">Ohm\'s Law and Power</string>
 	<string name="guiSerPar">Series/Parallel Resistance</string>
 	<string name="guiVDiv">Voltage Divider</string>
+	<string name="guiCatDesignTools">Design Tools</string>
 	<string name="guiCurCap">Current Capacity</string>
+	<string name="guiPcbWidth">PCB Trace Impedance</string>
+	<string name="guiCatAnalogIC">Analog ICs</string>
+	<string name="guiKMapper">K-Map Generator</string>
 	<!-- Resources for individual activities -->
 	<!-- SMD resistor code -->
 	<string name="guiResLine">Value is underlined</string>
@@ -118,9 +134,7 @@
 	<string name="guiCurWire">Wire</string>
 	<string name="guiCurTrace">PCB Trace (External layer)</string>
 	<string name="guiCurTemp">Temp. Rise</string>
-	<string name="guiCurWidth">Trace Width</string>
 	<string name="guiCurDiameter">Wire Diameter</string>
-	<string name="guiCurThickness">Trace Thickness</string>
 	<string name="guiCurXArea">Cross-Section Area</string>
 	<string name="guiCurGauge">Gauge</string>
 	<string name="guiCurCurrentRating">Current Rating</string>
@@ -130,17 +144,6 @@
 		<item>Steel</item>
 		<item>Gold</item>
 		<item>Silver</item>
-	</string-array>
-	<string-array name="guiCurPCBUnits">
-		<!-- mm is the base unit -->
-		<item>mil</item>
-		<item>0.0254</item>
-		<item>in</item>
-		<item>25.4</item>
-		<item>um</item>
-		<item>0.001</item>
-		<item>oz Cu</item>
-		<item>0.035</item>
 	</string-array>
 	<string-array name="guiCurDiaUnits">
 		<!-- mm is the base unit -->
@@ -166,4 +169,22 @@
 	</string-array>
 	<string name="guiCurTraceWarn">Calculated trace width may be unrealistic for these parameters</string>
 	<string name="guiCurCapWarn">Current value may be unrealistic for these parameters</string>
+	<!-- PCB trace calculations -->
+	<string name="guiPcbScenario">Configuration: </string>
+	<string name="guiPcbImage">Trace diagram</string>
+	<string-array name="guiPcbScenarios">
+		<item>Microstrip</item>
+		<item>Stripline</item>
+		<item>Differential Microstrip</item>
+		<item>Differential Stripline</item>
+	</string-array>
+	<string name="guiPcbTraceWidth">Trace Width</string>
+	<string name="guiPcbTraceThick">Trace Height</string>
+	<string name="guiPcbTraceSpace">Trace Spacing</string>
+	<string name="guiPcbTraceZSingle">Characteristic Z</string>
+	<string name="guiPcbTraceZDiff">Differential Z</string>
+	<string name="guiPcbThickness">Board Height</string>
+	<string name="guiPcbDielectric">Dielectric \u03B5&lt;small&gt;r&lt;/small&gt;</string>
+	<string name="guiPcbNoSolution">No solution found for these requirements.</string>
+	<string name="guiPcbBadInput">Relative permittivity must be greater than 1, and all thicknesses must be positive.</string>
 </resources>
