@@ -41,7 +41,6 @@
 	<string name="copyMagPha">%1$.4g @ %2$.2f°</string>
 	<string name="copyReIm">%1$.4g + %2$.4gi</string>
 	<string name="editRaw">%1$.6f</string>
-	<string name="viewRaw">%1$.3g</string>
 	<!-- These show up pretty often -->
 	<string name="value">Value: </string>
 	<string name="voltage">Voltage</string>
@@ -54,6 +53,7 @@
 	<string name="capacit">Capacitance</string>
 	<string name="freq">Frequency</string>
 	<string name="period">Period</string>
+	<string name="duration">Duration</string>
 	<string name="mag">Magnitude</string>
 	<string name="phase">Phase</string>
 	<string name="angle">Angle</string>
@@ -80,6 +80,21 @@
 		<item>oz Cu</item>
 		<item>0.035</item>
 	</string-array>
+	<string-array name="guiTimeUnits">
+		<!-- s is the base unit -->
+		<item>ms</item>
+		<item>0.001</item>
+		<item>min</item>
+		<item>60</item>
+		<item>hr</item>
+		<item>3600</item>
+		<item>day</item>
+		<item>86400</item>
+		<item>wk</item>
+		<item>604800</item>
+		<item>yr</item>
+		<item>31557600</item>
+	</string-array>
 	<!-- Activity names and titles -->
 	<string name="guiTabAnalog">Analog</string>
 	<string name="guiTabDigital">Digital</string>
@@ -95,6 +110,7 @@
 	<string name="guiCatDesignTools">Design Tools</string>
 	<string name="guiCurCap">Current Capacity</string>
 	<string name="guiPcbWidth">PCB Trace Impedance</string>
+	<string name="guiPowerUse">Power Use/Battery Life</string>
 	<string name="guiCatAnalogIC">Analog ICs</string>
 	<string name="guiKMapper">K-Map Generator</string>
 	<!-- Resources for individual activities -->
@@ -187,4 +203,10 @@
 	<string name="guiPcbDielectric">Dielectric \u03B5&lt;small&gt;r&lt;/small&gt;</string>
 	<string name="guiPcbNoSolution">No solution found for these requirements.</string>
 	<string name="guiPcbBadInput">Relative permittivity must be greater than 1, and all thicknesses must be positive.</string>
+	<!-- Power consumption -->
+	<string name="guiPwrCapacity">Battery Capacity</string>
+	<string name="guiPwrRun">Run</string>
+	<string name="guiPwrIdle">Idle</string>
+	<string name="guiPwrSleep">Sleep</string>
+	<string name="guiPwrDuration">Runtime</string>
 </resources>

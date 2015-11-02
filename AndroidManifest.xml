@@ -52,5 +52,10 @@
 			<meta-data android:name="android.support.PARENT_ACTIVITY"
 					   android:value=".activity.ECEActivity"/>
 		</activity>
+		<activity android:name=".activity.PowerUseActivity" android:label="@string/guiPowerUse"
+				  android:windowSoftInputMode="adjustResize">
+			<meta-data android:name="android.support.PARENT_ACTIVITY"
+					   android:value=".activity.ECEActivity"/>
+		</activity>
 	</application>
 </manifest>

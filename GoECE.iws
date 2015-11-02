@@ -17,9 +17,9 @@
       <config>
         <devices>
           <device id="Nexus 5" />
+          <device id="Nexus S" />
           <device id="Nexus 6" />
           <device id="Nexus One" />
-          <device id="Nexus S" />
           <device id="tv_720p" />
           <device id="tv_1080p" />
           <device id="Galaxy Nexus" />
@@ -30,7 +30,7 @@
     <layouts>
       <layout url="file://$PROJECT_DIR$/res/layout/analog.xml">
         <config>
-          <theme>@android:style/Theme.Holo.NoActionBar</theme>
+          <theme>@android:style/Theme.Holo</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/res/layout/colorband.xml">
@@ -40,7 +40,7 @@
       </layout>
       <layout url="file://$PROJECT_DIR$/res/layout/cplxentry.xml">
         <config>
-          <theme>@android:style/Theme.Holo.NoActionBar</theme>
+          <theme>@android:style/Theme.Holo.Dialog.NoActionBar</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/res/layout/curcap.xml">
@@ -71,6 +71,12 @@
       <layout url="file://$PROJECT_DIR$/res/layout/pcbtrace.xml">
         <config>
           <theme>@android:style/Theme.Holo.NoActionBar</theme>
+        </config>
+      </layout>
+      <layout url="file://$PROJECT_DIR$/res/layout/poweruse.xml">
+        <config>
+          <state>Landscape</state>
+          <theme>@android:style/Theme.Holo</theme>
         </config>
       </layout>
       <layout url="file://$PROJECT_DIR$/res/layout/rescolorcode.xml">
@@ -111,33 +117,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0024cbc7-21cd-4014-805d-7a7fa0b06e96" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/Equation.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/EquationSolver.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/PcbTraceActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/pcbtrace.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/spinimgrow.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/AbstractEntryBox.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/AbstractEntryBox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/AnalogFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/AnalogFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ChildActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ChildActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ComplexEntryBox.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ComplexEntryBox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/ComplexValue.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/ComplexValue.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/CurCapActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/CurCapActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/PowerUseActivity.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/poweruse.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/CustomEntryBox.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/CustomEntryBox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/CustomEntryDialog.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/CustomEntryDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoECE.iws" afterPath="$PROJECT_DIR$/GoECE.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/OhmsLawActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/OhmsLawActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/UIFunctions.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/UIFunctions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/Units.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/Units.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/VDivActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/VDivActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueBoxContainer.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueBoxContainer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueEntryBox.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ValueEntryBox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/analog.xml" afterPath="$PROJECT_DIR$/res/layout/analog.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/cplxentry.xml" afterPath="$PROJECT_DIR$/res/layout/cplxentry.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/curcap.xml" afterPath="$PROJECT_DIR$/res/layout/curcap.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/digital.xml" afterPath="$PROJECT_DIR$/res/layout/digital.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/rescolorcode.xml" afterPath="$PROJECT_DIR$/res/layout/rescolorcode.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/AnalogFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/AnalogFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/attrs.xml" afterPath="$PROJECT_DIR$/res/values/attrs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoECE.iws" afterPath="$PROJECT_DIR$/GoECE.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/analog.xml" afterPath="$PROJECT_DIR$/res/layout/analog.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/curcap.xml" afterPath="$PROJECT_DIR$/res/layout/curcap.xml" />
     </list>
     <ignored path="GoECE.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -159,15 +148,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="PcbTraceActivity.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/PcbTraceActivity.java">
+      <file leaf-file-name="poweruse.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/poweruse.xml">
+          <provider selected="true" editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="34" column="40" selection-start-line="34" selection-start-column="40" selection-end-line="34" selection-end-column="40" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PowerUseActivity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/PowerUseActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.11725293">
-              <caret line="131" column="40" selection-start-line="131" selection-start-column="40" selection-end-line="131" selection-end-column="40" />
-              <folding>
-                <element signature="class#MicrostripEquation#0;class#PcbTraceActivity#0" expanded="true" />
-                <element signature="class#StriplineEquation#0;class#PcbTraceActivity#0" expanded="true" />
-              </folding>
+            <state vertical-scroll-proportion="0.0">
+              <caret line="79" column="68" selection-start-line="79" selection-start-column="68" selection-end-line="79" selection-end-column="68" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -179,11 +178,11 @@
       <list>
         <option value="valueResourceFile" />
         <option value="Interface" />
-        <option value="layoutResourceFile" />
-        <option value="Activity" />
         <option value="layoutResourceFile_vertical" />
         <option value="resourceFile" />
         <option value="Class" />
+        <option value="layoutResourceFile" />
+        <option value="Activity" />
       </list>
     </option>
   </component>
@@ -207,11 +206,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/res/layout/cplxentry.xml" />
-        <option value="$PROJECT_DIR$/res/layout/ohmslaw.xml" />
         <option value="$PROJECT_DIR$/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/res/layout/pcbtrace.xml" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/activity/PcbTraceActivity.java" />
+        <option value="$PROJECT_DIR$/res/layout/poweruse.xml" />
+        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/ui/CustomEntryBox.java" />
+        <option value="$PROJECT_DIR$/res/layout/curcap.xml" />
+        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/activity/PowerUseActivity.java" />
       </list>
     </option>
   </component>
@@ -307,7 +306,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="goece" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -321,19 +324,23 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="res" />
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="layout" />
+              <option name="myItemId" value="goece" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="activity" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -647,7 +654,6 @@
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32864866" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32981315" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32981315" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.32981315" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -660,6 +666,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -702,7 +709,8 @@
     <MESSAGE value="Finish current capacity tab calculations. Still could greatly benefit from custom unit display/conversion in CustomEntryBox." />
     <MESSAGE value="Finish current capacity tab calculations. Still could greatly benefit from custom unit display/conversion in CustomEntryBox.&#10;" />
     <MESSAGE value="Add AC section (SSS) to the Ohm's Law activity.&#10;Add separate Test Current to the Current Capacity activity.&#10;Fix egregious round off occurring on small numbers in EngineeringValue.&#10;Allow negative numbers in relevant fields for ComplexEntryDialog.&#10;Fix numerous other bugs." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add AC section (SSS) to the Ohm's Law activity.&#10;Add separate Test Current to the Current Capacity activity.&#10;Fix egregious round off occurring on small numbers in EngineeringValue.&#10;Allow negative numbers in relevant fields for ComplexEntryDialog.&#10;Fix numerous other bugs." />
+    <MESSAGE value="Start PCB trace width calculation, and simplify a few other layouts. Add classes which can be used to reverse solve functions that do not have a convenient algebraic solution. Remove a few activity dependencies in entry boxes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Start PCB trace width calculation, and simplify a few other layouts. Add classes which can be used to reverse solve functions that do not have a convenient algebraic solution. Remove a few activity dependencies in entry boxes." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -715,48 +723,43 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/res/layout/ohmslaw.xml">
-      <provider editor-type-id="android-designer">
+    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/CurCapActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="68" column="53" selection-start-line="68" selection-start-column="53" selection-end-line="68" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/curcap.xml">
+      <provider selected="true" editor-type-id="android-designer">
         <state />
       </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6574395">
-          <caret line="81" column="8" selection-start-line="81" selection-start-column="8" selection-end-line="81" selection-end-column="8" />
+      <provider editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="61" column="92" selection-start-line="61" selection-start-column="92" selection-end-line="61" selection-end-column="92" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/pcbtrace.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/ImpedanceActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.75778544">
-          <caret line="78" column="50" selection-start-line="78" selection-start-column="50" selection-end-line="78" selection-end-column="50" />
+        <state vertical-scroll-proportion="-0.021775544">
+          <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/OhmsLawActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8238342">
-          <caret line="184" column="50" selection-start-line="184" selection-start-column="50" selection-end-line="184" selection-end-column="50" />
+        <state vertical-scroll-proportion="-2.5343385">
+          <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/utility/Units.java">
+    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/PowerUseActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8324958">
-          <caret line="85" column="46" selection-start-line="85" selection-start-column="46" selection-end-line="85" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/PcbTraceActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11725293">
-          <caret line="131" column="40" selection-start-line="131" selection-start-column="40" selection-end-line="131" selection-end-column="40" />
-          <folding>
-            <element signature="class#MicrostripEquation#0;class#PcbTraceActivity#0" expanded="true" />
-            <element signature="class#StriplineEquation#0;class#PcbTraceActivity#0" expanded="true" />
-          </folding>
+        <state vertical-scroll-proportion="0.0">
+          <caret line="79" column="68" selection-start-line="79" selection-start-column="68" selection-end-line="79" selection-end-column="68" />
+          <folding />
         </state>
       </provider>
     </entry>

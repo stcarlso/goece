@@ -66,6 +66,7 @@
 		<attr name="value"/>
 		<attr name="group"/>
 		<attr name="affects"/>
+		<attr name="sigfigs"/>
 		<attr name="customUnits" format="reference"/>
 	</declare-styleable>
 </resources>

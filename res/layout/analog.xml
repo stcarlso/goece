@@ -55,5 +55,7 @@
 				android:text="@string/guiCurCap" android:id="@+id/guiCurCap"/>
 		<Button android:layout_width="match_parent" android:layout_height="wrap_content"
 				android:text="@string/guiPcbWidth" android:id="@+id/guiPcbWidth"/>
+		<Button android:layout_width="match_parent" android:layout_height="wrap_content"
+				android:text="@string/guiPowerUse" android:id="@+id/guiPowerUse"/>
 	</LinearLayout>
 </ScrollView>

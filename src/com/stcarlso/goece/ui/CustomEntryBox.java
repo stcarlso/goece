@@ -81,6 +81,10 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 	 * The unit used for display. If null or invalid, the base unit is used.
 	 */
 	protected CustomUnit displayUnit;
+	/**
+	 * The number of significant figures to be used when displaying the value.
+	 */
+	protected int sigfigs;
 
 	public CustomEntryBox(Context context) {
 		super(context);
@@ -95,6 +99,7 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 	protected void init(final Context context, final AttributeSet attrs) {
 		String units = "", desc = "Value", newGroup = "", willAffect = "";
 		double iv = 0.0;
+		int sf = 3;
 		super.init(context, attrs);
 		customUnits = null;
 		displayUnit = null;
@@ -109,6 +114,7 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 				iv = values.getFloat(R.styleable.CustomEntryBox_value, 0.0f);
 				newGroup = values.getString(R.styleable.CustomEntryBox_group);
 				willAffect = values.getString(R.styleable.CustomEntryBox_affects);
+				sf = values.getInteger(R.styleable.CustomEntryBox_sigfigs, 3);
 				// Extract string arrays from resources
 				final int customUnitsID = values.getResourceId(R.styleable.
 					CustomEntryBox_customUnits, 0);
@@ -122,6 +128,7 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 			Log.w("CustomEntryBox", "No units specified, defaulting to unitless!");
 		group = newGroup;
 		affects = willAffect;
+		this.sigfigs = sf;
 		// Create value and set text
 		description = desc;
 		setValue(new EngineeringValue(iv, 0.0, units));
@@ -135,8 +142,10 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 				// null if no match found
 				displayUnit = customUnits.get(unit);
 			// Why floats? Why no doubles in preferences? Android you make me sad!
-			if (!Double.isNaN(ld))
+			if (!Double.isNaN(ld)) {
 				updateValue(ld);
+				updateText();
+			}
 		}
 	}
 	public void saveState(SharedPreferences.Editor prefs) {
@@ -199,7 +208,7 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 		if (Double.isInfinite(dv))
 			displayVal = (dv > 0.0) ? "\u221E" : "-\u221E";
 		else
-			displayVal = getResources().getString(R.string.viewRaw, dv);
+			displayVal = String.format("%." + sigfigs + "g", dv);
 		// Italicize the name
 		text.setSpan(new StyleSpan(Typeface.ITALIC), 0, desc.length(),
 			Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

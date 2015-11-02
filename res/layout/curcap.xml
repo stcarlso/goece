@@ -59,7 +59,7 @@
 			<view class="com.stcarlso.goece.ui.CustomEntryBox" android:id="@+id/guiCurGauge"
 				  android:layout_width="wrap_content" android:layout_height="wrap_content"
 				  android:tag="guiCurGauge" ece:units="AWG" android:layout_marginRight="10dp"
-				  ece:affects="outputs,len" ece:group="inputs" ece:value="18" ece:sigfigs="0"
+				  ece:affects="outputs,len" ece:group="inputs" ece:value="18" ece:sigfigs="2"
 				  ece:description="@string/guiCurGauge"/>
 			<view class="com.stcarlso.goece.ui.CustomEntryBox" android:id="@+id/guiCurDiameter"
 				  android:layout_width="wrap_content" android:layout_height="wrap_content"
