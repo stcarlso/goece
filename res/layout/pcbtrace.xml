@@ -38,19 +38,19 @@
 			<ImageView android:layout_width="160dp" android:layout_height="120dp"
 					   android:id="@+id/guiPcbImage" android:layout_centerVertical="true"
 					   android:contentDescription="@string/guiPcbImage"/>
-			<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="outputs"
+			<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="outputs,outputs2"
 				  android:id="@+id/guiPcbTraceHeight" android:tag="guiPcbTraceHeight"
 				  android:layout_width="wrap_content" ece:description="@string/guiPcbTraceThick"
 				  ece:customUnits="@array/guiPcbUnits" android:layout_height="wrap_content"
 				  android:layout_toRightOf="@id/guiPcbImage" ece:units="mm" ece:group="none"
 				  android:layout_alignRight="@+id/guiPcbThickness" ece:value="0.035"/>
-			<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="outputs"
+			<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="outputs,outputs2"
 				  android:id="@+id/guiPcbThickness" android:tag="guiPcbThickness"
 				  android:layout_width="wrap_content" android:layout_height="wrap_content"
 				  ece:customUnits="@array/guiPcbUnits" ece:description="@string/guiPcbThickness"
 				  ece:group="none" android:layout_toRightOf="@id/guiPcbImage" ece:units="mm"
 				  android:layout_below="@id/guiPcbTraceHeight" ece:value="1.60"/>
-			<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="outputs"
+			<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="outputs,outputs2"
 				  android:id="@+id/guiPcbDielectric" android:tag="guiPcbDielectric"
 				  android:layout_width="wrap_content" android:layout_height="wrap_content"
 				  ece:description="@string/guiPcbDielectric" ece:value="4.2"

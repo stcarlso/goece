@@ -31,6 +31,7 @@
 	<string name="ok">OK</string>
 	<string name="calculate">Calculate</string>
 	<string name="copy">Copy</string>
+	<string name="paste">Paste</string>
 	<string name="magpha">r * e<sup>θ<i>i</i></sup></string>
 	<string name="reim">a + b<i>i</i></string>
 	<string name="copyRaw">%1$.4g</string>
@@ -40,6 +41,7 @@
 	<string name="copyAngle">%1$.2f°</string>
 	<string name="copyMagPha">%1$.4g @ %2$.2f°</string>
 	<string name="copyReIm">%1$.4g + %2$.4gi</string>
+	<string name="copyReImMinus">%1$.4g - %2$.4gi</string>
 	<string name="editRaw">%1$.6f</string>
 	<!-- These show up pretty often -->
 	<string name="value">Value: </string>
@@ -197,12 +199,12 @@
 	<string name="guiPcbTraceWidth">Trace Width</string>
 	<string name="guiPcbTraceThick">Trace Height</string>
 	<string name="guiPcbTraceSpace">Trace Spacing</string>
-	<string name="guiPcbTraceZSingle">Characteristic Z</string>
+	<string name="guiPcbTraceZSingle">Impedance Z</string>
 	<string name="guiPcbTraceZDiff">Differential Z</string>
 	<string name="guiPcbThickness">Board Height</string>
 	<string name="guiPcbDielectric">Dielectric \u03B5&lt;small&gt;r&lt;/small&gt;</string>
 	<string name="guiPcbNoSolution">No solution found for these requirements.</string>
-	<string name="guiPcbBadInput">Relative permittivity must be greater than 1, and all thicknesses must be positive.</string>
+	<string name="guiPcbBadInput">Relative permittivity must be greater than 1, and all other measurements must be positive.</string>
 	<!-- Power consumption -->
 	<string name="guiPwrCapacity">Battery Capacity</string>
 	<string name="guiPwrRun">Run</string>

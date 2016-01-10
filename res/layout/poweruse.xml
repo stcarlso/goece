@@ -83,11 +83,16 @@
 		  android:tag="guiPwrSleepTime" ece:units="s" ece:value="0.8" android:layout_row="3"
 		  ece:description="@string/duration" ece:group="none" ece:affects="outputs"
 		  android:layout_column="2" android:layout_gravity="center_horizontal"/>
-	<view class="com.stcarlso.goece.ui.CustomEntryBox" android:layout_width="wrap_content"
-		  android:layout_height="wrap_content" android:id="@+id/guiPwrDuration"
-		  android:tag="guiPwrDuration" ece:units="s" ece:value="1000" android:layout_row="4"
-		  ece:description="@string/guiPwrDuration" ece:group="outputs" ece:affects="inputs"
-		  android:layout_column="0" android:layout_gravity="center_horizontal"
-		  android:layout_columnSpan="3" android:layout_marginTop="10dp"
-		  ece:sigfigs="4" ece:customUnits="@array/guiTimeUnits"/>
+	<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+				  android:layout_row="4" android:layout_columnSpan="3"
+				  android:layout_column="0" android:layout_marginTop="10dp"
+				  android:layout_gravity="center_horizontal">
+		<view class="com.stcarlso.goece.ui.CustomEntryBox" android:layout_width="wrap_content"
+			  android:layout_height="wrap_content" android:id="@+id/guiPwrDuration"
+			  android:tag="guiPwrDuration" ece:units="s" ece:value="1000" ece:sigfigs="4"
+			  ece:description="@string/guiPwrDuration" ece:group="outputs" ece:affects="inputs"
+			  ece:customUnits="@array/guiTimeUnits"/>
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+				  android:id="@+id/guiPwrDraw" android:layout_marginLeft="10dp"/>
+	</LinearLayout>
 </GridLayout>

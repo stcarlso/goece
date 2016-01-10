@@ -29,7 +29,7 @@ import android.widget.TextView;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.ChildActivity;
 import com.stcarlso.goece.ui.ColorBand;
-import com.stcarlso.goece.ui.CopyListener;
+import com.stcarlso.goece.ui.CopyPasteListener;
 import com.stcarlso.goece.ui.ValueGroup;
 import com.stcarlso.goece.utility.EIATable;
 import com.stcarlso.goece.utility.EIAValue;
@@ -61,7 +61,7 @@ public class ResColorActivity extends ChildActivity {
 	/**
 	 * Handles long presses on the output text box.
 	 */
-	private final CopyListener copyListener;
+	private final CopyPasteListener copyPasteListener;
 	/**
 	 * Cached reference to the output text box.
 	 */
@@ -73,7 +73,7 @@ public class ResColorActivity extends ChildActivity {
 
 	public ResColorActivity() {
 		bandCtrl = new ColorBand[5];
-		copyListener = new CopyListener(this, "Resistance");
+		copyPasteListener = new CopyPasteListener(this, "Resistance");
 	}
 	public void recalculate(final ValueGroup group) {
 		final int tol = bandCtrl[4].getValue();
@@ -110,7 +110,7 @@ public class ResColorActivity extends ChildActivity {
 		final EIAValue finalValue = new EIAValue(value * MULTIPLIER[bandCtrl[3].getValue()],
 			series, TOLERANCE[tol]);
 		outputCtrl.setText(finalValue.toString());
-		copyListener.setValue(finalValue);
+		copyPasteListener.setValue(finalValue);
 		// In EIA series?
 		UIFunctions.checkEIATable(finalValue, stdCtrl);
 	}
@@ -125,7 +125,7 @@ public class ResColorActivity extends ChildActivity {
 		bandCtrl[3] = (ColorBand)findViewById(R.id.guiResBand4);
 		bandCtrl[4] = (ColorBand)findViewById(R.id.guiResBand5);
 		outputCtrl = asTextView(R.id.guiResValue);
-		outputCtrl.setOnLongClickListener(copyListener);
+		outputCtrl.setOnLongClickListener(copyPasteListener);
 		stdCtrl = asTextView(R.id.guiResIsStandard);
 		// Add click listeners
 		for (ColorBand band : bandCtrl) {

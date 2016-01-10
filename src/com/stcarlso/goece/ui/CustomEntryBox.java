@@ -100,7 +100,6 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 		String units = "", desc = "Value", newGroup = "", willAffect = "";
 		double iv = 0.0;
 		int sf = 3;
-		super.init(context, attrs);
 		customUnits = null;
 		displayUnit = null;
 		if (attrs != null) {
@@ -128,10 +127,14 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 			Log.w("CustomEntryBox", "No units specified, defaulting to unitless!");
 		group = newGroup;
 		affects = willAffect;
-		this.sigfigs = sf;
+		sigfigs = sf;
 		// Create value and set text
 		description = desc;
 		setValue(new EngineeringValue(iv, 0.0, units));
+		// Call superclass method only when the description and value are loaded
+		super.init(context, attrs);
+		if (!isInEditMode())
+			copyPasteListener.setSigFigOverride(sf);
 	}
 	public void loadState(SharedPreferences prefs) {
 		final String idS = UIFunctions.getTag(this);
@@ -208,7 +211,7 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 		if (Double.isInfinite(dv))
 			displayVal = (dv > 0.0) ? "\u221E" : "-\u221E";
 		else
-			displayVal = String.format("%." + sigfigs + "g", dv);
+			displayVal = new EngineeringValue(dv).valueToString(sigfigs);
 		// Italicize the name
 		text.setSpan(new StyleSpan(Typeface.ITALIC), 0, desc.length(),
 			Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

@@ -256,6 +256,21 @@ public class EngineeringValue implements Serializable {
 		return newValue(getValue() + other.getReal());
 	}
 	/**
+	 * Appends the tolerance specifier if necessary.
+	 *
+	 * @param format the location for the formatted tolerance to be placed
+	 */
+	private void appendToleranceFormat(final StringBuilder format) {
+		final double tol = getTolerance();
+		if (tol > 0.0) {
+			// value +/- #%
+			format.append(' ');
+			format.append(P_M_SYMBOL);
+			format.append(toleranceToString(tol));
+			format.append("%%");
+		}
+	}
+	/**
 	 * Divides this EngineeringValue by another. This is really only useful in the
 	 * ComplexValue instance, but still works for the real valued case.
 	 *
@@ -428,17 +443,34 @@ public class EngineeringValue implements Serializable {
 	public EngineeringValue subtract(final EngineeringValue other) {
 		return newValue(getValue() - other.getReal());
 	}
+	/**
+	 * A variation of toString() which uses valueToString() and omits the SI prefix, for units
+	 * which have the prefix already or are in the English system (why?)
+	 *
+	 * @param sf the number of significant figures to apply
+	 * @return this value as a a string
+	 */
+	public String toExponentialString(final int sf) {
+		final StringBuilder format = new StringBuilder(valueToString(sf));
+		format.append(" %s");
+		appendToleranceFormat(format);
+		return String.format(format.toString(), getUnits()).trim();
+	}
 	public String toString() {
 		final StringBuilder format = new StringBuilder(significandToString());
-		final double tol = getTolerance();
 		format.append(" %s%s");
-		if (tol > 0.0) {
-			// value +/- #%
-			format.append(' ');
-			format.append(P_M_SYMBOL);
-			format.append(toleranceToString(tol));
-			format.append("%%");
-		}
-		return String.format(format.toString(), getSIPrefix(), getUnits());
+		appendToleranceFormat(format);
+		return String.format(format.toString(), getSIPrefix(), getUnits()).trim();
+	}
+	/**
+	 * Converts the raw value of this EngineeringValue to a string with the correct number of
+	 * significant figures and the E+/E- specifier if needed, but with no units or other
+	 * suffixes. Essentially performs a String.format() call as a double.
+	 *
+	 * @param sf the number of significant figures to use
+	 * @return the raw value as a a string
+	 */
+	public String valueToString(final int sf) {
+		return String.format("%." + Integer.toString(sf) + "g", getValue());
 	}
 }

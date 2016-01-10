@@ -29,6 +29,38 @@ package com.stcarlso.goece.utility;
  */
 public final class ECECalc {
 	/**
+	 * Calculates the complete elliptic integral of the first kind for the parameter x.
+	 *
+	 * @param x the parameter of the integral
+	 * @return the elliptic integral
+	 */
+	public static double elliptic(final double x) {
+		return elliptic(x, 24);
+	}
+	/**
+	 * Calculates the complete elliptic integral of the first kind for the parameter x.
+	 *
+	 * @param x the parameter of the integral
+	 * @param terms the number of terms to compute in the series approximation
+	 * @return the elliptic integral
+	 */
+	public static double elliptic(final double x, final int terms) {
+		double sum = 1.0;
+		// x can be positive or negative in theory
+		double kpow = 1.0, num = 1.0, denom = 1.0;
+		// <= 0 terms is meaningless, and 1 term is always pi / 2
+		for (int i = 1; i < terms; i++) {
+			final int idx = i << 1;
+			kpow = kpow * x * x;
+			num *= idx - 1;
+			denom *= idx;
+			// Saves 1 multiply?
+			final double ratio = num / denom;
+			sum += kpow * ratio * ratio;
+		}
+		return sum * Math.PI * 0.5;
+	}
+	/**
 	 * Rounds the double-precision value to 40 bits. Essential for equalizing small calculation
 	 * errors from base-two rounding through calculation chains. This is about the 1E-9 decimal
 	 * place relative to the mantissa.

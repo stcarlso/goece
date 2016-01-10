@@ -86,7 +86,6 @@ public class ComplexEntryBox extends AbstractEntryBox<ComplexValue> implements
 			imDesc = null, magDesc = null, phaDesc = null;
 		double iv = 0.0, ip = 0.0;
 		int sf = 3;
-		super.init(context, attrs);
 		if (attrs != null) {
 			// Read attributes for units
 			final TypedArray values = context.getTheme().obtainStyledAttributes(attrs,
@@ -118,6 +117,8 @@ public class ComplexEntryBox extends AbstractEntryBox<ComplexValue> implements
 		complexDesc = new ComplexEntryDialog.ComplexEntryDescriptions(magDesc, phaDesc,
 			reDesc, imDesc, desc);
 		setValue(new ComplexValue(iv, ip, 0.0, sf, units));
+		// Call superclass method only when the description and value are loaded
+		super.init(context, attrs);
 	}
 	public void loadState(SharedPreferences prefs) {
 		final String idS = UIFunctions.getTag(this);

@@ -24,16 +24,12 @@
 
 package com.stcarlso.goece.ui;
 
-import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Parcelable;
 import android.text.Html;
-import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.style.BackgroundColorSpan;
 import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.view.View;
@@ -53,7 +49,7 @@ public abstract class AbstractEntryBox<T extends EngineeringValue> extends Butto
 	/**
 	 * Listens for long presses and copies the value.
 	 */
-	protected CopyListener copyListener;
+	protected CopyPasteListener copyPasteListener;
 	/**
 	 * The description requested for this value box ("Leakage Current", "Turn-On Voltage", ...)
 	 */
@@ -133,9 +129,9 @@ public abstract class AbstractEntryBox<T extends EngineeringValue> extends Butto
 	protected void init(final Context context, final AttributeSet attrs) {
 		// Update the copy listener (no activity parent in edit mode!)
 		if (!isInEditMode()) {
-			copyListener = new CopyListener(UIFunctions.getActivity(this), getDescription());
-			copyListener.setValue(getValue());
-			setOnLongClickListener(copyListener);
+			copyPasteListener = new CopyPasteListener(this);
+			copyPasteListener.setValue(getValue());
+			setOnLongClickListener(copyPasteListener);
 		}
 		// Initialize click listeners
 		listener = null;
@@ -203,8 +199,8 @@ public abstract class AbstractEntryBox<T extends EngineeringValue> extends Butto
 	public void setValue(final T newValue) {
 		if (newValue != null && (value == null || !value.equals(newValue))) {
 			value = newValue;
-			if (copyListener != null)
-				copyListener.setValue(newValue);
+			if (copyPasteListener != null)
+				copyPasteListener.setValue(newValue);
 			updateText();
 		}
 	}

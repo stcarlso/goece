@@ -110,7 +110,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	/**
 	 * Handles long presses on the output text box.
 	 */
-	private final CopyListener copyListener;
+	private final CopyPasteListener copyPasteListener;
 	/**
 	 * The last successfully calculated resistor code.
 	 */
@@ -129,7 +129,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	private CheckBox underlineCtrl;
 
 	public SMDResistorActivity() {
-		copyListener = new CopyListener(this, "Resistance");
+		copyPasteListener = new CopyPasteListener(this, "Resistance");
 		lastCode = "000";
 	}
 	/**
@@ -185,7 +185,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 		// Load and register the input code box
 		final ValueTextBox codeIn = (ValueTextBox)findViewById(R.id.guiResSMDCode);
 		outputCtrl = asTextView(R.id.guiResValue);
-		outputCtrl.setOnLongClickListener(copyListener);
+		outputCtrl.setOnLongClickListener(copyPasteListener);
 		stdCtrl = asTextView(R.id.guiResIsStandard);
 		registerAdjustable(codeIn);
 		// Add listener to calculate on press
@@ -235,7 +235,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	private void showValue(final EIAValue value) {
 		outputCtrl.setText(value.toString());
 		UIFunctions.checkEIATable(value, stdCtrl);
-		copyListener.setValue(value);
+		copyPasteListener.setValue(value);
 	}
 	// All work is done in recalculate()
 	protected void update(ValueGroup group) { }

@@ -27,10 +27,13 @@ package com.stcarlso.goece.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.TextView;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.ChildActivity;
 import com.stcarlso.goece.ui.ValueBoxContainer;
 import com.stcarlso.goece.ui.ValueGroup;
+import com.stcarlso.goece.utility.EngineeringValue;
+import com.stcarlso.goece.utility.Units;
 
 /**
  * An activity for calculating average power use and the resulting battery life.
@@ -40,6 +43,10 @@ public class PowerUseActivity extends ChildActivity implements View.OnClickListe
 	 * Contains all data entry controls.
 	 */
 	private final ValueBoxContainer controls;
+	/**
+	 * Cached reference to the average current draw text view.
+	 */
+	private TextView currentDraw;
 	/**
 	 * Cached reference to the "Idle" check box.
 	 */
@@ -77,6 +84,7 @@ public class PowerUseActivity extends ChildActivity implements View.OnClickListe
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.poweruse);
 		// Update references
+		currentDraw = (TextView)findViewById(R.id.guiPwrDraw);
 		idleEnableCtrl = (CheckBox)findViewById(R.id.guiPwrIdleEna);
 		runEnableCtrl = (CheckBox)findViewById(R.id.guiPwrRunEna);
 		sleepEnableCtrl = (CheckBox)findViewById(R.id.guiPwrSleepEna);
@@ -127,6 +135,7 @@ public class PowerUseActivity extends ChildActivity implements View.OnClickListe
 	}
 	protected void recalculate(ValueGroup group) {
 		final double i = calculateIAvg();
+		currentDraw.setText("Current: " + new EngineeringValue(i, Units.CURRENT));
 		switch (group.leastRecentlyUsed()) {
 		case R.id.guiPwrCapacity:
 			// Calculate capacity based on desired runtime
