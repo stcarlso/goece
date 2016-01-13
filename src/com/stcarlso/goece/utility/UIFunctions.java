@@ -1,7 +1,7 @@
 /***********************************************************************************************
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Stephen Carlson
+ * Copyright (c) 2016 Stephen Carlson
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -32,6 +32,7 @@ import android.graphics.Color;
 import android.text.Html;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import com.stcarlso.goece.R;
 
@@ -78,10 +79,12 @@ public final class UIFunctions {
 	 * @param messageID the string ID of the message
 	 */
 	public static void errorMessage(final Activity activity, final int messageID) {
-		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
-		builder.setMessage(messageID);
-		builder.setPositiveButton(R.string.ok, new IgnoreOnClickListener());
-		builder.create().show();
+		if (activity != null) {
+			final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+			builder.setMessage(messageID);
+			builder.setPositiveButton(R.string.ok, new IgnoreOnClickListener());
+			builder.create().show();
+		}
 	}
 	/**
 	 * Reports the parent activity of a View, or null if the view has no parent activity.
@@ -90,6 +93,8 @@ public final class UIFunctions {
 	 * @return the Activity object which is hosting the view
 	 */
 	public static Activity getActivity(final View view) {
+		if (view == null)
+			throw new NullPointerException("view");
 		Context context = view.getContext();
 		Activity parent = null;
 		while (parent == null && (context instanceof ContextWrapper)) {
@@ -107,6 +112,8 @@ public final class UIFunctions {
 	 * @return the view tag, or the view ID as a string if no tag was defined (bad!)
 	 */
 	public static String getTag(final View view) {
+		if (view == null)
+			throw new NullPointerException("view");
 		final Object tag = view.getTag();
 		final String idS;
 		if (tag != null)
@@ -118,13 +125,30 @@ public final class UIFunctions {
 		return idS;
 	}
 	/**
+	 * Hides the soft keyboard, used to silence warnings about inactive InputConnection.
+	 *
+	 * @param activity the current activity, use this method in onPause()
+	 */
+	public static void hideKeyboard(final Activity activity) {
+		if (activity == null)
+			throw new NullPointerException("activity");
+		final InputMethodManager inputMethodManager = (InputMethodManager)activity.
+			getSystemService(Context.INPUT_METHOD_SERVICE);
+		// Look for the root view
+		final View view = activity.findViewById(android.R.id.content);
+		if (view != null)
+			inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+	}
+	/**
 	 * Assigns text to a static text field.
 	 *
-	 * @param dialog the root view
+	 * @param view the root view
 	 * @param id the ID of the text field
 	 * @param text the text to load (<b>Will be parsed as HTML</b>)
 	 */
-	public static void setLabelText(final View dialog, final int id, final String text) {
-		((TextView)dialog.findViewById(id)).setText(Html.fromHtml(text));
+	public static void setLabelText(final View view, final int id, final String text) {
+		if (view == null)
+			throw new NullPointerException("view");
+		((TextView)view.findViewById(id)).setText(Html.fromHtml(text));
 	}
 }

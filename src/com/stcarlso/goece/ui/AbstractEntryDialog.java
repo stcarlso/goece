@@ -1,7 +1,7 @@
 /***********************************************************************************************
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Stephen Carlson
+ * Copyright (c) 2016 Stephen Carlson
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,12 +27,10 @@ package com.stcarlso.goece.ui;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 import com.stcarlso.goece.utility.EngineeringValue;
-
-import java.io.Serializable;
+import com.stcarlso.goece.utility.UIFunctions;
 
 /**
  * Abstract parent of ValueEntryDialog and CustomEntryDialog containing shared logic.
@@ -129,6 +127,8 @@ public abstract class AbstractEntryDialog extends DialogFragment implements
 		*/
 	}
 	public void onPause() {
+		// Silence "getExtractedText on inactive InputConnection"
+		UIFunctions.hideKeyboard(getActivity());
 		super.onPause();
 		dismiss();
 	}

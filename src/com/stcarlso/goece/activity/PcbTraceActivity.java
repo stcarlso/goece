@@ -1,7 +1,7 @@
 /***********************************************************************************************
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Stephen Carlson
+ * Copyright (c) 2016 Stephen Carlson
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -28,6 +28,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.AbstractEntryBox;
@@ -45,6 +46,15 @@ import com.stcarlso.goece.utility.Units;
 public class PcbTraceActivity extends ChildActivity implements
 		AdapterView.OnItemSelectedListener {
 	/**
+	 * Images for the user assist, indexed by the combo box option.
+	 */
+	private static final int[] IMAGES = new int[] {
+		R.drawable.microstrip1,
+		R.drawable.stripline1,
+		R.drawable.microstrip2,
+		R.drawable.stripline2
+	};
+	/**
 	 * Minimum width that the solver will attempt in mm.
 	 */
 	public static final double MIN_SOLVE_WIDTH = 0.01;
@@ -57,6 +67,10 @@ public class PcbTraceActivity extends ChildActivity implements
 	 * Contains all data entry controls.
 	 */
 	private final ValueBoxContainer controls;
+	/**
+	 * Cached reference to the user assist image of the current impedance scenario.
+	 */
+	private ImageView pcbImage;
 	/**
 	 * Cached reference to the trace type selector control.
 	 */
@@ -119,6 +133,7 @@ public class PcbTraceActivity extends ChildActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pcbtrace);
+		pcbImage = (ImageView)findViewById(R.id.guiPcbImage);
 		traceTypeCtrl = (Spinner)findViewById(R.id.guiPcbScenario);
 		traceTypeCtrl.setOnItemSelectedListener(this);
 		// Register value entry boxes
@@ -139,6 +154,9 @@ public class PcbTraceActivity extends ChildActivity implements
 			View.VISIBLE : View.GONE;
 		controls.get(R.id.guiPcbImpedance2).setVisibility(show);
 		controls.get(R.id.guiPcbTraceSpace).setVisibility(show);
+		if (scenario < IMAGES.length)
+			// Update the image
+			pcbImage.setImageResource(IMAGES[scenario]);
 		recalculate(controls.get(R.id.guiPcbThickness));
 	}
 	public void onNothingSelected(AdapterView<?> parent) { }

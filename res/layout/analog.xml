@@ -2,7 +2,7 @@
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ~ The MIT License (MIT)
   ~
-  ~ Copyright (c) 2015 Stephen Carlson
+  ~ Copyright (c) 2016 Stephen Carlson
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
   ~ of this software and associated documentation files (the "Software"), to deal
@@ -47,6 +47,8 @@
 				android:text="@string/guiSerPar" android:id="@+id/guiSerPar"/>
 		<Button android:layout_width="match_parent" android:layout_height="wrap_content"
 				android:text="@string/guiVDiv" android:id="@+id/guiVDiv"/>
+		<Button android:layout_width="match_parent" android:layout_height="wrap_content"
+				android:text="@string/guiDeltaWye" android:id="@+id/guiDeltaWye"/>
 		<TextView android:layout_width="match_parent" android:layout_height="wrap_content"
 				  android:text="@string/guiCatDesignTools" android:layout_gravity="left"
 				  android:layout_marginLeft="5dp" android:layout_marginTop="10dp"

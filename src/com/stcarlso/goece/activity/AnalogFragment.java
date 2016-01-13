@@ -1,7 +1,7 @@
 /***********************************************************************************************
  * The MIT License (MIT)
  *
- * Copyright (c) 2015 Stephen Carlson
+ * Copyright (c) 2016 Stephen Carlson
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -45,6 +45,7 @@ public class AnalogFragment extends MenuFragment {
 		setButtonEvent(view, R.id.guiImpedance, ImpedanceActivity.class);
 		setButtonEvent(view, R.id.guiSerPar, SerParActivity.class);
 		setButtonEvent(view, R.id.guiVDiv, VDivActivity.class);
+		setButtonEvent(view, R.id.guiDeltaWye, DeltaWyeActivity.class);
 		setButtonEvent(view, R.id.guiCurCap, CurCapActivity.class);
 		setButtonEvent(view, R.id.guiPcbWidth, PcbTraceActivity.class);
 		setButtonEvent(view, R.id.guiPowerUse, PowerUseActivity.class);
