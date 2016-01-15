@@ -290,6 +290,12 @@ public class ComplexEntryDialog extends DialogFragment implements
 		window.getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 		return window;
 	}
+	public void onPause() {
+		// Silence "getExtractedText on inactive InputConnection"
+		UIFunctions.hideKeyboard(getActivity());
+		super.onPause();
+		dismiss();
+	}
 	/**
 	 * Changes the description of this dialog box.
 	 *

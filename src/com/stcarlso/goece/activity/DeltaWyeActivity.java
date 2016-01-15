@@ -24,7 +24,9 @@
 
 package com.stcarlso.goece.activity;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.widget.LinearLayout;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.AbstractEntryBox;
 import com.stcarlso.goece.ui.ChildActivity;
@@ -44,6 +46,18 @@ public class DeltaWyeActivity extends ChildActivity {
 
 	public DeltaWyeActivity() {
 		controls = new ValueBoxContainer();
+	}
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		final LinearLayout root = ((LinearLayout)findViewById(R.id.guiDelRoot));
+		final Configuration conf = getResources().getConfiguration();
+		// Rotate by adjusting the layout of the main screen
+		if (conf != null) {
+			if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
+				root.setOrientation(LinearLayout.HORIZONTAL);
+			else
+				root.setOrientation(LinearLayout.VERTICAL);
+		}
 	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

@@ -43,8 +43,8 @@ import com.stcarlso.goece.utility.ValueControl;
 /**
  * Calculate the current capacity of wires and PCB traces.
  */
-public class CurCapActivity extends ChildActivity implements AdapterView.OnItemSelectedListener,
-		View.OnClickListener {
+public class CurCapActivity extends ChildActivity implements AdapterView.OnItemSelectedListener
+{
 	/**
 	 * Constant used for AWG calculation.
 	 */
@@ -115,7 +115,11 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 	 */
 	private Spinner materialsCtrl;
 	/**
-	 * Cached radio button to select wire capacity
+	 * Cached radio button to select trace capacity.
+	 */
+	private RadioButton traceSelCtrl;
+	/**
+	 * Cached radio button to select wire capacity.
 	 */
 	private RadioButton wireSelCtrl;
 
@@ -133,6 +137,7 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 		lengthOutCtrl = (TextView)findViewById(R.id.guiCurLenInfo);
 		materialsCtrl = (Spinner)findViewById(R.id.guiCurMaterials);
 		materialsCtrl.setOnItemSelectedListener(this);
+		traceSelCtrl = (RadioButton)findViewById(R.id.guiCurUseTrace);
 		wireSelCtrl = (RadioButton)findViewById(R.id.guiCurUseWire);
 		// Load controls and preferences
 		controls.add(findViewById(R.id.guiCurCurrent));
@@ -147,9 +152,12 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 		controls.setupAll(this);
 		loadPrefs();
 		// Recalculate everything
-		onClick(wireSelCtrl);
+		onClick();
 	}
-	public void onClick(View v) {
+	/**
+	 * Triggers an update when either of the radio buttons is pressed.
+	 */
+	private void onClick() {
 		final boolean isWire = wireSelCtrl.isChecked();
 		// Turn off trace params and temp rise in wire mode (future work to allow wire temp?)
 		controls.get(R.id.guiCurTemp).setEnabled(!isWire);
@@ -165,6 +173,24 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 		recalculate(findValueById(R.id.guiCurCurrent));
 	}
 	public void onNothingSelected(AdapterView<?> parent) { }
+	/**
+	 * Triggered when the "use trace" radio button is changed.
+	 *
+	 * @param v the view which changed
+	 */
+	public void onTraceClick(View v) {
+		wireSelCtrl.setChecked(!traceSelCtrl.isChecked());
+		onClick();
+	}
+	/**
+	 * Triggered when the "use wire" radio button is changed.
+	 *
+	 * @param v the view which changed
+	 */
+	public void onWireClick(View v) {
+		traceSelCtrl.setChecked(!wireSelCtrl.isChecked());
+		onClick();
+	}
 	protected void recalculate(ValueGroup group) {
 		final String name = group.getName();
 		if (name.equals("outputs"))
