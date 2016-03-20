@@ -59,5 +59,7 @@
 				android:text="@string/guiPcbWidth" android:id="@+id/guiPcbWidth"/>
 		<Button android:layout_width="match_parent" android:layout_height="wrap_content"
 				android:text="@string/guiPowerUse" android:id="@+id/guiPowerUse"/>
+		<Button android:layout_width="match_parent" android:layout_height="wrap_content"
+				android:text="@string/guiOscDesign" android:id="@+id/guiOscDesign"/>
 	</LinearLayout>
 </ScrollView>

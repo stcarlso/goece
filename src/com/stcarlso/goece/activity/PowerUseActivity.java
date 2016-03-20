@@ -84,10 +84,10 @@ public class PowerUseActivity extends ChildActivity implements View.OnClickListe
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.poweruse);
 		// Update references
-		currentDraw = (TextView)findViewById(R.id.guiPwrDraw);
-		idleEnableCtrl = (CheckBox)findViewById(R.id.guiPwrIdleEna);
-		runEnableCtrl = (CheckBox)findViewById(R.id.guiPwrRunEna);
-		sleepEnableCtrl = (CheckBox)findViewById(R.id.guiPwrSleepEna);
+		currentDraw = asTextView(R.id.guiPwrDraw);
+		idleEnableCtrl = asCheckBox(R.id.guiPwrIdleEna);
+		runEnableCtrl = asCheckBox(R.id.guiPwrRunEna);
+		sleepEnableCtrl = asCheckBox(R.id.guiPwrSleepEna);
 		// Register value entry boxes
 		controls.add(findViewById(R.id.guiPwrCapacity));
 		controls.add(findViewById(R.id.guiPwrRunCur));

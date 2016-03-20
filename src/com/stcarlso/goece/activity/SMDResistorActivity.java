@@ -36,7 +36,7 @@ import com.stcarlso.goece.utility.EIAValue;
 import com.stcarlso.goece.utility.UIFunctions;
 
 /**
- * Tab for the SMD resistor code calculator.
+ * An activity for calculating SMD resistor (and capacitor, but those are never marked!) codes.
  */
 public class SMDResistorActivity extends ChildActivity implements View.OnClickListener {
 	/**

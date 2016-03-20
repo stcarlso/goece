@@ -134,7 +134,7 @@ public class PcbTraceActivity extends ChildActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pcbtrace);
 		pcbImage = (ImageView)findViewById(R.id.guiPcbImage);
-		traceTypeCtrl = (Spinner)findViewById(R.id.guiPcbScenario);
+		traceTypeCtrl = asSpinner(R.id.guiPcbScenario);
 		traceTypeCtrl.setOnItemSelectedListener(this);
 		// Register value entry boxes
 		controls.add(findViewById(R.id.guiPcbDielectric));
@@ -154,7 +154,7 @@ public class PcbTraceActivity extends ChildActivity implements
 			View.VISIBLE : View.GONE;
 		controls.get(R.id.guiPcbImpedance2).setVisibility(show);
 		controls.get(R.id.guiPcbTraceSpace).setVisibility(show);
-		if (scenario < IMAGES.length)
+		if (scenario >= 0 && scenario < IMAGES.length)
 			// Update the image
 			pcbImage.setImageResource(IMAGES[scenario]);
 		recalculate(controls.get(R.id.guiPcbThickness));

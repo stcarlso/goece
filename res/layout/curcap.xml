@@ -98,12 +98,12 @@
 				  android:orientation="horizontal">
 		<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiCurLength"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:tag="guiCurLength" ece:units="m" android:layout_marginRight="5dp"
+			  android:tag="guiCurLength" ece:units="m" android:layout_marginRight="10dp"
 			  ece:affects="len" ece:group="len" android:layout_gravity="center_vertical"
 			  ece:value="0.5" ece:description="@string/guiCurLength"/>
 		<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiCurTest"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:tag="guiCurTest" ece:units="A" android:layout_marginRight="10dp"
+			  android:tag="guiCurTest" ece:units="A" android:layout_marginRight="15dp"
 			  ece:affects="len" ece:group="len" android:layout_gravity="center_vertical"
 			  ece:value="0.5" ece:description="@string/current"/>
 		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"

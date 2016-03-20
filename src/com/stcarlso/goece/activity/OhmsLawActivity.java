@@ -67,8 +67,8 @@ public class OhmsLawActivity extends ChildActivity implements View.OnClickListen
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ohmslaw);
 		// Update references
-		dcCtrl = (RadioButton)findViewById(R.id.guiOhmsSelDC);
-		powerFactorCtrl = (TextView)findViewById(R.id.guiOhmsPowerFactor);
+		dcCtrl = asRadioButton(R.id.guiOhmsSelDC);
+		powerFactorCtrl = asTextView(R.id.guiOhmsPowerFactor);
 		// Register value entry boxes
 		controls.add(findViewById(R.id.guiOhmsCurrentDC));
 		controls.add(findViewById(R.id.guiOhmsResistanceDC));

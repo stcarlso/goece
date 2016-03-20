@@ -114,6 +114,7 @@
 	<string name="guiPcbWidth">PCB Trace Impedance</string>
 	<string name="guiPowerUse">Power Use/Battery Life</string>
 	<string name="guiDeltaWye">Delta-Wye Conversion</string>
+	<string name="guiOscDesign">Oscillator Designer</string>
 	<string name="guiCatAnalogIC">Analog ICs</string>
 	<string name="guiKMapper">K-Map Generator</string>
 	<!-- Resources for individual activities -->
@@ -221,4 +222,13 @@
 	<string name="guiDelWye1">R&lt;small&gt;4&lt;/small&gt;</string>
 	<string name="guiDelWye2">R&lt;small&gt;5&lt;/small&gt;</string>
 	<string name="guiDelWye3">R&lt;small&gt;6&lt;/small&gt;</string>
+	<!-- Oscillator designer -->
+	<string name="guiOscLoadCap">Rated\u00A0C&lt;small&gt;L&lt;/small&gt;</string>
+	<string name="guiOscShuntCap">Rated\u00A0C&lt;small&gt;0&lt;/small&gt;</string>
+	<string name="guiOscESR">ESR</string>
+	<string name="guiOscStrayCap">Stray Capacitance</string>
+	<string name="guiOscTranscon">Transconductance:</string>
+	<string name="guiOscCL">Load Capacitance:</string>
+	<string name="guiOscBadCap">Invalid oscillator or stray capacitance.</string>
+	<string name="cirosc">Crystal oscillator circuit diagram</string>
 </resources>

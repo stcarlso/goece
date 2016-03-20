@@ -49,6 +49,7 @@ public class AnalogFragment extends MenuFragment {
 		setButtonEvent(view, R.id.guiCurCap, CurCapActivity.class);
 		setButtonEvent(view, R.id.guiPcbWidth, PcbTraceActivity.class);
 		setButtonEvent(view, R.id.guiPowerUse, PowerUseActivity.class);
+		setButtonEvent(view, R.id.guiOscDesign, OscDesignActivity.class);
 		return view;
 	}
 }

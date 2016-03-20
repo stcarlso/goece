@@ -37,7 +37,7 @@ import com.stcarlso.goece.utility.UIFunctions;
 import com.stcarlso.goece.utility.Units;
 
 /**
- * Tab for a resistor color code (PTH) value calculator.
+ * An activity for calculating resistor color code (PTH) values.
  */
 public class ResColorActivity extends ChildActivity {
 	/**

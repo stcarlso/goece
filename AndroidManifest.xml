@@ -94,5 +94,10 @@
 			<meta-data android:name="android.support.PARENT_ACTIVITY"
 					   android:value=".activity.ECEActivity"/>
 		</activity>
+		<activity android:name=".activity.OscDesignActivity"
+				  android:label="@string/guiOscDesign">
+			<meta-data android:name="android.support.PARENT_ACTIVITY"
+					   android:value=".activity.ECEActivity"/>
+		</activity>
 	</application>
 </manifest>

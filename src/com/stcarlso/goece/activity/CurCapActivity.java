@@ -134,11 +134,11 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.curcap);
-		lengthOutCtrl = (TextView)findViewById(R.id.guiCurLenInfo);
-		materialsCtrl = (Spinner)findViewById(R.id.guiCurMaterials);
+		lengthOutCtrl = asTextView(R.id.guiCurLenInfo);
+		materialsCtrl = asSpinner(R.id.guiCurMaterials);
 		materialsCtrl.setOnItemSelectedListener(this);
-		traceSelCtrl = (RadioButton)findViewById(R.id.guiCurUseTrace);
-		wireSelCtrl = (RadioButton)findViewById(R.id.guiCurUseWire);
+		traceSelCtrl = asRadioButton(R.id.guiCurUseTrace);
+		wireSelCtrl = asRadioButton(R.id.guiCurUseWire);
 		// Load controls and preferences
 		controls.add(findViewById(R.id.guiCurCurrent));
 		controls.add(findViewById(R.id.guiCurTemp));
