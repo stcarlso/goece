@@ -27,12 +27,9 @@ package com.stcarlso.goece.ui;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Parcelable;
-import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.style.QuoteSpan;
 import android.text.style.StyleSpan;
-import android.text.style.WrapTogetherSpan;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
@@ -91,6 +88,7 @@ public abstract class AbstractEntryBox<T extends EngineeringValue> extends Butto
 		if (listener != null)
 			listener.recalculate(this);
 	}
+	@Override
 	public String getAffects() {
 		return affects;
 	}
@@ -102,6 +100,7 @@ public abstract class AbstractEntryBox<T extends EngineeringValue> extends Butto
 	public String getDescription() {
 		return description;
 	}
+	@Override
 	public String getGroup() {
 		return group;
 	}
@@ -186,10 +185,12 @@ public abstract class AbstractEntryBox<T extends EngineeringValue> extends Butto
 			updateText();
 		}
 	}
+	@Override
 	public void setError(final CharSequence error) {
+		final CharSequence oldErr = getError();
 		super.setError(error);
 		// Display toast to alert the user of failure, if not null or empty
-		if (error != null && error.length() > 0)
+		if (error != null && error.length() > 0 && (oldErr == null || !error.equals(oldErr)))
 			Toast.makeText(UIFunctions.getActivity(this), error, Toast.LENGTH_LONG).show();
 	}
 	/**
@@ -212,7 +213,7 @@ public abstract class AbstractEntryBox<T extends EngineeringValue> extends Butto
 	protected void updateText() {
 		final SpannableStringBuilder text = new SpannableStringBuilder();
 		// Calculate text
-		final Spanned desc = Html.fromHtml(getDescription());
+		final Spanned desc = UIFunctions.fromHtml(getDescription());
 		text.append(desc);
 		// Italicize the name
 		text.setSpan(new StyleSpan(Typeface.ITALIC), 0, desc.length(),

@@ -27,7 +27,6 @@
 	<!-- App wide resources -->
 	<string name="app_name">Go ECE!</string>
 	<string name="cancel">Cancel</string>
-	<string name="error">Error</string>
 	<string name="ok">OK</string>
 	<string name="calculate">Calculate</string>
 	<string name="copy">Copy</string>
@@ -54,6 +53,7 @@
 	<string name="induct">Inductance</string>
 	<string name="capacit">Capacitance</string>
 	<string name="freq">Frequency</string>
+	<string name="duty">Duty Cycle</string>
 	<string name="period">Period</string>
 	<string name="duration">Duration</string>
 	<string name="mag">Magnitude</string>
@@ -100,7 +100,7 @@
 	<!-- Activity names and titles -->
 	<string name="guiTabAnalog">Analog</string>
 	<string name="guiTabDigital">Digital</string>
-	<string name="guiTabCircuits">Circuits</string>
+	<string name="guiTabCircuits">IC</string>
 	<string name="guiCatPassive">Passives</string>
 	<string name="guiColorCode">Resistor Color Code</string>
 	<string name="guiSMDResistor">SMD Resistor Code</string>
@@ -117,6 +117,7 @@
 	<string name="guiOscDesign">Oscillator Designer</string>
 	<string name="guiCatAnalogIC">Analog ICs</string>
 	<string name="guiKMapper">K-Map Generator</string>
+	<string name="gui555">555 Calculator</string>
 	<!-- Resources for individual activities -->
 	<!-- SMD resistor code -->
 	<string name="guiResLine">Value is underlined</string>
@@ -148,16 +149,21 @@
 	<string name="guiDivTop">R&lt;small&gt;1&lt;/small&gt;</string>
 	<string name="guiDivBottom">R&lt;small&gt;2&lt;/small&gt;</string>
 	<string name="guiDivLoad">R&lt;small&gt;L&lt;/small&gt;</string>
+	<string name="guiDivReq">Equivalent resistance: %1$s</string>
+	<string name="guiDivCurrent">Current flow: %1$s</string>
+	<string name="guiDivPower">Power dissipation: %1$s</string>
 	<string name="cirvdiv">Voltage divider circuit diagram</string>
 	<!-- Current capacity -->
 	<string name="guiCurLength">Length</string>
 	<string name="guiCurWire">Wire</string>
-	<string name="guiCurTrace">PCB Trace (External layer)</string>
-	<string name="guiCurTemp">Temp. Rise</string>
-	<string name="guiCurDiameter">Wire Diameter</string>
+	<string name="guiCurTrace">PCB Trace (Surface)</string>
+	<string name="guiCurTemp">\u2206T</string>
+	<string name="guiCurDiameter">Diameter</string>
 	<string name="guiCurXArea">Cross-Section Area</string>
 	<string name="guiCurGauge">Gauge</string>
 	<string name="guiCurCurrentRating">Current Rating</string>
+	<string name="guiCurTraceWidth">Width</string>
+	<string name="guiCurTraceThick">Thickness</string>
 	<string-array name="guiCurMaterials">
 		<item>Aluminium</item>
 		<item>Copper</item>
@@ -190,7 +196,6 @@
 	<string name="guiCurTraceWarn">Calculated trace width may be unrealistic for these parameters</string>
 	<string name="guiCurCapWarn">Current value may be unrealistic for these parameters</string>
 	<!-- PCB trace calculations -->
-	<string name="guiPcbScenario">Configuration: </string>
 	<string name="guiPcbImage">Trace diagram</string>
 	<string-array name="guiPcbScenarios">
 		<item>Microstrip</item>
@@ -198,13 +203,13 @@
 		<item>Differential Microstrip</item>
 		<item>Differential Stripline</item>
 	</string-array>
-	<string name="guiPcbTraceWidth">Trace Width</string>
-	<string name="guiPcbTraceThick">Trace Height</string>
-	<string name="guiPcbTraceSpace">Trace Spacing</string>
+	<string name="guiPcbTraceWidth">Width (W)</string>
+	<string name="guiPcbTraceThick">Height (T)</string>
+	<string name="guiPcbTraceSpace">Spacing (S)</string>
 	<string name="guiPcbTraceZSingle">Z Single</string>
 	<string name="guiPcbTraceZDiff">Z Diff</string>
-	<string name="guiPcbThickness">Board Height</string>
-	<string name="guiPcbDielectric">Dielectric \u03B5&lt;small&gt;r&lt;/small&gt;</string>
+	<string name="guiPcbThickness">PCB Height (H)</string>
+	<string name="guiPcbDielectric">PCB \u03B5&lt;small&gt;r&lt;/small&gt;</string>
 	<string name="guiPcbNoSolution">No solution found for these requirements.</string>
 	<string name="guiPcbBadInput">Relative permittivity must be greater than 1, and all other measurements must be positive.</string>
 	<!-- Power consumption -->
@@ -213,6 +218,7 @@
 	<string name="guiPwrIdle">Idle</string>
 	<string name="guiPwrSleep">Sleep</string>
 	<string name="guiPwrDuration">Runtime</string>
+	<string name="guiPwrIAvg">Average Current: %1$s</string>
 	<!-- Delta/y conversion -->
 	<string name="guiDelDelta">Delta</string>
 	<string name="guiDelWye">Wye</string>
@@ -231,4 +237,15 @@
 	<string name="guiOscCL">Load Capacitance:</string>
 	<string name="guiOscBadCap">Invalid oscillator or stray capacitance.</string>
 	<string name="cirosc">Crystal oscillator circuit diagram</string>
+	<!-- 555 calculator -->
+	<string name="gui555Mono">Monostable</string>
+	<string name="gui555Ast">Astable</string>
+	<string name="gui555Delay">Interval</string>
+	<string name="gui555C1">C&lt;small&gt;1&lt;/small&gt;</string>
+	<string name="gui555R1">R&lt;small&gt;1&lt;/small&gt;</string>
+	<string name="gui555R2">R&lt;small&gt;2&lt;/small&gt;</string>
+	<string name="gui555BadDuty" formatted="false">Duty cycle must be between 0% and 100%.</string>
+	<string name="gui555BadRAst">R1 and R2 should be between 1 KΩ and 10 MΩ.</string>
+	<string name="gui555BadRMono">R1 should be between 1 KΩ and 1 MΩ.</string>
+	<string name="cir555">555 oscillator circuit diagram</string>
 </resources>

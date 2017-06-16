@@ -30,8 +30,9 @@
 				  android:layout_height="wrap_content" android:layout_centerHorizontal="true"
 				  android:id="@+id/guiDivTemp">
 		<TextView android:layout_width="wrap_content" android:layout_gravity="center_vertical"
-				  android:text="@string/resSeries" android:layout_height="wrap_content"/>
-		<view class="com.stcarlso.goece.ui.ResSeriesSpinner" android:id="@+id/guiDivResSeries"
+				  android:text="@string/resSeries" android:layout_height="wrap_content"
+				  android:labelFor="@+id/guiDivResSeries"/>
+		<view class="com.stcarlso.goece.ui.ResSeriesSpinner" android:id="@id/guiDivResSeries"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  android:tag="divResSeries" ece:affects="res" ece:group="other"/>
 	</LinearLayout>

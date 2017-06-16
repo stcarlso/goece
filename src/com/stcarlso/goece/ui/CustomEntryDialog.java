@@ -27,10 +27,8 @@ package com.stcarlso.goece.ui;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -41,6 +39,7 @@ import com.stcarlso.goece.R;
 import com.stcarlso.goece.utility.CustomUnit;
 import com.stcarlso.goece.utility.EngineeringValue;
 import com.stcarlso.goece.utility.IgnoreOnClickListener;
+import com.stcarlso.goece.utility.UIFunctions;
 
 import java.util.*;
 
@@ -92,6 +91,7 @@ public class CustomEntryDialog extends AbstractEntryDialog implements
 	public void addCustomUnit(final CustomUnit unit) {
 		customUnits.add(unit);
 	}
+	@Override
 	protected double getEnteredValue() {
 		double raw = Double.parseDouble(valueEntry.getText().toString());
 		final CustomUnit unit = getSelectedUnit();
@@ -122,13 +122,14 @@ public class CustomEntryDialog extends AbstractEntryDialog implements
 	 */
 	private CharSequence[] getUnitChoices() {
 		final CharSequence[] ret = new CharSequence[customUnits.size() + 1];
-		ret[0] = Html.fromHtml(getValue().getUnits());
+		ret[0] = UIFunctions.fromHtml(getValue().getUnits());
 		// Iterate and add all custom choices
 		int i = 1;
 		for (CustomUnit unit : customUnits)
-			ret[i++] = Html.fromHtml(unit.getUnit());
+			ret[i++] = UIFunctions.fromHtml(unit.getUnit());
 		return ret;
 	}
+	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		final Activity act = getActivity();
 		final AlertDialog.Builder builder = new AlertDialog.Builder(act);
@@ -155,7 +156,7 @@ public class CustomEntryDialog extends AbstractEntryDialog implements
 		valueEntry = (EditText)dialog.findViewById(R.id.guiCustom);
 		valueEntry.setText(act.getString(R.string.editRaw, value.getValue()));
 		valueEntry.selectAll();
-		builder.setTitle(Html.fromHtml(desc));
+		builder.setTitle(UIFunctions.fromHtml(desc));
 		// Create OK and Cancel buttons
 		builder.setPositiveButton(R.string.ok, this);
 		builder.setNegativeButton(R.string.cancel, new IgnoreOnClickListener());
@@ -165,6 +166,7 @@ public class CustomEntryDialog extends AbstractEntryDialog implements
 		window.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 		return window;
 	}
+	@Override
 	public void onClick(DialogInterface dialog, int which) {
 		// Load value and unit
 		if (valueEntry != null && unitSelect != null)
@@ -181,6 +183,7 @@ public class CustomEntryDialog extends AbstractEntryDialog implements
 				dismiss();
 			} catch (NumberFormatException ignore) { }
 	}
+	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 		// Only trigger if the field value is selected
 		if (valueEntry.getSelectionStart() == 0 && valueEntry.getSelectionEnd() ==
@@ -195,6 +198,7 @@ public class CustomEntryDialog extends AbstractEntryDialog implements
 			valueEntry.selectAll();
 		}
 	}
+	@Override
 	public void onNothingSelected(AdapterView<?> parent) {
 		// This is not really possible with the units spinner
 	}

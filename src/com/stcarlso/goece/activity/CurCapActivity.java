@@ -38,7 +38,6 @@ import com.stcarlso.goece.ui.ValueBoxContainer;
 import com.stcarlso.goece.ui.ValueGroup;
 import com.stcarlso.goece.utility.EngineeringValue;
 import com.stcarlso.goece.utility.Units;
-import com.stcarlso.goece.utility.ValueControl;
 
 /**
  * Calculate the current capacity of wires and PCB traces.
@@ -126,11 +125,13 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 	public CurCapActivity() {
 		controls = new ValueBoxContainer();
 	}
+	@Override
 	protected void loadCustomPrefs(SharedPreferences prefs) {
 		loadPrefsSpinner(prefs, R.id.guiCurMaterials);
 		loadPrefsCheckBox(prefs, R.id.guiCurUseWire);
 		loadPrefsCheckBox(prefs, R.id.guiCurUseTrace);
 	}
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.curcap);
@@ -169,9 +170,11 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 		controls.get(R.id.guiCurXArea).setEnabled(isWire);
 		recalculate(findValueById(R.id.guiCurCurrent));
 	}
+	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 		recalculate(findValueById(R.id.guiCurCurrent));
 	}
+	@Override
 	public void onNothingSelected(AdapterView<?> parent) { }
 	/**
 	 * Triggered when the "use trace" radio button is changed.
@@ -191,6 +194,7 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 		traceSelCtrl.setChecked(!wireSelCtrl.isChecked());
 		onClick();
 	}
+	@Override
 	protected void recalculate(ValueGroup group) {
 		final String name = group.getName();
 		if (name.equals("outputs"))
@@ -317,11 +321,13 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 			break;
 		}
 	}
+	@Override
 	protected void saveCustomPrefs(SharedPreferences.Editor prefs) {
 		savePrefsSpinner(prefs, R.id.guiCurMaterials);
 		savePrefsCheckBox(prefs, R.id.guiCurUseTrace);
 		savePrefsCheckBox(prefs, R.id.guiCurUseWire);
 	}
+	@Override
 	protected void update(ValueGroup group) {
 		// Update before recalculate
 		final String name = group.getName();

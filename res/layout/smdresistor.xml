@@ -27,6 +27,8 @@
 				xmlns:ece="http://schemas.android.com/apk/res/com.stcarlso.goece"
 				android:layout_width="match_parent" android:layout_height="match_parent"
 				android:orientation="vertical">
+	<View android:layout_width="0dp" android:layout_height="0dp" android:id="@+id/guiResCenter"
+		  android:layout_centerHorizontal="true"/>
 	<TextView android:textAppearance="?android:attr/textAppearanceLarge" android:textSize="40sp"
 			  android:text="" android:id="@+id/guiResValue" android:layout_height="wrap_content"
 			  android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
@@ -38,16 +40,14 @@
 	<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  android:id="@+id/guiResLine" android:text="@string/guiResLine" android:tag="smdLn"
 			  android:layout_below="@id/guiResValue" android:layout_centerHorizontal="true"/>
-	<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
-				  android:layout_centerHorizontal="true" android:layout_below="@id/guiResLine"
-				  android:layout_above="@id/guiResIsStandard">
-		<view class="com.stcarlso.goece.ui.ValueTextBox" android:id="@+id/guiResSMDCode"
-			  android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:inputType="textNoSuggestions|textCapCharacters|textVisiblePassword"
-			  android:imeOptions="actionDone" android:tag="smdRes" ece:affects="all"
-			  ece:group="all" android:layout_marginRight="20dp" android:selectAllOnFocus="true"
-			  android:text="@string/guiResInitialValue" android:maxLength="4" android:ems="4"/>
-		<Button android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:text="@string/calculate" android:onClick="onClick"/>
-	</LinearLayout>
+	<view class="com.stcarlso.goece.ui.ValueTextBox" android:id="@+id/guiResSMDCode"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content"
+		  android:inputType="textNoSuggestions|textCapCharacters|textVisiblePassword"
+		  android:imeOptions="actionDone" android:tag="smdRes" ece:affects="all"
+		  ece:group="all" android:layout_marginRight="10dp" android:selectAllOnFocus="true"
+		  android:text="@string/guiResInitialValue" android:maxLength="4" android:ems="4"
+		  android:layout_below="@id/guiResLine" android:layout_toLeftOf="@id/guiResCenter"/>
+	<Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+			android:text="@string/calculate" android:layout_toRightOf="@id/guiResCenter"
+			android:layout_below="@id/guiResLine" android:onClick="onClick"/>
 </RelativeLayout>

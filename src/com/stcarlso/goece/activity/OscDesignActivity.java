@@ -87,6 +87,7 @@ public class OscDesignActivity extends ChildActivity {
 		loadPrefs();
 		recalculate(controls.get(R.id.guiOscFrequency));
 	}
+	@Override
 	protected void recalculate(ValueGroup group) {
 		final double f = controls.getRawValue(R.id.guiOscFrequency);
 		final double cRated = controls.getRawValue(R.id.guiOscLoadCap);
@@ -113,5 +114,6 @@ public class OscDesignActivity extends ChildActivity {
 				Units.CAPACITANCE), stdCtrl);
 		}
 	}
+	@Override
 	protected void update(ValueGroup group) { }
 }

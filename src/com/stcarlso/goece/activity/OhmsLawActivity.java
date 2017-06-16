@@ -58,11 +58,13 @@ public class OhmsLawActivity extends ChildActivity implements View.OnClickListen
 	public OhmsLawActivity() {
 		controls = new ValueBoxContainer();
 	}
+	@Override
 	protected void loadCustomPrefs(SharedPreferences prefs) {
 		super.loadCustomPrefs(prefs);
 		loadPrefsCheckBox(prefs, R.id.guiOhmsSelAC);
 		loadPrefsCheckBox(prefs, R.id.guiOhmsSelDC);
 	}
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ohmslaw);
@@ -83,6 +85,7 @@ public class OhmsLawActivity extends ChildActivity implements View.OnClickListen
 		// onClick handles initial calculations
 		onClick(dcCtrl);
 	}
+	@Override
 	public void onClick(View v) {
 		final boolean isDC = dcCtrl.isChecked();
 		// Show/hide controls and set enabled/disabled based on option
@@ -113,6 +116,7 @@ public class OhmsLawActivity extends ChildActivity implements View.OnClickListen
 		eac.setEnabled(!isDC);
 		eac.setVisibility(isDC ? View.INVISIBLE : View.VISIBLE);
 	}
+	@Override
 	public void recalculate(final ValueGroup group) {
 		// Select DC or AC
 		final boolean isDC = dcCtrl.isChecked();
@@ -186,11 +190,13 @@ public class OhmsLawActivity extends ChildActivity implements View.OnClickListen
 			break;
 		}
 	}
+	@Override
 	protected void saveCustomPrefs(SharedPreferences.Editor prefs) {
 		super.saveCustomPrefs(prefs);
 		savePrefsCheckBox(prefs, R.id.guiOhmsSelAC);
 		savePrefsCheckBox(prefs, R.id.guiOhmsSelDC);
 	}
+	@Override
 	protected void update(ValueGroup group) {
 		// Select DC or AC
 		final boolean isDC = dcCtrl.isChecked();

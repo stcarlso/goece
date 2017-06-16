@@ -164,6 +164,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 			lastCode = code;
 		}
 	}
+	@Override
 	protected void loadCustomPrefs(SharedPreferences prefs) {
 		loadPrefsCheckBox(prefs, R.id.guiResLine);
 		if (prefs.contains("lastCode"))
@@ -174,6 +175,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	 *
 	 * @param v the source view
 	 */
+	@Override
 	public void onClick(View v) {
 		recalculate(findValueById(R.id.guiResSMDCode));
 	}
@@ -214,6 +216,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 		super.onSaveInstanceState(outState);
 		outState.putString("lastCode", lastCode);
 	}
+	@Override
 	public void recalculate(final ValueGroup source) {
 		// Group has one item
 		final ValueTextBox input = (ValueTextBox)source.get(R.id.guiResSMDCode);
@@ -223,6 +226,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 			code = "R" + code;
 		calculate(code, true);
 	}
+	@Override
 	protected void saveCustomPrefs(SharedPreferences.Editor prefs) {
 		savePrefsCheckBox(prefs, R.id.guiResLine);
 		prefs.putString("lastCode", lastCode);
@@ -238,5 +242,6 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 		copyPasteListener.setValue(value);
 	}
 	// All work is done in recalculate()
+	@Override
 	protected void update(ValueGroup group) { }
 }

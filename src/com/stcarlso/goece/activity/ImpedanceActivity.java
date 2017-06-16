@@ -74,6 +74,7 @@ public class ImpedanceActivity extends ChildActivity implements View.OnClickList
 		// "Click" the check box (does not matter which one, the state is set by isChecked)
 		onClick(capSelCtrl);
 	}
+	@Override
 	public void onClick(View v) {
 		// One of the radio buttons was clicked; enable appropriate input
 		final boolean isCap = capSelCtrl.isChecked();
@@ -81,6 +82,7 @@ public class ImpedanceActivity extends ChildActivity implements View.OnClickList
 		controls.get(R.id.guiImpedInd).setEnabled(!isCap);
 		recalculate(findValueById(isCap ? R.id.guiImpedCap : R.id.guiImpedInd));
 	}
+	@Override
 	protected void recalculate(ValueGroup source) {
 		final ComplexEntryBox imped = (ComplexEntryBox)findValueById(R.id.guiImpedImp);
 		// Capacitance or inductance?
@@ -133,6 +135,7 @@ public class ImpedanceActivity extends ChildActivity implements View.OnClickList
 		savePrefsCheckBox(prefs, R.id.guiImpedSelCap);
 		savePrefsCheckBox(prefs, R.id.guiImpedSelInd);
 	}
+	@Override
 	protected void update(ValueGroup group) {
 		// Now that output group has only one element, everything is OK
 	}

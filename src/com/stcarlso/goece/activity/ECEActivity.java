@@ -34,21 +34,25 @@ import com.stcarlso.goece.ui.FragmentTabListener;
 /**
  * Make it your pastime, make it your mission!
  */
+@SuppressWarnings("deprecation")
 public final class ECEActivity extends FragmentActivity {
 	/**
-	 * Adds a tab to the menu.
+	 * Adds a tab to the menu. ActionBar tabs are deprecated but required on the old versions of
+	 * Android this app still can target.
 	 *
 	 * @param resId the string resource ID of the tab name
 	 */
 	private <T extends Fragment> ActionBar.Tab addTab(final int resId, Class<T> target) {
 		final ActionBar tabBar = getActionBar();
-		// Uh?
-		assert (tabBar != null);
-		// Create a tab
-		final ActionBar.Tab newTab = tabBar.newTab();
-		newTab.setText(resId);
-		newTab.setTabListener(new FragmentTabListener<T>(this, target.getSimpleName(), target));
-		tabBar.addTab(newTab);
+		final ActionBar.Tab newTab;
+		if (tabBar != null) {
+			// Create a tab
+			newTab = tabBar.newTab();
+			newTab.setText(resId);
+			newTab.setTabListener(new FragmentTabListener<T>(this, target.getSimpleName(), target));
+			tabBar.addTab(newTab);
+		} else
+			newTab = null;
 		return newTab;
 	}
 	/**
@@ -58,21 +62,35 @@ public final class ECEActivity extends FragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		final ActionBar tabBar = getActionBar();
-		// Uh?
-		assert (tabBar != null);
-		tabBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-		// Analog, digital, circuits, pinouts, resources tabs
-		final ActionBar.Tab analogTab = addTab(R.string.guiTabAnalog, AnalogFragment.class);
-		addTab(R.string.guiTabDigital, DigitalFragment.class);
-		if (savedInstanceState == null || !savedInstanceState.containsKey("tab"))
-			tabBar.selectTab(analogTab);
-		else
-			tabBar.setSelectedNavigationItem(savedInstanceState.getInt("tab"));
+		if (tabBar != null) {
+			tabBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+			// Analog, digital, circuits, pinouts, resources tabs
+			final ActionBar.Tab analogTab = addTab(R.string.guiTabAnalog, AnalogFragment.class);
+			addTab(R.string.guiTabDigital, DigitalFragment.class);
+			addTab(R.string.guiTabCircuits, ICFragment.class);
+			if (savedInstanceState == null || !savedInstanceState.containsKey("tab"))
+				tabBar.selectTab(analogTab);
+			else
+				tabBar.setSelectedNavigationItem(savedInstanceState.getInt("tab"));
+		}
 	}
+	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		super.onRestoreInstanceState(savedInstanceState);
+		final ActionBar tabBar = getActionBar();
+		if (tabBar != null) {
+			// Restore where the user was
+			if (savedInstanceState == null || !savedInstanceState.containsKey("tab"))
+				tabBar.selectTab(tabBar.getTabAt(0));
+			else
+				tabBar.setSelectedNavigationItem(savedInstanceState.getInt("tab"));
+		}
+	}
+	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		// Save where the user was
 		final ActionBar tabBar = getActionBar();
-		assert (tabBar != null);
-		outState.putInt("tab", tabBar.getSelectedTab().getPosition());
+		if (tabBar != null)
+			outState.putInt("tab", tabBar.getSelectedTab().getPosition());
 	}
 }

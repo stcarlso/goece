@@ -30,11 +30,14 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Color;
 import android.text.Html;
+import android.text.Spanned;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import com.stcarlso.goece.R;
+
+import java.util.Locale;
 
 /**
  * Contains functions used in multiple locations in the user interface.
@@ -67,8 +70,8 @@ public final class UIFunctions {
 				errorPct = 100.0 * (closest - res) / res;
 			// Display appropriate message
 			std.setTextColor(Color.RED);
-			std.setText(String.format("Nearest %s%% value is %s [%+.1f%%]", tolStr,
-				new EIAValue(closest, series, 0.0, value.getUnits()), errorPct));
+			std.setText(String.format(Locale.getDefault(), "Nearest %s%% value is %s [%+.1f%%]",
+				tolStr, new EIAValue(closest, series, 0.0, value.getUnits()), errorPct));
 		}
 		return isStandard;
 	}
@@ -85,6 +88,17 @@ public final class UIFunctions {
 			builder.setPositiveButton(R.string.ok, new IgnoreOnClickListener());
 			builder.create().show();
 		}
+	}
+	/**
+	 * Creates formatted text from an HTML fragment. Avoids deprecation warnings by calling the
+	 * appropriate version of Html.fromHtml for all API versions.
+	 *
+	 * @param text the HTML text as a string
+	 * @return the formatted text with HTML tags parsed
+	 */
+	@SuppressWarnings("deprecation")
+	public static Spanned fromHtml(final String text) {
+		return Html.fromHtml(text);
 	}
 	/**
 	 * Reports the parent activity of a View, or null if the view has no parent activity.
@@ -149,6 +163,6 @@ public final class UIFunctions {
 	public static void setLabelText(final View view, final int id, final String text) {
 		if (view == null)
 			throw new NullPointerException("view");
-		((TextView)view.findViewById(id)).setText(Html.fromHtml(text));
+		((TextView)view.findViewById(id)).setText(fromHtml(text));
 	}
 }

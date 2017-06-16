@@ -63,6 +63,7 @@ public class EnterKeyListener implements TextView.OnEditorActionListener {
 			throw new NullPointerException("listener");
 		this.listener = listener;
 	}
+	@Override
 	public boolean onEditorAction(TextView view, int actionId, KeyEvent event) {
 		if (actionId == EditorInfo.IME_ACTION_DONE)
 			// Click that button!

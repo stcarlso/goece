@@ -152,13 +152,15 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 		if (prefs.contains(tag))
 			view.setSelection(prefs.getInt(tag, 0), false);
 	}
+	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		final ActionBar bar = getActionBar();
 		// Uh?
-		assert (bar != null);
-		bar.setDisplayHomeAsUpEnabled(true);
+		if (bar != null)
+			bar.setDisplayHomeAsUpEnabled(true);
 	}
+	@Override
 	public boolean onOptionsItemSelected(final MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
@@ -177,14 +179,17 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	@Override
 	protected void onPause() {
 		super.onPause();
 		savePrefs();
 	}
+	@Override
 	protected void onResume() {
 		super.onResume();
 		loadPrefs();
 	}
+	@Override
 	public void recalculate(ValueControl source) {
 		// Extract the group and execute that group
 		final String group = source.getGroup();

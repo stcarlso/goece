@@ -63,6 +63,7 @@ public class PowerUseActivity extends ChildActivity implements View.OnClickListe
 	public PowerUseActivity() {
 		controls = new ValueBoxContainer();
 	}
+	@Override
 	public void onClick(View v) {
 		// Enable controls as needed
 		final boolean idleEna = idleEnableCtrl.isChecked(), runEna = runEnableCtrl.isChecked(),
@@ -133,9 +134,11 @@ public class PowerUseActivity extends ChildActivity implements View.OnClickListe
 			t = totalEnergy / totalTime;
 		return t;
 	}
+	@Override
 	protected void recalculate(ValueGroup group) {
 		final double i = calculateIAvg();
-		currentDraw.setText("Current: " + new EngineeringValue(i, Units.CURRENT));
+		currentDraw.setText(getString(R.string.guiPwrIAvg, new EngineeringValue(i,
+			Units.CURRENT).toString()));
 		switch (group.leastRecentlyUsed()) {
 		case R.id.guiPwrCapacity:
 			// Calculate capacity based on desired runtime
@@ -155,5 +158,6 @@ public class PowerUseActivity extends ChildActivity implements View.OnClickListe
 			break;
 		}
 	}
+	@Override
 	protected void update(ValueGroup group) { }
 }

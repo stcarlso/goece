@@ -25,6 +25,7 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1"
 		  package="com.stcarlso.goece" android:versionName="1.0">
+
 	<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="21"/>
 	<application android:label="@string/app_name" android:icon="@drawable/ic_launcher"
 				 android:allowBackup="true">
@@ -95,7 +96,13 @@
 					   android:value=".activity.ECEActivity"/>
 		</activity>
 		<activity android:name=".activity.OscDesignActivity"
-				  android:label="@string/guiOscDesign">
+				  android:label="@string/guiOscDesign"
+				  android:configChanges="screenSize|keyboardHidden">
+			<meta-data android:name="android.support.PARENT_ACTIVITY"
+					   android:value=".activity.ECEActivity"/>
+		</activity>
+		<activity android:name=".activity.Ne555Activity" android:label="@string/gui555"
+				  android:configChanges="screenSize|keyboardHidden">
 			<meta-data android:name="android.support.PARENT_ACTIVITY"
 					   android:value=".activity.ECEActivity"/>
 		</activity>

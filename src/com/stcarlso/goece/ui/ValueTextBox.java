@@ -61,9 +61,11 @@ public class ValueTextBox extends EditText implements ValueControl {
 		super(context, attrs, defStyle);
 		init(context, attrs);
 	}
+	@Override
 	public String getAffects() {
 		return affects;
 	}
+	@Override
 	public String getGroup() {
 		return group;
 	}
@@ -84,12 +86,14 @@ public class ValueTextBox extends EditText implements ValueControl {
 		group = newGroup;
 		affects = willAffect;
 	}
+	@Override
 	public void loadState(SharedPreferences prefs) {
 		final String tag = UIFunctions.getTag(this);
 		// Only change if the preferences are initialized
 		if (prefs.contains(tag))
 			setText(prefs.getString(tag, ""));
 	}
+	@Override
 	public void saveState(SharedPreferences.Editor prefs) {
 		prefs.putString(UIFunctions.getTag(this), getText().toString());
 	}

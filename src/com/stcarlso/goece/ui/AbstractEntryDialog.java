@@ -104,13 +104,13 @@ public abstract class AbstractEntryDialog extends DialogFragment implements
 				dismiss();
 			} catch (NumberFormatException ignore) { }
 	}
+	@Override
 	public void onClick(DialogInterface dialog, int which) {
 		// Load value and unit
 		ok();
 	}
 	protected void restoreState(Bundle savedInstanceState) {
-		/*
-		if (savedInstanceState != null && valueEntry != null && unitSelect != null) {
+		/*if (savedInstanceState != null && valueEntry != null && unitSelect != null) {
 			// Restore dialog state if rotated
 			if (savedInstanceState.containsKey("description"))
 				setDescription(savedInstanceState.getString("description"));
@@ -123,19 +123,18 @@ public abstract class AbstractEntryDialog extends DialogFragment implements
 				if (ov instanceof EngineeringValue)
 					value = (EngineeringValue)ov;
 			}
-		}
-		*/
+		}*/
 	}
+	@Override
 	public void onPause() {
 		// Silence "getExtractedText on inactive InputConnection"
 		UIFunctions.hideKeyboard(getActivity());
 		super.onPause();
 		dismiss();
 	}
-	public void onSaveInstanceState(Bundle outState) {
+	/*public void onSaveInstanceState(Bundle outState) {
 		// NOTE Cancel dialog, because restoring the listener reference is not worth it now
 		super.onSaveInstanceState(outState);
-		/*
 		if (valueEntry != null && unitSelect != null) {
 			// If the screen is rotated while a dialog is up, save our state
 			outState.putString("description", desc);
@@ -143,8 +142,7 @@ public abstract class AbstractEntryDialog extends DialogFragment implements
 			outState.putString("entry", valueEntry.getText().toString());
 			outState.putSerializable("value", value);
 		}
-		*/
-	}
+	}*/
 	/**
 	 * Changes the description of this dialog box.
 	 *

@@ -31,7 +31,6 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.text.Html;
 import android.view.View;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.utility.EngineeringValue;
@@ -171,6 +170,7 @@ public class CopyPasteListener implements View.OnLongClickListener {
 	public EngineeringValue getValue() {
 		return value;
 	}
+	@Override
 	public boolean onLongClick(View v) {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(activity);
 		final List<String> options = new ArrayList<String>(8);
@@ -184,12 +184,12 @@ public class CopyPasteListener implements View.OnLongClickListener {
 		final int sz = options.size();
 		final CharSequence[] copyOptions = new CharSequence[sz + (pv != null ? 1 : 0)];
 		for (int i = 0; i < sz; i++)
-			copyOptions[i] = Html.fromHtml(copy + " \"" + options.get(i) + "\"");
+			copyOptions[i] = UIFunctions.fromHtml(copy + " \"" + options.get(i) + "\"");
 		// Add "Paste ..."
 		if (pv != null)
-			copyOptions[sz] = Html.fromHtml(paste + " \"" + withSigFigOverride(pv) + "\"");
+			copyOptions[sz] = UIFunctions.fromHtml(paste + " \"" + withSigFigOverride(pv) + "\"");
 		builder.setItems(copyOptions, new CopyPasteItemsListener(options, pv));
-		final AlertDialog dialog = builder.setTitle(Html.fromHtml(description)).create();
+		final AlertDialog dialog = builder.setTitle(UIFunctions.fromHtml(description)).create();
 		dialog.show();
 		return true;
 	}
@@ -250,6 +250,7 @@ public class CopyPasteListener implements View.OnLongClickListener {
 			this.copyText = copyText;
 			this.toPaste = toPaste;
 		}
+		@Override
 		public void onClick(DialogInterface dialog, int which) {
 			final int len = copyText.size();
 			if (which >= 0 && which < len) {

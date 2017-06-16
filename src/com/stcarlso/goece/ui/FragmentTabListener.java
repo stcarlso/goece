@@ -32,11 +32,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 
 /**
- * A mismash of code from http://stackoverflow.com/questions/9451917/double-fragment-rotating-android-with-actionbar
+ * A mishmash of code from http://stackoverflow.com/questions/9451917/double-fragment-rotating-android-with-actionbar
  * with parameterization to deal with a few casting issues.
  *
  * @param <T> the type of the tab which is instantiated
  */
+@SuppressWarnings("deprecation")
 public class FragmentTabListener<T extends Fragment> implements ActionBar.TabListener {
 	private Fragment mFragment;
 	private final FragmentActivity mActivity;
@@ -54,7 +55,7 @@ public class FragmentTabListener<T extends Fragment> implements ActionBar.TabLis
 		mfragmentContainerId = android.R.id.content;
 		mfragmentArgs = new Bundle();
 	}
-
+	@Override
 	public void onTabSelected(ActionBar.Tab tab, android.app.FragmentTransaction ft) {
 		final FragmentManager manager = mActivity.getSupportFragmentManager();
 		final FragmentTransaction sft = manager.beginTransaction();
@@ -71,7 +72,7 @@ public class FragmentTabListener<T extends Fragment> implements ActionBar.TabLis
 		}
 		sft.commit();
 	}
-
+	@Override
 	public void onTabUnselected(ActionBar.Tab tab, android.app.FragmentTransaction ft) {
 		final FragmentManager manager = mActivity.getSupportFragmentManager();
 		final FragmentTransaction sft = manager.beginTransaction();
@@ -84,7 +85,7 @@ public class FragmentTabListener<T extends Fragment> implements ActionBar.TabLis
 			sft.detach(mFragment);
 		sft.commit();
 	}
-
+	@Override
 	public void onTabReselected(ActionBar.Tab tab, android.app.FragmentTransaction ft) {
 		// User selected the already selected tab. Usually do nothing.
 	}

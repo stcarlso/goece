@@ -82,9 +82,11 @@ public class ResSeriesSpinner extends Spinner implements ValueControl,
 		if (listener != null)
 			listener.recalculate(this);
 	}
+	@Override
 	public String getAffects() {
 		return affects;
 	}
+	@Override
 	public String getGroup() {
 		return group;
 	}
@@ -131,18 +133,22 @@ public class ResSeriesSpinner extends Spinner implements ValueControl,
 		if (!isInEditMode())
 			setSelection(1, false);
 	}
+	@Override
 	public void loadState(SharedPreferences prefs) {
 		final String tag = UIFunctions.getTag(this);
 		// Only change if the preferences are initialized
 		if (prefs.contains(tag))
 			setSelection(prefs.getInt(tag, 1), false);
 	}
+	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 		callOnCalculateListener();
 	}
+	@Override
 	public void onNothingSelected(AdapterView<?> parent) {
 		callOnCalculateListener();
 	}
+	@Override
 	public void saveState(SharedPreferences.Editor prefs) {
 		prefs.putInt(UIFunctions.getTag(this), getSelectedItemPosition());
 	}

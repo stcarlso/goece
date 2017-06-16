@@ -79,6 +79,7 @@ public class ValueEntryBox extends AbstractEntryBox<EngineeringValue> implements
 		// Call superclass method only when the description and value are loaded
 		super.init(context, attrs);
 	}
+	@Override
 	public void loadState(SharedPreferences prefs) {
 		final String idS = UIFunctions.getTag(this);
 		if (prefs.contains(idS)) {
@@ -88,9 +89,11 @@ public class ValueEntryBox extends AbstractEntryBox<EngineeringValue> implements
 				updateValue(ld);
 		}
 	}
+	@Override
 	public void saveState(SharedPreferences.Editor prefs) {
 		prefs.putLong(UIFunctions.getTag(this), Double.doubleToLongBits(getRawValue()));
 	}
+	@Override
 	public void onClick(View v) {
 		final String desc = getDescription();
 		// Create popup
@@ -99,6 +102,7 @@ public class ValueEntryBox extends AbstractEntryBox<EngineeringValue> implements
 		// Show it, popup will call oncalculate for us on OK
 		mutate.show(UIFunctions.getActivity(this).getFragmentManager(), desc);
 	}
+	@Override
 	public void updateValue(final double rawValue) {
 		setValue(getValue().newValue(rawValue));
 	}

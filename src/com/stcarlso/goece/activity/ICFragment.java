@@ -1,7 +1,7 @@
 /***********************************************************************************************
  * The MIT License (MIT)
  *
- * Copyright (c) 2016 Stephen Carlson
+ * Copyright (c) 2017 Stephen Carlson
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,25 +22,24 @@
  * SOFTWARE.
  **********************************************************************************************/
 
-package com.stcarlso.goece.ui;
+package com.stcarlso.goece.activity;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import com.stcarlso.goece.R;
+import com.stcarlso.goece.ui.MenuFragment;
 
 /**
- * Listens for a button click, then launches a preset activity.
+ * Fragment which displays all items on the IC tab.
  */
-public class ActivityClickListener implements View.OnClickListener {
-	private final Class<? extends Activity> destActivity;
-	private final Activity parentActivity;
-
-	public ActivityClickListener(final Activity parentActivity, final Class<? extends Activity> destActivity) {
-		this.destActivity = destActivity;
-		this.parentActivity = parentActivity;
-	}
+public class ICFragment extends MenuFragment {
 	@Override
-	public void onClick(View v) {
-		parentActivity.startActivity(new Intent(parentActivity, destActivity));
+	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		final View view = inflater.inflate(R.layout.ics, container, false);
+		// Configure all buttons
+		setButtonEvent(view, R.id.gui555, Ne555Activity.class);
+		return view;
 	}
 }

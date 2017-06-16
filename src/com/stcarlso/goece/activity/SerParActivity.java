@@ -144,6 +144,7 @@ public class SerParActivity extends ChildActivity {
 		// Recalculate everything
 		updateErrors();
 	}
+	@Override
 	protected void recalculate(ValueGroup group) {
 		final int id = group.leastRecentlyUsed();
 		switch (id) {
@@ -185,6 +186,7 @@ public class SerParActivity extends ChildActivity {
 			break;
 		}
 	}
+	@Override
 	protected void update(ValueGroup group) {
 	}
 	/**
@@ -203,7 +205,8 @@ public class SerParActivity extends ChildActivity {
 			serOutCtrl.setText(serCand.toString());
 		else
 			// Small difference
-			serOutCtrl.setText(String.format("%s [%+.1f%%]", serCand, 100.0 * serErr));
+			serOutCtrl.setText(String.format(Locale.getDefault(), "%s [%+.1f%%]", serCand,
+				100.0 * serErr));
 		// Parallel
 		final double r3 = controls.getRawValue(R.id.guiSerParallel1);
 		final double r4 = controls.getRawValue(R.id.guiSerParallel2);
@@ -214,7 +217,8 @@ public class SerParActivity extends ChildActivity {
 			parOutCtrl.setText(parCand.toString());
 		else
 			// Small difference
-			parOutCtrl.setText(String.format("%s [%+.1f%%]", parCand, 100.0 * parErr));
+			parOutCtrl.setText(String.format(Locale.getDefault(), "%s [%+.1f%%]", parCand,
+				100.0 * parErr));
 		// Overall fit
 		final EIAValue finalValue = new EIAValue(target, seriesCtrl.getSeries());
 		UIFunctions.checkEIATable(finalValue, stdCtrl);
@@ -234,9 +238,11 @@ public class SerParActivity extends ChildActivity {
 		protected SeriesResCandidate(final double r1, final double r2, final double target) {
 			super(r1, r2, r1 + r2, target);
 		}
+		@Override
 		public ResCandidate create(double r1, double r2) {
 			return new SeriesResCandidate(r1, r2, getTarget());
 		}
+		@Override
 		protected void populateValues(int[] values, List<Double> candidates) {
 			final int maxIndex = 8 * values.length + 1;
 			for (int i = 0; i < maxIndex; i++) {
@@ -246,6 +252,7 @@ public class SerParActivity extends ChildActivity {
 				if (!possible(cv)) break;
 			}
 		}
+		@Override
 		public boolean possible(double candidate) {
 			// If value > candidate, impossible to make a series since series increases R...
 			return candidate <= getTarget();
@@ -266,9 +273,11 @@ public class SerParActivity extends ChildActivity {
 		protected ParallelResCandidate(final double r1, final double r2, final double target) {
 			super(r1, r2, ECECalc.parallelResistance(r1, r2), target);
 		}
+		@Override
 		public ResCandidate create(double r1, double r2) {
 			return new ParallelResCandidate(r1, r2, getTarget());
 		}
+		@Override
 		protected void populateValues(int[] values, List<Double> candidates) {
 			final int maxIndex = 8 * values.length + 1;
 			for (int i = maxIndex - 1; i >= 0; i--) {
@@ -278,6 +287,7 @@ public class SerParActivity extends ChildActivity {
 				if (!possible(cv)) break;
 			}
 		}
+		@Override
 		public boolean possible(double candidate) {
 			// If value < candidate, impossible to make a parallel since parallel decreases R...
 			return candidate >= getTarget();

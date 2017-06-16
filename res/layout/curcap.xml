@@ -78,20 +78,18 @@
 					 android:id="@+id/guiCurUseTrace" android:text="@string/guiCurTrace"
 					 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
 					 android:onClick="onTraceClick" android:layout_centerHorizontal="true"/>
-		<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
-					  android:layout_centerHorizontal="true" android:orientation="horizontal"
-					  android:layout_below="@id/guiCurUseTrace">
-			<view class="com.stcarlso.goece.ui.CustomEntryBox" android:id="@+id/guiCurThickness"
-				  android:layout_width="wrap_content" android:layout_height="wrap_content"
-				  ece:affects="inputs,len" ece:customUnits="@array/guiPcbUnits" ece:units="mm"
-				  ece:value="0.07" ece:description="@string/guiPcbTraceThick" ece:group="none"
-				  android:layout_marginRight="10dp" android:tag="guiCurThickness"/>
-			<view class="com.stcarlso.goece.ui.CustomEntryBox" android:id="@+id/guiCurWidth"
-				  android:layout_width="wrap_content" android:layout_height="wrap_content"
-				  ece:affects="outputs,len" ece:customUnits="@array/guiPcbUnits"
-				  ece:value="1" ece:description="@string/guiPcbTraceWidth"
-				  ece:units="mm" ece:group="inputs" android:tag="guiCurWidth"/>
-		</LinearLayout>
+		<view class="com.stcarlso.goece.ui.CustomEntryBox" android:id="@+id/guiCurThickness"
+			  android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  ece:affects="inputs,len" ece:customUnits="@array/guiPcbUnits" ece:units="mm"
+			  ece:value="0.07" ece:description="@string/guiCurTraceThick" ece:group="none"
+			  android:layout_marginRight="10dp" android:tag="guiCurThickness"
+			  android:layout_below="@id/guiCurUseTrace"/>
+		<view class="com.stcarlso.goece.ui.CustomEntryBox" android:id="@+id/guiCurWidth"
+			  android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  ece:affects="outputs,len" ece:customUnits="@array/guiPcbUnits" ece:units="mm"
+			  ece:value="1" ece:description="@string/guiCurTraceWidth" ece:group="inputs"
+			  android:layout_below="@id/guiCurUseTrace" android:tag="guiCurWidth"
+			  android:layout_toRightOf="@id/guiCurThickness"/>
 	</RelativeLayout>
 	<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
 				  android:layout_gravity="center_horizontal" android:layout_marginTop="10dp"

@@ -28,7 +28,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
-import android.text.Html;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
@@ -136,6 +135,7 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 		if (!isInEditMode())
 			copyPasteListener.setSigFigOverride(sf);
 	}
+	@Override
 	public void loadState(SharedPreferences prefs) {
 		final String idS = UIFunctions.getTag(this);
 		if (prefs.contains(idS)) {
@@ -151,6 +151,7 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 			}
 		}
 	}
+	@Override
 	public void saveState(SharedPreferences.Editor prefs) {
 		final String idS = UIFunctions.getTag(this);
 		prefs.putLong(idS, Double.doubleToLongBits(getRawValue()));
@@ -160,6 +161,7 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 		else
 			prefs.putString(idS + "_unit", displayUnit.getUnit());
 	}
+	@Override
 	public void onClick(View v) {
 		final String desc = getDescription();
 		// Create popup
@@ -176,6 +178,7 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 		// Show it, popup will call oncalculate for us on OK
 		mutate.show(UIFunctions.getActivity(this).getFragmentManager(), desc);
 	}
+	@Override
 	public void onValueChange(EngineeringValue newValue) {
 		final EngineeringValue oldValue = value;
 		if (newValue != null) {
@@ -196,9 +199,10 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 	/**
 	 * Update the button text.
 	 */
+	@Override
 	protected void updateText() {
 		final EngineeringValue ev = getValue();
-		final Spanned desc = Html.fromHtml(getDescription());
+		final Spanned desc = UIFunctions.fromHtml(getDescription());
 		final SpannableStringBuilder text = new SpannableStringBuilder();
 		// Try to find the display unit, if we fail use the default unit
 		final CustomUnit unit = displayUnit;
@@ -218,9 +222,10 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 		text.append('\n');
 		text.append(displayVal);
 		text.append(' ');
-		text.append(Html.fromHtml((unit != null) ? unit.getUnit() : ev.getUnits()));
+		text.append(UIFunctions.fromHtml((unit != null) ? unit.getUnit() : ev.getUnits()));
 		setText(text);
 	}
+	@Override
 	public void updateValue(final double rawValue) {
 		setValue(getValue().newValue(rawValue));
 	}

@@ -38,8 +38,9 @@
 				  android:layout_height="wrap_content" android:id="@+id/guiSerResTemp"
 				  android:layout_below="@id/guiSerTarget" android:orientation="horizontal">
 		<TextView android:layout_width="wrap_content" android:layout_gravity="center_vertical"
-				  android:text="@string/resSeries" android:layout_height="wrap_content"/>
-		<view class="com.stcarlso.goece.ui.ResSeriesSpinner" android:id="@+id/guiSerResSeries"
+				  android:text="@string/resSeries" android:layout_height="wrap_content"
+				  android:labelFor="@+id/guiSerResSeries"/>
+		<view class="com.stcarlso.goece.ui.ResSeriesSpinner" android:id="@id/guiSerResSeries"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  android:tag="serResSeries" android:layout_gravity="center_vertical"
 			  ece:affects="outputs" ece:group="inputs"/>

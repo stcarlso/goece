@@ -111,19 +111,23 @@ public class ValueGroup implements Iterable<ValueControl> {
 	public int mostRecentlyUsed() {
 		return searchEnabledControl(mru.iterator(), mru.getFirst());
 	}
+	@Override
 	public Iterator<ValueControl> iterator() {
 		return new Iterator<ValueControl>() {
 			private int index;
 			private final int count = map.size();
 
+			@Override
 			public boolean hasNext() {
 				return index < count;
 			}
+			@Override
 			public ValueControl next() {
 				if (index >= count)
 					throw new NoSuchElementException("At end of list");
 				return map.valueAt(index++);
 			}
+			@Override
 			public void remove() {
 				throw new UnsupportedOperationException("Read-only iterator");
 			}

@@ -47,6 +47,7 @@ public class DeltaWyeActivity extends ChildActivity {
 	public DeltaWyeActivity() {
 		controls = new ValueBoxContainer();
 	}
+	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 		final LinearLayout root = ((LinearLayout)findViewById(R.id.guiDelRoot));
@@ -73,6 +74,7 @@ public class DeltaWyeActivity extends ChildActivity {
 		controls.setupAll(this);
 		loadPrefs();
 	}
+	@Override
 	protected void recalculate(ValueGroup group) {
 		final EngineeringValue ra, rb, rc, r1, r2, r3;
 		// Shared variables
@@ -121,5 +123,6 @@ public class DeltaWyeActivity extends ChildActivity {
 			break;
 		}
 	}
+	@Override
 	protected void update(ValueGroup group) { }
 }

@@ -31,6 +31,7 @@ import android.content.DialogInterface;
  * on dialogs.
  */
 public class IgnoreOnClickListener implements DialogInterface.OnClickListener {
+	@Override
 	public void onClick(DialogInterface dialog, int which) {
 		// Nothing
 	}

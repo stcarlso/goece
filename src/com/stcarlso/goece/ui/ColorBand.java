@@ -84,9 +84,11 @@ public class ColorBand extends LinearLayout implements View.OnClickListener, Val
 		if (listener != null)
 			listener.recalculate(this);
 	}
+	@Override
 	public String getAffects() {
 		return affects;
 	}
+	@Override
 	public String getGroup() {
 		return group;
 	}
@@ -170,14 +172,17 @@ public class ColorBand extends LinearLayout implements View.OnClickListener, Val
 			break;
 		}
 	}
+	@Override
 	public void loadState(SharedPreferences prefs) {
 		final int idx = prefs.getInt(UIFunctions.getTag(this), -1);
 		if (idx >= 0 && idx < colors.length)
 			setValue(idx);
 	}
+	@Override
 	public void saveState(SharedPreferences.Editor prefs) {
 		prefs.putInt(UIFunctions.getTag(this), getValue());
 	}
+	@Override
 	public void onClick(View view) {
 		final int id = view.getId(), oldValue = value;
 		for (int i = 0; i < colors.length; i++)

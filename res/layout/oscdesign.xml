@@ -27,41 +27,38 @@
 				xmlns:ece="http://schemas.android.com/apk/res/com.stcarlso.goece"
 				android:orientation="vertical" android:layout_width="match_parent"
 				android:layout_height="match_parent">
-	<GridLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:orientation="horizontal" android:layout_centerHorizontal="true"
-				android:id="@+id/guiOscInputs" android:rowCount="3" android:columnCount="2">
-		<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="outputs"
-			  android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:tag="guiOscFrequency" android:id="@+id/guiOscFrequency" ece:units="Hz"
-			  ece:description="@string/freq" ece:group="inputs" ece:value="8000000"
-			  android:layout_marginRight="10dp" android:layout_row="0"
-			  android:layout_column="0" android:layout_gravity="right"/>
-		<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="none"
-			  android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:tag="guiOscESR" android:id="@+id/guiOscESR" ece:units="Ω"
-			  ece:description="@string/guiOscESR" ece:group="outputs" ece:value="70"
-			  android:layout_row="0" android:layout_column="1"/>
-		<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="outputs"
-			  android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:tag="guiOscLoadCap" android:id="@+id/guiOscLoadCap" ece:units="F"
-			  ece:description="@string/guiOscLoadCap" ece:group="inputs" ece:value="20E-12"
-			  android:layout_marginRight="10dp" android:layout_row="1"
-			  android:layout_column="0" android:layout_gravity="right"/>
-		<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="outputs"
-			  android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:tag="guiOscShuntCap" android:id="@+id/guiOscShuntCap" ece:units="F"
-			  ece:description="@string/guiOscShuntCap" ece:group="inputs" ece:value="7E-12"
-			  android:layout_row="1" android:layout_column="1"/>
-		<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="outputs"
-			  android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:tag="guiOscPinCap" android:id="@+id/guiOscPinCap" ece:units="F"
-			  ece:description="@string/guiOscStrayCap" ece:group="inputs" ece:value="3E-12"
-			  android:layout_row="2" android:layout_column="0" android:layout_columnSpan="2"
-			  android:layout_gravity="center_horizontal"/>
-	</GridLayout>
+	<View android:layout_height="0dp" android:layout_width="0dp" android:id="@+id/guiOscCenter"
+		  android:layout_centerHorizontal="true"/>
+	<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="outputs" ece:value="8000000"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content"
+		  android:tag="guiOscFrequency" android:id="@+id/guiOscFrequency" ece:units="Hz"
+		  android:layout_toLeftOf="@id/guiOscCenter" android:layout_marginRight="5dp"
+		  ece:description="@string/freq" ece:group="inputs"/>
+	<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="none" ece:value="70"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content"
+		  android:tag="guiOscESR" android:id="@+id/guiOscESR" ece:units="Ω"
+		  android:layout_toRightOf="@id/guiOscCenter" android:layout_marginLeft="5dp"
+		  ece:description="@string/guiOscESR" ece:group="outputs"/>
+	<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="outputs" ece:value="20E-12"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content"
+		  android:tag="guiOscLoadCap" android:id="@+id/guiOscLoadCap" ece:units="F"
+		  android:layout_below="@id/guiOscESR" android:layout_toLeftOf="@id/guiOscCenter"
+		  android:layout_marginTop="5dp" android:layout_marginRight="5dp"
+		  ece:description="@string/guiOscLoadCap" ece:group="inputs"/>
+	<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="outputs" ece:value="7E-12"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content"
+		  android:tag="guiOscShuntCap" android:id="@+id/guiOscShuntCap" ece:units="F"
+		  android:layout_below="@id/guiOscESR" android:layout_toRightOf="@id/guiOscCenter"
+		  android:layout_marginTop="5dp" android:layout_marginLeft="5dp"
+		  ece:description="@string/guiOscShuntCap" ece:group="inputs"/>
+	<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="outputs" ece:value="3E-12"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content" ece:units="F"
+		  android:tag="guiOscPinCap" android:id="@+id/guiOscPinCap" ece:group="inputs"
+		  android:layout_below="@id/guiOscShuntCap" android:layout_centerHorizontal="true"
+		  ece:description="@string/guiOscStrayCap" android:layout_marginTop="5dp"/>
 	<ImageView android:layout_width="156dp" android:layout_height="174dp"
 			   android:src="@drawable/oscdesign" android:layout_centerHorizontal="true"
-			   android:layout_margin="10dp" android:layout_below="@id/guiOscInputs"
+			   android:layout_margin="5dp" android:layout_below="@id/guiOscPinCap"
 			   android:contentDescription="@string/cirosc" android:id="@+id/guiOscCircuit"/>
 	<GridLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
 				android:layout_centerHorizontal="true" android:layout_below="@id/guiOscCircuit"

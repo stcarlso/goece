@@ -40,11 +40,11 @@ public class ComplexValue extends EngineeringValue implements Serializable {
 	/**
 	 * Cached imaginary part.
 	 */
-	private transient double imag;
+	private final transient double imag;
 	/**
 	 * Cached real part.
 	 */
-	private transient double real;
+	private final transient double real;
 
 	/**
 	 * Create an engineering value with no units, no tolerance, and 3 significant figures.

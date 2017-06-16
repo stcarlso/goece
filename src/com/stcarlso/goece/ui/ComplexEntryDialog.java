@@ -30,7 +30,6 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.View;
 import android.view.WindowManager.LayoutParams;
 import android.widget.*;
@@ -39,6 +38,8 @@ import com.stcarlso.goece.utility.ComplexValue;
 import com.stcarlso.goece.utility.EngineeringValue;
 import com.stcarlso.goece.utility.IgnoreOnClickListener;
 import com.stcarlso.goece.utility.UIFunctions;
+
+import java.util.Locale;
 
 /**
  * Represents a dialog box which can accept ECE values in scientific notation for real and
@@ -122,7 +123,7 @@ public class ComplexEntryDialog extends DialogFragment implements
 	 * Reference to the drop-down list of unit selections. There are 3 of these, one for each
 	 * of magnitude, real and imaginary part.
 	 */
-	private Spinner[] unitSelect;
+	private final Spinner[] unitSelect;
 	/**
 	 * The last successfully entered or set value.
 	 */
@@ -202,14 +203,15 @@ public class ComplexEntryDialog extends DialogFragment implements
 		unitSelect[2].setSelection(imPart.getSIPrefixCode());
 		// Load magnitude/phase, allow editing of a few more sigfigs than usual
 		magEntry.setText(decFormat(value.getSignificand()));
-		phaEntry.setText(String.format("%.3f", value.getAngle()));
+		phaEntry.setText(String.format(Locale.getDefault(), "%.3f", value.getAngle()));
 		// Load real/imaginary
 		realEntry.setText(decFormat(rePart.getSignificand()));
 		imagEntry.setText(decFormat(imPart.getSignificand()));
 	}
+	@Override
 	public void onClick(DialogInterface dialog, int which) {
 		// Load value and unit
-		if (magEntry != null && unitSelect != null)
+		if (magEntry != null)
 			try {
 				// Load the new value
 				if (magPhaseMode.isChecked())
@@ -221,6 +223,7 @@ public class ComplexEntryDialog extends DialogFragment implements
 				dismiss();
 			} catch (NumberFormatException ignore) { }
 	}
+	@Override
 	public void onClick(View v) {
 		boolean magPhase = magPhaseMode.isChecked();
 		final View which = reImSwitcher.getCurrentView();
@@ -247,6 +250,7 @@ public class ComplexEntryDialog extends DialogFragment implements
 		else
 			magEntry.selectAll();
 	}
+	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		final Activity act = getActivity();
 		final AlertDialog.Builder builder = new AlertDialog.Builder(act);
@@ -277,7 +281,7 @@ public class ComplexEntryDialog extends DialogFragment implements
 		// Show the keyboard
 		magEntry.selectAll();
 		// Split up and load all descriptions (must have at least one element in return!)
-		builder.setTitle(Html.fromHtml(desc.getTitle()));
+		builder.setTitle(UIFunctions.fromHtml(desc.getTitle()));
 		UIFunctions.setLabelText(dialog, R.id.guiValueMagDesc, desc.getMagnitudeDescription());
 		UIFunctions.setLabelText(dialog, R.id.guiValuePhaDesc, desc.getPhaseDescription());
 		UIFunctions.setLabelText(dialog, R.id.guiValueReDesc, desc.getRealDescription());
@@ -290,6 +294,7 @@ public class ComplexEntryDialog extends DialogFragment implements
 		window.getWindow().setSoftInputMode(LayoutParams.SOFT_INPUT_STATE_VISIBLE);
 		return window;
 	}
+	@Override
 	public void onPause() {
 		// Silence "getExtractedText on inactive InputConnection"
 		UIFunctions.hideKeyboard(getActivity());

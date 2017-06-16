@@ -77,6 +77,7 @@ public class ComplexEntryBox extends AbstractEntryBox<ComplexValue> implements
 	 *
 	 * @return the current value
 	 */
+	@Override
 	public ComplexValue getValue() {
 		return value;
 	}
@@ -120,6 +121,7 @@ public class ComplexEntryBox extends AbstractEntryBox<ComplexValue> implements
 		// Call superclass method only when the description and value are loaded
 		super.init(context, attrs);
 	}
+	@Override
 	public void loadState(SharedPreferences prefs) {
 		final String idS = UIFunctions.getTag(this);
 		if (prefs.contains(idS + "_mag") && prefs.contains(idS + "_pha")) {
@@ -130,11 +132,13 @@ public class ComplexEntryBox extends AbstractEntryBox<ComplexValue> implements
 				updateValue(mag, pha);
 		}
 	}
+	@Override
 	public void saveState(SharedPreferences.Editor prefs) {
 		final String tag = UIFunctions.getTag(this);
 		prefs.putLong(tag + "_mag", Double.doubleToLongBits(getRawMagnitude()));
 		prefs.putLong(tag + "_pha", Double.doubleToLongBits(getRawAngle()));
 	}
+	@Override
 	public void onClick(View v) {
 		final String desc = getDescription();
 		// Create popup
@@ -147,6 +151,7 @@ public class ComplexEntryBox extends AbstractEntryBox<ComplexValue> implements
 	public void updateValue(final double rawMag, final double rawPhase) {
 		setValue(getValue().newValue(rawMag, rawPhase));
 	}
+	@Override
 	public void updateValue(final double rawValue) {
 		updateValue(rawValue, getValue().getAngle());
 	}

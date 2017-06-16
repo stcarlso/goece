@@ -24,8 +24,6 @@
 
 package com.stcarlso.goece.utility;
 
-import android.service.wallpaper.WallpaperService;
-
 import java.io.Serializable;
 
 /**

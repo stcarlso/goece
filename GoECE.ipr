@@ -59,8 +59,14 @@
   <component name="InspectionProjectProfileManager">
     <profile version="1.0" is_locked="false">
       <option name="myName" value="Project Default" />
-      <option name="myLocal" value="true" />
       <inspection_tool class="AbstractClassWithoutAbstractMethods" enabled="true" level="INFO" enabled_by_default="true" />
+      <inspection_tool class="AndroidKLintDefaultLocale" enabled="false" level="WARNING" enabled_by_default="false" />
+      <inspection_tool class="AndroidKLintGoogleAppIndexingWarning" enabled="false" level="WARNING" enabled_by_default="false" />
+      <inspection_tool class="AndroidKLintIconDensities" enabled="false" level="WARNING" enabled_by_default="false" />
+      <inspection_tool class="AndroidKLintRtlHardcoded" enabled="false" level="WARNING" enabled_by_default="false" />
+      <inspection_tool class="AndroidKLintSuspiciousImport" enabled="false" level="WARNING" enabled_by_default="false" />
+      <inspection_tool class="AndroidLintRtlCompat" enabled="false" level="ERROR" enabled_by_default="false" />
+      <inspection_tool class="AndroidLintRtlHardcoded" enabled="false" level="WARNING" enabled_by_default="false" />
       <inspection_tool class="AnnotationClass" enabled="true" level="WARNING" enabled_by_default="true" />
       <inspection_tool class="ArrayEquality" enabled="true" level="WARNING" enabled_by_default="true" />
       <inspection_tool class="AssertEqualsBetweenInconvertibleTypes" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -103,6 +109,7 @@
       <inspection_tool class="Convert2Diamond" enabled="false" level="WARNING" enabled_by_default="false" />
       <inspection_tool class="CyclicClassDependency" enabled="true" level="INFO" enabled_by_default="true" />
       <inspection_tool class="CyclicPackageDependency" enabled="true" level="INFO" enabled_by_default="true" />
+      <inspection_tool class="DanglingJavadoc" enabled="false" level="WARNING" enabled_by_default="false" />
       <inspection_tool class="DivideByZero" enabled="true" level="WARNING" enabled_by_default="true" />
       <inspection_tool class="DollarSignInName" enabled="true" level="WARNING" enabled_by_default="true" />
       <inspection_tool class="DuplicateBooleanBranch" enabled="true" level="INFO" enabled_by_default="true" />
@@ -169,10 +176,6 @@
       <inspection_tool class="LocalVariableHidingMemberVariable" enabled="true" level="INFO" enabled_by_default="true">
         <option name="m_ignoreInvisibleFields" value="true" />
         <option name="m_ignoreStaticMethods" value="true" />
-      </inspection_tool>
-      <inspection_tool class="LoggerInitializedWithForeignClass" enabled="false" level="WARNING" enabled_by_default="false">
-        <option name="loggerClassName" value="org.apache.log4j.Logger,org.slf4j.LoggerFactory,org.apache.commons.logging.LogFactory,java.util.logging.Logger" />
-        <option name="loggerFactoryMethodName" value="getLogger,getLogger,getLog,getLogger" />
       </inspection_tool>
       <inspection_tool class="LoopConditionNotUpdatedInsideLoop" enabled="true" level="INFO" enabled_by_default="true">
         <option name="ignoreIterators" value="true" />
@@ -313,7 +316,7 @@
       </inspection_tool>
       <inspection_tool class="UnaryPlus" enabled="true" level="INFO" enabled_by_default="true" />
       <inspection_tool class="UnnecessaryContinue" enabled="false" level="WARNING" enabled_by_default="false" />
-      <inspection_tool class="UnnecessaryFullyQualifiedName" enabled="true" level="INFO" enabled_by_default="true">
+      <inspection_tool class="UnnecessaryFullyQualifiedName" enabled="false" level="INFO" enabled_by_default="false">
         <option name="m_ignoreJavadoc" value="true" />
       </inspection_tool>
       <inspection_tool class="UnnecessaryLabelOnBreakStatement" enabled="false" level="WARNING" enabled_by_default="false" />
@@ -482,7 +485,7 @@
         </XML>
       </value>
     </option>
-    <option name="PREFERRED_PROJECT_CODE_STYLE" value="Eclipse" />
+    <option name="PREFERRED_PROJECT_CODE_STYLE" value="Default" />
   </component>
   <component name="ProjectDictionaryState">
     <dictionary name="stcarlso" />
@@ -502,7 +505,7 @@
       <module fileurl="file://$PROJECT_DIR$/GoECE.iml" filepath="$PROJECT_DIR$/GoECE.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" project-jdk-name="Android SDK" project-jdk-type="Android SDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" project-jdk-name="Android" project-jdk-type="Android SDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="ProjectType">

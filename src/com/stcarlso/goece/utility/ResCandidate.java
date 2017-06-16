@@ -62,6 +62,7 @@ public abstract class ResCandidate implements Comparable<ResCandidate> {
 		this.target = target;
 		this.value = value;
 	}
+	@Override
 	public int compareTo(ResCandidate other) {
 		// Compare using absolute value of error for quick drill down
 		int ret = Double.compare(Math.abs(getError()), Math.abs(other.getError()));

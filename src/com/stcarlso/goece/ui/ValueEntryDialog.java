@@ -28,7 +28,6 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
-import android.text.Html;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager.LayoutParams;
@@ -70,15 +69,18 @@ public class ValueEntryDialog extends AbstractEntryDialog implements View.OnKeyL
 		return dialog;
 	}
 
+	@Override
 	protected double getEnteredValue() {
 		// Reconstruct from units and value, fairly simple
 		return EngineeringValue.valueFromSigExp(Double.parseDouble(valueEntry.getText().
 			toString()), unitSelect.getSelectedItemPosition());
 	}
+	@Override
 	public boolean onKey(View v, int keyCode, KeyEvent event) {
 		updateValidValues(v.getRootView());
 		return false;
 	}
+	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		final Activity act = getActivity();
 		final AlertDialog.Builder builder = new AlertDialog.Builder(act);
@@ -100,7 +102,7 @@ public class ValueEntryDialog extends AbstractEntryDialog implements View.OnKeyL
 		valueEntry.setText(value.significandToString(6));
 		valueEntry.selectAll();
 		updateValidValues(dialog);
-		builder.setTitle(Html.fromHtml(desc));
+		builder.setTitle(UIFunctions.fromHtml(desc));
 		// Create OK and Cancel buttons
 		builder.setPositiveButton(R.string.ok, this);
 		builder.setNegativeButton(R.string.cancel, new IgnoreOnClickListener());

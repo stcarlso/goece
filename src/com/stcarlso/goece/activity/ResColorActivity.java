@@ -75,6 +75,7 @@ public class ResColorActivity extends ChildActivity {
 		bandCtrl = new ColorBand[5];
 		copyPasteListener = new CopyPasteListener(this, "Resistance");
 	}
+	@Override
 	public void recalculate(final ValueGroup group) {
 		final int tol = bandCtrl[4].getValue();
 		// Calculate prefix
@@ -137,5 +138,6 @@ public class ResColorActivity extends ChildActivity {
 		recalculate(bandCtrl[4]);
 	}
 	// All work is done in recalculate()
+	@Override
 	protected void update(ValueGroup group) { }
 }

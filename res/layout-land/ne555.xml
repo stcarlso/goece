@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ The MIT License (MIT)
+  ~
+  ~ Copyright (c) 2017 Stephen Carlson
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+				xmlns:ece="http://schemas.android.com/apk/res/com.stcarlso.goece"
+				android:layout_width="match_parent" android:layout_height="match_parent">
+	<View android:layout_width="0dp" android:layout_height="0dp" android:id="@+id/gui555Center"
+		  android:layout_centerHorizontal="true"/>
+	<RadioGroup android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_centerHorizontal="true" android:orientation="horizontal"
+				android:id="@+id/gui555Mode">
+		<RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+					 android:tag="gui555Monostable" android:id="@+id/gui555Monostable"
+					 android:text="@string/gui555Mono" android:onClick="onClick"
+					 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+					 android:layout_marginRight="10dp" android:checked="true"/>
+		<RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+					 android:tag="gui555Astable" android:id="@+id/gui555Astable"
+					 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+					 android:text="@string/gui555Ast" android:onClick="onClick"/>
+	</RadioGroup>
+	<ImageView android:layout_width="200dp" android:layout_height="200dp"
+			   android:layout_centerHorizontal="true" android:src="@drawable/ic555astable"
+			   android:contentDescription="@string/cir555" android:id="@+id/gui555Image"
+			   android:layout_below="@id/gui555Mode" android:layout_marginRight="5dp"
+			   android:layout_toLeftOf="@id/gui555Center"/>
+	<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="inputs" ece:value="1000"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content"
+		  android:tag="gui555Freq" android:id="@+id/gui555Freq" ece:units="Hz"
+		  ece:description="@string/freq" ece:group="outputs" android:layout_marginLeft="5dp"
+		  android:layout_toRightOf="@id/gui555Center" android:layout_below="@id/gui555Mode"/>
+	<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="inputs" ece:value="0.01"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content"
+		  android:tag="gui555Delay" android:id="@+id/gui555Delay" ece:units="s"
+		  ece:description="@string/gui555Delay" ece:group="outputs" android:visibility="gone"
+		  android:layout_toRightOf="@id/gui555Freq" android:layout_below="@id/gui555Mode"
+		  android:layout_marginLeft="5dp"/>
+	<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="inputs" ece:value="100"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content"
+		  android:tag="gui555Duty" android:id="@+id/gui555Duty" ece:units="%"
+		  ece:description="@string/duty" ece:group="outputs" android:layout_marginLeft="10dp"
+		  android:layout_toRightOf="@id/gui555Delay" android:layout_below="@id/gui555Mode"/>
+	<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="outputs" ece:value="1e-6"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content"
+		  android:tag="gui555C1" android:id="@+id/gui555C1" ece:units="F" ece:group="inputs"
+		  ece:description="@string/gui555C1" android:layout_marginLeft="5dp"
+		  android:layout_below="@id/gui555Duty" android:layout_toRightOf="@id/gui555Center"
+		  android:layout_marginTop="10dp"/>
+	<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="outputs" ece:value="1000"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content"
+		  android:tag="gui555R1" android:id="@+id/gui555R1" ece:units="Ω" ece:group="inputs"
+		  ece:description="@string/gui555R1" android:layout_marginLeft="10dp"
+		  android:layout_below="@id/gui555Duty" android:layout_toRightOf="@id/gui555C1"
+		  android:layout_marginTop="10dp"/>
+	<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="outputs" ece:value="1000"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content"
+		  android:tag="gui555R2" android:id="@+id/gui555R2" ece:units="Ω" ece:group="inputs"
+		  ece:description="@string/gui555R2" android:layout_toRightOf="@id/gui555Center"
+		  android:layout_below="@id/gui555R1" android:layout_marginLeft="5dp"/>
+</RelativeLayout>

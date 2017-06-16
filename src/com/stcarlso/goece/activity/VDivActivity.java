@@ -106,9 +106,11 @@ public class VDivActivity extends ChildActivity implements View.OnClickListener 
 		}
 		return best;
 	}
+	@Override
 	protected void loadCustomPrefs(SharedPreferences prefs) {
 		loadPrefsCheckBox(prefs, R.id.guiDivIsLoad);
 	}
+	@Override
 	public void onClick(View v) {
 		final AbstractEntryBox<?> loadR = controls.get(R.id.guiDivLoad);
 		loadR.setEnabled(isLoadCtrl.isChecked());
@@ -136,6 +138,7 @@ public class VDivActivity extends ChildActivity implements View.OnClickListener 
 		// Recalculate everything
 		onClick(null);
 	}
+	@Override
 	protected void recalculate(ValueGroup group) {
 		// Raw values
 		final double vin = controls.getRawValue(R.id.guiDivInput);
@@ -211,9 +214,11 @@ public class VDivActivity extends ChildActivity implements View.OnClickListener 
 		final double ratio = ECECalc.voltageDivide(r1, r2);
 		controls.setRawValue(R.id.guiDivOutput, vin * ratio);
 	}
+	@Override
 	protected void saveCustomPrefs(SharedPreferences.Editor prefs) {
 		savePrefsCheckBox(prefs, R.id.guiDivIsLoad);
 	}
+	@Override
 	protected void update(ValueGroup group) {
 	}
 	/**
@@ -225,11 +230,12 @@ public class VDivActivity extends ChildActivity implements View.OnClickListener 
 		final double v = controls.getRawValue(R.id.guiDivInput);
 		// R total = R1 + R2, current = V / R, power = V * V / R
 		final double er = r1 + r2, current = v / er;
-		equivCtrl.setText("Equivalent resistance: " + new EngineeringValue(er,
-			Units.RESISTANCE));
-		currentCtrl.setText("Current flow: " + new EngineeringValue(current, Units.CURRENT));
-		powerCtrl.setText("Power dissipation: " + new EngineeringValue(current * v,
-			Units.POWER));
+		equivCtrl.setText(getString(R.string.guiDivReq, new EngineeringValue(er,
+			Units.RESISTANCE).toString()));
+		currentCtrl.setText(getString(R.string.guiDivCurrent, new EngineeringValue(current,
+			Units.CURRENT)));
+		powerCtrl.setText(getString(R.string.guiDivPower, new EngineeringValue(current * v,
+			Units.POWER)));
 	}
 
 	/**
@@ -286,6 +292,7 @@ public class VDivActivity extends ChildActivity implements View.OnClickListener 
 			this.rl = rl;
 			this.target = target;
 		}
+		@Override
 		public int compareTo(DividerCandidate other) {
 			int test;
 			if (getCurrent() > MAX_CURRENT)

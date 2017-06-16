@@ -126,6 +126,7 @@ public class PcbTraceActivity extends ChildActivity implements
 			}
 		}
 	}
+	@Override
 	protected void loadCustomPrefs(SharedPreferences prefs) {
 		loadPrefsSpinner(prefs, R.id.guiPcbScenario);
 	}
@@ -148,6 +149,7 @@ public class PcbTraceActivity extends ChildActivity implements
 		loadPrefs();
 		recalculate(controls.get(R.id.guiPcbThickness));
 	}
+	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 		// Show/hide diff impedance based on selection
 		final int scenario = traceTypeCtrl.getSelectedItemPosition(), show = (scenario > 1) ?
@@ -159,7 +161,9 @@ public class PcbTraceActivity extends ChildActivity implements
 			pcbImage.setImageResource(IMAGES[scenario]);
 		recalculate(controls.get(R.id.guiPcbThickness));
 	}
+	@Override
 	public void onNothingSelected(AdapterView<?> parent) { }
+	@Override
 	protected void recalculate(ValueGroup group) {
 		final int scenario = traceTypeCtrl.getSelectedItemPosition();
 		Equation equ = null;
@@ -218,9 +222,11 @@ public class PcbTraceActivity extends ChildActivity implements
 			break;
 		}
 	}
+	@Override
 	protected void saveCustomPrefs(SharedPreferences.Editor prefs) {
 		savePrefsSpinner(prefs, R.id.guiPcbScenario);
 	}
+	@Override
 	protected void update(ValueGroup group) { }
 
 	/**
@@ -284,6 +290,7 @@ public class PcbTraceActivity extends ChildActivity implements
 			zDenom = Math.sqrt(1.0 + er) * 2.8284271247461902;
 			zX2Add = (1.0 + 1.0 / er) * 0.5 * Math.PI * Math.PI;
 		}
+		@Override
 		public double eval(double x) {
 			final double ret;
 			if (x <= 0.0)
@@ -353,6 +360,7 @@ public class PcbTraceActivity extends ChildActivity implements
 			// Precompute
 			zNum = 60.0 / Math.sqrt(er);
 		}
+		@Override
 		public double eval(double x) {
 			final double ret;
 			if (x <= 0.0)
@@ -461,6 +469,7 @@ public class PcbTraceActivity extends ChildActivity implements
 			q1 = 0.8695 * Math.pow(u, .194);
 			zom = zo_surf * Math.sqrt(er_eff) / (Units.Z_0 * Math.PI);
 		}
+		@Override
 		public double eval(double x) {
 			final double ret;
 			if (x <= 0.0)
@@ -575,6 +584,7 @@ public class PcbTraceActivity extends ChildActivity implements
 			final double bht = b / ht;
 			cfTB = 2.0 * bht * Math.log1p(bht) - t * Math.log(bht * bht - 1.0) / ht;
 		}
+		@Override
 		public double eval(double x) {
 			final double ret;
 			if (x <= 0.0)

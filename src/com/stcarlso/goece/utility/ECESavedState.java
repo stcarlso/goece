@@ -79,6 +79,7 @@ public class ECESavedState<T extends Serializable> extends View.BaseSavedState {
 		state = value;
 	}
 	// Write the parcel, then save our state
+	@Override
 	public void writeToParcel(Parcel dest, int flags) {
 		super.writeToParcel(dest, flags);
 		dest.writeSerializable(state);
@@ -89,9 +90,11 @@ public class ECESavedState<T extends Serializable> extends View.BaseSavedState {
 	 */
 	public static final Parcelable.Creator<ECESavedState> CREATOR =
 		new Parcelable.Creator<ECESavedState>() {
+			@Override
 			public ECESavedState createFromParcel(Parcel source) {
 				return new ECESavedState(source);
 			}
+			@Override
 			public ECESavedState[] newArray(int size) {
 				return new ECESavedState[size];
 			}
