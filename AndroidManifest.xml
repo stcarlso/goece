@@ -43,7 +43,7 @@
 		</activity>
 		<activity android:name=".activity.SMDResistorActivity"
 				  android:label="@string/guiSMDResistor"
-				  android:configChanges="orientation|screenSize"
+				  android:configChanges="orientation|screenSize|keyboardHidden"
 				  android:windowSoftInputMode="adjustResize|stateVisible">
 			<meta-data android:name="android.support.PARENT_ACTIVITY"
 					   android:value=".activity.ECEActivity"/>
@@ -63,7 +63,7 @@
 		</activity>
 		<activity android:name=".activity.SerParActivity" android:label="@string/guiSerPar"
 				  android:windowSoftInputMode="adjustResize"
-				  android:configChanges="orientation|screenSize">
+				  android:configChanges="orientation|screenSize|keyboardHidden">
 			<meta-data android:name="android.support.PARENT_ACTIVITY"
 					   android:value=".activity.ECEActivity"/>
 		</activity>
@@ -74,13 +74,14 @@
 					   android:value=".activity.ECEActivity"/>
 		</activity>
 		<activity android:name=".activity.CurCapActivity" android:label="@string/guiCurCap"
-				  android:windowSoftInputMode="adjustResize">
+				  android:windowSoftInputMode="adjustResize"
+				  android:configChanges="screenSize|keyboardHidden">
 			<meta-data android:name="android.support.PARENT_ACTIVITY"
 					   android:value=".activity.ECEActivity"/>
 		</activity>
 		<activity android:name=".activity.PcbTraceActivity" android:label="@string/guiPcbWidth"
 				  android:windowSoftInputMode="adjustResize"
-				  android:configChanges="orientation|screenSize|keyboardHidden">
+				  android:configChanges="screenSize|keyboardHidden">
 			<meta-data android:name="android.support.PARENT_ACTIVITY"
 					   android:value=".activity.ECEActivity"/>
 		</activity>
@@ -97,11 +98,19 @@
 		</activity>
 		<activity android:name=".activity.OscDesignActivity"
 				  android:label="@string/guiOscDesign"
+				  android:windowSoftInputMode="adjustResize"
 				  android:configChanges="screenSize|keyboardHidden">
 			<meta-data android:name="android.support.PARENT_ACTIVITY"
 					   android:value=".activity.ECEActivity"/>
 		</activity>
-		<activity android:name=".activity.Ne555Activity" android:label="@string/gui555"
+		<activity android:name=".activity.Ne555Activity" android:label="@string/gui555Calc"
+				  android:windowSoftInputMode="adjustResize"
+				  android:configChanges="screenSize|keyboardHidden">
+			<meta-data android:name="android.support.PARENT_ACTIVITY"
+					   android:value=".activity.ECEActivity"/>
+		</activity>
+		<activity android:name=".activity.ADCActivity" android:label="@string/guiAdcCalc"
+				  android:windowSoftInputMode="adjustResize"
 				  android:configChanges="screenSize|keyboardHidden">
 			<meta-data android:name="android.support.PARENT_ACTIVITY"
 					   android:value=".activity.ECEActivity"/>

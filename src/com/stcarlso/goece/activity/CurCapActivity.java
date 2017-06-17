@@ -30,12 +30,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
-import android.widget.TextView;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.AbstractEntryBox;
 import com.stcarlso.goece.ui.ChildActivity;
-import com.stcarlso.goece.ui.ValueBoxContainer;
 import com.stcarlso.goece.ui.ValueGroup;
+import com.stcarlso.goece.ui.ValueOutputField;
 import com.stcarlso.goece.utility.EngineeringValue;
 import com.stcarlso.goece.utility.Units;
 
@@ -102,29 +101,30 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 	}
 
 	/**
-	 * Contains all data entry controls.
-	 */
-	private final ValueBoxContainer controls;
-	/**
-	 * Cached reference to the length analysis output box.
-	 */
-	private TextView lengthOutCtrl;
-	/**
 	 * Cached reference to the materials selection list.
 	 */
 	private Spinner materialsCtrl;
+	/**
+	 * Cached reference to the power loss output box.
+	 */
+	private ValueOutputField powerOutCtrl;
+	/**
+	 * Cached reference to the wire resistance output box.
+	 */
+	private ValueOutputField resistOutCtrl;
 	/**
 	 * Cached radio button to select trace capacity.
 	 */
 	private RadioButton traceSelCtrl;
 	/**
+	 * Cached reference to the voltage drop output box.
+	 */
+	private ValueOutputField voltOutCtrl;
+	/**
 	 * Cached radio button to select wire capacity.
 	 */
 	private RadioButton wireSelCtrl;
 
-	public CurCapActivity() {
-		controls = new ValueBoxContainer();
-	}
 	@Override
 	protected void loadCustomPrefs(SharedPreferences prefs) {
 		loadPrefsSpinner(prefs, R.id.guiCurMaterials);
@@ -135,10 +135,13 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.curcap);
-		lengthOutCtrl = asTextView(R.id.guiCurLenInfo);
+		// Update references
 		materialsCtrl = asSpinner(R.id.guiCurMaterials);
 		materialsCtrl.setOnItemSelectedListener(this);
+		powerOutCtrl = asValueField(R.id.guiCurPower);
+		resistOutCtrl = asValueField(R.id.guiCurResist);
 		traceSelCtrl = asRadioButton(R.id.guiCurUseTrace);
+		voltOutCtrl = asValueField(R.id.guiCurVDrop);
 		wireSelCtrl = asRadioButton(R.id.guiCurUseWire);
 		// Load controls and preferences
 		controls.add(findViewById(R.id.guiCurCurrent));
@@ -381,11 +384,8 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 		final double ohm = controls.getRawValue(R.id.guiCurLength) * ohmperm;
 		final double voltDrop = ohm * current;
 		// Generate engineering values
-		final EngineeringValue resistance = new EngineeringValue(ohm, Units.RESISTANCE);
-		final EngineeringValue power = new EngineeringValue(current * voltDrop, Units.POWER);
-		final EngineeringValue voltage = new EngineeringValue(voltDrop, Units.VOLTAGE);
-		// Update field
-		lengthOutCtrl.setText(String.format("Resistance: %s\r\nPower loss: %s\r\n" +
-			"Voltage drop: %s", resistance, power, voltage));
+		resistOutCtrl.setValue(new EngineeringValue(ohm, Units.RESISTANCE));
+		powerOutCtrl.setValue(new EngineeringValue(current * voltDrop, Units.POWER));
+		voltOutCtrl.setValue(new EngineeringValue(voltDrop, Units.VOLTAGE));
 	}
 }

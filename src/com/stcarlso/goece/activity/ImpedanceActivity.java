@@ -41,17 +41,10 @@ import com.stcarlso.goece.utility.ComplexValue;
  */
 public class ImpedanceActivity extends ChildActivity implements View.OnClickListener {
 	/**
-	 * Contains all data entry controls.
-	 */
-	private final ValueBoxContainer controls;
-	/**
 	 * Cached radio button to select capacitance (inductance is always the opposite!)
 	 */
 	private RadioButton capSelCtrl;
 
-	public ImpedanceActivity() {
-		controls = new ValueBoxContainer();
-	}
 	@Override
 	protected void loadCustomPrefs(SharedPreferences prefs) {
 		super.loadCustomPrefs(prefs);

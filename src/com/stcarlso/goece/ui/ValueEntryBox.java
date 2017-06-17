@@ -39,6 +39,11 @@ import com.stcarlso.goece.utility.UIFunctions;
  */
 public class ValueEntryBox extends AbstractEntryBox<EngineeringValue> implements
 		AbstractEntryDialog.OnCalculateListener {
+	/**
+	 * Whether negative numbers can be entered, default false.
+	 */
+	private boolean negative;
+
 	public ValueEntryBox(Context context) {
 		super(context);
 	}
@@ -50,29 +55,30 @@ public class ValueEntryBox extends AbstractEntryBox<EngineeringValue> implements
 	}
 	@Override
 	protected void init(final Context context, final AttributeSet attrs) {
-		String units = "", desc = "Value", newGroup = "", willAffect = "";
+		String units = "", desc = context.getString(R.string.value), newGroup = "",
+			willAffect = "";
 		double iv = 0.0;
 		int sf = 3;
+		boolean neg = false;
 		if (attrs != null) {
 			// Read attributes for units
 			final TypedArray values = context.getTheme().obtainStyledAttributes(attrs,
 				R.styleable.ValueEntryBox, 0, 0);
-			try {
-				// Read the values and substitute defaults
-				units = values.getString(R.styleable.ValueEntryBox_units);
-				desc = values.getString(R.styleable.ValueEntryBox_description);
-				iv = values.getFloat(R.styleable.ValueEntryBox_value, 0.0f);
-				sf = values.getInt(R.styleable.ValueEntryBox_sigfigs, 3);
-				newGroup = values.getString(R.styleable.ValueEntryBox_group);
-				willAffect = values.getString(R.styleable.ValueEntryBox_affects);
-			} catch (Exception e) {
-				Log.e("ValueEntryBox", "Invalid attributes:", e);
-			}
+			// Read the values and substitute defaults
+			units = values.getString(R.styleable.ValueEntryBox_units);
+			desc = values.getString(R.styleable.ValueEntryBox_description);
+			iv = values.getFloat(R.styleable.ValueEntryBox_value, 0.0f);
+			sf = values.getInt(R.styleable.ValueEntryBox_sigfigs, 3);
+			neg = values.getBoolean(R.styleable.ValueEntryBox_allowNegative, false);
+			newGroup = values.getString(R.styleable.ValueEntryBox_group);
+			willAffect = values.getString(R.styleable.ValueEntryBox_affects);
+			values.recycle();
 		} else
 			// Probably not good
 			Log.w("ValueEntryBox", "No units specified, defaulting to unitless!");
 		group = newGroup;
 		affects = willAffect;
+		negative = neg;
 		// Create value and set text
 		description = desc;
 		setValue(new EngineeringValue(iv, 0.0, sf, units));
@@ -98,6 +104,7 @@ public class ValueEntryBox extends AbstractEntryBox<EngineeringValue> implements
 		final String desc = getDescription();
 		// Create popup
 		final ValueEntryDialog mutate = ValueEntryDialog.create(value, desc);
+		mutate.setNegativeAllowed(negative);
 		mutate.setOnCalculateListener(this);
 		// Show it, popup will call oncalculate for us on OK
 		mutate.show(UIFunctions.getActivity(this).getFragmentManager(), desc);

@@ -111,9 +111,10 @@ public class ColorBand extends LinearLayout implements View.OnClickListener, Val
 		colors[10] = (Button)findViewById(R.id.guiColor10);
 		colors[11] = (Button)findViewById(R.id.guiColor11);
 		colors[12] = (Button)findViewById(R.id.guiColor12);
-		// Add click listeners
+		// Add click listeners, but only when not in edit mode
 		for (Button color : colors)
-			color.setOnClickListener(this);
+			if (isInEditMode() && color != null)
+				color.setOnClickListener(this);
 		// Attribute parsing
 		if (attrs != null)
 			loadAttributes(context, attrs);
@@ -126,13 +127,11 @@ public class ColorBand extends LinearLayout implements View.OnClickListener, Val
 			R.styleable.ColorBand, 0, 0);
 		int pos = 0;
 		String newGroup = "", willAffect = "";
-		try {
+		if (values != null) {
 			// Read the values and substitute defaults
 			pos = values.getInteger(R.styleable.ColorBand_pos, 0);
 			newGroup = values.getString(R.styleable.ColorBand_group);
 			willAffect = values.getString(R.styleable.ColorBand_affects);
-		} catch (Exception e) {
-			Log.e("ColorBand", "Invalid attributes:", e);
 		}
 		group = newGroup;
 		affects = willAffect;

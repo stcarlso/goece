@@ -46,6 +46,10 @@ public abstract class AbstractEntryDialog extends DialogFragment implements
 	 */
 	protected OnCalculateListener listener;
 	/**
+	 * True only if negative values are allowed.
+	 */
+	protected boolean negative;
+	/**
 	 * Reference to the drop-down list of unit selections.
 	 */
 	protected Spinner unitSelect;
@@ -64,6 +68,7 @@ public abstract class AbstractEntryDialog extends DialogFragment implements
 	protected AbstractEntryDialog() {
 		valueEntry = null;
 		listener = null;
+		negative = false;
 		value = new EngineeringValue(0.0);
 		desc = "Enter new value";
 		unitSelect = null;
@@ -90,6 +95,14 @@ public abstract class AbstractEntryDialog extends DialogFragment implements
 	 */
 	public EngineeringValue getValue() {
 		return value;
+	}
+	/**
+	 * Returns true if negative inputs are allowed.
+	 *
+	 * @return whether negative inputs are allowed
+	 */
+	public boolean isNegativeAllowed() {
+		return negative;
 	}
 	/**
 	 * Performs processing as if the user had selected OK.
@@ -146,10 +159,18 @@ public abstract class AbstractEntryDialog extends DialogFragment implements
 	/**
 	 * Changes the description of this dialog box.
 	 *
-	 * @param desc A short description of the value to be entered
+	 * @param desc a short description of the value to be entered
 	 */
 	protected void setDescription(final String desc) {
 		this.desc = desc;
+	}
+	/**
+	 * Changes whether negative inputs are allowed.
+	 *
+	 * @param negative whether negative inputs should be allowed
+	 */
+	public void setNegativeAllowed(final boolean negative) {
+		this.negative = negative;
 	}
 	/**
 	 * Changes the listener fired when the value is changed and recalculation is required.

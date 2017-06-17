@@ -69,13 +69,16 @@
 			  android:layout_width="wrap_content" android:checked="false"
 			  android:layout_alignBaseline="@id/guiDivLoad" android:onClick="onClick"
 			  android:layout_toLeftOf="@id/guiDivLoad" android:tag="divIsLoad"/>
-	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:id="@+id/guiDivEquiv" android:layout_centerHorizontal="true"
-			  android:layout_below="@id/guiDivCircuit"/>
-	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:id="@+id/guiDivCurrent" android:layout_centerHorizontal="true"
-			  android:layout_below="@id/guiDivEquiv"/>
-	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:id="@+id/guiDivPower" android:layout_centerHorizontal="true"
-			  android:layout_below="@id/guiDivCurrent"/>
+	<view class="com.stcarlso.goece.ui.ValueOutputField" android:layout_width="wrap_content"
+		  android:layout_height="wrap_content" ece:description="@string/guiDivEquiv"
+		  android:id="@+id/guiDivEquiv" android:layout_centerHorizontal="true"
+		  android:layout_below="@id/guiDivCircuit"/>
+	<view class="com.stcarlso.goece.ui.ValueOutputField" android:layout_width="wrap_content"
+		  android:layout_height="wrap_content" ece:description="@string/guiDivCurrent"
+		  android:id="@+id/guiDivCurrent" android:layout_centerHorizontal="true"
+		  android:layout_below="@id/guiDivEquiv"/>
+	<view class="com.stcarlso.goece.ui.ValueOutputField" android:layout_width="wrap_content"
+		  android:layout_height="wrap_content" ece:description="@string/guiDivPower"
+		  android:id="@+id/guiDivPower" android:layout_centerHorizontal="true"
+		  android:layout_below="@id/guiDivCurrent"/>
 </RelativeLayout>

@@ -95,21 +95,30 @@
 			  android:id="@+id/guiCurWidth" android:layout_below="@id/guiCurUseTrace"
 			  android:layout_toRightOf="@id/guiCurThickness"/>
 	</RelativeLayout>
-	<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
-				  android:layout_centerHorizontal="true" android:layout_marginTop="10dp"
-				  android:orientation="horizontal" android:layout_below="@id/guiCurWire">
+	<RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+					android:layout_centerHorizontal="true" android:layout_marginTop="10dp"
+					android:orientation="horizontal" android:layout_below="@id/guiCurWire">
 		<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiCurLength"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:tag="guiCurLength" ece:units="m" android:layout_marginRight="5dp"
+			  android:tag="guiCurLength" ece:units="m" android:layout_marginRight="10dp"
 			  ece:affects="len" ece:group="len" android:layout_gravity="center_vertical"
 			  ece:value="0.5" ece:description="@string/guiCurLength"/>
 		<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiCurTest"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:tag="guiCurTest" ece:units="A" android:layout_marginRight="10dp"
+			  android:tag="guiCurTest" ece:units="A" android:layout_marginRight="15dp"
 			  ece:affects="len" ece:group="len" android:layout_gravity="center_vertical"
-			  ece:value="0.5" ece:description="@string/current"/>
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-				  android:text="" android:id="@+id/guiCurLenInfo"
-				  android:layout_gravity="center_vertical"/>
-	</LinearLayout>
+			  ece:value="0.5" ece:description="@string/current"
+			  android:layout_toRightOf="@id/guiCurLength"/>
+		<view class="com.stcarlso.goece.ui.ValueOutputField" android:layout_width="wrap_content"
+			  android:layout_height="wrap_content" ece:description="@string/resist"
+			  android:layout_toRightOf="@id/guiCurTest" android:id="@+id/guiCurResist"/>
+		<view class="com.stcarlso.goece.ui.ValueOutputField" android:layout_width="wrap_content"
+			  android:layout_height="wrap_content" ece:description="@string/guiCurPower"
+			  android:layout_toRightOf="@id/guiCurTest" android:id="@+id/guiCurPower"
+			  android:layout_below="@id/guiCurResist"/>
+		<view class="com.stcarlso.goece.ui.ValueOutputField" android:layout_width="wrap_content"
+			  android:layout_height="wrap_content" ece:description="@string/guiCurVDrop"
+			  android:layout_toRightOf="@id/guiCurTest" android:id="@+id/guiCurVDrop"
+			  android:layout_below="@id/guiCurPower"/>
+	</RelativeLayout>
 </RelativeLayout>

@@ -93,8 +93,9 @@
 			  ece:magDesc="@string/guiOhmsPApp" ece:phaDesc="@string/angle" ece:units="VA"
 			  ece:realDesc="@string/guiOhmsPReal" ece:imagDesc="@string/guiOhmsPImag"
 			  android:tag="ohmsPowerAC" ece:affects="vir" android:visibility="gone"/>
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-				  android:id="@+id/guiOhmsPowerFactor" android:layout_gravity="center_vertical"
-				  android:layout_marginLeft="10dp"/>
+		<view class="com.stcarlso.goece.ui.ValueOutputField" android:layout_width="wrap_content"
+			  android:layout_height="wrap_content" android:layout_marginLeft="10dp"
+			  android:id="@+id/guiOhmsPowerFactor" android:layout_gravity="center_vertical"
+			  ece:description="@string/guiOhmsPFactor" ece:sigfigs="2"/>
 	</LinearLayout>
 </RelativeLayout>

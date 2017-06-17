@@ -44,17 +44,13 @@ import java.util.*;
  */
 public class VDivActivity extends ChildActivity implements View.OnClickListener {
 	/**
-	 * Contains all data entry controls.
-	 */
-	private final ValueBoxContainer controls;
-	/**
 	 * Reference to the current flowing through the divider.
 	 */
-	private TextView currentCtrl;
+	private ValueOutputField currentCtrl;
 	/**
 	 * Reference to the equivalent resistance of this pair.
 	 */
-	private TextView equivCtrl;
+	private ValueOutputField equivCtrl;
 	/**
 	 * Reference to the load resistance enable toggle.
 	 */
@@ -62,15 +58,12 @@ public class VDivActivity extends ChildActivity implements View.OnClickListener 
 	/**
 	 * Reference to the power dissipated by the divider.
 	 */
-	private TextView powerCtrl;
+	private ValueOutputField powerCtrl;
 	/**
 	 * Reference to resistor series to use (1%, 5%, ...)
 	 */
 	private ResSeriesSpinner seriesCtrl;
 
-	public VDivActivity() {
-		controls = new ValueBoxContainer();
-	}
 	/**
 	 * Searches for the best resistor pair matching the template. The resistor series specified
 	 * in the UI is used.
@@ -120,10 +113,10 @@ public class VDivActivity extends ChildActivity implements View.OnClickListener 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.vdiv);
-		currentCtrl = asTextView(R.id.guiDivCurrent);
-		equivCtrl = asTextView(R.id.guiDivEquiv);
+		currentCtrl = asValueField(R.id.guiDivCurrent);
+		equivCtrl = asValueField(R.id.guiDivEquiv);
 		isLoadCtrl = asCheckBox(R.id.guiDivIsLoad);
-		powerCtrl = asTextView(R.id.guiDivPower);
+		powerCtrl = asValueField(R.id.guiDivPower);
 		seriesCtrl = (ResSeriesSpinner)findViewById(R.id.guiDivResSeries);
 		// Load controls and preferences
 		controls.add(findViewById(R.id.guiDivTop));
@@ -219,8 +212,7 @@ public class VDivActivity extends ChildActivity implements View.OnClickListener 
 		savePrefsCheckBox(prefs, R.id.guiDivIsLoad);
 	}
 	@Override
-	protected void update(ValueGroup group) {
-	}
+	protected void update(ValueGroup group) { }
 	/**
 	 * Updates the current, equivalent resistance, and power outputs
 	 */
@@ -230,12 +222,9 @@ public class VDivActivity extends ChildActivity implements View.OnClickListener 
 		final double v = controls.getRawValue(R.id.guiDivInput);
 		// R total = R1 + R2, current = V / R, power = V * V / R
 		final double er = r1 + r2, current = v / er;
-		equivCtrl.setText(getString(R.string.guiDivReq, new EngineeringValue(er,
-			Units.RESISTANCE).toString()));
-		currentCtrl.setText(getString(R.string.guiDivCurrent, new EngineeringValue(current,
-			Units.CURRENT)));
-		powerCtrl.setText(getString(R.string.guiDivPower, new EngineeringValue(current * v,
-			Units.POWER)));
+		equivCtrl.setValue(new EngineeringValue(er, Units.RESISTANCE));
+		currentCtrl.setValue(new EngineeringValue(current, Units.CURRENT));
+		powerCtrl.setValue(new EngineeringValue(current * v, Units.POWER));
 	}
 
 	/**
@@ -252,9 +241,9 @@ public class VDivActivity extends ChildActivity implements View.OnClickListener 
 		 * The absolute maximum current that will be guessed flowing through a resistor divider.
 		 * With load resistances marring an otherwise perfect match, we can get "closer and
 		 * closer" by running the impedances down to the milliohm range. <b>No longer!</b> This
-		 * limit is about 5 mA which is a lot for a voltage divider!
+		 * limit is about 10 mA which is a lot for a voltage divider!
 		 */
-		public static final double MAX_CURRENT = 5E-3;
+		public static final double MAX_CURRENT = 1E-2;
 
 		/**
 		 * The first resistor value.

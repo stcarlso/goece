@@ -43,7 +43,7 @@
 	<string name="copyReImMinus">%1$.4g - %2$.4gi</string>
 	<string name="editRaw">%1$.6f</string>
 	<!-- These show up pretty often -->
-	<string name="value">Value: </string>
+	<string name="value">Value</string>
 	<string name="voltage">Voltage</string>
 	<string name="current">Current</string>
 	<string name="resist">Resistance</string>
@@ -71,6 +71,7 @@
 	<string name="degree">°</string>
 	<string name="degreeC">°C</string>
 	<string name="degreeF">°F</string>
+	<string name="bits">bits</string>
 	<string-array name="guiPcbUnits">
 		<!-- mm is the base unit -->
 		<item>mil</item>
@@ -117,7 +118,8 @@
 	<string name="guiOscDesign">Oscillator Designer</string>
 	<string name="guiCatAnalogIC">Analog ICs</string>
 	<string name="guiKMapper">K-Map Generator</string>
-	<string name="gui555">555 Calculator</string>
+	<string name="guiAdcCalc">ADC Calculation</string>
+	<string name="gui555Calc">555 Calculator</string>
 	<!-- Resources for individual activities -->
 	<!-- SMD resistor code -->
 	<string name="guiResLine">Value is underlined</string>
@@ -130,12 +132,14 @@
 	<string name="guiOhmsPReal">Real Power</string>
 	<string name="guiOhmsPImag">Reactive Power</string>
 	<string name="guiOhmsPApp">Apparent Power</string>
-	<string name="guiOhmsPFactor">Power Factor: %1$.2f</string>
+	<string name="guiOhmsPFactor">Power Factor</string>
 	<!-- Series/parallel resistance -->
 	<string name="guiSerSeries1">R&lt;small&gt;1&lt;/small&gt;</string>
 	<string name="guiSerSeries2">R&lt;small&gt;2&lt;/small&gt;</string>
 	<string name="guiSerParallel1">R&lt;small&gt;3&lt;/small&gt;</string>
 	<string name="guiSerParallel2">R&lt;small&gt;4&lt;/small&gt;</string>
+	<string name="guiSerRSer">Series Resistance</string>
+	<string name="guiSerRPar">Parallel Resistance</string>
 	<string name="cirserpar">Series and parallel circuit diagram</string>
 	<string-array name="guiSerResSeries">
 		<item>1%</item>
@@ -149,9 +153,9 @@
 	<string name="guiDivTop">R&lt;small&gt;1&lt;/small&gt;</string>
 	<string name="guiDivBottom">R&lt;small&gt;2&lt;/small&gt;</string>
 	<string name="guiDivLoad">R&lt;small&gt;L&lt;/small&gt;</string>
-	<string name="guiDivReq">Equivalent resistance: %1$s</string>
-	<string name="guiDivCurrent">Current flow: %1$s</string>
-	<string name="guiDivPower">Power dissipation: %1$s</string>
+	<string name="guiDivEquiv">Equivalent resistance</string>
+	<string name="guiDivCurrent">Current flow</string>
+	<string name="guiDivPower">Power dissipation</string>
 	<string name="cirvdiv">Voltage divider circuit diagram</string>
 	<!-- Current capacity -->
 	<string name="guiCurLength">Length</string>
@@ -164,6 +168,8 @@
 	<string name="guiCurCurrentRating">Current Rating</string>
 	<string name="guiCurTraceWidth">Width</string>
 	<string name="guiCurTraceThick">Thickness</string>
+	<string name="guiCurPower">Power loss</string>
+	<string name="guiCurVDrop">Voltage drop</string>
 	<string-array name="guiCurMaterials">
 		<item>Aluminium</item>
 		<item>Copper</item>
@@ -218,7 +224,7 @@
 	<string name="guiPwrIdle">Idle</string>
 	<string name="guiPwrSleep">Sleep</string>
 	<string name="guiPwrDuration">Runtime</string>
-	<string name="guiPwrIAvg">Average Current: %1$s</string>
+	<string name="guiPwrIAvg">Average Current</string>
 	<!-- Delta/y conversion -->
 	<string name="guiDelDelta">Delta</string>
 	<string name="guiDelWye">Wye</string>
@@ -229,12 +235,12 @@
 	<string name="guiDelWye2">R&lt;small&gt;5&lt;/small&gt;</string>
 	<string name="guiDelWye3">R&lt;small&gt;6&lt;/small&gt;</string>
 	<!-- Oscillator designer -->
-	<string name="guiOscLoadCap">Rated\u00A0C&lt;small&gt;L&lt;/small&gt;</string>
-	<string name="guiOscShuntCap">Rated\u00A0C&lt;small&gt;0&lt;/small&gt;</string>
+	<string name="guiOscLoadCap">Rated C&lt;small&gt;L&lt;/small&gt;</string>
+	<string name="guiOscShuntCap">Rated C&lt;small&gt;0&lt;/small&gt;</string>
 	<string name="guiOscESR">ESR</string>
 	<string name="guiOscStrayCap">Stray Capacitance</string>
-	<string name="guiOscTranscon">Transconductance:</string>
-	<string name="guiOscCL">Load Capacitance:</string>
+	<string name="guiOscTranscon">Transconductance</string>
+	<string name="guiOscCL">Load Capacitance</string>
 	<string name="guiOscBadCap">Invalid oscillator or stray capacitance.</string>
 	<string name="cirosc">Crystal oscillator circuit diagram</string>
 	<!-- 555 calculator -->
@@ -248,4 +254,9 @@
 	<string name="gui555BadRAst">R1 and R2 should be between 1 KΩ and 10 MΩ.</string>
 	<string name="gui555BadRMono">R1 should be between 1 KΩ and 1 MΩ.</string>
 	<string name="cir555">555 oscillator circuit diagram</string>
+	<!-- ADC calculator -->
+	<string name="guiAdcVrefP">V&lt;small&gt;ref&lt;/small&gt;&lt;sup&gt;&lt;small&gt;+&lt;/small&gt;&lt;/sup&gt;</string>
+	<string name="guiAdcVrefN">V&lt;small&gt;ref&lt;/small&gt;&lt;sup&gt;&lt;small&gt;-&lt;/small&gt;&lt;/sup&gt;</string>
+	<string name="guiAdcRes">Resolution</string>
+	<string name="guiAdcCount">Counts</string>
 </resources>

@@ -83,31 +83,28 @@ public class ComplexEntryBox extends AbstractEntryBox<ComplexValue> implements
 	}
 	@Override
 	protected void init(final Context context, final AttributeSet attrs) {
-		String units = "", desc = "Value", newGroup = "", willAffect = "", reDesc = null,
-			imDesc = null, magDesc = null, phaDesc = null;
+		String units = "", desc = context.getString(R.string.value), newGroup = "",
+			willAffect = "", reDesc = null, imDesc = null, magDesc = null, phaDesc = null;
 		double iv = 0.0, ip = 0.0;
 		int sf = 3;
 		if (attrs != null) {
 			// Read attributes for units
 			final TypedArray values = context.getTheme().obtainStyledAttributes(attrs,
 				R.styleable.ComplexEntryBox, 0, 0);
-			try {
-				// Read the values and substitute defaults
-				units = values.getString(R.styleable.ComplexEntryBox_units);
-				desc = values.getString(R.styleable.ComplexEntryBox_description);
-				iv = values.getFloat(R.styleable.ComplexEntryBox_value, 0.0f);
-				ip = values.getFloat(R.styleable.ComplexEntryBox_phase, 0.0f);
-				sf = values.getInt(R.styleable.ComplexEntryBox_sigfigs, 3);
-				newGroup = values.getString(R.styleable.ComplexEntryBox_group);
-				willAffect = values.getString(R.styleable.ComplexEntryBox_affects);
-				// Read descriptions
-				reDesc = values.getString(R.styleable.ComplexEntryBox_realDesc);
-				imDesc = values.getString(R.styleable.ComplexEntryBox_imagDesc);
-				magDesc = values.getString(R.styleable.ComplexEntryBox_magDesc);
-				phaDesc = values.getString(R.styleable.ComplexEntryBox_phaDesc);
-			} catch (Exception e) {
-				Log.e("ComplexEntryBox", "Invalid attributes:", e);
-			}
+			// Read the values and substitute defaults
+			units = values.getString(R.styleable.ComplexEntryBox_units);
+			desc = values.getString(R.styleable.ComplexEntryBox_description);
+			iv = values.getFloat(R.styleable.ComplexEntryBox_value, 0.0f);
+			ip = values.getFloat(R.styleable.ComplexEntryBox_phase, 0.0f);
+			sf = values.getInt(R.styleable.ComplexEntryBox_sigfigs, 3);
+			newGroup = values.getString(R.styleable.ComplexEntryBox_group);
+			willAffect = values.getString(R.styleable.ComplexEntryBox_affects);
+			// Read descriptions
+			reDesc = values.getString(R.styleable.ComplexEntryBox_realDesc);
+			imDesc = values.getString(R.styleable.ComplexEntryBox_imagDesc);
+			magDesc = values.getString(R.styleable.ComplexEntryBox_magDesc);
+			phaDesc = values.getString(R.styleable.ComplexEntryBox_phaDesc);
+			values.recycle();
 		} else
 			// Probably not good
 			Log.w("ComplexEntryBox", "No units specified, defaulting to unitless!");

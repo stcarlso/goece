@@ -27,10 +27,7 @@ package com.stcarlso.goece.activity;
 import android.os.Bundle;
 import android.widget.TextView;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.ui.ChildActivity;
-import com.stcarlso.goece.ui.CopyPasteListener;
-import com.stcarlso.goece.ui.ValueBoxContainer;
-import com.stcarlso.goece.ui.ValueGroup;
+import com.stcarlso.goece.ui.*;
 import com.stcarlso.goece.utility.*;
 
 /**
@@ -40,15 +37,7 @@ public class OscDesignActivity extends ChildActivity {
 	/**
 	 * Cached reference to the output capacitance text box.
 	 */
-	private TextView clCtrl;
-	/**
-	 * Handles long presses on the load capacitance text box.
-	 */
-	private final CopyPasteListener clListener;
-	/**
-	 * Contains all data entry controls.
-	 */
-	private final ValueBoxContainer controls;
+	private ValueOutputField clCtrl;
 	/**
 	 * Cached reference to the standard value output text box.
 	 */
@@ -56,27 +45,16 @@ public class OscDesignActivity extends ChildActivity {
 	/**
 	 * Cached reference to the transconductance text box.
 	 */
-	private TextView transconCtrl;
-	/**
-	 * Handles long presses on the transconductance text box.
-	 */
-	private final CopyPasteListener transconListener;
+	private ValueOutputField transconCtrl;
 
-	public OscDesignActivity() {
-		controls = new ValueBoxContainer();
-		clListener = new CopyPasteListener(this, "Load Capacitance");
-		transconListener = new CopyPasteListener(this, "Transconductance");
-	}
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.oscdesign);
-		// Fix that HTML
-		clCtrl = asTextView(R.id.guiOscCL);
-		clCtrl.setOnLongClickListener(clListener);
+		// Update references
+		clCtrl = asValueField(R.id.guiOscCL);
 		stdCtrl = asTextView(R.id.guiOscIsStandard);
-		transconCtrl = asTextView(R.id.guiOscTranscon);
-		transconCtrl.setOnLongClickListener(transconListener);
+		transconCtrl = asValueField(R.id.guiOscTranscon);
 		// Register value entry boxes
 		controls.add(findViewById(R.id.guiOscFrequency));
 		controls.add(findViewById(R.id.guiOscLoadCap));
@@ -99,16 +77,13 @@ public class OscDesignActivity extends ChildActivity {
 			controls.get(R.id.guiOscCL).setError(getString(R.string.guiOscBadCap));
 		else {
 			final double cl = (cRated - cStray) * 2.0;
-			final EngineeringValue clv = new EngineeringValue(cl, Units.CAPACITANCE);
-			clCtrl.setText(clv.toString());
-			clListener.setValue(clv);
+			clCtrl.setValue(new EngineeringValue(cl, Units.CAPACITANCE));
 			// ST AN2867
 			final double ctotal = (cRated + c0) * f;
 			final double gm = (16.0 * Math.PI * Math.PI) * ctotal * ctotal * esr;
 			// Transconductance display
-			final EngineeringValue gmv = new EngineeringValue(gm, "A/V");
-			transconCtrl.setText(gmv.toString());
-			transconListener.setValue(gmv);
+			transconCtrl.setValue(new EngineeringValue(gm, Units.CURRENT + "/" +
+				Units.VOLTAGE));
 			// Standard capacitor values are E24
 			UIFunctions.checkEIATable(new EIAValue(cl, EIATable.EIASeries.E24,
 				Units.CAPACITANCE), stdCtrl);

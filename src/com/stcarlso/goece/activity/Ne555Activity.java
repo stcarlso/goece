@@ -33,7 +33,6 @@ import android.widget.RadioButton;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.AbstractEntryBox;
 import com.stcarlso.goece.ui.ChildActivity;
-import com.stcarlso.goece.ui.ValueBoxContainer;
 import com.stcarlso.goece.ui.ValueGroup;
 
 /**
@@ -55,21 +54,14 @@ public class Ne555Activity extends ChildActivity implements View.OnClickListener
 	private static final double MONO_FACTOR = 1.09861228866811;
 
 	/**
-	 * Contains all data entry controls.
-	 */
-	private final ValueBoxContainer controls;
-	/**
 	 * Cached reference to the monostable mode UI option.
 	 */
-	private RadioButton modeMonostable;
+	private RadioButton modeMonostableCtrl;
 	/**
 	 * Cached reference to the image of the current 555 circuit diagram.
 	 */
-	private ImageView pcbImage;
+	private ImageView pcbImageCtrl;
 
-	public Ne555Activity() {
-		controls = new ValueBoxContainer();
-	}
 	/**
 	 * Reports the user-entered duty cycle from 0 (0%) to 1 (100%). Sets the error message on
 	 * the dialog box if necessary.
@@ -96,8 +88,8 @@ public class Ne555Activity extends ChildActivity implements View.OnClickListener
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.ne555);
-		modeMonostable = (RadioButton)findViewById(R.id.gui555Monostable);
-		pcbImage = (ImageView)findViewById(R.id.gui555Image);
+		modeMonostableCtrl = asRadioButton(R.id.gui555Monostable);
+		pcbImageCtrl = asImageView(R.id.gui555Image);
 		// Register value entry boxes
 		controls.add(findViewById(R.id.gui555C1));
 		controls.add(findViewById(R.id.gui555R1));
@@ -199,7 +191,7 @@ public class Ne555Activity extends ChildActivity implements View.OnClickListener
 	}
 	@Override
 	protected void recalculate(ValueGroup group) {
-		if (modeMonostable.isChecked()) {
+		if (modeMonostableCtrl.isChecked()) {
 			final double r = controls.getRawValue(R.id.gui555R1);
 			final double c = controls.getRawValue(R.id.gui555C1);
 			final double delay = controls.getRawValue(R.id.gui555Delay);
@@ -243,7 +235,7 @@ public class Ne555Activity extends ChildActivity implements View.OnClickListener
 		final double r1 = r1Box.getRawValue(), r2 = r2Box.getRawValue();
 		final String error;
 		// Check R1 and R2 values to ensure they are in the workable range
-		if (modeMonostable.isChecked()) {
+		if (modeMonostableCtrl.isChecked()) {
 			error = getString(R.string.gui555BadRMono);
 			r1Box.setError((Double.isInfinite(r1) || r1 < 1.0e3 || r1 > 1.0e6) ? error : null);
 		} else {
@@ -265,28 +257,24 @@ public class Ne555Activity extends ChildActivity implements View.OnClickListener
 	 * should only be called when necessary.
 	 */
 	private void updateView() {
-		final double duty = controls.getRawValue(R.id.gui555Duty) * 0.01;
-		final boolean mono = modeMonostable.isChecked();
+		final AbstractEntryBox<?> dutyCtrl = controls.get(R.id.gui555Duty);
+		final double duty = dutyCtrl.getRawValue() * 0.01;
+		final boolean mono = modeMonostableCtrl.isChecked();
 		// Update image
 		if (mono)
-			pcbImage.setImageResource(R.drawable.ic555mstable);
+			pcbImageCtrl.setImageResource(R.drawable.ic555mstable);
 		else
-			pcbImage.setImageResource((duty > DUTY_THRES) ? R.drawable.ic555astable :
+			pcbImageCtrl.setImageResource((duty > DUTY_THRES) ? R.drawable.ic555astable :
 				R.drawable.ic555astable50);
 		// Show/hide the entries accordingly
-		controls.get(R.id.gui555R2).setVisibility(mono ? View.GONE : View.VISIBLE);
+		controls.get(R.id.gui555R2).setEnabled(mono);
 		controls.get(R.id.gui555Delay).setVisibility(mono ? View.VISIBLE : View.GONE);
 		controls.get(R.id.gui555Freq).setVisibility(mono ? View.GONE : View.VISIBLE);
 		// Duty has controls depending on it, so it needs to exist even if not relevant
-		final AbstractEntryBox<?> dutyCtrl = controls.get(R.id.gui555Duty);
 		final ViewGroup.LayoutParams params = dutyCtrl.getLayoutParams();
 		// Swap between 0 width and appropriate width so not to knock out of center
 		params.width = mono ? 0 : ViewGroup.LayoutParams.WRAP_CONTENT;
 		dutyCtrl.setLayoutParams(params);
 		dutyCtrl.setVisibility(mono ? View.INVISIBLE : View.VISIBLE);
-		// Fix line wrap layout issue
-		final View view = findViewById(R.id.gui555Outputs);
-		if (view != null)
-			view.forceLayout();
 	}
 }

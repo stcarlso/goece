@@ -32,6 +32,6 @@
 				  android:layout_marginLeft="5dp" android:maxLines="1"
 				  android:textAppearance="?android:attr/textAppearanceLarge"/>
 		<Button android:layout_width="match_parent" android:layout_height="wrap_content"
-				android:text="@string/gui555" android:id="@+id/gui555"/>
+				android:text="@string/gui555Calc" android:id="@+id/gui555"/>
 	</LinearLayout>
 </ScrollView>

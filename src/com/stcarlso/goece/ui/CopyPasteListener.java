@@ -36,7 +36,8 @@ import com.stcarlso.goece.R;
 import com.stcarlso.goece.utility.EngineeringValue;
 import com.stcarlso.goece.utility.UIFunctions;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A listener which can be added for long-presses to present a "Copy" dialog allowing the user
@@ -60,7 +61,7 @@ public class CopyPasteListener implements View.OnLongClickListener {
 	/**
 	 * When "Paste" is chosen, this will be updated
 	 */
-	private final AbstractEntryBox<?> target;
+	private final CopyValueSource target;
 	/**
 	 * The value to be copied when invoked.
 	 */
@@ -71,10 +72,10 @@ public class CopyPasteListener implements View.OnLongClickListener {
 	 *
 	 * @param target the parent entry field
 	 */
-	public CopyPasteListener(final AbstractEntryBox<?> target) {
+	public CopyPasteListener(final CopyValueSource target) {
 		if (target == null)
 			throw new NullPointerException("target");
-		activity = UIFunctions.getActivity(target);
+		activity = UIFunctions.getActivity(target.getContext());
 		description = target.getDescription();
 		sigFigOverride = 0;
 		this.target = target;
@@ -89,8 +90,6 @@ public class CopyPasteListener implements View.OnLongClickListener {
 	public CopyPasteListener(final Activity activity, final String description) {
 		if (activity == null)
 			throw new NullPointerException("activity");
-		if (description == null)
-			throw new NullPointerException("description");
 		this.activity = activity;
 		this.description = description;
 		sigFigOverride = 0;
@@ -135,7 +134,7 @@ public class CopyPasteListener implements View.OnLongClickListener {
 		final ClipboardManager manager = (ClipboardManager)activity.getSystemService(
 			Context.CLIPBOARD_SERVICE);
 		EngineeringValue tp = null;
-		if (manager.hasPrimaryClip() && target != null) {
+		if (manager.hasPrimaryClip() && target != null && target.isEditable()) {
 			// Clipboard has contents, might as well search all
 			final ClipData data = manager.getPrimaryClip();
 			for (int i = 0; i < data.getItemCount(); i++) {
@@ -177,7 +176,11 @@ public class CopyPasteListener implements View.OnLongClickListener {
 		// "Copy" options
 		final String copy = activity.getString(R.string.copy), paste = activity.getString(
 			R.string.paste);
+		String desc = description;
 		final EngineeringValue pv;
+		// Description cannot be blank
+		if (desc == null || desc.length() < 1)
+			desc = activity.getString(R.string.value);
 		addCopyOptions(options);
 		pv = addPasteOptions();
 		// Build text presented to user
@@ -189,7 +192,7 @@ public class CopyPasteListener implements View.OnLongClickListener {
 		if (pv != null)
 			copyOptions[sz] = UIFunctions.fromHtml(paste + " \"" + withSigFigOverride(pv) + "\"");
 		builder.setItems(copyOptions, new CopyPasteItemsListener(options, pv));
-		final AlertDialog dialog = builder.setTitle(UIFunctions.fromHtml(description)).create();
+		final AlertDialog dialog = builder.setTitle(UIFunctions.fromHtml(desc)).create();
 		dialog.show();
 		return true;
 	}
@@ -258,12 +261,10 @@ public class CopyPasteListener implements View.OnLongClickListener {
 				final ClipboardManager manager = (ClipboardManager)activity.getSystemService(
 					Context.CLIPBOARD_SERVICE);
 				manager.setPrimaryClip(ClipData.newPlainText(description, copyText.get(which)));
-			} else if (which == len && toPaste != null && target != null) {
+			} else if (which == len && toPaste != null && target != null && target.isEditable())
 				// Paste the text from the system clipboard
 				// If we allow imaginary pasting in the future this will need to be updated
-				target.updateValue(toPaste.getValue());
-				target.callOnCalculateListener();
-			}
+				target.updateValueUser(toPaste.getValue());
 			dialog.dismiss();
 		}
 	}

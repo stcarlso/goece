@@ -60,25 +60,16 @@
 			   android:src="@drawable/oscdesign" android:layout_centerHorizontal="true"
 			   android:layout_margin="5dp" android:layout_below="@id/guiOscPinCap"
 			   android:contentDescription="@string/cirosc" android:id="@+id/guiOscCircuit"/>
-	<GridLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
-				android:layout_centerHorizontal="true" android:layout_below="@id/guiOscCircuit"
-				android:rowCount="2" android:columnCount="2">
-		<TextView android:layout_gravity="right" android:text="@string/guiOscCL"
-				  android:layout_row="0" android:layout_marginRight="10dp"
-				  android:textAppearance="@android:style/TextAppearance.Large"
-				  android:layout_column="0" android:id="@+id/guiOscCLDesc"
-				  android:layout_marginBottom="5dp"/>
-		<TextView android:id="@+id/guiOscCL" android:layout_row="0" android:layout_column="1"
-				  android:textAppearance="@android:style/TextAppearance.Large"
-				  android:layout_marginBottom="5dp"/>
-		<TextView android:layout_gravity="right" android:text="@string/guiOscTranscon"
-				  android:layout_row="1" android:layout_marginRight="10dp"
-				  android:textAppearance="@android:style/TextAppearance.Large"
-				  android:layout_column="0"/>
-		<TextView android:id="@+id/guiOscTranscon" android:layout_row="1"
-				  android:textAppearance="@android:style/TextAppearance.Large"
-				  android:layout_column="1"/>
-	</GridLayout>
+	<view class="com.stcarlso.goece.ui.ValueOutputField" ece:description="@string/guiOscCL"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content"
+		  android:layout_centerHorizontal="true" android:layout_below="@id/guiOscCircuit"
+		  android:layout_marginBottom="5dp" android:id="@+id/guiOscCL"
+		  android:textAppearance="@android:style/TextAppearance.Large"/>
+	<view class="com.stcarlso.goece.ui.ValueOutputField" android:id="@+id/guiOscTranscon"
+		  ece:description="@string/guiOscTranscon" android:layout_below="@id/guiOscCL"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content"
+		  android:textAppearance="@android:style/TextAppearance.Large"
+		  android:layout_centerHorizontal="true"/>
 	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  android:textAppearance="?android:attr/textAppearanceMedium" android:text=""
 			  android:layout_gravity="center_horizontal" android:id="@+id/guiOscIsStandard"

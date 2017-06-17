@@ -2,7 +2,7 @@
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ~ The MIT License (MIT)
   ~
-  ~ Copyright (c) 2016 Stephen Carlson
+  ~ Copyright (c) 2017 Stephen Carlson
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
   ~ of this software and associated documentation files (the "Software"), to deal
@@ -27,13 +27,22 @@
 			xmlns:ece="http://schemas.android.com/apk/res/com.stcarlso.goece"
 			android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:layout_gravity="center_horizontal" android:columnCount="3"
-			android:rowCount="6">
-	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:layout_width="wrap_content"
-		  android:layout_height="wrap_content" android:id="@+id/guiPwrCapacity"
-		  android:tag="guiPwrCapacity" ece:units="Ah" ece:value="0.3" android:layout_row="0"
-		  ece:description="@string/guiPwrCapacity" ece:group="inputs" ece:affects="outputs"
-		  android:layout_marginBottom="10dp" android:layout_column="0"
-		  android:layout_columnSpan="3" android:layout_gravity="center"/>
+			android:rowCount="5">
+	<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+				  android:layout_row="0" android:layout_columnSpan="3"
+				  android:layout_column="0" android:layout_marginBottom="10dp"
+				  android:layout_gravity="center_horizontal">
+		<view class="com.stcarlso.goece.ui.ValueEntryBox" android:layout_width="wrap_content"
+			  android:layout_height="wrap_content" android:id="@+id/guiPwrCapacity"
+			  android:tag="guiPwrCapacity" ece:units="Ah" ece:value="0.3"
+			  ece:description="@string/guiPwrCapacity" ece:group="inputs" ece:affects="outputs"
+			  android:layout_marginRight="20dp" android:layout_gravity="center"/>
+		<view class="com.stcarlso.goece.ui.CustomEntryBox" android:layout_width="wrap_content"
+			  android:layout_height="wrap_content" android:id="@+id/guiPwrDuration"
+			  android:tag="guiPwrDuration" ece:units="s" ece:value="1000" ece:sigfigs="4"
+			  ece:description="@string/guiPwrDuration" ece:group="outputs" ece:affects="inputs"
+			  ece:customUnits="@array/guiTimeUnits"/>
+	</LinearLayout>
 	<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  android:text="@string/guiPwrRun" android:layout_column="0"
 			  android:layout_row="1" android:layout_gravity="center_vertical"
@@ -83,16 +92,9 @@
 		  android:tag="guiPwrSleepTime" ece:units="s" ece:value="0.8" android:layout_row="3"
 		  ece:description="@string/duration" ece:group="none" ece:affects="outputs"
 		  android:layout_column="2" android:layout_gravity="center_horizontal"/>
-	<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
-				  android:layout_row="4" android:layout_columnSpan="3"
-				  android:layout_column="0" android:layout_marginTop="10dp"
-				  android:layout_gravity="center_horizontal">
-		<view class="com.stcarlso.goece.ui.CustomEntryBox" android:layout_width="wrap_content"
-			  android:layout_height="wrap_content" android:id="@+id/guiPwrDuration"
-			  android:tag="guiPwrDuration" ece:units="s" ece:value="1000" ece:sigfigs="4"
-			  ece:description="@string/guiPwrDuration" ece:group="outputs" ece:affects="inputs"
-			  ece:customUnits="@array/guiTimeUnits"/>
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-				  android:id="@+id/guiPwrDraw" android:layout_marginLeft="10dp"/>
-	</LinearLayout>
+	<view class="com.stcarlso.goece.ui.ValueOutputField" android:layout_width="wrap_content"
+		  android:layout_height="wrap_content" ece:description="@string/guiPwrIAvg"
+		  android:id="@+id/guiPwrDraw" android:layout_marginTop="10dp" android:layout_row="4"
+		  android:layout_columnSpan="3" android:layout_gravity="center_horizontal"
+		  android:layout_column="0"/>
 </GridLayout>

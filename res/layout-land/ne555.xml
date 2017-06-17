@@ -67,7 +67,7 @@
 		  android:tag="gui555C1" android:id="@+id/gui555C1" ece:units="F" ece:group="inputs"
 		  ece:description="@string/gui555C1" android:layout_marginLeft="5dp"
 		  android:layout_below="@id/gui555Duty" android:layout_toRightOf="@id/gui555Center"
-		  android:layout_marginTop="10dp"/>
+		  android:layout_marginTop="10dp" android:layout_alignRight="@id/gui555R2"/>
 	<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="outputs" ece:value="1000"
 		  android:layout_width="wrap_content" android:layout_height="wrap_content"
 		  android:tag="gui555R1" android:id="@+id/gui555R1" ece:units="Ω" ece:group="inputs"

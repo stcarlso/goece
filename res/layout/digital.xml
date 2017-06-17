@@ -23,10 +23,17 @@
   ~ SOFTWARE.
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-			  android:orientation="vertical" android:layout_width="match_parent"
-			  android:layout_height="match_parent">
-	<Button android:layout_width="match_parent" android:layout_height="wrap_content"
-			android:text="@string/guiKMapper" android:id="@+id/guiKMapper"/>
-</LinearLayout>
-
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+			android:layout_width="match_parent" android:layout_height="match_parent">
+	<LinearLayout android:orientation="vertical" android:layout_width="match_parent"
+				  android:layout_height="wrap_content">
+		<Button android:layout_width="match_parent" android:layout_height="wrap_content"
+				android:text="@string/guiAdcCalc" android:id="@+id/guiAdcCalc"/>
+		<TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+				  android:text="@string/guiCatDesignTools" android:layout_gravity="left"
+				  android:layout_marginLeft="5dp" android:layout_marginTop="10dp"
+				  android:textAppearance="?android:attr/textAppearanceLarge"/>
+		<Button android:layout_width="match_parent" android:layout_height="wrap_content"
+				android:text="@string/guiKMapper" android:id="@+id/guiKMapper"/>
+	</LinearLayout>
+</ScrollView>

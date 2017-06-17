@@ -30,12 +30,10 @@ import android.view.View;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.ui.AbstractEntryBox;
-import com.stcarlso.goece.ui.ChildActivity;
-import com.stcarlso.goece.ui.ValueBoxContainer;
-import com.stcarlso.goece.ui.ValueGroup;
+import com.stcarlso.goece.ui.*;
 import com.stcarlso.goece.utility.ComplexValue;
 import com.stcarlso.goece.utility.EngineeringValue;
+import com.stcarlso.goece.utility.Units;
 
 /**
  * Very simple Ohm's law activity. Everyone should know it, but this adds engineering value
@@ -43,21 +41,14 @@ import com.stcarlso.goece.utility.EngineeringValue;
  */
 public class OhmsLawActivity extends ChildActivity implements View.OnClickListener {
 	/**
-	 * Contains all data entry controls.
-	 */
-	private final ValueBoxContainer controls;
-	/**
 	 * Cached reference to the "DC" radio button (AC is the opposite)
 	 */
 	private RadioButton dcCtrl;
 	/**
 	 * Cached reference to the power factor label.
 	 */
-	private TextView powerFactorCtrl;
+	private ValueOutputField powerFactorCtrl;
 
-	public OhmsLawActivity() {
-		controls = new ValueBoxContainer();
-	}
 	@Override
 	protected void loadCustomPrefs(SharedPreferences prefs) {
 		super.loadCustomPrefs(prefs);
@@ -70,7 +61,7 @@ public class OhmsLawActivity extends ChildActivity implements View.OnClickListen
 		setContentView(R.layout.ohmslaw);
 		// Update references
 		dcCtrl = asRadioButton(R.id.guiOhmsSelDC);
-		powerFactorCtrl = asTextView(R.id.guiOhmsPowerFactor);
+		powerFactorCtrl = asValueField(R.id.guiOhmsPowerFactor);
 		// Register value entry boxes
 		controls.add(findViewById(R.id.guiOhmsCurrentDC));
 		controls.add(findViewById(R.id.guiOhmsResistanceDC));
@@ -253,6 +244,7 @@ public class OhmsLawActivity extends ChildActivity implements View.OnClickListen
 			powerFactor = Math.abs(power.getReal()) / power.getValue();
 		else
 			powerFactor = 0.0;
-		powerFactorCtrl.setText(getString(R.string.guiOhmsPFactor, powerFactor));
+		// Power factor is unitless and has no tolerance
+		powerFactorCtrl.setValue(new EngineeringValue(powerFactor));
 	}
 }

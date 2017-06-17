@@ -39,7 +39,8 @@ import com.stcarlso.goece.utility.CustomUnit;
 import com.stcarlso.goece.utility.EngineeringValue;
 import com.stcarlso.goece.utility.UIFunctions;
 
-import java.util.*;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * A button with user settable units that when clicked brings up a CustomEntryDialog. The value
@@ -64,7 +65,9 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 					ret.put(name, new CustomUnit(name, factor));
 				else
 					Log.w("CustomEntryBox", "Empty unit name!");
-			} catch (RuntimeException e) {
+			} catch (NumberFormatException e) {
+				Log.w("CustomEntryBox", "Invalid conversion factor: " + factorS);
+			} catch (IllegalArgumentException e) {
 				Log.w("CustomEntryBox", "Invalid conversion factor: " + factorS);
 			}
 		}
@@ -75,11 +78,15 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 	 * List of custom unit options.
 	 * If none are provided, only the base unit will be available.
 	 */
-	protected Map<String, CustomUnit> customUnits;
+	private Map<String, CustomUnit> customUnits;
 	/**
 	 * The unit used for display. If null or invalid, the base unit is used.
 	 */
-	protected CustomUnit displayUnit;
+	private CustomUnit displayUnit;
+	/**
+	 * Whether negative numbers can be entered, default false.
+	 */
+	private boolean negative;
 	/**
 	 * The number of significant figures to be used when displaying the value.
 	 */
@@ -96,36 +103,37 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 	}
 	@Override
 	protected void init(final Context context, final AttributeSet attrs) {
-		String units = "", desc = "Value", newGroup = "", willAffect = "";
+		String units = "", desc = context.getString(R.string.value), newGroup = "",
+			willAffect = "";
 		double iv = 0.0;
 		int sf = 3;
+		boolean neg = false;
 		customUnits = null;
 		displayUnit = null;
 		if (attrs != null) {
 			// Read attributes for units
 			final TypedArray values = context.getTheme().obtainStyledAttributes(attrs,
 				R.styleable.CustomEntryBox, 0, 0);
-			try {
-				// Read the values and substitute defaults
-				units = values.getString(R.styleable.CustomEntryBox_units);
-				desc = values.getString(R.styleable.CustomEntryBox_description);
-				iv = values.getFloat(R.styleable.CustomEntryBox_value, 0.0f);
-				newGroup = values.getString(R.styleable.CustomEntryBox_group);
-				willAffect = values.getString(R.styleable.CustomEntryBox_affects);
-				sf = values.getInteger(R.styleable.CustomEntryBox_sigfigs, 3);
-				// Extract string arrays from resources
-				final int customUnitsID = values.getResourceId(R.styleable.
-					CustomEntryBox_customUnits, 0);
-				if (customUnitsID != 0)
-					customUnits = createUnits(getResources().getStringArray(customUnitsID));
-			} catch (Exception e) {
-				Log.e("CustomEntryBox", "Invalid attributes:", e);
-			}
+			// Read the values and substitute defaults
+			units = values.getString(R.styleable.CustomEntryBox_units);
+			desc = values.getString(R.styleable.CustomEntryBox_description);
+			iv = values.getFloat(R.styleable.CustomEntryBox_value, 0.0f);
+			neg = values.getBoolean(R.styleable.CustomEntryBox_allowNegative, false);
+			newGroup = values.getString(R.styleable.CustomEntryBox_group);
+			willAffect = values.getString(R.styleable.CustomEntryBox_affects);
+			sf = values.getInteger(R.styleable.CustomEntryBox_sigfigs, 3);
+			// Extract string arrays from resources
+			final int customUnitsID = values.getResourceId(R.styleable.
+				CustomEntryBox_customUnits, 0);
+			if (customUnitsID != 0)
+				customUnits = createUnits(getResources().getStringArray(customUnitsID));
+			values.recycle();
 		} else
 			// Probably not good
 			Log.w("CustomEntryBox", "No units specified, defaulting to unitless!");
 		group = newGroup;
 		affects = willAffect;
+		negative = neg;
 		sigfigs = sf;
 		// Create value and set text
 		description = desc;
@@ -166,6 +174,7 @@ public class CustomEntryBox extends AbstractEntryBox<EngineeringValue> implement
 		final String desc = getDescription();
 		// Create popup
 		final CustomEntryDialog mutate = CustomEntryDialog.create(value, desc);
+		mutate.setNegativeAllowed(negative);
 		mutate.setOnCalculateListener(this);
 		if (customUnits != null) {
 			// Add custom units

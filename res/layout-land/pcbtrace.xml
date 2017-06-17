@@ -2,7 +2,7 @@
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   ~ The MIT License (MIT)
   ~
-  ~ Copyright (c) 2016 Stephen Carlson
+  ~ Copyright (c) 2017 Stephen Carlson
   ~
   ~ Permission is hereby granted, free of charge, to any person obtaining a copy
   ~ of this software and associated documentation files (the "Software"), to deal
@@ -26,8 +26,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 				xmlns:ece="http://schemas.android.com/apk/res/com.stcarlso.goece"
 				android:layout_width="match_parent" android:layout_height="match_parent">
-	<View android:layout_width="0dp" android:layout_height="0dp" android:id="@+id/guiPcbCenter"
-		  android:layout_centerHorizontal="true"/>
 	<Spinner android:layout_width="wrap_content" android:layout_height="wrap_content"
 			 android:entries="@array/guiPcbScenarios" android:id="@+id/guiPcbScenario"
 			 android:layout_gravity="center_horizontal" android:tag="guiPcbScenario"
@@ -47,10 +45,24 @@
 			  android:layout_toRightOf="@id/guiPcbImage" ece:units="mm" ece:group="none"
 			  android:layout_alignRight="@+id/guiPcbThickness" ece:value="0.035"/>
 		<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="outputs,outputs2"
+			  android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:tag="guiPcbTraceWidth" android:id="@+id/guiPcbTraceWidth" ece:value="0.1"
+			  ece:description="@string/guiPcbTraceWidth" ece:group="inputs" ece:units="mm"
+			  ece:customUnits="@array/guiPcbUnits" android:layout_marginLeft="10dp"
+			  android:layout_toRightOf="@id/guiPcbTraceHeight"
+			  android:layout_alignRight="@id/guiPcbTraceSpace"/>
+		<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="outputs,outputs2"
 			  android:id="@+id/guiPcbThickness" android:tag="guiPcbThickness" ece:value="1.60"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  ece:customUnits="@array/guiPcbUnits" ece:description="@string/guiPcbThickness"
 			  ece:group="none" android:layout_toRightOf="@id/guiPcbImage" ece:units="mm"
+			  android:layout_below="@id/guiPcbTraceHeight"/>
+		<view class="com.stcarlso.goece.ui.CustomEntryBox" android:enabled="false"
+			  android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:tag="guiPcbTraceSpace" android:id="@+id/guiPcbTraceSpace" ece:value="0.1"
+			  ece:description="@string/guiPcbTraceSpace" ece:group="inputs2" ece:units="mm"
+			  ece:customUnits="@array/guiPcbUnits" android:layout_marginLeft="10dp"
+			  ece:affects="outputs2" android:layout_toRightOf="@id/guiPcbThickness"
 			  android:layout_below="@id/guiPcbTraceHeight"/>
 		<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="outputs,outputs2"
 			  android:id="@+id/guiPcbDielectric" android:tag="guiPcbDielectric" ece:units=""
@@ -59,22 +71,8 @@
 			  android:layout_below="@id/guiPcbThickness" android:layout_height="wrap_content"
 			  android:layout_alignRight="@+id/guiPcbTraceHeight"/>
 	</RelativeLayout>
-	<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="outputs,outputs2"
-		  android:layout_width="wrap_content" android:layout_height="wrap_content"
-		  android:tag="guiPcbTraceWidth" android:id="@+id/guiPcbTraceWidth" ece:value="0.1"
-		  ece:description="@string/guiPcbTraceWidth" ece:group="inputs" ece:units="mm"
-		  android:layout_toLeftOf="@id/guiPcbCenter" android:layout_marginRight="5dp"
-		  ece:customUnits="@array/guiPcbUnits" android:layout_marginTop="5dp"
-		  android:layout_below="@id/guiPcbGivens"/>
-	<view class="com.stcarlso.goece.ui.CustomEntryBox" android:enabled="false"
-		  android:layout_width="wrap_content" android:layout_height="wrap_content"
-		  android:tag="guiPcbTraceSpace" android:id="@+id/guiPcbTraceSpace" ece:value="0.1"
-		  ece:description="@string/guiPcbTraceSpace" ece:group="inputs2" ece:units="mm"
-		  ece:customUnits="@array/guiPcbUnits" android:layout_marginTop="5dp"
-		  android:layout_toRightOf="@id/guiPcbCenter" android:layout_marginLeft="5dp"
-		  ece:affects="outputs2" android:layout_below="@id/guiPcbGivens"/>
 	<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
-				  android:layout_below="@id/guiPcbTraceSpace" android:layout_marginTop="10dp"
+				  android:layout_below="@id/guiPcbGivens" android:layout_marginTop="10dp"
 				  android:layout_centerHorizontal="true">
 		<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiPcbImpedance1"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"

@@ -27,10 +27,7 @@ package com.stcarlso.goece.activity;
 import android.os.Bundle;
 import android.widget.TextView;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.ui.ChildActivity;
-import com.stcarlso.goece.ui.ColorBand;
-import com.stcarlso.goece.ui.CopyPasteListener;
-import com.stcarlso.goece.ui.ValueGroup;
+import com.stcarlso.goece.ui.*;
 import com.stcarlso.goece.utility.EIATable;
 import com.stcarlso.goece.utility.EIAValue;
 import com.stcarlso.goece.utility.UIFunctions;
@@ -59,13 +56,9 @@ public class ResColorActivity extends ChildActivity {
 	 */
 	private final ColorBand[] bandCtrl;
 	/**
-	 * Handles long presses on the output text box.
-	 */
-	private final CopyPasteListener copyPasteListener;
-	/**
 	 * Cached reference to the output text box.
 	 */
-	private TextView outputCtrl;
+	private ValueOutputField outputCtrl;
 	/**
 	 * Cached reference to the standard value box.
 	 */
@@ -73,7 +66,6 @@ public class ResColorActivity extends ChildActivity {
 
 	public ResColorActivity() {
 		bandCtrl = new ColorBand[5];
-		copyPasteListener = new CopyPasteListener(this, "Resistance");
 	}
 	@Override
 	public void recalculate(final ValueGroup group) {
@@ -110,8 +102,7 @@ public class ResColorActivity extends ChildActivity {
 		// Calculate multiplier
 		final EIAValue finalValue = new EIAValue(value * MULTIPLIER[bandCtrl[3].getValue()],
 			series, TOLERANCE[tol]);
-		outputCtrl.setText(finalValue.toString());
-		copyPasteListener.setValue(finalValue);
+		outputCtrl.setValue(finalValue);
 		// In EIA series?
 		UIFunctions.checkEIATable(finalValue, stdCtrl);
 	}
@@ -125,8 +116,7 @@ public class ResColorActivity extends ChildActivity {
 		bandCtrl[2] = (ColorBand)findViewById(R.id.guiResBand3);
 		bandCtrl[3] = (ColorBand)findViewById(R.id.guiResBand4);
 		bandCtrl[4] = (ColorBand)findViewById(R.id.guiResBand5);
-		outputCtrl = asTextView(R.id.guiResValue);
-		outputCtrl.setOnLongClickListener(copyPasteListener);
+		outputCtrl = asValueField(R.id.guiResValue);
 		stdCtrl = asTextView(R.id.guiResIsStandard);
 		// Add click listeners
 		for (ColorBand band : bandCtrl) {

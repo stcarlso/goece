@@ -101,15 +101,14 @@ public final class UIFunctions {
 		return Html.fromHtml(text);
 	}
 	/**
-	 * Reports the parent activity of a View, or null if the view has no parent activity.
+	 * Reports the parent activity of a Context, or null if the context has no parent activity.
 	 *
-	 * @param view the view to investigate
-	 * @return the Activity object which is hosting the view
+	 * @param context the context to investigate
+	 * @return the Activity object which is hosting the context
 	 */
-	public static Activity getActivity(final View view) {
-		if (view == null)
-			throw new NullPointerException("view");
-		Context context = view.getContext();
+	public static Activity getActivity(Context context) {
+		if (context == null)
+			throw new NullPointerException("context");
 		Activity parent = null;
 		while (parent == null && (context instanceof ContextWrapper)) {
 			if (context instanceof Activity)
@@ -118,6 +117,17 @@ public final class UIFunctions {
 				context = ((ContextWrapper)context).getBaseContext();
 		}
 		return parent;
+	}
+	/**
+	 * Reports the parent activity of a View, or null if the view has no parent activity.
+	 *
+	 * @param view the view to investigate
+	 * @return the Activity object which is hosting the view
+	 */
+	public static Activity getActivity(final View view) {
+		if (view == null)
+			throw new NullPointerException("view");
+		return getActivity(view.getContext());
 	}
 	/**
 	 * Retrieves the tag from a visual element.

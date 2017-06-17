@@ -75,13 +75,10 @@ public class ValueTextBox extends EditText implements ValueControl {
 			// Read attributes for affects and group
 			final TypedArray values = context.getTheme().obtainStyledAttributes(attrs,
 				R.styleable.ValueTextBox, 0, 0);
-			try {
-				// Read the values and substitute defaults
-				newGroup = values.getString(R.styleable.ValueTextBox_group);
-				willAffect = values.getString(R.styleable.ValueTextBox_affects);
-			} catch (Exception e) {
-				Log.e("ValueTextBox", "Invalid attributes:", e);
-			}
+			// Read the values and substitute defaults
+			newGroup = values.getString(R.styleable.ValueTextBox_group);
+			willAffect = values.getString(R.styleable.ValueTextBox_affects);
+			values.recycle();
 		}
 		group = newGroup;
 		affects = willAffect;

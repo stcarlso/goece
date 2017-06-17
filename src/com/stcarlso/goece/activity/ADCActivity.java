@@ -1,7 +1,7 @@
 /***********************************************************************************************
  * The MIT License (MIT)
  *
- * Copyright (c) 2016 Stephen Carlson
+ * Copyright (c) 2017 Stephen Carlson
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,21 +25,30 @@
 package com.stcarlso.goece.activity;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.ui.MenuFragment;
+import com.stcarlso.goece.ui.ChildActivity;
+import com.stcarlso.goece.ui.ValueGroup;
 
 /**
- * Fragment which displays all items on the Digital tab.
+ * An activity which allows ADC values to be interpreted quickly into actual voltages.
  */
-public class DigitalFragment extends MenuFragment {
+public class ADCActivity extends ChildActivity {
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final View view = inflater.inflate(R.layout.digital, container, false);
-		// Configure all buttons
-		setButtonEvent(view, R.id.guiAdcCalc, ADCActivity.class);
-		return view;
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.adccalc);
+		controls.add(findViewById(R.id.guiAdcRes));
+		controls.add(findViewById(R.id.guiAdcVrefN));
+		controls.add(findViewById(R.id.guiAdcVrefP));
+		controls.setupAll(this);
+		loadPrefs();
+	}
+	@Override
+	protected void recalculate(ValueGroup group) {
+
+	}
+	@Override
+	protected void update(ValueGroup group) {
+
 	}
 }

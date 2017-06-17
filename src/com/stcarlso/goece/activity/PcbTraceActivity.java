@@ -57,16 +57,12 @@ public class PcbTraceActivity extends ChildActivity implements
 	/**
 	 * Minimum width that the solver will attempt in mm.
 	 */
-	public static final double MIN_SOLVE_WIDTH = 0.01;
+	private static final double MIN_SOLVE_WIDTH = 0.01;
 	/**
 	 * Maximum width that the solver will attempt in mm.
 	 */
-	public static final double MAX_SOLVE_WIDTH = 100.0;
+	private static final double MAX_SOLVE_WIDTH = 100.0;
 
-	/**
-	 * Contains all data entry controls.
-	 */
-	private final ValueBoxContainer controls;
 	/**
 	 * Cached reference to the user assist image of the current impedance scenario.
 	 */
@@ -76,9 +72,6 @@ public class PcbTraceActivity extends ChildActivity implements
 	 */
 	private Spinner traceTypeCtrl;
 
-	public PcbTraceActivity() {
-		controls = new ValueBoxContainer();
-	}
 	/**
 	 * Solves the equation and puts the result into the specified output box.
 	 *
@@ -134,7 +127,7 @@ public class PcbTraceActivity extends ChildActivity implements
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.pcbtrace);
-		pcbImage = (ImageView)findViewById(R.id.guiPcbImage);
+		pcbImage = asImageView(R.id.guiPcbImage);
 		traceTypeCtrl = asSpinner(R.id.guiPcbScenario);
 		traceTypeCtrl.setOnItemSelectedListener(this);
 		// Register value entry boxes
@@ -152,10 +145,10 @@ public class PcbTraceActivity extends ChildActivity implements
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 		// Show/hide diff impedance based on selection
-		final int scenario = traceTypeCtrl.getSelectedItemPosition(), show = (scenario > 1) ?
-			View.VISIBLE : View.GONE;
-		controls.get(R.id.guiPcbImpedance2).setVisibility(show);
-		controls.get(R.id.guiPcbTraceSpace).setVisibility(show);
+		final int scenario = traceTypeCtrl.getSelectedItemPosition();
+		final boolean show = scenario > 1;
+		controls.get(R.id.guiPcbImpedance2).setVisibility(show ? View.VISIBLE : View.GONE);
+		controls.get(R.id.guiPcbTraceSpace).setEnabled(show);
 		if (scenario >= 0 && scenario < IMAGES.length)
 			// Update the image
 			pcbImage.setImageResource(IMAGES[scenario]);

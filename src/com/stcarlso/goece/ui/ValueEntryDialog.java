@@ -28,6 +28,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager.LayoutParams;
@@ -84,9 +85,12 @@ public class ValueEntryDialog extends AbstractEntryDialog implements View.OnKeyL
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		final Activity act = getActivity();
 		final AlertDialog.Builder builder = new AlertDialog.Builder(act);
+		int flags = InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER;
 		// Load layout
 		final View dialog = View.inflate(act, R.layout.valueentry, null);
 		builder.setView(dialog);
+		if (negative)
+			flags |= InputType.TYPE_NUMBER_FLAG_SIGNED;
 		// Create array adapter
 		final ArrayAdapter<String> adapter = new ArrayAdapter<String>(act,
 			android.R.layout.simple_spinner_item, EngineeringValue.buildUnitChoices(
@@ -98,6 +102,7 @@ public class ValueEntryDialog extends AbstractEntryDialog implements View.OnKeyL
 		unitSelect.setSelection(value.getSIPrefixCode());
 		// Load text, allow editing of a few more sigfigs than usual
 		valueEntry = (EditText)dialog.findViewById(R.id.guiValue);
+		valueEntry.setInputType(flags);
 		valueEntry.setOnKeyListener(this);
 		valueEntry.setText(value.significandToString(6));
 		valueEntry.selectAll();

@@ -46,9 +46,13 @@ import java.util.*;
  */
 public abstract class ChildActivity extends Activity implements Calculatable {
 	/**
+	 * Contains all data entry controls.
+	 */
+	protected final ValueBoxContainer controls;
+	/**
 	 * List of fields registered with registerAdjustable.
 	 */
-	protected final ValueGroup fields;
+	private final ValueGroup fields;
 	/**
 	 * List of fields again, but mapped by group.
 	 */
@@ -58,6 +62,7 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 * Initialize this activity.
 	 */
 	protected ChildActivity() {
+		controls = new ValueBoxContainer();
 		fields = new ValueGroup("");
 		groups = new HashMap<String, ValueGroup>(32);
 	}
@@ -69,6 +74,15 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 */
 	protected CheckBox asCheckBox(final int id) {
 		return (CheckBox)findViewById(id);
+	}
+	/**
+	 * Retrieves an image by its ID.
+	 *
+	 * @param id the ID of the image
+	 * @return the image view control
+	 */
+	protected ImageView asImageView(final int id) {
+		return (ImageView)findViewById(id);
 	}
 	/**
 	 * Retrieves a radio button by its ID.
@@ -96,6 +110,15 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 */
 	protected TextView asTextView(final int id) {
 		return (TextView)findViewById(id);
+	}
+	/**
+	 * Retrieves a value field by its ID.
+	 *
+	 * @param id the ID of the output field (ValueOutputField class)
+	 * @return the value label control
+	 */
+	protected ValueOutputField asValueField(final int id) {
+		return (ValueOutputField)findViewById(id);
 	}
 	/**
 	 * Slightly stronger typed version of findViewById that is also much faster, but only works
@@ -146,7 +169,7 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 * @param id the ID of the control to load
 	 */
 	protected void loadPrefsSpinner(final SharedPreferences prefs, final int id) {
-		final Spinner view = (Spinner)findViewById(id);
+		final Spinner view = asSpinner(id);
 		final String tag = UIFunctions.getTag(view);
 		// Only change if the preferences are initialized
 		if (prefs.contains(tag))
@@ -255,7 +278,7 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 * Saves to application settings the values of all fields registered with
 	 * registerAdjustable.
 	 */
-	protected void savePrefs() {
+	private void savePrefs() {
 		final SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
 		// Save all items registered as Restorable
 		for (ValueControl control : fields)
@@ -280,7 +303,7 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 * @param id the ID of the control to save
 	 */
 	protected void savePrefsSpinner(final SharedPreferences.Editor prefs, final int id) {
-		final Spinner view = (Spinner)findViewById(id);
+		final Spinner view = asSpinner(id);
 		prefs.putInt(UIFunctions.getTag(view), view.getSelectedItemPosition());
 	}
 	/**

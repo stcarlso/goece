@@ -39,14 +39,6 @@ import com.stcarlso.goece.utility.EngineeringValue;
  * also be used.
  */
 public class DeltaWyeActivity extends ChildActivity {
-	/**
-	 * Contains all data entry controls.
-	 */
-	private final ValueBoxContainer controls;
-
-	public DeltaWyeActivity() {
-		controls = new ValueBoxContainer();
-	}
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);

@@ -27,10 +27,12 @@
 				xmlns:ece="http://schemas.android.com/apk/res/com.stcarlso.goece"
 				android:layout_width="match_parent" android:layout_height="match_parent"
 				android:orientation="vertical">
-	<TextView android:textAppearance="?android:attr/textAppearanceLarge" android:textSize="40sp"
-			  android:text="" android:id="@+id/guiResValue" android:layout_height="wrap_content"
-			  android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
-			  android:layout_alignParentTop="true" android:layout_centerHorizontal="true"/>
+	<view class="com.stcarlso.goece.ui.ValueOutputField" android:layout_centerHorizontal="true"
+		  android:textAppearance="?android:attr/textAppearanceLarge" android:textSize="40sp"
+		  android:text="" android:id="@+id/guiResValue" android:layout_height="wrap_content"
+		  android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
+		  android:layout_alignParentTop="true" ece:description="@string/resist"
+		  ece:showDesc="false"/>
 	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  android:textAppearance="?android:attr/textAppearanceMedium" android:text=""
 			  android:layout_gravity="center_horizontal" android:id="@+id/guiResIsStandard"

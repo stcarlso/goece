@@ -106,13 +106,10 @@ public class ResSeriesSpinner extends Spinner implements ValueControl,
 			// Read attributes for affects and group
 			final TypedArray values = context.getTheme().obtainStyledAttributes(attrs,
 				R.styleable.ValueTextBox, 0, 0);
-			try {
-				// Read the values and substitute defaults
-				newGroup = values.getString(R.styleable.ResSeriesSpinner_group);
-				willAffect = values.getString(R.styleable.ResSeriesSpinner_affects);
-			} catch (Exception e) {
-				Log.e("ResSeriesSpinner", "Invalid attributes:", e);
-			}
+			// Read the values and substitute defaults
+			newGroup = values.getString(R.styleable.ResSeriesSpinner_group);
+			willAffect = values.getString(R.styleable.ResSeriesSpinner_affects);
+			values.recycle();
 		}
 		group = newGroup;
 		affects = willAffect;

@@ -62,6 +62,14 @@ public abstract class ResCandidate implements Comparable<ResCandidate> {
 		this.target = target;
 		this.value = value;
 	}
+	/**
+	 * Reports the value of this pair as a resistance value.
+	 *
+	 * @return the value of the resistor pair as an EngineeringValue object
+	 */
+	public EngineeringValue asResistance() {
+		return new EngineeringValue(value, Units.RESISTANCE);
+	}
 	@Override
 	public int compareTo(ResCandidate other) {
 		// Compare using absolute value of error for quick drill down
@@ -184,6 +192,6 @@ public abstract class ResCandidate implements Comparable<ResCandidate> {
 		return possible(getValue());
 	}
 	public String toString() {
-		return new EngineeringValue(value, Units.RESISTANCE).toString();
+		return asResistance().toString();
 	}
 }

@@ -30,8 +30,9 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.ChildActivity;
-import com.stcarlso.goece.ui.ValueBoxContainer;
+import com.stcarlso.goece.ui.CopyPasteListener;
 import com.stcarlso.goece.ui.ValueGroup;
+import com.stcarlso.goece.ui.ValueOutputField;
 import com.stcarlso.goece.utility.EngineeringValue;
 import com.stcarlso.goece.utility.Units;
 
@@ -40,13 +41,9 @@ import com.stcarlso.goece.utility.Units;
  */
 public class PowerUseActivity extends ChildActivity implements View.OnClickListener {
 	/**
-	 * Contains all data entry controls.
-	 */
-	private final ValueBoxContainer controls;
-	/**
 	 * Cached reference to the average current draw text view.
 	 */
-	private TextView currentDraw;
+	private ValueOutputField currentDraw;
 	/**
 	 * Cached reference to the "Idle" check box.
 	 */
@@ -60,9 +57,6 @@ public class PowerUseActivity extends ChildActivity implements View.OnClickListe
 	 */
 	private CheckBox sleepEnableCtrl;
 
-	public PowerUseActivity() {
-		controls = new ValueBoxContainer();
-	}
 	@Override
 	public void onClick(View v) {
 		// Enable controls as needed
@@ -85,7 +79,7 @@ public class PowerUseActivity extends ChildActivity implements View.OnClickListe
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.poweruse);
 		// Update references
-		currentDraw = asTextView(R.id.guiPwrDraw);
+		currentDraw = asValueField(R.id.guiPwrDraw);
 		idleEnableCtrl = asCheckBox(R.id.guiPwrIdleEna);
 		runEnableCtrl = asCheckBox(R.id.guiPwrRunEna);
 		sleepEnableCtrl = asCheckBox(R.id.guiPwrSleepEna);
@@ -137,8 +131,8 @@ public class PowerUseActivity extends ChildActivity implements View.OnClickListe
 	@Override
 	protected void recalculate(ValueGroup group) {
 		final double i = calculateIAvg();
-		currentDraw.setText(getString(R.string.guiPwrIAvg, new EngineeringValue(i,
-			Units.CURRENT).toString()));
+		// Display average current value
+		currentDraw.setValue(new EngineeringValue(i, Units.CURRENT));
 		switch (group.leastRecentlyUsed()) {
 		case R.id.guiPwrCapacity:
 			// Calculate capacity based on desired runtime

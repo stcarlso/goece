@@ -29,6 +29,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -41,7 +42,8 @@ import com.stcarlso.goece.utility.EngineeringValue;
 import com.stcarlso.goece.utility.IgnoreOnClickListener;
 import com.stcarlso.goece.utility.UIFunctions;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A dialog box similar to ValueEntryDialog, but which supplies a list of custom units.
@@ -133,9 +135,12 @@ public class CustomEntryDialog extends AbstractEntryDialog implements
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
 		final Activity act = getActivity();
 		final AlertDialog.Builder builder = new AlertDialog.Builder(act);
+		int flags = InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_CLASS_NUMBER;
 		// Load layout
 		final View dialog = View.inflate(act, R.layout.customentry, null);
 		builder.setView(dialog);
+		if (negative)
+			flags |= InputType.TYPE_NUMBER_FLAG_SIGNED;
 		// Create array adapter
 		final ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(act,
 			android.R.layout.simple_spinner_item, getUnitChoices());

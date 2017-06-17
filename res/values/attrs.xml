@@ -36,6 +36,7 @@
 		<attr name="value" format="float"/>
 		<attr name="description" format="string"/>
 		<attr name="sigfigs" format="integer"/>
+		<attr name="allowNegative" format="boolean"/>
 		<attr name="group"/>
 		<attr name="affects"/>
 	</declare-styleable>
@@ -68,5 +69,11 @@
 		<attr name="affects"/>
 		<attr name="sigfigs"/>
 		<attr name="customUnits" format="reference"/>
+		<attr name="allowNegative"/>
+	</declare-styleable>
+	<declare-styleable name="ValueOutputField">
+		<attr name="description"/>
+		<attr name="showDesc" format="boolean"/>
+		<attr name="sigfigs"/>
 	</declare-styleable>
 </resources>

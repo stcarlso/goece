@@ -28,15 +28,16 @@ import android.os.Bundle;
 import android.widget.TextView;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.ChildActivity;
+import com.stcarlso.goece.ui.CopyPasteListener;
 import com.stcarlso.goece.ui.ResSeriesSpinner;
-import com.stcarlso.goece.ui.ValueBoxContainer;
 import com.stcarlso.goece.ui.ValueGroup;
 import com.stcarlso.goece.utility.ECECalc;
 import com.stcarlso.goece.utility.EIAValue;
 import com.stcarlso.goece.utility.ResCandidate;
 import com.stcarlso.goece.utility.UIFunctions;
 
-import java.util.*;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Activity to allow construction of unusual resistor values from available parts placed in
@@ -44,13 +45,17 @@ import java.util.*;
  */
 public class SerParActivity extends ChildActivity {
 	/**
-	 * Contains all data entry controls.
+	 * Handles long presses on the parallel resistance text box.
 	 */
-	private final ValueBoxContainer controls;
+	private CopyPasteListener parListener;
 	/**
 	 * Cached reference to the parallel resistor error output box.
 	 */
 	private TextView parOutCtrl;
+	/**
+	 * Handles long presses on the series resistance text box.
+	 */
+	private CopyPasteListener serListener;
 	/**
 	 * Reference to resistor series to use (1%, 5%, ...)
 	 */
@@ -64,9 +69,6 @@ public class SerParActivity extends ChildActivity {
 	 */
 	private TextView stdCtrl;
 
-	public SerParActivity() {
-		controls = new ValueBoxContainer();
-	}
 	/**
 	 * Recalculates the closest match of parallel resistors from the user specified series,
 	 * using the target value.
@@ -127,9 +129,15 @@ public class SerParActivity extends ChildActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.serpar);
+		// Initialize copy and paste listeners
+		parListener = new CopyPasteListener(this, getString(R.string.guiSerRPar));
+		serListener = new CopyPasteListener(this, getString(R.string.guiSerRSer));
+		// Update references
 		parOutCtrl = asTextView(R.id.guiSerParallelOut);
+		parOutCtrl.setOnLongClickListener(parListener);
 		seriesCtrl = (ResSeriesSpinner)findViewById(R.id.guiSerResSeries);
 		serOutCtrl = asTextView(R.id.guiSerSeriesOut);
+		serOutCtrl.setOnLongClickListener(serListener);
 		stdCtrl = asTextView(R.id.guiSerIsStandard);
 		// Load controls and preferences
 		controls.add(findViewById(R.id.guiSerTarget));
@@ -207,6 +215,7 @@ public class SerParActivity extends ChildActivity {
 			// Small difference
 			serOutCtrl.setText(String.format(Locale.getDefault(), "%s [%+.1f%%]", serCand,
 				100.0 * serErr));
+		serListener.setValue(serCand.asResistance());
 		// Parallel
 		final double r3 = controls.getRawValue(R.id.guiSerParallel1);
 		final double r4 = controls.getRawValue(R.id.guiSerParallel2);
@@ -219,6 +228,7 @@ public class SerParActivity extends ChildActivity {
 			// Small difference
 			parOutCtrl.setText(String.format(Locale.getDefault(), "%s [%+.1f%%]", parCand,
 				100.0 * parErr));
+		parListener.setValue(parCand.asResistance());
 		// Overall fit
 		final EIAValue finalValue = new EIAValue(target, seriesCtrl.getSeries());
 		UIFunctions.checkEIATable(finalValue, stdCtrl);

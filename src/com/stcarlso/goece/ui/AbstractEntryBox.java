@@ -40,7 +40,7 @@ import com.stcarlso.goece.utility.*;
  * Skeleton class for a button with units that when clicked brings up a dialog.
  */
 public abstract class AbstractEntryBox<T extends EngineeringValue> extends Button implements
-		View.OnClickListener, ValueControl {
+		View.OnClickListener, ValueControl, CopyValueSource {
 	/**
 	 * When this box is changed, this field is used to determine which group is affected.
 	 */
@@ -97,6 +97,7 @@ public abstract class AbstractEntryBox<T extends EngineeringValue> extends Butto
 	 *
 	 * @return the short description (shown on the button)
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -141,6 +142,10 @@ public abstract class AbstractEntryBox<T extends EngineeringValue> extends Butto
 		// Get rid of the all-caps on lollipop material design devices which interferes with the
 		// color, resize, and superscript/subscript on these buttons
 		setTransformationMethod(null);
+	}
+	@Override
+	public boolean isEditable() {
+		return isEnabled();
 	}
 	@Override
 	public void onRestoreInstanceState(Parcelable state) {
@@ -229,6 +234,18 @@ public abstract class AbstractEntryBox<T extends EngineeringValue> extends Butto
 	 * @param rawValue the new raw value to show in this entry box
 	 */
 	public abstract void updateValue(final double rawValue);
+	/**
+	 * Changes the raw value of this value entry box, keeping all other engineering parameters
+	 * the same. Calls the calculation listener, exactly as if this value had been user-entered
+	 * rather than programmatically set.
+	 *
+	 * @param rawValue the new raw value to show in this entry box
+	 */
+	@Override
+	public void updateValueUser(final double rawValue) {
+		updateValue(rawValue);
+		callOnCalculateListener();
+	}
 	/**
 	 * Changes the raw value of this value entry box, keeping all other engineering parameters
 	 * the same.
