@@ -106,6 +106,28 @@ public abstract class AbstractEntryBox<T extends EngineeringValue> extends Butto
 		return group;
 	}
 	/**
+	 * Retrieves the raw value of this entry box rounded to the nearest integer. The error flag
+	 * will be set if the value is outside the bounds specified.
+	 *
+	 * @param min the minimum acceptable value (inclusive)
+	 * @param max the maximum acceptable value (inclusive)
+	 * @param error the error message to show if the value is invalid
+	 * @return the integer value
+	 */
+	public int getIntValue(double min, double max, final String error) {
+		final double dValue = getRawValue();
+		final int ret;
+		if (Double.isNaN(dValue) || Double.isInfinite(dValue) || dValue < min || dValue > max) {
+			// Invalid
+			setError(error);
+			ret = 0;
+		} else {
+			setError(null);
+			ret = (int)Math.round(dValue);
+		}
+		return ret;
+	}
+	/**
 	 * Returns the raw magnitude entered in this value box.
 	 *
 	 * @return the result of getValue() on the current value

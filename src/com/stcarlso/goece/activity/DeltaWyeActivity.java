@@ -57,12 +57,8 @@ public class DeltaWyeActivity extends ChildActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.deltawye);
 		// Register value entry boxes
-		controls.add(findViewById(R.id.guiDelDelta1));
-		controls.add(findViewById(R.id.guiDelDelta2));
-		controls.add(findViewById(R.id.guiDelDelta3));
-		controls.add(findViewById(R.id.guiDelWye1));
-		controls.add(findViewById(R.id.guiDelWye2));
-		controls.add(findViewById(R.id.guiDelWye3));
+		controls.add(this, R.id.guiDelDelta1, R.id.guiDelDelta2, R.id.guiDelDelta3,
+			R.id.guiDelWye1, R.id.guiDelWye2, R.id.guiDelWye3);
 		controls.setupAll(this);
 		loadPrefs();
 	}

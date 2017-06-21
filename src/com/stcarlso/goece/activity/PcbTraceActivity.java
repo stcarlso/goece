@@ -131,13 +131,9 @@ public class PcbTraceActivity extends ChildActivity implements
 		traceTypeCtrl = asSpinner(R.id.guiPcbScenario);
 		traceTypeCtrl.setOnItemSelectedListener(this);
 		// Register value entry boxes
-		controls.add(findViewById(R.id.guiPcbDielectric));
-		controls.add(findViewById(R.id.guiPcbImpedance1));
-		controls.add(findViewById(R.id.guiPcbImpedance2));
-		controls.add(findViewById(R.id.guiPcbThickness));
-		controls.add(findViewById(R.id.guiPcbTraceHeight));
-		controls.add(findViewById(R.id.guiPcbTraceSpace));
-		controls.add(findViewById(R.id.guiPcbTraceWidth));
+		controls.add(this, R.id.guiPcbDielectric, R.id.guiPcbImpedance1, R.id.guiPcbImpedance2,
+			R.id.guiPcbThickness, R.id.guiPcbTraceHeight, R.id.guiPcbTraceSpace,
+			R.id.guiPcbTraceWidth);
 		controls.setupAll(this);
 		loadPrefs();
 		recalculate(controls.get(R.id.guiPcbThickness));

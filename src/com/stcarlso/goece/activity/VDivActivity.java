@@ -119,11 +119,8 @@ public class VDivActivity extends ChildActivity implements View.OnClickListener 
 		powerCtrl = asValueField(R.id.guiDivPower);
 		seriesCtrl = (ResSeriesSpinner)findViewById(R.id.guiDivResSeries);
 		// Load controls and preferences
-		controls.add(findViewById(R.id.guiDivTop));
-		controls.add(findViewById(R.id.guiDivBottom));
-		controls.add(findViewById(R.id.guiDivInput));
-		controls.add(findViewById(R.id.guiDivOutput));
-		controls.add(findViewById(R.id.guiDivLoad));
+		controls.add(this, R.id.guiDivTop, R.id.guiDivBottom, R.id.guiDivInput,
+			R.id.guiDivOutput, R.id.guiDivLoad);
 		controls.setupAll(this);
 		seriesCtrl.setOnCalculateListener(this);
 		registerAdjustable(seriesCtrl);

@@ -29,11 +29,11 @@
 	<RadioGroup android:layout_width="wrap_content" android:orientation="horizontal"
 				android:layout_height="wrap_content" android:layout_gravity="center_horizontal">
 		<RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
-					 android:id="@+id/guiValueModeMagPha" android:tag="guiValueModeMagPha"
-					 android:checked="true" android:text="@string/magpha"/>
+					 android:id="@+id/guiValueModeMagPha" android:text="@string/magpha"
+					 android:checked="true"/>
 		<RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
-					 android:id="@+id/guiValueModeReIm" android:tag="guiValueModeReIm"
-					 android:checked="false" android:text="@string/reim"/>
+					 android:id="@+id/guiValueModeReIm" android:text="@string/reim"
+					 android:checked="false"/>
 	</RadioGroup>
 	<ViewSwitcher android:layout_width="wrap_content" android:layout_gravity="center_horizontal"
 				  android:layout_height="wrap_content" android:id="@+id/guiValueView">

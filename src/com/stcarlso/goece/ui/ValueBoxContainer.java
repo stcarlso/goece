@@ -24,6 +24,7 @@
 
 package com.stcarlso.goece.ui;
 
+import android.app.Activity;
 import android.util.SparseArray;
 import android.view.View;
 import com.stcarlso.goece.utility.EngineeringValue;
@@ -46,6 +47,19 @@ public class ValueBoxContainer extends SparseArray<AbstractEntryBox<? extends En
 			// Only add valid items
 			final AbstractEntryBox<?> box = (AbstractEntryBox<?>)view;
 			put(box.getId(), box);
+		}
+	}
+	/**
+	 * Adds a series of controls to this container.
+	 *
+	 * @param act the parent activity
+	 * @param id the integer IDs of controls to add
+	 */
+	public void add(final Activity act, final int... id) {
+		for (int viewID : id) {
+			final View view = act.findViewById(viewID);
+			if (view != null)
+				add(view);
 		}
 	}
 	/**

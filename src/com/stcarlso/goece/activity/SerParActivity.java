@@ -140,11 +140,8 @@ public class SerParActivity extends ChildActivity {
 		serOutCtrl.setOnLongClickListener(serListener);
 		stdCtrl = asTextView(R.id.guiSerIsStandard);
 		// Load controls and preferences
-		controls.add(findViewById(R.id.guiSerTarget));
-		controls.add(findViewById(R.id.guiSerSeries1));
-		controls.add(findViewById(R.id.guiSerSeries2));
-		controls.add(findViewById(R.id.guiSerParallel1));
-		controls.add(findViewById(R.id.guiSerParallel2));
+		controls.add(this, R.id.guiSerTarget, R.id.guiSerSeries1, R.id.guiSerSeries2,
+			R.id.guiSerParallel1, R.id.guiSerParallel2);
 		controls.setupAll(this);
 		seriesCtrl.setOnCalculateListener(this);
 		registerAdjustable(seriesCtrl);

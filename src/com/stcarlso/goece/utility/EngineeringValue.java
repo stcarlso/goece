@@ -469,6 +469,12 @@ public class EngineeringValue implements Serializable {
 	 * @return the raw value as a a string
 	 */
 	public String valueToString(final int sf) {
-		return String.format("%." + Integer.toString(sf) + "g", getValue());
+		final String formatString;
+		if (sf > 0)
+			formatString = "%." + Integer.toString(sf) + "g";
+		else
+			// Prevent crash with negative value
+			formatString = "%.0f";
+		return String.format(formatString, getValue());
 	}
 }

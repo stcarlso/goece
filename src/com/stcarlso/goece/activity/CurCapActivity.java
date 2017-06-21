@@ -144,15 +144,9 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 		voltOutCtrl = asValueField(R.id.guiCurVDrop);
 		wireSelCtrl = asRadioButton(R.id.guiCurUseWire);
 		// Load controls and preferences
-		controls.add(findViewById(R.id.guiCurCurrent));
-		controls.add(findViewById(R.id.guiCurTemp));
-		controls.add(findViewById(R.id.guiCurGauge));
-		controls.add(findViewById(R.id.guiCurDiameter));
-		controls.add(findViewById(R.id.guiCurThickness));
-		controls.add(findViewById(R.id.guiCurWidth));
-		controls.add(findViewById(R.id.guiCurXArea));
-		controls.add(findViewById(R.id.guiCurLength));
-		controls.add(findViewById(R.id.guiCurTest));
+		controls.add(this, R.id.guiCurCurrent, R.id.guiCurTemp, R.id.guiCurGauge,
+			R.id.guiCurDiameter, R.id.guiCurThickness, R.id.guiCurWidth, R.id.guiCurXArea,
+			R.id.guiCurLength, R.id.guiCurTest);
 		controls.setupAll(this);
 		loadPrefs();
 		// Recalculate everything

@@ -63,14 +63,9 @@ public class OhmsLawActivity extends ChildActivity implements View.OnClickListen
 		dcCtrl = asRadioButton(R.id.guiOhmsSelDC);
 		powerFactorCtrl = asValueField(R.id.guiOhmsPowerFactor);
 		// Register value entry boxes
-		controls.add(findViewById(R.id.guiOhmsCurrentDC));
-		controls.add(findViewById(R.id.guiOhmsResistanceDC));
-		controls.add(findViewById(R.id.guiOhmsVoltageDC));
-		controls.add(findViewById(R.id.guiOhmsCurrentAC));
-		controls.add(findViewById(R.id.guiOhmsResistanceAC));
-		controls.add(findViewById(R.id.guiOhmsVoltageAC));
-		controls.add(findViewById(R.id.guiOhmsPowerDC));
-		controls.add(findViewById(R.id.guiOhmsPowerAC));
+		controls.add(this, R.id.guiOhmsCurrentDC, R.id.guiOhmsResistanceDC,
+			R.id.guiOhmsVoltageDC, R.id.guiOhmsCurrentAC, R.id.guiOhmsResistanceAC,
+			R.id.guiOhmsVoltageAC, R.id.guiOhmsPowerDC, R.id.guiOhmsPowerAC);
 		controls.setupAll(this);
 		loadPrefs();
 		// onClick handles initial calculations
@@ -102,10 +97,10 @@ public class OhmsLawActivity extends ChildActivity implements View.OnClickListen
 	private void pick(final boolean isDC, final int dc, final int ac) {
 		final AbstractEntryBox<?> edc = controls.get(dc);
 		edc.setEnabled(isDC);
-		edc.setVisibility(isDC ? View.VISIBLE : View.INVISIBLE);
+		edc.setVisibility(isDC ? View.VISIBLE : View.GONE);
 		final AbstractEntryBox<?> eac = controls.get(ac);
 		eac.setEnabled(!isDC);
-		eac.setVisibility(isDC ? View.INVISIBLE : View.VISIBLE);
+		eac.setVisibility(isDC ? View.GONE : View.VISIBLE);
 	}
 	@Override
 	public void recalculate(final ValueGroup group) {

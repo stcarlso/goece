@@ -39,6 +39,10 @@ import android.widget.TextView;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.utility.*;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Represents a dialog box which can accept ECE values in scientific notation.
  */
@@ -51,6 +55,15 @@ public class ValueEntryDialog extends AbstractEntryDialog implements View.OnKeyL
 		EIATable.EIASeries.E96, EIATable.EIASeries.E24,
 		EIATable.EIASeries.E12, EIATable.EIASeries.E6
 	};
+	/**
+	 * Unit types which cause the display helpers to be shown.
+	 */
+	private static final Set<String> SERIES_UNITS = new HashSet<String>(Arrays.asList(
+		new String[] {
+			Units.RESISTANCE, Units.CAPACITANCE, Units.INDUCTANCE
+		}
+	));
+
 	/**
 	 * Creates a value entry dialog.
 	 *
@@ -119,16 +132,15 @@ public class ValueEntryDialog extends AbstractEntryDialog implements View.OnKeyL
 	}
 	/**
 	 * Updates some labels beneath the text box for feedback on valid 1%, 5%, 10%, and 20%
-	 * values. Only shows for Units.RESISTANCE, Units.CAPACITANCE, and Units.INDUCTANCE.
+	 * values. Only shows for units included in SERIES_UNITS.
 	 *
 	 * @param view the parent layout view
 	 */
-	protected void updateValidValues(final View view) {
+	private void updateValidValues(final View view) {
 		final String units = getValue().getUnits();
 		final TextView[] pct = new TextView[SERIES.length];
 		// Check if units are approved for display
-		final boolean use = Units.RESISTANCE.equals(units) || Units.CAPACITANCE.equals(units) ||
-			Units.INDUCTANCE.equals(units);
+		final boolean use = SERIES_UNITS.contains(units);
 		pct[0] = (TextView)view.findViewById(R.id.guiValid1Pct);
 		pct[1] = (TextView)view.findViewById(R.id.guiValid5Pct);
 		pct[2] = (TextView)view.findViewById(R.id.guiValid10Pct);

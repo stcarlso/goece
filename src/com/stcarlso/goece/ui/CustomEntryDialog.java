@@ -74,11 +74,11 @@ public class CustomEntryDialog extends AbstractEntryDialog implements
 	 * List of custom unit options.
 	 * If none are provided, only the base unit will be available.
 	 */
-	protected final List<CustomUnit> customUnits;
+	private final List<CustomUnit> customUnits;
 	/**
 	 * The initially selected custom unit. If null or invalid, the base unit is selected.
 	 */
-	protected CustomUnit initialUnit;
+	private CustomUnit initialUnit;
 
 	public CustomEntryDialog() {
 		super();
@@ -159,6 +159,7 @@ public class CustomEntryDialog extends AbstractEntryDialog implements
 			unitSelect.setVisibility(View.GONE);
 		// Load text, allow editing of a few more sigfigs than usual
 		valueEntry = (EditText)dialog.findViewById(R.id.guiCustom);
+		valueEntry.setInputType(flags);
 		valueEntry.setText(act.getString(R.string.editRaw, value.getValue()));
 		valueEntry.selectAll();
 		builder.setTitle(UIFunctions.fromHtml(desc));

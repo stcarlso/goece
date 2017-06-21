@@ -30,7 +30,7 @@
 		  android:layout_centerHorizontal="true"/>
 	<Spinner android:layout_width="wrap_content" android:layout_height="wrap_content"
 			 android:entries="@array/guiPcbScenarios" android:id="@+id/guiPcbScenario"
-			 android:layout_gravity="center_horizontal" android:tag="guiPcbScenario"
+			 android:layout_gravity="center_horizontal" android:tag="pcbScenario"
 			 android:layout_alignParentTop="true" android:layout_centerHorizontal="true"
 			 android:spinnerStyle="@android:style/Widget.Spinner.DropDown"/>
 	<RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -41,19 +41,19 @@
 				   android:src="@drawable/microstrip1" android:layout_marginRight="10dp"
 				   android:contentDescription="@string/guiPcbImage"/>
 		<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="outputs,outputs2"
-			  android:id="@+id/guiPcbTraceHeight" android:tag="guiPcbTraceHeight"
+			  android:id="@+id/guiPcbTraceHeight" android:tag="pcbTraceHeight"
 			  android:layout_width="wrap_content" ece:description="@string/guiPcbTraceThick"
 			  ece:customUnits="@array/guiPcbUnits" android:layout_height="wrap_content"
 			  android:layout_toRightOf="@id/guiPcbImage" ece:units="mm" ece:group="none"
 			  android:layout_alignRight="@+id/guiPcbThickness" ece:value="0.035"/>
 		<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="outputs,outputs2"
-			  android:id="@+id/guiPcbThickness" android:tag="guiPcbThickness" ece:value="1.60"
+			  android:id="@+id/guiPcbThickness" android:tag="pcbThickness" ece:value="1.60"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  ece:customUnits="@array/guiPcbUnits" ece:description="@string/guiPcbThickness"
 			  ece:group="none" android:layout_toRightOf="@id/guiPcbImage" ece:units="mm"
 			  android:layout_below="@id/guiPcbTraceHeight"/>
 		<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="outputs,outputs2"
-			  android:id="@+id/guiPcbDielectric" android:tag="guiPcbDielectric" ece:units=""
+			  android:id="@+id/guiPcbDielectric" android:tag="pcbDielectric" ece:units=""
 			  ece:description="@string/guiPcbDielectric" ece:value="4.2" ece:group="none"
 			  android:layout_toRightOf="@id/guiPcbImage" android:layout_width="wrap_content"
 			  android:layout_below="@id/guiPcbThickness" android:layout_height="wrap_content"
@@ -61,28 +61,28 @@
 	</RelativeLayout>
 	<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="outputs,outputs2"
 		  android:layout_width="wrap_content" android:layout_height="wrap_content"
-		  android:tag="guiPcbTraceWidth" android:id="@+id/guiPcbTraceWidth" ece:value="0.1"
+		  android:tag="pcbTraceWidth" android:id="@+id/guiPcbTraceWidth" ece:value="0.1"
 		  ece:description="@string/guiPcbTraceWidth" ece:group="inputs" ece:units="mm"
 		  android:layout_toLeftOf="@id/guiPcbCenter" android:layout_marginRight="5dp"
 		  ece:customUnits="@array/guiPcbUnits" android:layout_marginTop="5dp"
 		  android:layout_below="@id/guiPcbGivens"/>
 	<view class="com.stcarlso.goece.ui.CustomEntryBox" android:enabled="false"
 		  android:layout_width="wrap_content" android:layout_height="wrap_content"
-		  android:tag="guiPcbTraceSpace" android:id="@+id/guiPcbTraceSpace" ece:value="0.1"
+		  android:tag="pcbTraceSpace" android:id="@+id/guiPcbTraceSpace" ece:value="0.1"
 		  ece:description="@string/guiPcbTraceSpace" ece:group="inputs2" ece:units="mm"
-		  ece:customUnits="@array/guiPcbUnits" android:layout_marginTop="5dp"
+		  ece:customUnits="@array/guiPcbUnits" android:layout_alignTop="@id/guiPcbTraceWidth"
 		  android:layout_toRightOf="@id/guiPcbCenter" android:layout_marginLeft="5dp"
-		  ece:affects="outputs2" android:layout_below="@id/guiPcbGivens"/>
+		  ece:affects="outputs2"/>
 	<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
 				  android:layout_below="@id/guiPcbTraceSpace" android:layout_marginTop="10dp"
 				  android:layout_centerHorizontal="true">
 		<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiPcbImpedance1"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:tag="guiPcbImpedance1" ece:affects="inputs,outputs2" ece:value="50"
+			  android:tag="pcbImpedance1" ece:affects="inputs,outputs2" ece:value="50"
 			  ece:description="@string/guiPcbTraceZSingle" ece:group="outputs" ece:units="Ω"/>
 		<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiPcbImpedance2"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:tag="guiPcbImpedance2" ece:affects="inputs2" ece:value="50"
+			  android:tag="pcbImpedance2" ece:affects="inputs2" ece:value="50"
 			  ece:description="@string/guiPcbTraceZDiff" ece:group="outputs2" ece:units="Ω"
 			  android:visibility="gone" android:layout_marginLeft="10dp"/>
 	</LinearLayout>

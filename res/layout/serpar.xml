@@ -51,7 +51,7 @@
 			   android:layout_below="@id/guiSerResTemp"/>
 	<LinearLayout android:layout_width="wrap_content" android:layout_below="@id/guiSerResTemp"
 				  android:layout_height="wrap_content" android:orientation="vertical"
-				  android:layout_alignParentLeft="true" android:layout_margin="10dp"
+				  android:layout_alignParentLeft="true" android:layout_marginRight="5dp"
 				  android:layout_toLeftOf="@id/guiSerCircuit">
 		<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiSerSeries1"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -68,7 +68,7 @@
 	</LinearLayout>
 	<LinearLayout android:layout_width="wrap_content" android:layout_below="@id/guiSerResTemp"
 				  android:layout_height="wrap_content" android:orientation="vertical"
-				  android:layout_alignParentRight="true" android:layout_margin="10dp"
+				  android:layout_alignParentRight="true" android:layout_marginLeft="5dp"
 				  android:layout_toRightOf="@id/guiSerCircuit">
 		<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiSerParallel1"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"

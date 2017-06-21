@@ -32,12 +32,12 @@
 				android:layout_centerHorizontal="true" android:orientation="horizontal"
 				android:id="@+id/gui555Mode">
 		<RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
-					 android:tag="gui555Monostable" android:id="@+id/gui555Monostable"
+					 android:tag="f55Monostable" android:id="@+id/gui555Monostable"
 					 android:text="@string/gui555Mono" android:onClick="onClick"
 					 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
 					 android:layout_marginRight="10dp" android:checked="true"/>
 		<RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
-					 android:tag="gui555Astable" android:id="@+id/gui555Astable"
+					 android:tag="f55Astable" android:id="@+id/gui555Astable"
 					 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
 					 android:text="@string/gui555Ast" android:onClick="onClick"/>
 	</RadioGroup>
@@ -47,17 +47,17 @@
 				  android:id="@+id/gui555Outputs">
 		<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="inputs"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:tag="gui555Freq" android:id="@+id/gui555Freq" ece:units="Hz"
+			  android:tag="f55Freq" android:id="@+id/gui555Freq" ece:units="Hz"
 			  ece:description="@string/freq" ece:group="outputs" ece:value="1000"
 			  android:layout_marginRight="10dp"/>
 		<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="inputs"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:tag="gui555Delay" android:id="@+id/gui555Delay" ece:units="s"
+			  android:tag="f55Delay" android:id="@+id/gui555Delay" ece:units="s"
 			  ece:description="@string/gui555Delay" ece:group="outputs" ece:value="0.01"
 			  android:visibility="gone"/>
 		<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="inputs"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:tag="gui555Duty" android:id="@+id/gui555Duty" ece:units="%"
+			  android:tag="f55Duty" android:id="@+id/gui555Duty" ece:units="%"
 			  ece:description="@string/duty" ece:group="outputs" ece:value="100"/>
 	</LinearLayout>
 	<ImageView android:layout_width="200dp" android:layout_height="200dp"
@@ -66,17 +66,17 @@
 			   android:layout_below="@id/gui555Outputs"/>
 	<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="outputs" ece:value="1e-6"
 		  android:layout_width="wrap_content" android:layout_height="wrap_content"
-		  android:tag="gui555C1" android:id="@+id/gui555C1" ece:units="F" ece:group="inputs"
+		  android:tag="f55C1" android:id="@+id/gui555C1" ece:units="F" ece:group="inputs"
 		  ece:description="@string/gui555C1" android:layout_marginRight="5dp"
 		  android:layout_below="@id/gui555Image" android:layout_toLeftOf="@id/gui555Center"/>
 	<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="outputs" ece:value="1000"
 		  android:layout_width="wrap_content" android:layout_height="wrap_content"
-		  android:tag="gui555R1" android:id="@+id/gui555R1" ece:units="Ω" ece:group="inputs"
+		  android:tag="f55R1" android:id="@+id/gui555R1" ece:units="Ω" ece:group="inputs"
 		  ece:description="@string/gui555R1" android:layout_marginLeft="5dp"
 		  android:layout_below="@id/gui555Image" android:layout_toRightOf="@id/gui555Center"/>
 	<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="outputs" ece:value="1000"
 		  android:layout_width="wrap_content" android:layout_height="wrap_content"
-		  android:tag="gui555R2" android:id="@+id/gui555R2" ece:units="Ω" ece:group="inputs"
+		  android:tag="f55R2" android:id="@+id/gui555R2" ece:units="Ω" ece:group="inputs"
 		  ece:description="@string/gui555R2" android:layout_centerHorizontal="true"
 		  android:layout_below="@id/gui555R1"/>
 </RelativeLayout>

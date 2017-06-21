@@ -91,12 +91,8 @@ public class Ne555Activity extends ChildActivity implements View.OnClickListener
 		modeMonostableCtrl = asRadioButton(R.id.gui555Monostable);
 		pcbImageCtrl = asImageView(R.id.gui555Image);
 		// Register value entry boxes
-		controls.add(findViewById(R.id.gui555C1));
-		controls.add(findViewById(R.id.gui555R1));
-		controls.add(findViewById(R.id.gui555R2));
-		controls.add(findViewById(R.id.gui555Delay));
-		controls.add(findViewById(R.id.gui555Freq));
-		controls.add(findViewById(R.id.gui555Duty));
+		controls.add(this, R.id.gui555C1, R.id.gui555R1, R.id.gui555R2, R.id.gui555Delay,
+			R.id.gui555Freq, R.id.gui555Duty);
 		controls.setupAll(this);
 		loadPrefs();
 		updateView();

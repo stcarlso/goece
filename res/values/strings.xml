@@ -259,4 +259,8 @@
 	<string name="guiAdcVrefN">V&lt;small&gt;ref&lt;/small&gt;&lt;sup&gt;&lt;small&gt;-&lt;/small&gt;&lt;/sup&gt;</string>
 	<string name="guiAdcRes">Resolution</string>
 	<string name="guiAdcCount">Counts</string>
+	<string name="guiAdcStep">LSB Size</string>
+	<string name="guiAdcBadBits">Bit depth must be at least 2 and at most 32.</string>
+	<string name="guiAdcBadCount">Counts must be at least 0 and no more than %1$.0f.</string>
+	<string name="guiAdcBadSpan">Positive reference voltage must be greater than negative reference.</string>
 </resources>

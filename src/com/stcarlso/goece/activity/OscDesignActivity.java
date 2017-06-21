@@ -56,11 +56,8 @@ public class OscDesignActivity extends ChildActivity {
 		stdCtrl = asTextView(R.id.guiOscIsStandard);
 		transconCtrl = asValueField(R.id.guiOscTranscon);
 		// Register value entry boxes
-		controls.add(findViewById(R.id.guiOscFrequency));
-		controls.add(findViewById(R.id.guiOscLoadCap));
-		controls.add(findViewById(R.id.guiOscShuntCap));
-		controls.add(findViewById(R.id.guiOscPinCap));
-		controls.add(findViewById(R.id.guiOscESR));
+		controls.add(this, R.id.guiOscFrequency, R.id.guiOscLoadCap, R.id.guiOscShuntCap,
+			R.id.guiOscPinCap, R.id.guiOscESR);
 		controls.setupAll(this);
 		loadPrefs();
 		recalculate(controls.get(R.id.guiOscFrequency));

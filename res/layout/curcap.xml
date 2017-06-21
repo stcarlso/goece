@@ -29,25 +29,25 @@
 			  android:orientation="vertical">
 	<Spinner android:layout_width="150dp" android:layout_height="wrap_content"
 			 android:entries="@array/guiCurMaterials" android:id="@+id/guiCurMaterials"
-			 android:layout_gravity="center_horizontal" android:tag="guiCurMaterials"
+			 android:layout_gravity="center_horizontal" android:tag="curMaterials"
 			 android:spinnerStyle="@android:style/Widget.Spinner.DropDown"/>
 	<LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
 				  android:layout_gravity="center_horizontal" android:orientation="horizontal">
 		<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="inputs,len"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:tag="guiCurCurrent" ece:value="1" android:layout_marginRight="10dp"
+			  android:tag="curCurrent" ece:value="1" android:layout_marginRight="10dp"
 			  android:id="@+id/guiCurCurrent" ece:group="outputs" ece:units="A"
 			  ece:description="@string/guiCurCurrentRating"/>
 		<view class="com.stcarlso.goece.ui.CustomEntryBox" android:id="@+id/guiCurTemp"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:tag="guiCurTemp" ece:value="30" ece:units="@string/degreeC"
+			  android:tag="curTemp" ece:value="30" ece:units="@string/degreeC"
 			  ece:group="outputs" ece:description="@string/guiCurTemp"
 			  ece:customUnits="@array/guiCurTempUnits" ece:affects="inputs,len"/>
 	</LinearLayout>
 	<RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
 					android:layout_gravity="center_horizontal">
 		<RadioButton android:layout_width="wrap_content" android:layout_marginTop="10dp"
-					 android:layout_height="wrap_content" android:tag="guiCurUseWire"
+					 android:layout_height="wrap_content" android:tag="curUseWire"
 					 android:id="@+id/guiCurUseWire" android:text="@string/guiCurWire"
 					 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
 					 android:checked="true" android:onClick="onWireClick"
@@ -56,25 +56,25 @@
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  ece:affects="outputs,len" ece:group="inputs" ece:value="18" ece:sigfigs="2"
 			  ece:description="@string/guiCurGauge" android:layout_marginRight="10dp"
-			  android:layout_below="@id/guiCurUseWire" android:tag="guiCurGauge"
+			  android:layout_below="@id/guiCurUseWire" android:tag="curGauge"
 			  ece:units="AWG"/>
 		<view class="com.stcarlso.goece.ui.CustomEntryBox" android:id="@+id/guiCurDiameter"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  ece:affects="outputs,len" ece:customUnits="@array/guiCurDiaUnits"
 			  ece:description="@string/guiCurDiameter" ece:group="inputs"
 			  android:layout_toRightOf="@id/guiCurGauge" ece:value="1" ece:units="mm"
-			  android:layout_below="@id/guiCurUseWire" android:tag="guiCurDiameter"/>
+			  android:layout_alignTop="@id/guiCurGauge" android:tag="curDiameter"/>
 		<view class="com.stcarlso.goece.ui.CustomEntryBox" android:id="@+id/guiCurXArea"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  ece:affects="outputs,len" ece:customUnits="@array/guiCurAreaUnits"
 			  ece:description="@string/guiCurXArea" ece:units="@string/guiCurAreaBase"
-			  android:layout_below="@id/guiCurDiameter" android:tag="guiCurXArea"
+			  android:layout_below="@id/guiCurDiameter" android:tag="curXArea"
 			  ece:group="inputs" android:layout_centerHorizontal="true"/>
 	</RelativeLayout>
 	<RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
 					android:layout_gravity="center_horizontal">
 		<RadioButton android:layout_width="wrap_content" android:layout_marginTop="10dp"
-					 android:layout_height="wrap_content" android:tag="guiCurUseTrace"
+					 android:layout_height="wrap_content" android:tag="curUseTrace"
 					 android:id="@+id/guiCurUseTrace" android:text="@string/guiCurTrace"
 					 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
 					 android:onClick="onTraceClick" android:layout_centerHorizontal="true"/>
@@ -82,13 +82,13 @@
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  ece:affects="inputs,len" ece:customUnits="@array/guiPcbUnits" ece:units="mm"
 			  ece:value="0.07" ece:description="@string/guiCurTraceThick" ece:group="none"
-			  android:layout_marginRight="10dp" android:tag="guiCurThickness"
+			  android:layout_marginRight="10dp" android:tag="curThickness"
 			  android:layout_below="@id/guiCurUseTrace"/>
 		<view class="com.stcarlso.goece.ui.CustomEntryBox" android:id="@+id/guiCurWidth"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  ece:affects="outputs,len" ece:customUnits="@array/guiPcbUnits" ece:units="mm"
 			  ece:value="1" ece:description="@string/guiCurTraceWidth" ece:group="inputs"
-			  android:layout_below="@id/guiCurUseTrace" android:tag="guiCurWidth"
+			  android:layout_alignTop="@id/guiCurThickness" android:tag="curWidth"
 			  android:layout_toRightOf="@id/guiCurThickness"/>
 	</RelativeLayout>
 	<RelativeLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
@@ -96,12 +96,12 @@
 					android:orientation="horizontal">
 		<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiCurLength"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:tag="guiCurLength" ece:units="m" android:layout_marginRight="10dp"
+			  android:tag="curLength" ece:units="m" android:layout_marginRight="10dp"
 			  ece:affects="len" ece:group="len" android:layout_gravity="center_vertical"
 			  ece:value="0.5" ece:description="@string/guiCurLength"/>
 		<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiCurTest"
 			  android:layout_width="wrap_content" android:layout_height="wrap_content"
-			  android:tag="guiCurTest" ece:units="A" android:layout_marginRight="15dp"
+			  android:tag="curTest" ece:units="A" android:layout_marginRight="15dp"
 			  ece:affects="len" ece:group="len" android:layout_gravity="center_vertical"
 			  ece:value="0.5" ece:description="@string/current"
 			  android:layout_toRightOf="@id/guiCurLength"/>

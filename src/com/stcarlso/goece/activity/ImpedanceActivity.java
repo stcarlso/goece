@@ -57,11 +57,8 @@ public class ImpedanceActivity extends ChildActivity implements View.OnClickList
 		setContentView(R.layout.impedance);
 		capSelCtrl = asRadioButton(R.id.guiImpedSelCap);
 		// Resistance is always futile!
-		controls.add(findViewById(R.id.guiImpedRes));
-		controls.add(findViewById(R.id.guiImpedCap));
-		controls.add(findViewById(R.id.guiImpedInd));
-		controls.add(findViewById(R.id.guiImpedFreq));
-		controls.add(findViewById(R.id.guiImpedImp));
+		controls.add(this, R.id.guiImpedRes, R.id.guiImpedCap, R.id.guiImpedInd,
+			R.id.guiImpedFreq, R.id.guiImpedImp);
 		controls.setupAll(this);
 		loadPrefs();
 		// "Click" the check box (does not matter which one, the state is set by isChecked)

@@ -31,31 +31,36 @@
 		  android:layout_centerHorizontal="true"/>
 	<view class="com.stcarlso.goece.ui.CustomEntryBox" android:id="@+id/guiAdcRes"
 		  android:layout_width="wrap_content" android:layout_height="wrap_content"
-		  android:tag="guiAdcRes" ece:value="10" ece:units="@string/bits"
+		  android:tag="adcRes" ece:value="10" ece:units="@string/bits"
 		  ece:group="none" ece:description="@string/guiAdcRes" ece:affects="outputs"
-		  android:layout_centerHorizontal="true"/>
+		  android:layout_centerHorizontal="true" ece:sigfigs="0"/>
 	<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="outputs" ece:units="V"
 		  android:layout_width="wrap_content" android:layout_height="wrap_content"
-		  android:tag="guiAdcVrefP" ece:value="1" android:layout_marginRight="5dp"
+		  android:tag="adcVrefP" ece:value="1" android:layout_marginRight="5dp"
 		  android:id="@+id/guiAdcVrefP" ece:group="none" ece:description="@string/guiAdcVrefP"
-		  android:layout_toLeftOf="@id/guiAdcCenter" android:layout_marginTop="5dp"
-		  android:layout_below="@id/guiAdcRes" ece:allowNegative="true"/>
+		  android:layout_toLeftOf="@id/guiAdcCenter" android:layout_below="@id/guiAdcRes"
+		  ece:allowNegative="true"/>
 	<view class="com.stcarlso.goece.ui.ValueEntryBox" ece:affects="outputs" ece:units="V"
 		  android:layout_width="wrap_content" android:layout_height="wrap_content"
-		  android:tag="guiAdcVrefN" ece:value="-1" android:layout_marginLeft="5dp"
+		  android:tag="adcVrefN" ece:value="-1" android:layout_marginLeft="5dp"
 		  android:id="@+id/guiAdcVrefN" ece:group="none" ece:description="@string/guiAdcVrefN"
-		  android:layout_toRightOf="@id/guiAdcCenter" android:layout_marginTop="5dp"
-		  android:layout_below="@id/guiAdcRes" ece:allowNegative="true"/>
+		  android:layout_toRightOf="@id/guiAdcCenter" android:layout_alignTop="@id/guiAdcVrefP"
+		  ece:allowNegative="true"/>
 	<view class="com.stcarlso.goece.ui.CustomEntryBox" android:id="@+id/guiAdcCount"
 		  android:layout_width="wrap_content" android:layout_height="wrap_content"
-		  android:tag="guiAdcCount" ece:value="512" ece:units=""
+		  android:tag="adcCount" ece:value="512" ece:units="" ece:sigfigs="0"
 		  ece:group="inputs" ece:description="@string/guiAdcCount" ece:affects="outputs"
 		  android:layout_below="@id/guiAdcVrefN" android:layout_marginTop="10dp"
 		  android:layout_marginRight="5dp" android:layout_toLeftOf="@id/guiAdcCenter"/>
 	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiAdcVoltage"
 		  android:layout_width="wrap_content" android:layout_height="wrap_content"
-		  android:tag="guiAdcVoltage" ece:value="0" ece:units="V" ece:group="outputs"
-		  ece:description="@string/voltage" android:layout_below="@id/guiAdcVrefN"
+		  android:tag="adcVoltage" ece:value="0" ece:units="V" ece:group="outputs"
+		  ece:description="@string/voltage" android:layout_alignTop="@id/guiAdcCount"
 		  android:layout_marginLeft="5dp" android:layout_toRightOf="@id/guiAdcCenter"
-		  ece:affects="inputs" android:layout_marginTop="10dp"/>
+		  ece:affects="inputs"/>
+	<view class="com.stcarlso.goece.ui.ValueOutputField" android:id="@+id/guiAdcStep"
+		  android:layout_width="wrap_content" android:layout_height="wrap_content"
+		  ece:description="@string/guiAdcStep" android:layout_centerHorizontal="true"
+		  android:layout_below="@id/guiAdcVoltage" android:layout_marginTop="10dp"
+		  android:textAppearance="@android:style/TextAppearance.Large"/>
 </RelativeLayout>

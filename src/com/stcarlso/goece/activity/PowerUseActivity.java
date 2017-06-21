@@ -84,14 +84,9 @@ public class PowerUseActivity extends ChildActivity implements View.OnClickListe
 		runEnableCtrl = asCheckBox(R.id.guiPwrRunEna);
 		sleepEnableCtrl = asCheckBox(R.id.guiPwrSleepEna);
 		// Register value entry boxes
-		controls.add(findViewById(R.id.guiPwrCapacity));
-		controls.add(findViewById(R.id.guiPwrRunCur));
-		controls.add(findViewById(R.id.guiPwrRunTime));
-		controls.add(findViewById(R.id.guiPwrIdleCur));
-		controls.add(findViewById(R.id.guiPwrIdleTime));
-		controls.add(findViewById(R.id.guiPwrSleepCur));
-		controls.add(findViewById(R.id.guiPwrSleepTime));
-		controls.add(findViewById(R.id.guiPwrDuration));
+		controls.add(this, R.id.guiPwrCapacity, R.id.guiPwrRunCur, R.id.guiPwrRunTime,
+			R.id.guiPwrIdleCur, R.id.guiPwrIdleTime, R.id.guiPwrSleepCur, R.id.guiPwrSleepTime,
+			R.id.guiPwrDuration);
 		controls.setupAll(this);
 		loadPrefs();
 		// Initial calculations

@@ -57,13 +57,13 @@
 		  ece:description="@string/guiDivBottom"/>
 	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiDivOutput"
 		  android:layout_width="wrap_content" android:layout_height="wrap_content" ece:units="V"
-		  android:layout_below="@id/guiDivInput" android:layout_toRightOf="@id/guiDivCircuit"
+		  android:layout_alignTop="@id/guiDivTop" android:layout_toRightOf="@id/guiDivCircuit"
 		  android:tag="divLoad" ece:description="@string/guiDivOutput" ece:group="volt"
 		  ece:affects="res" ece:value="2.5"/>
 	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiDivLoad"
 		  android:layout_width="wrap_content" android:layout_height="wrap_content" ece:units="Ω"
-		  android:layout_toRightOf="@id/guiDivCircuit" android:layout_below="@id/guiDivOutput"
-		  android:tag="divOutput" ece:group="other" ece:description="@string/guiDivLoad"
+		  android:layout_toRightOf="@id/guiDivCircuit" ece:description="@string/guiDivLoad"
+		  android:tag="divOutput" ece:group="other" android:layout_alignTop="@id/guiDivBottom"
 		  ece:affects="res" ece:value="1E+308" android:enabled="false"/>
 	<CheckBox android:id="@+id/guiDivIsLoad" android:layout_height="wrap_content"
 			  android:layout_width="wrap_content" android:checked="false"

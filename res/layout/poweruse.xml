@@ -34,12 +34,12 @@
 				  android:layout_gravity="center_horizontal">
 		<view class="com.stcarlso.goece.ui.ValueEntryBox" android:layout_width="wrap_content"
 			  android:layout_height="wrap_content" android:id="@+id/guiPwrCapacity"
-			  android:tag="guiPwrCapacity" ece:units="Ah" ece:value="0.3"
+			  android:tag="pwrCapacity" ece:units="Ah" ece:value="0.3"
 			  ece:description="@string/guiPwrCapacity" ece:group="inputs" ece:affects="outputs"
 			  android:layout_marginRight="20dp" android:layout_gravity="center"/>
 		<view class="com.stcarlso.goece.ui.CustomEntryBox" android:layout_width="wrap_content"
 			  android:layout_height="wrap_content" android:id="@+id/guiPwrDuration"
-			  android:tag="guiPwrDuration" ece:units="s" ece:value="1000" ece:sigfigs="4"
+			  android:tag="pwrDuration" ece:units="s" ece:value="1000" ece:sigfigs="4"
 			  ece:description="@string/guiPwrDuration" ece:group="outputs" ece:affects="inputs"
 			  ece:customUnits="@array/guiTimeUnits"/>
 	</LinearLayout>
@@ -47,32 +47,32 @@
 			  android:text="@string/guiPwrRun" android:layout_column="0"
 			  android:layout_row="1" android:layout_gravity="center_vertical"
 			  android:layout_marginRight="10dp" android:checked="true" android:onClick="onClick"
-			  android:id="@+id/guiPwrRunEna" android:tag="guiPwrRunEna"/>
+			  android:id="@+id/guiPwrRunEna" android:tag="pwrRunEna"/>
 	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:layout_width="match_parent"
 		  android:layout_height="wrap_content" android:id="@+id/guiPwrRunCur"
-		  android:tag="guiPwrRunCur" ece:units="A" ece:value="0.1" android:layout_row="1"
+		  android:tag="pwrRunCur" ece:units="A" ece:value="0.1" android:layout_row="1"
 		  ece:description="@string/current" ece:group="none" ece:affects="outputs"
 		  android:layout_column="1" android:layout_marginRight="10dp"
 		  android:layout_gravity="center_horizontal"/>
 	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:layout_width="match_parent"
 		  android:layout_height="wrap_content" android:id="@+id/guiPwrRunTime"
-		  android:tag="guiPwrRunTime" ece:units="s" ece:value="0.1" android:layout_row="1"
+		  android:tag="pwrRunTime" ece:units="s" ece:value="0.1" android:layout_row="1"
 		  ece:description="@string/duration" ece:group="none" ece:affects="outputs"
 		  android:layout_column="2" android:layout_gravity="center_horizontal"/>
 	<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  android:text="@string/guiPwrIdle" android:layout_column="0"
 			  android:layout_row="2" android:layout_gravity="center_vertical"
 			  android:layout_marginRight="10dp" android:onClick="onClick"
-			  android:id="@+id/guiPwrIdleEna" android:tag="guiPwrIdleEna"/>
+			  android:id="@+id/guiPwrIdleEna" android:tag="pwrIdleEna"/>
 	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:layout_width="match_parent"
 		  android:layout_height="wrap_content" android:id="@+id/guiPwrIdleCur"
-		  android:tag="guiPwrIdleCur" ece:units="A" ece:value="0.01" android:layout_row="2"
+		  android:tag="pwrIdleCur" ece:units="A" ece:value="0.01" android:layout_row="2"
 		  ece:description="@string/current" ece:group="none" ece:affects="outputs"
 		  android:layout_column="1" android:layout_marginRight="10dp"
 		  android:layout_gravity="center_horizontal" android:enabled="false"/>
 	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:layout_width="match_parent"
 		  android:layout_height="wrap_content" android:id="@+id/guiPwrIdleTime"
-		  android:tag="guiPwrIdleTime" ece:units="s" ece:value="0.1" android:layout_row="2"
+		  android:tag="pwrIdleTime" ece:units="s" ece:value="0.1" android:layout_row="2"
 		  ece:description="@string/duration" ece:group="none" ece:affects="outputs"
 		  android:layout_column="2" android:layout_gravity="center_horizontal"
 		  android:enabled="false"/>
@@ -80,16 +80,16 @@
 			  android:text="@string/guiPwrSleep" android:layout_column="0"
 			  android:layout_row="3" android:layout_gravity="center_vertical"
 			  android:layout_marginRight="10dp" android:checked="true" android:onClick="onClick"
-			  android:id="@+id/guiPwrSleepEna" android:tag="guiPwrSleepEna"/>
+			  android:id="@+id/guiPwrSleepEna" android:tag="pwrSleepEna"/>
 	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:layout_width="match_parent"
 		  android:layout_height="wrap_content" android:id="@+id/guiPwrSleepCur"
-		  android:tag="guiPwrSleepCur" ece:units="A" ece:group="none" android:layout_row="3"
+		  android:tag="pwrSleepCur" ece:units="A" ece:group="none" android:layout_row="3"
 		  ece:description="@string/current" ece:affects="outputs" ece:value="0.001"
 		  android:layout_column="1" android:layout_marginRight="10dp"
 		  android:layout_gravity="center_horizontal"/>
 	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:layout_width="match_parent"
 		  android:layout_height="wrap_content" android:id="@+id/guiPwrSleepTime"
-		  android:tag="guiPwrSleepTime" ece:units="s" ece:value="0.8" android:layout_row="3"
+		  android:tag="pwrSleepTime" ece:units="s" ece:value="0.8" android:layout_row="3"
 		  ece:description="@string/duration" ece:group="none" ece:affects="outputs"
 		  android:layout_column="2" android:layout_gravity="center_horizontal"/>
 	<view class="com.stcarlso.goece.ui.ValueOutputField" android:layout_width="wrap_content"
