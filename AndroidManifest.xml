@@ -29,91 +29,13 @@
 	<uses-sdk android:minSdkVersion="15" android:targetSdkVersion="21"/>
 	<application android:label="@string/app_name" android:icon="@drawable/ic_launcher"
 				 android:allowBackup="true">
-		<activity android:name=".activity.ECEActivity" android:label="@string/app_name">
+		<activity android:name=".activity.ECEActivity" android:label="@string/app_name"
+				  android:windowSoftInputMode="adjustResize"
+				  android:configChanges="screenSize|keyboardHidden">
 			<intent-filter>
 				<action android:name="android.intent.action.MAIN"/>
 				<category android:name="android.intent.category.LAUNCHER"/>
 			</intent-filter>
-		</activity>
-		<activity android:name=".activity.ResColorActivity" android:label="@string/guiColorCode"
-				  android:windowSoftInputMode="adjustResize"
-				  android:configChanges="orientation|screenSize">
-			<meta-data android:name="android.support.PARENT_ACTIVITY"
-					   android:value=".activity.ECEActivity"/>
-		</activity>
-		<activity android:name=".activity.SMDResistorActivity"
-				  android:label="@string/guiSMDResistor"
-				  android:configChanges="orientation|screenSize|keyboardHidden"
-				  android:windowSoftInputMode="adjustResize|stateVisible">
-			<meta-data android:name="android.support.PARENT_ACTIVITY"
-					   android:value=".activity.ECEActivity"/>
-		</activity>
-		<activity android:name=".activity.OhmsLawActivity" android:label="@string/guiOhmsLaw"
-				  android:windowSoftInputMode="adjustResize"
-				  android:configChanges="orientation|screenSize|keyboardHidden">
-			<meta-data android:name="android.support.PARENT_ACTIVITY"
-					   android:value=".activity.ECEActivity"/>
-		</activity>
-		<activity android:name=".activity.ImpedanceActivity"
-				  android:label="@string/guiImpedance"
-				  android:configChanges="orientation|screenSize|keyboardHidden"
-				  android:windowSoftInputMode="adjustResize">
-			<meta-data android:name="android.support.PARENT_ACTIVITY"
-					   android:value=".activity.ECEActivity"/>
-		</activity>
-		<activity android:name=".activity.SerParActivity" android:label="@string/guiSerPar"
-				  android:windowSoftInputMode="adjustResize"
-				  android:configChanges="orientation|screenSize|keyboardHidden">
-			<meta-data android:name="android.support.PARENT_ACTIVITY"
-					   android:value=".activity.ECEActivity"/>
-		</activity>
-		<activity android:name=".activity.VDivActivity" android:label="@string/guiVDiv"
-				  android:windowSoftInputMode="adjustResize"
-				  android:configChanges="orientation|screenSize|keyboardHidden">
-			<meta-data android:name="android.support.PARENT_ACTIVITY"
-					   android:value=".activity.ECEActivity"/>
-		</activity>
-		<activity android:name=".activity.CurCapActivity" android:label="@string/guiCurCap"
-				  android:windowSoftInputMode="adjustResize"
-				  android:configChanges="screenSize|keyboardHidden">
-			<meta-data android:name="android.support.PARENT_ACTIVITY"
-					   android:value=".activity.ECEActivity"/>
-		</activity>
-		<activity android:name=".activity.PcbTraceActivity" android:label="@string/guiPcbWidth"
-				  android:windowSoftInputMode="adjustResize"
-				  android:configChanges="screenSize|keyboardHidden">
-			<meta-data android:name="android.support.PARENT_ACTIVITY"
-					   android:value=".activity.ECEActivity"/>
-		</activity>
-		<activity android:name=".activity.PowerUseActivity" android:label="@string/guiPowerUse"
-				  android:windowSoftInputMode="adjustResize"
-				  android:configChanges="orientation|screenSize|keyboardHidden">
-			<meta-data android:name="android.support.PARENT_ACTIVITY"
-					   android:value=".activity.ECEActivity"/>
-		</activity>
-		<activity android:name=".activity.DeltaWyeActivity" android:label="@string/guiDeltaWye"
-				  android:configChanges="orientation|screenSize|keyboardHidden">
-			<meta-data android:name="android.support.PARENT_ACTIVITY"
-					   android:value=".activity.ECEActivity"/>
-		</activity>
-		<activity android:name=".activity.OscDesignActivity"
-				  android:label="@string/guiOscDesign"
-				  android:windowSoftInputMode="adjustResize"
-				  android:configChanges="screenSize|keyboardHidden">
-			<meta-data android:name="android.support.PARENT_ACTIVITY"
-					   android:value=".activity.ECEActivity"/>
-		</activity>
-		<activity android:name=".activity.Ne555Activity" android:label="@string/gui555Calc"
-				  android:windowSoftInputMode="adjustResize"
-				  android:configChanges="screenSize|keyboardHidden">
-			<meta-data android:name="android.support.PARENT_ACTIVITY"
-					   android:value=".activity.ECEActivity"/>
-		</activity>
-		<activity android:name=".activity.ADCActivity" android:label="@string/guiAdcCalc"
-				  android:windowSoftInputMode="adjustResize"
-				  android:configChanges="screenSize|keyboardHidden">
-			<meta-data android:name="android.support.PARENT_ACTIVITY"
-					   android:value=".activity.ECEActivity"/>
 		</activity>
 	</application>
 </manifest>

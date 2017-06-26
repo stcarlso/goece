@@ -84,13 +84,13 @@ public class CopyPasteListener implements View.OnLongClickListener {
 	/**
 	 * Creates a new copy listener with no value.
 	 *
-	 * @param activity the parent activity
+	 * @param fragment the parent fragment
 	 * @param description a short description of the value when copied
 	 */
-	public CopyPasteListener(final Activity activity, final String description) {
-		if (activity == null)
-			throw new NullPointerException("activity");
-		this.activity = activity;
+	public CopyPasteListener(final ChildFragment fragment, final String description) {
+		if (fragment == null)
+			throw new NullPointerException("fragment");
+		activity = fragment.getActivity();
 		this.description = description;
 		sigFigOverride = 0;
 		target = null;

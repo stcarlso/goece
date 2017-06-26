@@ -26,11 +26,13 @@ package com.stcarlso.goece.activity;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.AbstractEntryBox;
-import com.stcarlso.goece.ui.ChildActivity;
-import com.stcarlso.goece.ui.ValueBoxContainer;
+import com.stcarlso.goece.ui.ChildFragment;
 import com.stcarlso.goece.ui.ValueGroup;
 import com.stcarlso.goece.utility.EngineeringValue;
 
@@ -38,7 +40,7 @@ import com.stcarlso.goece.utility.EngineeringValue;
  * An activity for converting between delta and wye impedance networks. Complex impedances can
  * also be used.
  */
-public class DeltaWyeActivity extends ChildActivity {
+public class DeltaWyeFragment extends ChildFragment {
 	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
@@ -53,14 +55,14 @@ public class DeltaWyeActivity extends ChildActivity {
 		}
 	}
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.deltawye);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		final View view = inflater.inflate(R.layout.deltawye, container, false);
 		// Register value entry boxes
-		controls.add(this, R.id.guiDelDelta1, R.id.guiDelDelta2, R.id.guiDelDelta3,
+		controls.add(view, R.id.guiDelDelta1, R.id.guiDelDelta2, R.id.guiDelDelta3,
 			R.id.guiDelWye1, R.id.guiDelWye2, R.id.guiDelWye3);
 		controls.setupAll(this);
-		loadPrefs();
+		return view;
 	}
 	@Override
 	protected void recalculate(ValueGroup group) {

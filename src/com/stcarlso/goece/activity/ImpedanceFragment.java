@@ -26,12 +26,13 @@ package com.stcarlso.goece.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RadioButton;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.ui.ChildActivity;
+import com.stcarlso.goece.ui.ChildFragment;
 import com.stcarlso.goece.ui.ComplexEntryBox;
-import com.stcarlso.goece.ui.ValueBoxContainer;
 import com.stcarlso.goece.ui.ValueGroup;
 import com.stcarlso.goece.utility.ComplexValue;
 
@@ -39,7 +40,7 @@ import com.stcarlso.goece.utility.ComplexValue;
  * Calculate the reactance of capacitors and inductors at a given frequency, and perform angle
  * and magnitude calculations of the complex impedance.
  */
-public class ImpedanceActivity extends ChildActivity implements View.OnClickListener {
+public class ImpedanceFragment extends ChildFragment implements View.OnClickListener {
 	/**
 	 * Cached radio button to select capacitance (inductance is always the opposite!)
 	 */
@@ -52,17 +53,21 @@ public class ImpedanceActivity extends ChildActivity implements View.OnClickList
 		loadPrefsCheckBox(prefs, R.id.guiImpedSelInd);
 	}
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.impedance);
-		capSelCtrl = asRadioButton(R.id.guiImpedSelCap);
-		// Resistance is always futile!
-		controls.add(this, R.id.guiImpedRes, R.id.guiImpedCap, R.id.guiImpedInd,
-			R.id.guiImpedFreq, R.id.guiImpedImp);
-		controls.setupAll(this);
-		loadPrefs();
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
 		// "Click" the check box (does not matter which one, the state is set by isChecked)
 		onClick(capSelCtrl);
+	}
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		final View view = inflater.inflate(R.layout.impedance, container, false);
+		capSelCtrl = asRadioButton(view, R.id.guiImpedSelCap);
+		// Resistance is always futile!
+		controls.add(view, R.id.guiImpedRes, R.id.guiImpedCap, R.id.guiImpedInd,
+			R.id.guiImpedFreq, R.id.guiImpedImp);
+		controls.setupAll(this);
+		return view;
 	}
 	@Override
 	public void onClick(View v) {

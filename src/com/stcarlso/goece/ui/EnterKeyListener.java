@@ -37,13 +37,13 @@ public class EnterKeyListener implements TextView.OnEditorActionListener {
 	/**
 	 * Arms a listener for done actions on the specified text field.
 	 *
-	 * @param activity the parent activity of the text field
+	 * @param view the parent view of the text field
 	 * @param id the text field ID
 	 * @param listener the listener to add
 	 */
-	public static void addListener(final Activity activity, final int id,
+	public static void addListener(final View view, final int id,
 								   final View.OnClickListener listener) {
-		final TextView field = (TextView)activity.findViewById(id);
+		final TextView field = (TextView)view.findViewById(id);
 		if (field != null)
 			field.setOnEditorActionListener(new EnterKeyListener(listener));
 	}

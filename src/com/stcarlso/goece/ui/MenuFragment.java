@@ -39,9 +39,9 @@ public class MenuFragment extends Fragment {
 	 * @param activity the activity to launch when clicked
 	 */
 	protected void setButtonEvent(final View view, final int buttonId,
-								  final Class<? extends ChildActivity> activity) {
+								  final Class<? extends ChildFragment> activity) {
 		final View button = view.findViewById(buttonId);
 		if (button != null)
-			button.setOnClickListener(new ActivityClickListener(getActivity(), activity));
+			button.setOnClickListener(new FragmentClickListener(getActivity(), activity));
 	}
 }

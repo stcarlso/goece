@@ -26,14 +26,15 @@ package com.stcarlso.goece.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.AbstractEntryBox;
-import com.stcarlso.goece.ui.ChildActivity;
-import com.stcarlso.goece.ui.ValueBoxContainer;
+import com.stcarlso.goece.ui.ChildFragment;
 import com.stcarlso.goece.ui.ValueGroup;
 import com.stcarlso.goece.utility.ECECalc;
 import com.stcarlso.goece.utility.Equation;
@@ -43,7 +44,7 @@ import com.stcarlso.goece.utility.Units;
 /**
  * An activity for PCB trace impedance calculation.
  */
-public class PcbTraceActivity extends ChildActivity implements
+public class PcbTraceFragment extends ChildFragment implements
 		AdapterView.OnItemSelectedListener {
 	/**
 	 * Images for the user assist, indexed by the combo box option.
@@ -124,19 +125,24 @@ public class PcbTraceActivity extends ChildActivity implements
 		loadPrefsSpinner(prefs, R.id.guiPcbScenario);
 	}
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.pcbtrace);
-		pcbImage = asImageView(R.id.guiPcbImage);
-		traceTypeCtrl = asSpinner(R.id.guiPcbScenario);
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		loadPrefs();
+		recalculate(controls.get(R.id.guiPcbThickness));
+	}
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		final View view = inflater.inflate(R.layout.pcbtrace, container, false);
+		pcbImage = asImageView(view, R.id.guiPcbImage);
+		traceTypeCtrl = asSpinner(view, R.id.guiPcbScenario);
 		traceTypeCtrl.setOnItemSelectedListener(this);
 		// Register value entry boxes
-		controls.add(this, R.id.guiPcbDielectric, R.id.guiPcbImpedance1, R.id.guiPcbImpedance2,
+		controls.add(view, R.id.guiPcbDielectric, R.id.guiPcbImpedance1, R.id.guiPcbImpedance2,
 			R.id.guiPcbThickness, R.id.guiPcbTraceHeight, R.id.guiPcbTraceSpace,
 			R.id.guiPcbTraceWidth);
 		controls.setupAll(this);
-		loadPrefs();
-		recalculate(controls.get(R.id.guiPcbThickness));
+		return view;
 	}
 	@Override
 	public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

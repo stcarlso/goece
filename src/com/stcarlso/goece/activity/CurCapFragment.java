@@ -26,13 +26,15 @@ package com.stcarlso.goece.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.RadioButton;
 import android.widget.Spinner;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.AbstractEntryBox;
-import com.stcarlso.goece.ui.ChildActivity;
+import com.stcarlso.goece.ui.ChildFragment;
 import com.stcarlso.goece.ui.ValueGroup;
 import com.stcarlso.goece.ui.ValueOutputField;
 import com.stcarlso.goece.utility.EngineeringValue;
@@ -41,7 +43,7 @@ import com.stcarlso.goece.utility.Units;
 /**
  * Calculate the current capacity of wires and PCB traces.
  */
-public class CurCapActivity extends ChildActivity implements AdapterView.OnItemSelectedListener
+public class CurCapFragment extends ChildFragment implements AdapterView.OnItemSelectedListener
 {
 	/**
 	 * Constant used for AWG calculation.
@@ -132,25 +134,29 @@ public class CurCapActivity extends ChildActivity implements AdapterView.OnItemS
 		loadPrefsCheckBox(prefs, R.id.guiCurUseTrace);
 	}
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.curcap);
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		// Recalculate everything
+		onClick();
+	}
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		final View view = inflater.inflate(R.layout.curcap, container, false);
 		// Update references
-		materialsCtrl = asSpinner(R.id.guiCurMaterials);
+		materialsCtrl = asSpinner(view, R.id.guiCurMaterials);
 		materialsCtrl.setOnItemSelectedListener(this);
-		powerOutCtrl = asValueField(R.id.guiCurPower);
-		resistOutCtrl = asValueField(R.id.guiCurResist);
-		traceSelCtrl = asRadioButton(R.id.guiCurUseTrace);
-		voltOutCtrl = asValueField(R.id.guiCurVDrop);
-		wireSelCtrl = asRadioButton(R.id.guiCurUseWire);
+		powerOutCtrl = asValueField(view, R.id.guiCurPower);
+		resistOutCtrl = asValueField(view, R.id.guiCurResist);
+		traceSelCtrl = asRadioButton(view, R.id.guiCurUseTrace);
+		voltOutCtrl = asValueField(view, R.id.guiCurVDrop);
+		wireSelCtrl = asRadioButton(view, R.id.guiCurUseWire);
 		// Load controls and preferences
-		controls.add(this, R.id.guiCurCurrent, R.id.guiCurTemp, R.id.guiCurGauge,
+		controls.add(view, R.id.guiCurCurrent, R.id.guiCurTemp, R.id.guiCurGauge,
 			R.id.guiCurDiameter, R.id.guiCurThickness, R.id.guiCurWidth, R.id.guiCurXArea,
 			R.id.guiCurLength, R.id.guiCurTest);
 		controls.setupAll(this);
-		loadPrefs();
-		// Recalculate everything
-		onClick();
+		return view;
 	}
 	/**
 	 * Triggers an update when either of the radio buttons is pressed.

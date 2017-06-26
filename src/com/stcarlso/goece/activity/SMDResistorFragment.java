@@ -26,7 +26,9 @@ package com.stcarlso.goece.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import com.stcarlso.goece.R;
@@ -38,7 +40,7 @@ import com.stcarlso.goece.utility.UIFunctions;
 /**
  * An activity for calculating SMD resistor (and capacitor, but those are never marked!) codes.
  */
-public class SMDResistorActivity extends ChildActivity implements View.OnClickListener {
+public class SMDResistorFragment extends ChildFragment implements View.OnClickListener {
 	/**
 	 * Parse a code in the form "3R00" or "10R5" into a value, where R is the decimal point
 	 * location. The code must contain exactly one capital letter 'R'
@@ -124,7 +126,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 	 */
 	private CheckBox underlineCtrl;
 
-	public SMDResistorActivity() {
+	public SMDResistorFragment() {
 		lastCode = "000";
 	}
 	/**
@@ -152,7 +154,7 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 		if (value == null) {
 			// Oh no!
 			if (showErrors)
-				UIFunctions.errorMessage(this, R.string.guiResInvalid);
+				UIFunctions.errorMessage(getActivity(), R.string.guiResInvalid);
 		} else {
 			// Display it!
 			showValue(value);
@@ -175,40 +177,23 @@ public class SMDResistorActivity extends ChildActivity implements View.OnClickLi
 		recalculate(findValueById(R.id.guiResSMDCode));
 	}
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.smdresistor);
-		underlineCtrl = asCheckBox(R.id.guiResLine);
-		// Load and register the input code box
-		final ValueTextBox codeIn = (ValueTextBox)findViewById(R.id.guiResSMDCode);
-		outputCtrl = asValueField(R.id.guiResValue);
-		stdCtrl = asTextView(R.id.guiResIsStandard);
-		registerAdjustable(codeIn);
-		// Add listener to calculate on press
-		EnterKeyListener.addListener(this, R.id.guiResSMDCode, this);
-		loadPrefs();
-		if (savedInstanceState != null && savedInstanceState.containsKey("lastCode")) {
-			// Retrieve the code from a saved execution
-			lastCode = savedInstanceState.getString("lastCode", lastCode);
-			calculate(lastCode, false);
-		} else {
-			// Will set the last value appropriately
-			String code = codeIn.getText().toString();
-			if (code.length() < 1)
-				code = lastCode;
-			calculate(code, false);
-		}
-	}
-	@Override
-	protected void onRestoreInstanceState(Bundle state) {
-		super.onRestoreInstanceState(state);
-		lastCode = state.getString("lastCode", lastCode);
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
 		calculate(lastCode, false);
 	}
 	@Override
-	protected void onSaveInstanceState(Bundle outState) {
-		super.onSaveInstanceState(outState);
-		outState.putString("lastCode", lastCode);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		final View view = inflater.inflate(R.layout.smdresistor, container, false);
+		underlineCtrl = asCheckBox(view, R.id.guiResLine);
+		// Load and register the input code box
+		final ValueTextBox codeIn = (ValueTextBox)view.findViewById(R.id.guiResSMDCode);
+		outputCtrl = asValueField(view, R.id.guiResValue);
+		stdCtrl = asTextView(view, R.id.guiResIsStandard);
+		registerAdjustable(codeIn);
+		// Add listener to calculate on press
+		EnterKeyListener.addListener(view, R.id.guiResSMDCode, this);
+		return view;
 	}
 	@Override
 	public void recalculate(final ValueGroup source) {

@@ -25,9 +25,12 @@
 package com.stcarlso.goece.activity;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.AbstractEntryBox;
-import com.stcarlso.goece.ui.ChildActivity;
+import com.stcarlso.goece.ui.ChildFragment;
 import com.stcarlso.goece.ui.ValueGroup;
 import com.stcarlso.goece.ui.ValueOutputField;
 import com.stcarlso.goece.utility.EngineeringValue;
@@ -36,23 +39,27 @@ import com.stcarlso.goece.utility.Units;
 /**
  * An activity which allows ADC values to be interpreted quickly into actual voltages.
  */
-public class ADCActivity extends ChildActivity {
+public class ADCFragment extends ChildFragment {
 	/**
 	 * Cached reference to the step size output field.
 	 */
 	private ValueOutputField stepSizeCtrl;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.adccalc);
-		stepSizeCtrl = asValueField(R.id.guiAdcStep);
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		recalculate(controls.get(R.id.guiAdcCount));
+	}
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		final View view = inflater.inflate(R.layout.adccalc, container, false);
+		stepSizeCtrl = asValueField(view, R.id.guiAdcStep);
 		// Register value entry boxes
-		controls.add(this, R.id.guiAdcRes, R.id.guiAdcVrefN, R.id.guiAdcVrefP, R.id.guiAdcCount,
+		controls.add(view, R.id.guiAdcRes, R.id.guiAdcVrefN, R.id.guiAdcVrefP, R.id.guiAdcCount,
 			R.id.guiAdcVoltage);
 		controls.setupAll(this);
-		loadPrefs();
-		recalculate(controls.get(R.id.guiAdcCount));
+		return view;
 	}
 	@Override
 	protected void recalculate(ValueGroup group) {

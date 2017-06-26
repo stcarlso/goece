@@ -25,6 +25,9 @@
 package com.stcarlso.goece.activity;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.*;
@@ -33,7 +36,7 @@ import com.stcarlso.goece.utility.*;
 /**
  * An activity for designing Pierce crystal oscillator circuits.
  */
-public class OscDesignActivity extends ChildActivity {
+public class OscDesignFragment extends ChildFragment {
 	/**
 	 * Cached reference to the output capacitance text box.
 	 */
@@ -48,19 +51,24 @@ public class OscDesignActivity extends ChildActivity {
 	private ValueOutputField transconCtrl;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.oscdesign);
-		// Update references
-		clCtrl = asValueField(R.id.guiOscCL);
-		stdCtrl = asTextView(R.id.guiOscIsStandard);
-		transconCtrl = asValueField(R.id.guiOscTranscon);
-		// Register value entry boxes
-		controls.add(this, R.id.guiOscFrequency, R.id.guiOscLoadCap, R.id.guiOscShuntCap,
-			R.id.guiOscPinCap, R.id.guiOscESR);
-		controls.setupAll(this);
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
 		loadPrefs();
 		recalculate(controls.get(R.id.guiOscFrequency));
+	}
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		final View view = inflater.inflate(R.layout.oscdesign, container, false);
+		// Update references
+		clCtrl = asValueField(view, R.id.guiOscCL);
+		stdCtrl = asTextView(view, R.id.guiOscIsStandard);
+		transconCtrl = asValueField(view, R.id.guiOscTranscon);
+		// Register value entry boxes
+		controls.add(view, R.id.guiOscFrequency, R.id.guiOscLoadCap, R.id.guiOscShuntCap,
+			R.id.guiOscPinCap, R.id.guiOscESR);
+		controls.setupAll(this);
+		return view;
 	}
 	@Override
 	protected void recalculate(ValueGroup group) {

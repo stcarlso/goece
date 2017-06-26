@@ -25,9 +25,12 @@
 package com.stcarlso.goece.activity;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.ui.ChildActivity;
+import com.stcarlso.goece.ui.ChildFragment;
 import com.stcarlso.goece.ui.CopyPasteListener;
 import com.stcarlso.goece.ui.ResSeriesSpinner;
 import com.stcarlso.goece.ui.ValueGroup;
@@ -43,7 +46,7 @@ import java.util.Locale;
  * Activity to allow construction of unusual resistor values from available parts placed in
  * a series or parallel combination.
  */
-public class SerParActivity extends ChildActivity {
+public class SerParFragment extends ChildFragment {
 	/**
 	 * Handles long presses on the parallel resistance text box.
 	 */
@@ -126,28 +129,32 @@ public class SerParActivity extends ChildActivity {
 		return best;
 	}
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.serpar);
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		// Recalculate everything
+		updateErrors();
+	}
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		final View view = inflater.inflate(R.layout.serpar, container, false);
 		// Initialize copy and paste listeners
 		parListener = new CopyPasteListener(this, getString(R.string.guiSerRPar));
 		serListener = new CopyPasteListener(this, getString(R.string.guiSerRSer));
 		// Update references
-		parOutCtrl = asTextView(R.id.guiSerParallelOut);
+		parOutCtrl = asTextView(view, R.id.guiSerParallelOut);
 		parOutCtrl.setOnLongClickListener(parListener);
-		seriesCtrl = (ResSeriesSpinner)findViewById(R.id.guiSerResSeries);
-		serOutCtrl = asTextView(R.id.guiSerSeriesOut);
+		seriesCtrl = (ResSeriesSpinner)view.findViewById(R.id.guiSerResSeries);
+		serOutCtrl = asTextView(view, R.id.guiSerSeriesOut);
 		serOutCtrl.setOnLongClickListener(serListener);
-		stdCtrl = asTextView(R.id.guiSerIsStandard);
+		stdCtrl = asTextView(view, R.id.guiSerIsStandard);
 		// Load controls and preferences
-		controls.add(this, R.id.guiSerTarget, R.id.guiSerSeries1, R.id.guiSerSeries2,
+		controls.add(view, R.id.guiSerTarget, R.id.guiSerSeries1, R.id.guiSerSeries2,
 			R.id.guiSerParallel1, R.id.guiSerParallel2);
 		controls.setupAll(this);
 		seriesCtrl.setOnCalculateListener(this);
 		registerAdjustable(seriesCtrl);
-		loadPrefs();
-		// Recalculate everything
-		updateErrors();
+		return view;
 	}
 	@Override
 	protected void recalculate(ValueGroup group) {

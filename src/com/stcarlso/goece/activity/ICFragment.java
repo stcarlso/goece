@@ -39,7 +39,7 @@ public class ICFragment extends MenuFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.ics, container, false);
 		// Configure all buttons
-		setButtonEvent(view, R.id.gui555, Ne555Activity.class);
+		setButtonEvent(view, R.id.gui555, Ne555Fragment.class);
 		return view;
 	}
 }

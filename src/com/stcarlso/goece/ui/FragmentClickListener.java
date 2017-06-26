@@ -24,23 +24,40 @@
 
 package com.stcarlso.goece.ui;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.app.ActionBar;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 /**
- * Listens for a button click, then launches a preset activity.
+ * Listens for a button click, then launches a preset fragment.
  */
-public class ActivityClickListener implements View.OnClickListener {
-	private final Class<? extends Activity> destActivity;
-	private final Activity parentActivity;
+public class FragmentClickListener implements View.OnClickListener {
+	private final Class<? extends Fragment> destFragment;
+	private final FragmentActivity parentActivity;
 
-	public ActivityClickListener(final Activity parentActivity, final Class<? extends Activity> destActivity) {
-		this.destActivity = destActivity;
+	public FragmentClickListener(final FragmentActivity parentActivity,
+	                             final Class<? extends Fragment> destFragment) {
+		this.destFragment = destFragment;
 		this.parentActivity = parentActivity;
 	}
 	@Override
 	public void onClick(View v) {
-		parentActivity.startActivity(new Intent(parentActivity, destActivity));
+		final FragmentTransaction transaction = parentActivity.getSupportFragmentManager().
+			beginTransaction();
+		final Fragment target = Fragment.instantiate(parentActivity, destFragment.getName(),
+			null);
+		// Replace the entire content area with the target fragment
+		transaction.add(android.R.id.content, target, target.getClass().getSimpleName());
+		// Allow user to go back
+		transaction.addToBackStack(null);
+		transaction.commit();
+		// Display home as up since we are now in a child fragment
+		final ActionBar bar = parentActivity.getActionBar();
+		if (bar != null) {
+			bar.setDisplayHomeAsUpEnabled(true);
+			bar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+		}
 	}
 }

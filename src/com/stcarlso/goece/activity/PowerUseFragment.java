@@ -25,12 +25,12 @@
 package com.stcarlso.goece.activity;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.TextView;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.ui.ChildActivity;
-import com.stcarlso.goece.ui.CopyPasteListener;
+import com.stcarlso.goece.ui.ChildFragment;
 import com.stcarlso.goece.ui.ValueGroup;
 import com.stcarlso.goece.ui.ValueOutputField;
 import com.stcarlso.goece.utility.EngineeringValue;
@@ -39,7 +39,7 @@ import com.stcarlso.goece.utility.Units;
 /**
  * An activity for calculating average power use and the resulting battery life.
  */
-public class PowerUseActivity extends ChildActivity implements View.OnClickListener {
+public class PowerUseFragment extends ChildFragment implements View.OnClickListener {
 	/**
 	 * Cached reference to the average current draw text view.
 	 */
@@ -75,22 +75,27 @@ public class PowerUseActivity extends ChildActivity implements View.OnClickListe
 		recalculate(controls.get(R.id.guiPwrCapacity));
 	}
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.poweruse);
-		// Update references
-		currentDraw = asValueField(R.id.guiPwrDraw);
-		idleEnableCtrl = asCheckBox(R.id.guiPwrIdleEna);
-		runEnableCtrl = asCheckBox(R.id.guiPwrRunEna);
-		sleepEnableCtrl = asCheckBox(R.id.guiPwrSleepEna);
-		// Register value entry boxes
-		controls.add(this, R.id.guiPwrCapacity, R.id.guiPwrRunCur, R.id.guiPwrRunTime,
-			R.id.guiPwrIdleCur, R.id.guiPwrIdleTime, R.id.guiPwrSleepCur, R.id.guiPwrSleepTime,
-			R.id.guiPwrDuration);
-		controls.setupAll(this);
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
 		loadPrefs();
 		// Initial calculations
 		onClick(runEnableCtrl);
+	}
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		final View view = inflater.inflate(R.layout.poweruse, container, false);
+		// Update references
+		currentDraw = asValueField(view, R.id.guiPwrDraw);
+		idleEnableCtrl = asCheckBox(view, R.id.guiPwrIdleEna);
+		runEnableCtrl = asCheckBox(view, R.id.guiPwrRunEna);
+		sleepEnableCtrl = asCheckBox(view, R.id.guiPwrSleepEna);
+		// Register value entry boxes
+		controls.add(view, R.id.guiPwrCapacity, R.id.guiPwrRunCur, R.id.guiPwrRunTime,
+			R.id.guiPwrIdleCur, R.id.guiPwrIdleTime, R.id.guiPwrSleepCur, R.id.guiPwrSleepTime,
+			R.id.guiPwrDuration);
+		controls.setupAll(this);
+		return view;
 	}
 	/**
 	 * Calculates the average current draw for one period of operation.

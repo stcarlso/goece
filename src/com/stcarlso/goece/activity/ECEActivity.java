@@ -28,6 +28,8 @@ import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.view.MenuItem;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.FragmentTabListener;
 
@@ -49,11 +51,53 @@ public final class ECEActivity extends FragmentActivity {
 			// Create a tab
 			newTab = tabBar.newTab();
 			newTab.setText(resId);
-			newTab.setTabListener(new FragmentTabListener<T>(this, target.getSimpleName(), target));
+			newTab.setTabListener(new FragmentTabListener<T>(this, target.getSimpleName(),
+				target));
 			tabBar.addTab(newTab);
 		} else
 			newTab = null;
 		return newTab;
+	}
+	/**
+	 * Closes the currently visible fragment.
+	 *
+	 * @return true if a fragment was closed in this way, or false otherwise
+	 */
+	private boolean closeFragment() {
+		boolean closed = false;
+		final FragmentManager manager = getSupportFragmentManager();
+		// Pop fragment back stack if available
+		if (manager.getBackStackEntryCount() > 0) {
+			final ActionBar bar = getActionBar();
+			manager.popBackStack();
+			if (manager.getBackStackEntryCount() <= 0 && bar != null) {
+				// Back to main activity, clear display as-up
+				bar.setDisplayHomeAsUpEnabled(false);
+				bar.setDisplayShowHomeEnabled(false);
+				bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+			}
+			closed = true;
+		}
+		return closed;
+	}
+	@Override
+	public void onBackPressed() {
+		// Pop fragment back stack if available, otherwise kill off activity
+		if (!closeFragment())
+			super.onBackPressed();
+	}
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		boolean done = false;
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			// Act as if BACK was pressed and pop the stack if available
+			done = closeFragment();
+			break;
+		default:
+			break;
+		}
+		return done || super.onOptionsItemSelected(item);
 	}
 	/**
 	 * Called when the activity is first created.

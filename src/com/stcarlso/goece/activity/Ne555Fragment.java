@@ -26,20 +26,21 @@ package com.stcarlso.goece.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.AbstractEntryBox;
-import com.stcarlso.goece.ui.ChildActivity;
+import com.stcarlso.goece.ui.ChildFragment;
 import com.stcarlso.goece.ui.ValueGroup;
 
 /**
  * Calculates passive component values for the requested timing intervals when building a
  * circuit with the classic 555 timer IC.
  */
-public class Ne555Activity extends ChildActivity implements View.OnClickListener {
+public class Ne555Fragment extends ChildFragment implements View.OnClickListener {
 	/**
 	 * ln(0.67) - ln(0.33), the multiplier used for charging the capacitor from 33% to 67%
 	 */
@@ -85,18 +86,22 @@ public class Ne555Activity extends ChildActivity implements View.OnClickListener
 		loadPrefsCheckBox(prefs, R.id.gui555Astable);
 	}
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.ne555);
-		modeMonostableCtrl = asRadioButton(R.id.gui555Monostable);
-		pcbImageCtrl = asImageView(R.id.gui555Image);
-		// Register value entry boxes
-		controls.add(this, R.id.gui555C1, R.id.gui555R1, R.id.gui555R2, R.id.gui555Delay,
-			R.id.gui555Freq, R.id.gui555Duty);
-		controls.setupAll(this);
-		loadPrefs();
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
 		updateView();
 		recalculate(controls.get(R.id.gui555Freq));
+	}
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		final View view = inflater.inflate(R.layout.ne555, container, false);
+		modeMonostableCtrl = asRadioButton(view, R.id.gui555Monostable);
+		pcbImageCtrl = asImageView(view, R.id.gui555Image);
+		// Register value entry boxes
+		controls.add(view, R.id.gui555C1, R.id.gui555R1, R.id.gui555R2, R.id.gui555Delay,
+			R.id.gui555Freq, R.id.gui555Duty);
+		controls.setupAll(this);
+		return view;
 	}
 	@Override
 	public void onClick(View source) {

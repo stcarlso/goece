@@ -24,27 +24,26 @@
 
 package com.stcarlso.goece.ui;
 
-import android.app.ActionBar;
-import android.app.Activity;
-import android.content.Intent;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
-import android.support.v4.app.TaskStackBuilder;
+import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.MenuItem;
+import android.view.View;
 import android.widget.*;
 import com.stcarlso.goece.utility.Calculatable;
 import com.stcarlso.goece.utility.UIFunctions;
 import com.stcarlso.goece.utility.ValueControl;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringTokenizer;
 
 /**
  * An activity parent which handles the up action gracefully and fixes the gross problem with
  * value entry boxes needing a parent.
  */
-public abstract class ChildActivity extends Activity implements Calculatable {
+public abstract class ChildFragment extends Fragment implements Calculatable {
 	/**
 	 * Contains all data entry controls.
 	 */
@@ -61,7 +60,7 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	/**
 	 * Initialize this activity.
 	 */
-	protected ChildActivity() {
+	protected ChildFragment() {
 		controls = new ValueBoxContainer();
 		fields = new ValueGroup("");
 		groups = new HashMap<String, ValueGroup>(32);
@@ -69,56 +68,62 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	/**
 	 * Retrieves a checkbox by its ID.
 	 *
+	 * @param view the parent view
 	 * @param id the ID of the checkbox
 	 * @return the checkbox control
 	 */
-	protected CheckBox asCheckBox(final int id) {
-		return (CheckBox)findViewById(id);
+	protected static CheckBox asCheckBox(final View view, final int id) {
+		return (CheckBox)view.findViewById(id);
 	}
 	/**
 	 * Retrieves an image by its ID.
 	 *
+	 * @param view the parent view
 	 * @param id the ID of the image
 	 * @return the image view control
 	 */
-	protected ImageView asImageView(final int id) {
-		return (ImageView)findViewById(id);
+	protected static ImageView asImageView(final View view, final int id) {
+		return (ImageView)view.findViewById(id);
 	}
 	/**
 	 * Retrieves a radio button by its ID.
 	 *
+	 * @param view the parent view
 	 * @param id the ID of the radio button
 	 * @return the radio button control
 	 */
-	protected RadioButton asRadioButton(final int id) {
-		return (RadioButton)findViewById(id);
+	protected static RadioButton asRadioButton(final View view, final int id) {
+		return (RadioButton)view.findViewById(id);
 	}
 	/**
 	 * Retrieves a spinner by its ID.
 	 *
+	 * @param view the parent view
 	 * @param id the ID of the spinner
 	 * @return the spinner control
 	 */
-	protected Spinner asSpinner(final int id) {
-		return (Spinner)findViewById(id);
+	protected static Spinner asSpinner(final View view, final int id) {
+		return (Spinner)view.findViewById(id);
 	}
 	/**
 	 * Retrieves a label by its ID.
 	 *
+	 * @param view the parent view
 	 * @param id the ID of the label
 	 * @return the label control
 	 */
-	protected TextView asTextView(final int id) {
-		return (TextView)findViewById(id);
+	protected static TextView asTextView(final View view, final int id) {
+		return (TextView)view.findViewById(id);
 	}
 	/**
 	 * Retrieves a value field by its ID.
 	 *
+	 * @param view the parent view
 	 * @param id the ID of the output field (ValueOutputField class)
 	 * @return the value label control
 	 */
-	protected ValueOutputField asValueField(final int id) {
-		return (ValueOutputField)findViewById(id);
+	protected static ValueOutputField asValueField(final View view, final int id) {
+		return (ValueOutputField)view.findViewById(id);
 	}
 	/**
 	 * Slightly stronger typed version of findViewById that is also much faster, but only works
@@ -129,6 +134,15 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 */
 	protected ValueControl findValueById(final int id) {
 		return fields.get(id);
+	}
+	/**
+	 * Finds a view in the parent activity by ID.
+	 *
+	 * @param id the view ID
+	 * @return the matching view, or null if no view matches
+	 */
+	protected View findViewById(final int id) {
+		return getActivity().findViewById(id);
 	}
 	/**
 	 * Method for subclasses to override for restoration of standard Android objects not loaded
@@ -143,7 +157,7 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 * registerAdjustable.
 	 */
 	protected void loadPrefs() {
-		final SharedPreferences prefs = getPreferences(MODE_PRIVATE);
+		final SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
 		for (ValueControl control : fields)
 			// Restore all items marked as Restorable
 			control.loadState(prefs);
@@ -169,48 +183,31 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 * @param id the ID of the control to load
 	 */
 	protected void loadPrefsSpinner(final SharedPreferences prefs, final int id) {
-		final Spinner view = asSpinner(id);
+		final Spinner view = asSpinner(findViewById(android.R.id.content), id);
 		final String tag = UIFunctions.getTag(view);
 		// Only change if the preferences are initialized
 		if (prefs.contains(tag))
 			view.setSelection(prefs.getInt(tag, 0), false);
 	}
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		final ActionBar bar = getActionBar();
-		// Uh?
-		if (bar != null)
-			bar.setDisplayHomeAsUpEnabled(true);
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		loadPrefs();
 	}
 	@Override
-	public boolean onOptionsItemSelected(final MenuItem item) {
-		switch (item.getItemId()) {
-		case android.R.id.home:
-			// Find the parent activity
-			final Intent upIntent = NavUtils.getParentActivityIntent(this);
-			if (NavUtils.shouldUpRecreateTask(this, upIntent))
-				// Launched from another application, create a new task
-				TaskStackBuilder.create(this).addNextIntentWithParentStack(upIntent).
-					startActivities();
-			else
-				// No need to create a new back stack
-				NavUtils.navigateUpTo(this, upIntent);
-			break;
-		default:
-			break;
-		}
-		return super.onOptionsItemSelected(item);
-	}
-	@Override
-	protected void onPause() {
+	public void onPause() {
 		super.onPause();
 		savePrefs();
 	}
 	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
 		loadPrefs();
+	}
+	@Override
+	public void onStop() {
+		super.onStop();
+		savePrefs();
 	}
 	@Override
 	public void recalculate(ValueControl source) {
@@ -233,11 +230,11 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 						recalculate(dest);
 					else
 						// Target not found
-						Log.w("ChildActivity", "Target \"" + target + "\" not found");
+						Log.w("ChildFragment", "Target \"" + target + "\" not found");
 				}
 			} else
 				// Group not found
-				Log.w("ChildActivity", "Group \"" + group + "\" not found");
+				Log.w("ChildFragment", "Group \"" + group + "\" not found");
 		}
 	}
 	/**
@@ -279,7 +276,8 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 * registerAdjustable.
 	 */
 	private void savePrefs() {
-		final SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+		final SharedPreferences.Editor editor = getActivity().getPreferences(Context.
+			MODE_PRIVATE).edit();
 		// Save all items registered as Restorable
 		for (ValueControl control : fields)
 			control.saveState(editor);
@@ -303,7 +301,7 @@ public abstract class ChildActivity extends Activity implements Calculatable {
 	 * @param id the ID of the control to save
 	 */
 	protected void savePrefsSpinner(final SharedPreferences.Editor prefs, final int id) {
-		final Spinner view = asSpinner(id);
+		final Spinner view = asSpinner(findViewById(android.R.id.content), id);
 		prefs.putInt(UIFunctions.getTag(view), view.getSelectedItemPosition());
 	}
 	/**

@@ -26,20 +26,23 @@ package com.stcarlso.goece.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.RadioButton;
-import android.widget.TextView;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.ui.*;
+import com.stcarlso.goece.ui.AbstractEntryBox;
+import com.stcarlso.goece.ui.ChildFragment;
+import com.stcarlso.goece.ui.ValueGroup;
+import com.stcarlso.goece.ui.ValueOutputField;
 import com.stcarlso.goece.utility.ComplexValue;
 import com.stcarlso.goece.utility.EngineeringValue;
-import com.stcarlso.goece.utility.Units;
 
 /**
  * Very simple Ohm's law activity. Everyone should know it, but this adds engineering value
  * goodness! (uA, mV, Gohm anyone?)
  */
-public class OhmsLawActivity extends ChildActivity implements View.OnClickListener {
+public class OhmsLawFragment extends ChildFragment implements View.OnClickListener {
 	/**
 	 * Cached reference to the "DC" radio button (AC is the opposite)
 	 */
@@ -56,20 +59,25 @@ public class OhmsLawActivity extends ChildActivity implements View.OnClickListen
 		loadPrefsCheckBox(prefs, R.id.guiOhmsSelDC);
 	}
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.ohmslaw);
-		// Update references
-		dcCtrl = asRadioButton(R.id.guiOhmsSelDC);
-		powerFactorCtrl = asValueField(R.id.guiOhmsPowerFactor);
-		// Register value entry boxes
-		controls.add(this, R.id.guiOhmsCurrentDC, R.id.guiOhmsResistanceDC,
-			R.id.guiOhmsVoltageDC, R.id.guiOhmsCurrentAC, R.id.guiOhmsResistanceAC,
-			R.id.guiOhmsVoltageAC, R.id.guiOhmsPowerDC, R.id.guiOhmsPowerAC);
-		controls.setupAll(this);
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
 		loadPrefs();
 		// onClick handles initial calculations
 		onClick(dcCtrl);
+	}
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		final View view = inflater.inflate(R.layout.ohmslaw, container, false);
+		// Update references
+		dcCtrl = asRadioButton(view, R.id.guiOhmsSelDC);
+		powerFactorCtrl = asValueField(view, R.id.guiOhmsPowerFactor);
+		// Register value entry boxes
+		controls.add(view, R.id.guiOhmsCurrentDC, R.id.guiOhmsResistanceDC,
+			R.id.guiOhmsVoltageDC, R.id.guiOhmsCurrentAC, R.id.guiOhmsResistanceAC,
+			R.id.guiOhmsVoltageAC, R.id.guiOhmsPowerDC, R.id.guiOhmsPowerAC);
+		controls.setupAll(this);
+		return view;
 	}
 	@Override
 	public void onClick(View v) {

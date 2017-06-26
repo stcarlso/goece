@@ -52,12 +52,12 @@ public class ValueBoxContainer extends SparseArray<AbstractEntryBox<? extends En
 	/**
 	 * Adds a series of controls to this container.
 	 *
-	 * @param act the parent activity
+	 * @param parent the parent view
 	 * @param id the integer IDs of controls to add
 	 */
-	public void add(final Activity act, final int... id) {
+	public void add(final View parent, final int... id) {
 		for (int viewID : id) {
-			final View view = act.findViewById(viewID);
+			final View view = parent.findViewById(viewID);
 			if (view != null)
 				add(view);
 		}
@@ -134,10 +134,10 @@ public class ValueBoxContainer extends SparseArray<AbstractEntryBox<? extends En
 	/**
 	 * Configures all of the components added to this container so far.
 	 *
-	 * @param activity the parent activity which should own these components
+	 * @param fragment the parent fragment which should own these components
 	 */
-	public void setupAll(final ChildActivity activity) {
+	public void setupAll(final ChildFragment fragment) {
 		for (int i = 0; i < size(); i++)
-			activity.setupValueEntryBox(keyAt(i));
+			fragment.setupValueEntryBox(keyAt(i));
 	}
 }

@@ -26,9 +26,10 @@ package com.stcarlso.goece.activity;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.TextView;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.*;
 import com.stcarlso.goece.utility.ECECalc;
@@ -42,7 +43,7 @@ import java.util.*;
  * Allows computations of voltage dividers, and determination of resistor values to make a
  * certain ratio.
  */
-public class VDivActivity extends ChildActivity implements View.OnClickListener {
+public class VDivFragment extends ChildFragment implements View.OnClickListener {
 	/**
 	 * Reference to the current flowing through the divider.
 	 */
@@ -110,23 +111,27 @@ public class VDivActivity extends ChildActivity implements View.OnClickListener 
 		recalculate(loadR);
 	}
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.vdiv);
-		currentCtrl = asValueField(R.id.guiDivCurrent);
-		equivCtrl = asValueField(R.id.guiDivEquiv);
-		isLoadCtrl = asCheckBox(R.id.guiDivIsLoad);
-		powerCtrl = asValueField(R.id.guiDivPower);
-		seriesCtrl = (ResSeriesSpinner)findViewById(R.id.guiDivResSeries);
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		// Recalculate everything
+		onClick(null);
+	}
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		final View view = inflater.inflate(R.layout.vdiv, container, false);
+		currentCtrl = asValueField(view, R.id.guiDivCurrent);
+		equivCtrl = asValueField(view, R.id.guiDivEquiv);
+		isLoadCtrl = asCheckBox(view, R.id.guiDivIsLoad);
+		powerCtrl = asValueField(view, R.id.guiDivPower);
+		seriesCtrl = (ResSeriesSpinner)view.findViewById(R.id.guiDivResSeries);
 		// Load controls and preferences
-		controls.add(this, R.id.guiDivTop, R.id.guiDivBottom, R.id.guiDivInput,
+		controls.add(view, R.id.guiDivTop, R.id.guiDivBottom, R.id.guiDivInput,
 			R.id.guiDivOutput, R.id.guiDivLoad);
 		controls.setupAll(this);
 		seriesCtrl.setOnCalculateListener(this);
 		registerAdjustable(seriesCtrl);
-		loadPrefs();
-		// Recalculate everything
-		onClick(null);
+		return view;
 	}
 	@Override
 	protected void recalculate(ValueGroup group) {

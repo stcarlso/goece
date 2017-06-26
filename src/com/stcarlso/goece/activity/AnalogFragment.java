@@ -39,17 +39,17 @@ public class AnalogFragment extends MenuFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.analog, container, false);
 		// Configure all buttons
-		setButtonEvent(view, R.id.guiColorCode, ResColorActivity.class);
-		setButtonEvent(view, R.id.guiSMDResistor, SMDResistorActivity.class);
-		setButtonEvent(view, R.id.guiOhmsLaw, OhmsLawActivity.class);
-		setButtonEvent(view, R.id.guiImpedance, ImpedanceActivity.class);
-		setButtonEvent(view, R.id.guiSerPar, SerParActivity.class);
-		setButtonEvent(view, R.id.guiVDiv, VDivActivity.class);
-		setButtonEvent(view, R.id.guiDeltaWye, DeltaWyeActivity.class);
-		setButtonEvent(view, R.id.guiCurCap, CurCapActivity.class);
-		setButtonEvent(view, R.id.guiPcbWidth, PcbTraceActivity.class);
-		setButtonEvent(view, R.id.guiPowerUse, PowerUseActivity.class);
-		setButtonEvent(view, R.id.guiOscDesign, OscDesignActivity.class);
+		setButtonEvent(view, R.id.guiColorCode, ResColorFragment.class);
+		setButtonEvent(view, R.id.guiSMDResistor, SMDResistorFragment.class);
+		setButtonEvent(view, R.id.guiOhmsLaw, OhmsLawFragment.class);
+		setButtonEvent(view, R.id.guiImpedance, ImpedanceFragment.class);
+		setButtonEvent(view, R.id.guiSerPar, SerParFragment.class);
+		setButtonEvent(view, R.id.guiVDiv, VDivFragment.class);
+		setButtonEvent(view, R.id.guiDeltaWye, DeltaWyeFragment.class);
+		setButtonEvent(view, R.id.guiCurCap, CurCapFragment.class);
+		setButtonEvent(view, R.id.guiPcbWidth, PcbTraceFragment.class);
+		setButtonEvent(view, R.id.guiPowerUse, PowerUseFragment.class);
+		setButtonEvent(view, R.id.guiOscDesign, OscDesignFragment.class);
 		return view;
 	}
 }

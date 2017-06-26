@@ -25,6 +25,9 @@
 package com.stcarlso.goece.activity;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.*;
@@ -36,7 +39,7 @@ import com.stcarlso.goece.utility.Units;
 /**
  * An activity for calculating resistor color code (PTH) values.
  */
-public class ResColorActivity extends ChildActivity {
+public class ResColorFragment extends ChildFragment {
 	/**
 	 * The resistor power-of-10 multiplier for each possible 3rd (4th) band value.
 	 */
@@ -64,7 +67,7 @@ public class ResColorActivity extends ChildActivity {
 	 */
 	private TextView stdCtrl;
 
-	public ResColorActivity() {
+	public ResColorFragment() {
 		bandCtrl = new ColorBand[5];
 	}
 	@Override
@@ -107,25 +110,30 @@ public class ResColorActivity extends ChildActivity {
 		UIFunctions.checkEIATable(finalValue, stdCtrl);
 	}
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.rescolorcode);
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		// Display initial value
+		loadPrefs();
+		recalculate(bandCtrl[4]);
+	}
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		final View view = inflater.inflate(R.layout.rescolorcode, container, false);
 		// Load band objects
-		bandCtrl[0] = (ColorBand)findViewById(R.id.guiResBand1);
-		bandCtrl[1] = (ColorBand)findViewById(R.id.guiResBand2);
-		bandCtrl[2] = (ColorBand)findViewById(R.id.guiResBand3);
-		bandCtrl[3] = (ColorBand)findViewById(R.id.guiResBand4);
-		bandCtrl[4] = (ColorBand)findViewById(R.id.guiResBand5);
-		outputCtrl = asValueField(R.id.guiResValue);
-		stdCtrl = asTextView(R.id.guiResIsStandard);
+		bandCtrl[0] = (ColorBand)view.findViewById(R.id.guiResBand1);
+		bandCtrl[1] = (ColorBand)view.findViewById(R.id.guiResBand2);
+		bandCtrl[2] = (ColorBand)view.findViewById(R.id.guiResBand3);
+		bandCtrl[3] = (ColorBand)view.findViewById(R.id.guiResBand4);
+		bandCtrl[4] = (ColorBand)view.findViewById(R.id.guiResBand5);
+		outputCtrl = asValueField(view, R.id.guiResValue);
+		stdCtrl = asTextView(view, R.id.guiResIsStandard);
 		// Add click listeners
 		for (ColorBand band : bandCtrl) {
 			band.setOnCalculateListener(this);
 			registerAdjustable(band);
 		}
-		// Display initial value
-		loadPrefs();
-		recalculate(bandCtrl[4]);
+		return view;
 	}
 	// All work is done in recalculate()
 	@Override

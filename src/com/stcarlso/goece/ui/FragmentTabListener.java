@@ -43,8 +43,6 @@ public class FragmentTabListener<T extends Fragment> implements ActionBar.TabLis
 	private final FragmentActivity mActivity;
 	private final String mTag;
 	private final Class<T> mClass;
-	private final int mfragmentContainerId;
-	private final Bundle mfragmentArgs;
 
 	// This version defaults to replacing the entire activity content area
 	// new FragmentTabListener<SomeFragment>(this, "first", SomeFragment.class))
@@ -52,8 +50,6 @@ public class FragmentTabListener<T extends Fragment> implements ActionBar.TabLis
 		mActivity = activity;
 		mTag = tag;
 		mClass = clz;
-		mfragmentContainerId = android.R.id.content;
-		mfragmentArgs = new Bundle();
 	}
 	@Override
 	public void onTabSelected(ActionBar.Tab tab, android.app.FragmentTransaction ft) {
@@ -64,12 +60,11 @@ public class FragmentTabListener<T extends Fragment> implements ActionBar.TabLis
 		if (visible == null) {
 			// If not, instantiate and add it to the activity
 			if (mFragment == null)
-				mFragment = Fragment.instantiate(mActivity, mClass.getName(), mfragmentArgs);
-			sft.add(mfragmentContainerId, mFragment, mTag);
-		} else {
+				mFragment = Fragment.instantiate(mActivity, mClass.getName(), null);
+			sft.add(android.R.id.content, mFragment, mTag);
+		} else
 			// If it exists, simply attach it in order to show it
 			sft.attach(visible);
-		}
 		sft.commit();
 	}
 	@Override
