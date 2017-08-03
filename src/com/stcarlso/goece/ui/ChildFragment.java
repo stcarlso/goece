@@ -308,10 +308,9 @@ public abstract class ChildFragment extends Fragment implements Calculatable {
 	 * Sets the listener and parent activity of the specified value entry box. Useful for the
 	 * vast majority of activities.
 	 *
-	 * @param id the entry box to configure
+	 * @param box the entry box to configure
 	 */
-	protected void setupValueEntryBox(final int id) {
-		final AbstractEntryBox<?> box = ((AbstractEntryBox<?>)findViewById(id));
+	protected void setupValueEntryBox(final AbstractEntryBox<?> box) {
 		box.setOnCalculateListener(this);
 		registerAdjustable(box);
 	}

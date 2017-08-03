@@ -66,11 +66,12 @@ public final class ECEActivity extends FragmentActivity {
 	private boolean closeFragment() {
 		boolean closed = false;
 		final FragmentManager manager = getSupportFragmentManager();
+		final int count = manager.getBackStackEntryCount();
 		// Pop fragment back stack if available
-		if (manager.getBackStackEntryCount() > 0) {
+		if (count > 0) {
 			final ActionBar bar = getActionBar();
 			manager.popBackStack();
-			if (manager.getBackStackEntryCount() <= 0 && bar != null) {
+			if (count < 2 && bar != null) {
 				// Back to main activity, clear display as-up
 				bar.setDisplayHomeAsUpEnabled(false);
 				bar.setDisplayShowHomeEnabled(false);
@@ -112,23 +113,13 @@ public final class ECEActivity extends FragmentActivity {
 			final ActionBar.Tab analogTab = addTab(R.string.guiTabAnalog, AnalogFragment.class);
 			addTab(R.string.guiTabDigital, DigitalFragment.class);
 			addTab(R.string.guiTabCircuits, ICFragment.class);
-			if (savedInstanceState == null || !savedInstanceState.containsKey("tab"))
-				tabBar.selectTab(analogTab);
-			else
-				tabBar.setSelectedNavigationItem(savedInstanceState.getInt("tab"));
 		}
+		restoreTab(savedInstanceState);
 	}
 	@Override
 	protected void onRestoreInstanceState(Bundle savedInstanceState) {
 		super.onRestoreInstanceState(savedInstanceState);
-		final ActionBar tabBar = getActionBar();
-		if (tabBar != null) {
-			// Restore where the user was
-			if (savedInstanceState == null || !savedInstanceState.containsKey("tab"))
-				tabBar.selectTab(tabBar.getTabAt(0));
-			else
-				tabBar.setSelectedNavigationItem(savedInstanceState.getInt("tab"));
-		}
+		restoreTab(savedInstanceState);
 	}
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
@@ -136,5 +127,15 @@ public final class ECEActivity extends FragmentActivity {
 		final ActionBar tabBar = getActionBar();
 		if (tabBar != null)
 			outState.putInt("tab", tabBar.getSelectedTab().getPosition());
+	}
+	// Restores the tab where the user last was found
+	private void restoreTab(final Bundle savedInstanceState) {
+		final ActionBar tabBar = getActionBar();
+		if (tabBar != null) {
+			if (savedInstanceState == null || !savedInstanceState.containsKey("tab"))
+				tabBar.setSelectedNavigationItem(0);
+			else
+				tabBar.setSelectedNavigationItem(savedInstanceState.getInt("tab"));
+		}
 	}
 }

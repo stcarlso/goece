@@ -138,6 +138,6 @@ public class ValueBoxContainer extends SparseArray<AbstractEntryBox<? extends En
 	 */
 	public void setupAll(final ChildFragment fragment) {
 		for (int i = 0; i < size(); i++)
-			fragment.setupValueEntryBox(keyAt(i));
+			fragment.setupValueEntryBox(valueAt(i));
 	}
 }

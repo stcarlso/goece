@@ -33,6 +33,7 @@ import android.view.View;
 /**
  * Listens for a button click, then launches a preset fragment.
  */
+@SuppressWarnings("deprecation")
 public class FragmentClickListener implements View.OnClickListener {
 	private final Class<? extends Fragment> destFragment;
 	private final FragmentActivity parentActivity;
