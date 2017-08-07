@@ -50,7 +50,7 @@ public class FragmentClickListener implements View.OnClickListener {
 		final Fragment target = Fragment.instantiate(parentActivity, destFragment.getName(),
 			null);
 		// Replace the entire content area with the target fragment
-		transaction.add(android.R.id.content, target, target.getClass().getSimpleName());
+		transaction.add(android.R.id.content, target, "content");
 		// Allow user to go back
 		transaction.addToBackStack(null);
 		transaction.commit();

@@ -25,10 +25,14 @@
 package com.stcarlso.goece.activity;
 
 import android.app.ActionBar;
+import android.app.Activity;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.MenuItem;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.FragmentTabListener;
@@ -100,6 +104,20 @@ public final class ECEActivity extends FragmentActivity {
 		}
 		return done || super.onOptionsItemSelected(item);
 	}
+	@Override
+	public void onConfigurationChanged(Configuration newConfig) {
+		final FragmentManager manager = getSupportFragmentManager();
+		super.onConfigurationChanged(newConfig);
+		final Fragment current = manager.findFragmentByTag("content");
+		if (current != null) {
+			// Detach and re-attach the fragment to re-layout any landscape views
+			final FragmentTransaction transaction = manager.beginTransaction();
+			transaction.detach(current);
+			transaction.attach(current);
+			// Do not allow user to go back, this transaction has no meaning for precedence
+			transaction.commit();
+		}
+	}
 	/**
 	 * Called when the activity is first created.
 	 */
@@ -125,13 +143,14 @@ public final class ECEActivity extends FragmentActivity {
 	protected void onSaveInstanceState(Bundle outState) {
 		// Save where the user was
 		final ActionBar tabBar = getActionBar();
-		if (tabBar != null)
+		if (tabBar != null && tabBar.getNavigationMode() == ActionBar.NAVIGATION_MODE_TABS)
 			outState.putInt("tab", tabBar.getSelectedTab().getPosition());
 	}
 	// Restores the tab where the user last was found
 	private void restoreTab(final Bundle savedInstanceState) {
 		final ActionBar tabBar = getActionBar();
-		if (tabBar != null) {
+		if (tabBar != null && tabBar.getNavigationMode() == ActionBar.NAVIGATION_MODE_TABS) {
+			// Only if the user has been here before, otherwise pick tab 0
 			if (savedInstanceState == null || !savedInstanceState.containsKey("tab"))
 				tabBar.setSelectedNavigationItem(0);
 			else

@@ -67,6 +67,9 @@ public class ImpedanceFragment extends ChildFragment implements View.OnClickList
 		controls.add(view, R.id.guiImpedRes, R.id.guiImpedCap, R.id.guiImpedInd,
 			R.id.guiImpedFreq, R.id.guiImpedImp);
 		controls.setupAll(this);
+		// Register events
+		capSelCtrl.setOnClickListener(this);
+		asRadioButton(view, R.id.guiImpedSelInd).setOnClickListener(this);
 		return view;
 	}
 	@Override

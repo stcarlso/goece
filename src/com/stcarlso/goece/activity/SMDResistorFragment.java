@@ -168,7 +168,7 @@ public class SMDResistorFragment extends ChildFragment implements View.OnClickLi
 			lastCode = prefs.getString("lastCode", lastCode);
 	}
 	/**
-	 * Receive click events from the calculate button and recalculate.
+	 * Receive click events from the calculate button and recalculates.
 	 *
 	 * @param v the source view
 	 */
@@ -193,6 +193,7 @@ public class SMDResistorFragment extends ChildFragment implements View.OnClickLi
 		registerAdjustable(codeIn);
 		// Add listener to calculate on press
 		EnterKeyListener.addListener(view, R.id.guiResSMDCode, this);
+		view.findViewById(R.id.guiResCalculate).setOnClickListener(this);
 		return view;
 	}
 	@Override

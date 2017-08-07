@@ -45,14 +45,11 @@ public class DeltaWyeFragment extends ChildFragment {
 	public void onConfigurationChanged(Configuration newConfig) {
 		super.onConfigurationChanged(newConfig);
 		final LinearLayout root = ((LinearLayout)findViewById(R.id.guiDelRoot));
-		final Configuration conf = getResources().getConfiguration();
 		// Rotate by adjusting the layout of the main screen
-		if (conf != null) {
-			if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
-				root.setOrientation(LinearLayout.HORIZONTAL);
-			else
-				root.setOrientation(LinearLayout.VERTICAL);
-		}
+		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
+			root.setOrientation(LinearLayout.HORIZONTAL);
+		else
+			root.setOrientation(LinearLayout.VERTICAL);
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

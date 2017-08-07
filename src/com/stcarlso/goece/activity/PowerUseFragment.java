@@ -95,6 +95,10 @@ public class PowerUseFragment extends ChildFragment implements View.OnClickListe
 			R.id.guiPwrIdleCur, R.id.guiPwrIdleTime, R.id.guiPwrSleepCur, R.id.guiPwrSleepTime,
 			R.id.guiPwrDuration);
 		controls.setupAll(this);
+		// Register events
+		idleEnableCtrl.setOnClickListener(this);
+		runEnableCtrl.setOnClickListener(this);
+		sleepEnableCtrl.setOnClickListener(this);
 		return view;
 	}
 	/**

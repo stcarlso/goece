@@ -46,8 +46,8 @@
 	<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  android:text="@string/guiPwrRun" android:layout_column="0"
 			  android:layout_row="1" android:layout_gravity="center_vertical"
-			  android:layout_marginRight="10dp" android:checked="true" android:onClick="onClick"
-			  android:id="@+id/guiPwrRunEna" android:tag="pwrRunEna"/>
+			  android:layout_marginRight="10dp" android:checked="true" android:tag="pwrRunEna"
+			  android:id="@+id/guiPwrRunEna"/>
 	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:layout_width="match_parent"
 		  android:layout_height="wrap_content" android:id="@+id/guiPwrRunCur"
 		  android:tag="pwrRunCur" ece:units="A" ece:value="0.1" android:layout_row="1"
@@ -62,8 +62,8 @@
 	<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  android:text="@string/guiPwrIdle" android:layout_column="0"
 			  android:layout_row="2" android:layout_gravity="center_vertical"
-			  android:layout_marginRight="10dp" android:onClick="onClick"
-			  android:id="@+id/guiPwrIdleEna" android:tag="pwrIdleEna"/>
+			  android:layout_marginRight="10dp" android:tag="pwrIdleEna"
+			  android:id="@+id/guiPwrIdleEna"/>
 	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:layout_width="match_parent"
 		  android:layout_height="wrap_content" android:id="@+id/guiPwrIdleCur"
 		  android:tag="pwrIdleCur" ece:units="A" ece:value="0.01" android:layout_row="2"
@@ -79,8 +79,8 @@
 	<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
 			  android:text="@string/guiPwrSleep" android:layout_column="0"
 			  android:layout_row="3" android:layout_gravity="center_vertical"
-			  android:layout_marginRight="10dp" android:checked="true" android:onClick="onClick"
-			  android:id="@+id/guiPwrSleepEna" android:tag="pwrSleepEna"/>
+			  android:layout_marginRight="10dp" android:checked="true" android:tag="pwrSleepEna"
+			  android:id="@+id/guiPwrSleepEna"/>
 	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:layout_width="match_parent"
 		  android:layout_height="wrap_content" android:id="@+id/guiPwrSleepCur"
 		  android:tag="pwrSleepCur" ece:units="A" ece:group="none" android:layout_row="3"

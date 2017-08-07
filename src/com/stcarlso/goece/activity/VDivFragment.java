@@ -131,6 +131,8 @@ public class VDivFragment extends ChildFragment implements View.OnClickListener 
 		controls.setupAll(this);
 		seriesCtrl.setOnCalculateListener(this);
 		registerAdjustable(seriesCtrl);
+		// Register events
+		asCheckBox(view, R.id.guiDivIsLoad).setOnClickListener(this);
 		return view;
 	}
 	@Override

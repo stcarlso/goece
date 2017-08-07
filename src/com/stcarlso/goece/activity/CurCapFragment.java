@@ -29,22 +29,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.RadioButton;
-import android.widget.Spinner;
+import android.widget.*;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.ui.AbstractEntryBox;
-import com.stcarlso.goece.ui.ChildFragment;
-import com.stcarlso.goece.ui.ValueGroup;
-import com.stcarlso.goece.ui.ValueOutputField;
+import com.stcarlso.goece.ui.*;
 import com.stcarlso.goece.utility.EngineeringValue;
 import com.stcarlso.goece.utility.Units;
 
 /**
  * Calculate the current capacity of wires and PCB traces.
  */
-public class CurCapFragment extends ChildFragment implements AdapterView.OnItemSelectedListener
-{
+public class CurCapFragment extends ChildFragment implements AdapterView.OnItemSelectedListener,
+		View.OnClickListener {
 	/**
 	 * Constant used for AWG calculation.
 	 */
@@ -137,7 +132,7 @@ public class CurCapFragment extends ChildFragment implements AdapterView.OnItemS
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		// Recalculate everything
-		onClick();
+		onClick(null);
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -156,12 +151,17 @@ public class CurCapFragment extends ChildFragment implements AdapterView.OnItemS
 			R.id.guiCurDiameter, R.id.guiCurThickness, R.id.guiCurWidth, R.id.guiCurXArea,
 			R.id.guiCurLength, R.id.guiCurTest);
 		controls.setupAll(this);
+		// Register events
+		final ButtonSwapListener listener = new ButtonSwapListener(this, traceSelCtrl,
+			wireSelCtrl);
+		traceSelCtrl.setOnClickListener(listener);
+		wireSelCtrl.setOnClickListener(listener);
 		return view;
 	}
 	/**
 	 * Triggers an update when either of the radio buttons is pressed.
 	 */
-	private void onClick() {
+	public void onClick(final View view) {
 		final boolean isWire = wireSelCtrl.isChecked();
 		// Turn off trace params and temp rise in wire mode (future work to allow wire temp?)
 		controls.get(R.id.guiCurTemp).setEnabled(!isWire);
@@ -179,24 +179,6 @@ public class CurCapFragment extends ChildFragment implements AdapterView.OnItemS
 	}
 	@Override
 	public void onNothingSelected(AdapterView<?> parent) { }
-	/**
-	 * Triggered when the "use trace" radio button is changed.
-	 *
-	 * @param v the view which changed
-	 */
-	public void onTraceClick(View v) {
-		wireSelCtrl.setChecked(!traceSelCtrl.isChecked());
-		onClick();
-	}
-	/**
-	 * Triggered when the "use wire" radio button is changed.
-	 *
-	 * @param v the view which changed
-	 */
-	public void onWireClick(View v) {
-		traceSelCtrl.setChecked(!wireSelCtrl.isChecked());
-		onClick();
-	}
 	@Override
 	protected void recalculate(ValueGroup group) {
 		final String name = group.getName();

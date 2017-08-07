@@ -33,13 +33,13 @@
 				android:id="@+id/gui555Mode">
 		<RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
 					 android:tag="f55Monostable" android:id="@+id/gui555Monostable"
-					 android:text="@string/gui555Mono" android:onClick="onClick"
 					 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-					 android:layout_marginRight="10dp" android:checked="true"/>
+					 android:layout_marginRight="10dp" android:checked="true"
+					 android:text="@string/gui555Mono"/>
 		<RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
 					 android:tag="f55Astable" android:id="@+id/gui555Astable"
 					 android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
-					 android:text="@string/gui555Ast" android:onClick="onClick"/>
+					 android:text="@string/gui555Ast"/>
 	</RadioGroup>
 	<ImageView android:layout_width="200dp" android:layout_height="200dp"
 			   android:layout_centerHorizontal="true" android:src="@drawable/ic555astable"

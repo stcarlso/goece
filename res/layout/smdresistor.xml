@@ -51,5 +51,5 @@
 		  android:layout_below="@id/guiResLine" android:layout_toLeftOf="@id/guiResCenter"/>
 	<Button android:layout_width="wrap_content" android:layout_height="wrap_content"
 			android:text="@string/calculate" android:layout_toRightOf="@id/guiResCenter"
-			android:layout_below="@id/guiResLine" android:onClick="onClick"/>
+			android:layout_below="@id/guiResLine" android:id="@+id/guiResCalculate"/>
 </RelativeLayout>

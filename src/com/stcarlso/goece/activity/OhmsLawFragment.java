@@ -77,6 +77,9 @@ public class OhmsLawFragment extends ChildFragment implements View.OnClickListen
 			R.id.guiOhmsVoltageDC, R.id.guiOhmsCurrentAC, R.id.guiOhmsResistanceAC,
 			R.id.guiOhmsVoltageAC, R.id.guiOhmsPowerDC, R.id.guiOhmsPowerAC);
 		controls.setupAll(this);
+		// Register events
+		dcCtrl.setOnClickListener(this);
+		asRadioButton(view, R.id.guiOhmsSelAC).setOnClickListener(this);
 		return view;
 	}
 	@Override

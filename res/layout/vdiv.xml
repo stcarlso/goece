@@ -67,8 +67,8 @@
 		  ece:affects="res" ece:value="1E+308" android:enabled="false"/>
 	<CheckBox android:id="@+id/guiDivIsLoad" android:layout_height="wrap_content"
 			  android:layout_width="wrap_content" android:checked="false"
-			  android:layout_alignBaseline="@id/guiDivLoad" android:onClick="onClick"
-			  android:layout_toLeftOf="@id/guiDivLoad" android:tag="divIsLoad"/>
+			  android:layout_alignBaseline="@id/guiDivLoad" android:tag="divIsLoad"
+			  android:layout_toLeftOf="@id/guiDivLoad"/>
 	<view class="com.stcarlso.goece.ui.ValueOutputField" android:layout_width="wrap_content"
 		  android:layout_height="wrap_content" ece:description="@string/guiDivEquiv"
 		  android:id="@+id/guiDivEquiv" android:layout_centerHorizontal="true"

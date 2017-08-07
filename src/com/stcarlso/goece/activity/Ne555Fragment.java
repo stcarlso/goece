@@ -101,6 +101,9 @@ public class Ne555Fragment extends ChildFragment implements View.OnClickListener
 		controls.add(view, R.id.gui555C1, R.id.gui555R1, R.id.gui555R2, R.id.gui555Delay,
 			R.id.gui555Freq, R.id.gui555Duty);
 		controls.setupAll(this);
+		// Register events
+		asRadioButton(view, R.id.gui555Astable).setOnClickListener(this);
+		modeMonostableCtrl.setOnClickListener(this);
 		return view;
 	}
 	@Override

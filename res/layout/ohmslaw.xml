@@ -31,12 +31,11 @@
 				android:orientation="horizontal" android:layout_centerHorizontal="true"
 				android:id="@+id/guiOhmsSel">
 		<RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
-					 android:checked="true" android:text="@string/dc" android:onClick="onClick"
-					 android:id="@+id/guiOhmsSelDC" android:layout_marginRight="20dp"
-					 android:tag="ohmsSelDC"/>
+					 android:checked="true" android:text="@string/dc" android:tag="ohmsSelDC"
+					 android:id="@+id/guiOhmsSelDC" android:layout_marginRight="20dp"/>
 		<RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
-					 android:checked="false" android:text="@string/ac" android:onClick="onClick"
-					 android:id="@+id/guiOhmsSelAC" android:tag="ohmsSelAC"/>
+					 android:checked="false" android:text="@string/ac" android:tag="ohmsSelAC"
+					 android:id="@+id/guiOhmsSelAC"/>
 	</RadioGroup>
 	<view class="com.stcarlso.goece.ui.ValueEntryBox" android:id="@+id/guiOhmsCurrentDC"
 		  android:layout_width="wrap_content" android:layout_height="wrap_content" ece:units="A"
