@@ -55,7 +55,7 @@
 		  android:layout_width="wrap_content" android:layout_height="wrap_content"
 		  android:tag="f55Delay" android:id="@+id/gui555Delay" ece:units="s"
 		  ece:description="@string/gui555Delay" ece:group="outputs" android:visibility="gone"
-		  android:layout_toRightOf="@id/gui555Freq" android:layout_alignTop="@id/gui555Freq"
+		  android:layout_toRightOf="@id/gui555Center" android:layout_below="@id/gui555Mode"
 		  android:layout_marginLeft="5dp"/>
 	<view class="com.stcarlso.goece.ui.CustomEntryBox" ece:affects="inputs" ece:value="100"
 		  android:layout_width="wrap_content" android:layout_height="wrap_content"

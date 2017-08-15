@@ -57,7 +57,7 @@
 		  android:tag="adcVoltage" ece:value="0" ece:units="V" ece:group="outputs"
 		  ece:description="@string/voltage" android:layout_alignTop="@id/guiAdcCount"
 		  android:layout_marginLeft="5dp" android:layout_toRightOf="@id/guiAdcCenter"
-		  ece:affects="inputs"/>
+		  ece:affects="inputs" ece:allowNegative="true"/>
 	<view class="com.stcarlso.goece.ui.ValueOutputField" android:id="@+id/guiAdcStep"
 		  android:layout_width="wrap_content" android:layout_height="wrap_content"
 		  ece:description="@string/guiAdcStep" android:layout_centerHorizontal="true"

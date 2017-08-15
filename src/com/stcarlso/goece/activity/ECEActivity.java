@@ -80,6 +80,7 @@ public final class ECEActivity extends FragmentActivity {
 				bar.setDisplayHomeAsUpEnabled(false);
 				bar.setDisplayShowHomeEnabled(false);
 				bar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
+				bar.setTitle(R.string.app_name);
 			}
 			closed = true;
 		}
@@ -112,8 +113,7 @@ public final class ECEActivity extends FragmentActivity {
 		if (current != null) {
 			// Detach and re-attach the fragment to re-layout any landscape views
 			final FragmentTransaction transaction = manager.beginTransaction();
-			transaction.detach(current);
-			transaction.attach(current);
+			transaction.detach(current).attach(current);
 			// Do not allow user to go back, this transaction has no meaning for precedence
 			transaction.commit();
 		}
@@ -144,14 +144,14 @@ public final class ECEActivity extends FragmentActivity {
 		// Save where the user was
 		final ActionBar tabBar = getActionBar();
 		if (tabBar != null && tabBar.getNavigationMode() == ActionBar.NAVIGATION_MODE_TABS)
-			outState.putInt("tab", tabBar.getSelectedTab().getPosition());
+			outState.putInt("tab", tabBar.getSelectedNavigationIndex());
 	}
 	// Restores the tab where the user last was found
 	private void restoreTab(final Bundle savedInstanceState) {
 		final ActionBar tabBar = getActionBar();
 		if (tabBar != null && tabBar.getNavigationMode() == ActionBar.NAVIGATION_MODE_TABS) {
 			// Only if the user has been here before, otherwise pick tab 0
-			if (savedInstanceState == null || !savedInstanceState.containsKey("tab"))
+			if (savedInstanceState == null)
 				tabBar.setSelectedNavigationItem(0);
 			else
 				tabBar.setSelectedNavigationItem(savedInstanceState.getInt("tab"));

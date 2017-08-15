@@ -66,30 +66,35 @@ public class ADCFragment extends ChildFragment {
 		final AbstractEntryBox<?> resEntry = controls.get(R.id.guiAdcRes);
 		final AbstractEntryBox<?> countEntry = controls.get(R.id.guiAdcCount);
 		final AbstractEntryBox<?> vRefEntry = controls.get(R.id.guiAdcVrefN);
+		final AbstractEntryBox<?> voltEntry = controls.get(R.id.guiAdcVoltage);
 		// Calculate the best mtach for the the resolution and the total quantity of counts
 		final int res = resEntry.getIntValue(2.0, 32.0, getString(R.string.guiAdcBadBits));
 		final double totalCounts = Math.pow(2.0, (double)res) - 1.0, vrefN = vRefEntry.
-			getRawValue();
-		final int counts = countEntry.getIntValue(0.0, totalCounts, getString(R.string.
-			guiAdcBadCount, totalCounts));
+			getRawValue(), vrefP = controls.getRawValue(R.id.guiAdcVrefP);
 		// Calculate the step size in volts
-		final double vSpan = controls.getRawValue(R.id.guiAdcVrefP) - vrefN, stepSize = vSpan /
-			totalCounts;
+		final double vSpan = vrefP - vrefN, stepSize = vSpan / totalCounts;
 		vRefEntry.setError(vSpan <= 0.0 ? getString(R.string.guiAdcBadSpan) : null);
 		stepSizeCtrl.setValue(new EngineeringValue(stepSize, Units.VOLTAGE));
 		switch (group.leastRecentlyUsed()) {
 		case R.id.guiAdcVoltage:
+			final int counts = countEntry.getIntValue(0.0, totalCounts, getString(R.string.
+				guiAdcBadCount, totalCounts));
 			// Generate voltage from counts
-			controls.setRawValue(R.id.guiAdcVoltage, vrefN + counts * stepSize);
+			voltEntry.updateValue(vrefN + counts * stepSize);
 			break;
 		case R.id.guiAdcCount:
-			final double vdelta = controls.getRawValue(R.id.guiAdcVoltage) - vrefN, newCounts;
-			// Generate count from voltage
-			if (vSpan <= 0.0)
-				newCounts = 0.0;
-			else
-				newCounts = vdelta * totalCounts / vSpan;
-			controls.setRawValue(R.id.guiAdcCount, newCounts);
+			final double v = voltEntry.getRawValue(), vdelta = v - vrefN, newCounts;
+			// Ensure voltage is in range
+			if (v >= vrefN && v <= vrefP) {
+				// Generate count from voltage
+				if (vSpan <= 0.0)
+					newCounts = 0.0;
+				else
+					newCounts = vdelta * totalCounts / vSpan;
+				voltEntry.setError(null);
+				countEntry.updateValue(newCounts);
+			} else
+				voltEntry.setError(getString(R.string.guiAdcBadVolt));
 			break;
 		default:
 			// Invalid

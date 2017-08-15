@@ -35,11 +35,11 @@ import android.view.View;
  */
 @SuppressWarnings("deprecation")
 public class FragmentClickListener implements View.OnClickListener {
-	private final Class<? extends Fragment> destFragment;
+	private final Class<? extends ChildFragment> destFragment;
 	private final FragmentActivity parentActivity;
 
 	public FragmentClickListener(final FragmentActivity parentActivity,
-	                             final Class<? extends Fragment> destFragment) {
+	                             final Class<? extends ChildFragment> destFragment) {
 		this.destFragment = destFragment;
 		this.parentActivity = parentActivity;
 	}

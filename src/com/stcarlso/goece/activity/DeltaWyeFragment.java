@@ -42,19 +42,16 @@ import com.stcarlso.goece.utility.EngineeringValue;
  */
 public class DeltaWyeFragment extends ChildFragment {
 	@Override
-	public void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-		final LinearLayout root = ((LinearLayout)findViewById(R.id.guiDelRoot));
-		// Rotate by adjusting the layout of the main screen
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
+		final View view = inflater.inflate(R.layout.deltawye, container, false);
+		final LinearLayout root = (LinearLayout)view.findViewById(R.id.guiDelRoot);
+		// Handle rotation to the correct layout orientation
+		final Configuration newConfig = getResources().getConfiguration();
 		if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE)
 			root.setOrientation(LinearLayout.HORIZONTAL);
 		else
 			root.setOrientation(LinearLayout.VERTICAL);
-	}
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	                         Bundle savedInstanceState) {
-		final View view = inflater.inflate(R.layout.deltawye, container, false);
 		// Register value entry boxes
 		controls.add(view, R.id.guiDelDelta1, R.id.guiDelDelta2, R.id.guiDelDelta3,
 			R.id.guiDelWye1, R.id.guiDelWye2, R.id.guiDelWye3);

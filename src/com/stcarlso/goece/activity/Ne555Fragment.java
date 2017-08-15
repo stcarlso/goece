@@ -73,7 +73,7 @@ public class Ne555Fragment extends ChildFragment implements View.OnClickListener
 		final AbstractEntryBox<?> dutyBox = controls.get(R.id.gui555Duty);
 		double duty = dutyBox.getRawValue() * 0.01;
 		// Error popup if duty is invalid
-		if (duty >= 1.0) {
+		if (duty >= 1.0 || Double.isNaN(duty) || Double.isInfinite(duty)) {
 			dutyBox.setError(getString(R.string.gui555BadDuty));
 			duty = 0.99;
 		} else
@@ -144,18 +144,16 @@ public class Ne555Fragment extends ChildFragment implements View.OnClickListener
 		case R.id.gui555Freq:
 		case R.id.gui555Delay:
 			// Duty cycle and frequency (need to be careful about 50% boundary)
-			final double newFreq, newDuty;
-			if (duty > DUTY_THRES) {
+			final double res, newDuty;
+			if (duty > DUTY_THRES)
 				// >50%
-				newDuty = (r1 + r2) / Math.max(1.0, r1 + 2.0 * r2);
-				newFreq = 1.0 / (CHARGE_FACTOR * c * (r1 + 2.0 * r2));
-			} else {
+				res = r2;
+			else
 				// <50%
-				newDuty = r1 / Math.max(1.0, r1 + r2);
-				newFreq = 1.0 / (CHARGE_FACTOR * c * (r1 + r2));
-			}
-			controls.setRawValue(R.id.gui555Duty, newDuty * 100.0);
-			controls.setRawValue(R.id.gui555Freq, newFreq);
+				res = 0.0;
+			newDuty = (r1 + res) / Math.max(1.0, r1 + r2 + res);
+			controls.setRawValue(R.id.gui555Duty, 100.0 * newDuty);
+			controls.setRawValue(R.id.gui555Freq, 1.0 / (CHARGE_FACTOR * c * (r1 + r2 + res)));
 			// Drawing may have changed
 			if ((newDuty <= DUTY_THRES && duty > DUTY_THRES) || (newDuty > DUTY_THRES &&
 					duty <= DUTY_THRES))

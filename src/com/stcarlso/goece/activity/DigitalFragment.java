@@ -36,7 +36,8 @@ import com.stcarlso.goece.ui.MenuFragment;
  */
 public class DigitalFragment extends MenuFragment {
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+	                         Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.digital, container, false);
 		// Configure all buttons
 		setButtonEvent(view, R.id.guiAdcCalc, ADCFragment.class);
