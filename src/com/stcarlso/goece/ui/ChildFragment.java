@@ -136,11 +136,20 @@ public abstract class ChildFragment extends Fragment implements Calculatable {
 		return fields.get(id);
 	}
 	/**
+	 * Returns the title for this fragment shown in the app bar when this fragment is open.
+	 *
+	 * @param parent the parent context, used for getString() when this fragment is not yet
+	 *               attached to an Activity
+	 * @return the fragment title
+	 */
+	protected abstract String getTitle(Context parent);
+	/**
 	 * Finds a view in the parent activity by ID.
 	 *
 	 * @param id the view ID
 	 * @return the matching view, or null if no view matches
 	 */
+	@Deprecated
 	protected View findViewById(final int id) {
 		return getActivity().findViewById(id);
 	}

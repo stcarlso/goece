@@ -24,6 +24,7 @@
 
 package com.stcarlso.goece.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,6 +50,10 @@ public class ADCFragment extends ChildFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		recalculate(controls.get(R.id.guiAdcCount));
+	}
+	@Override
+	protected String getTitle(Context parent) {
+		return parent.getString(R.string.guiAdcCalc);
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,

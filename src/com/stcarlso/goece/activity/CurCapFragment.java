@@ -24,6 +24,7 @@
 
 package com.stcarlso.goece.activity;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -122,6 +123,10 @@ public class CurCapFragment extends ChildFragment implements AdapterView.OnItemS
 	 */
 	private RadioButton wireSelCtrl;
 
+	@Override
+	protected String getTitle(Context parent) {
+		return parent.getString(R.string.guiCurCap);
+	}
 	@Override
 	protected void loadCustomPrefs(SharedPreferences prefs) {
 		loadPrefsSpinner(prefs, R.id.guiCurMaterials);

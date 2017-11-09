@@ -120,6 +120,7 @@
 	<string name="guiKMapper">K-Map Generator</string>
 	<string name="guiAdcCalc">ADC Calculation</string>
 	<string name="gui555Calc">555 Calculator</string>
+	<string name="guiPinout">Pinout Reference</string>
 	<!-- Resources for individual activities -->
 	<!-- SMD resistor code -->
 	<string name="guiResLine">Value is underlined</string>
@@ -264,4 +265,5 @@
 	<string name="guiAdcBadCount">Counts must be at least 0 and no more than %1$.0f.</string>
 	<string name="guiAdcBadSpan">Positive reference voltage must be greater than negative reference.</string>
 	<string name="guiAdcBadVolt">Target voltage must be between the positive and negative references.</string>
+	<!-- Pinouts -->
 </resources>

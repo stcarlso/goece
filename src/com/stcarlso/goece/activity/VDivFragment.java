@@ -24,6 +24,7 @@
 
 package com.stcarlso.goece.activity;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -99,6 +100,10 @@ public class VDivFragment extends ChildFragment implements View.OnClickListener 
 			}
 		}
 		return best;
+	}
+	@Override
+	protected String getTitle(Context parent) {
+		return parent.getString(R.string.guiVDiv);
 	}
 	@Override
 	protected void loadCustomPrefs(SharedPreferences prefs) {

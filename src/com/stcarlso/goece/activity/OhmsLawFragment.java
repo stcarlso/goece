@@ -24,6 +24,7 @@
 
 package com.stcarlso.goece.activity;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -52,6 +53,10 @@ public class OhmsLawFragment extends ChildFragment implements View.OnClickListen
 	 */
 	private ValueOutputField powerFactorCtrl;
 
+	@Override
+	protected String getTitle(Context parent) {
+		return parent.getString(R.string.guiOhmsLaw);
+	}
 	@Override
 	protected void loadCustomPrefs(SharedPreferences prefs) {
 		super.loadCustomPrefs(prefs);

@@ -24,6 +24,7 @@
 
 package com.stcarlso.goece.activity;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -119,6 +120,10 @@ public class PcbTraceFragment extends ChildFragment implements
 				out.setError(null);
 			}
 		}
+	}
+	@Override
+	protected String getTitle(Context parent) {
+		return parent.getString(R.string.guiPcbWidth);
 	}
 	@Override
 	protected void loadCustomPrefs(SharedPreferences prefs) {

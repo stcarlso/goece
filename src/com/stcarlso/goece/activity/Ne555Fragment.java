@@ -24,6 +24,7 @@
 
 package com.stcarlso.goece.activity;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -79,6 +80,10 @@ public class Ne555Fragment extends ChildFragment implements View.OnClickListener
 		} else
 			dutyBox.setError(null);
 		return duty;
+	}
+	@Override
+	protected String getTitle(Context parent) {
+		return parent.getString(R.string.gui555Calc);
 	}
 	@Override
 	protected void loadCustomPrefs(SharedPreferences prefs) {

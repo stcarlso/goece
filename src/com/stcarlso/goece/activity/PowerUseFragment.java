@@ -24,6 +24,7 @@
 
 package com.stcarlso.goece.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,6 +58,10 @@ public class PowerUseFragment extends ChildFragment implements View.OnClickListe
 	 */
 	private CheckBox sleepEnableCtrl;
 
+	@Override
+	protected String getTitle(Context parent) {
+		return parent.getString(R.string.guiPowerUse);
+	}
 	@Override
 	public void onClick(View v) {
 		// Enable controls as needed

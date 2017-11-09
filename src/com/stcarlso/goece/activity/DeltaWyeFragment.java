@@ -24,6 +24,7 @@
 
 package com.stcarlso.goece.activity;
 
+import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -41,6 +42,10 @@ import com.stcarlso.goece.utility.EngineeringValue;
  * also be used.
  */
 public class DeltaWyeFragment extends ChildFragment {
+	@Override
+	protected String getTitle(Context parent) {
+		return parent.getString(R.string.guiDeltaWye);
+	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 	                         Bundle savedInstanceState) {

@@ -24,6 +24,7 @@
 
 package com.stcarlso.goece.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,6 +51,10 @@ public class OscDesignFragment extends ChildFragment {
 	 */
 	private ValueOutputField transconCtrl;
 
+	@Override
+	protected String getTitle(Context parent) {
+		return parent.getString(R.string.guiOscDesign);
+	}
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);

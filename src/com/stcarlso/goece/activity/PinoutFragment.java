@@ -24,23 +24,34 @@
 
 package com.stcarlso.goece.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.stcarlso.goece.R;
-import com.stcarlso.goece.ui.MenuFragment;
+import com.stcarlso.goece.ui.ChildFragment;
+import com.stcarlso.goece.ui.ValueGroup;
 
 /**
- * Fragment which displays all items on the IC tab.
+ * Displays pinouts for ICs.
  */
-public class ICFragment extends MenuFragment {
+public class PinoutFragment extends ChildFragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		final View view = inflater.inflate(R.layout.ics, container, false);
-		// Configure all buttons
-		setButtonEvent(view, R.id.guiPinout, PinoutFragment.class);
-		setButtonEvent(view, R.id.gui555, Ne555Fragment.class);
+		final View view = inflater.inflate(R.layout.pinout, container, false);
 		return view;
+	}
+	@Override
+	protected String getTitle(Context parent) {
+		return parent.getString(R.string.guiPinout);
+	}
+	@Override
+	protected void recalculate(ValueGroup group) {
+		// The pinouts view does no calculations
+	}
+	@Override
+	protected void update(ValueGroup group) {
+		// The pinouts view does no calculations
 	}
 }

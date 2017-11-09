@@ -24,6 +24,7 @@
 
 package com.stcarlso.goece.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -69,6 +70,10 @@ public class ResColorFragment extends ChildFragment {
 
 	public ResColorFragment() {
 		bandCtrl = new ColorBand[5];
+	}
+	@Override
+	protected String getTitle(Context parent) {
+		return parent.getString(R.string.guiColorCode);
 	}
 	@Override
 	public void recalculate(final ValueGroup group) {

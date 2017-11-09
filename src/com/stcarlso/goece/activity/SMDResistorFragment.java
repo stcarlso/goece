@@ -24,6 +24,7 @@
 
 package com.stcarlso.goece.activity;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -160,6 +161,10 @@ public class SMDResistorFragment extends ChildFragment implements View.OnClickLi
 			showValue(value);
 			lastCode = code;
 		}
+	}
+	@Override
+	protected String getTitle(Context parent) {
+		return parent.getString(R.string.guiSMDResistor);
 	}
 	@Override
 	protected void loadCustomPrefs(SharedPreferences prefs) {

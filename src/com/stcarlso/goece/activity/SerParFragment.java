@@ -24,6 +24,7 @@
 
 package com.stcarlso.goece.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -127,6 +128,10 @@ public class SerParFragment extends ChildFragment {
 			}
 		}
 		return best;
+	}
+	@Override
+	protected String getTitle(Context parent) {
+		return parent.getString(R.string.guiSerPar);
 	}
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {

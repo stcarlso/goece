@@ -35,7 +35,14 @@ import android.view.View;
  */
 @SuppressWarnings("deprecation")
 public class FragmentClickListener implements View.OnClickListener {
+	/**
+	 * The target fragment class to start.
+	 */
 	private final Class<? extends ChildFragment> destFragment;
+	/**
+	 * A reference to the parent activity, which is required for a context to set up the
+	 * fragment.
+	 */
 	private final FragmentActivity parentActivity;
 
 	public FragmentClickListener(final FragmentActivity parentActivity,
@@ -47,8 +54,9 @@ public class FragmentClickListener implements View.OnClickListener {
 	public void onClick(View v) {
 		final FragmentTransaction transaction = parentActivity.getSupportFragmentManager().
 			beginTransaction();
-		final Fragment target = Fragment.instantiate(parentActivity, destFragment.getName(),
-			null);
+		// Cast should not fail since class had to be ChildFragment anyways in the constructor
+		final ChildFragment target = (ChildFragment)Fragment.instantiate(parentActivity,
+			destFragment.getName(), null);
 		// Replace the entire content area with the target fragment
 		transaction.add(android.R.id.content, target, "content");
 		// Allow user to go back
@@ -59,6 +67,7 @@ public class FragmentClickListener implements View.OnClickListener {
 		if (bar != null) {
 			bar.setDisplayHomeAsUpEnabled(true);
 			bar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+			bar.setTitle(target.getTitle(parentActivity));
 		}
 	}
 }
