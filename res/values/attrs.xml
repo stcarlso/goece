@@ -76,4 +76,9 @@
 		<attr name="showDesc" format="boolean"/>
 		<attr name="sigfigs"/>
 	</declare-styleable>
+	<declare-styleable name="PinoutView">
+		<attr name="pinMargin" format="dimension"/>
+		<attr name="pinLength" format="dimension"/>
+		<attr name="pinSpacing" format="dimension"/>
+	</declare-styleable>
 </resources>

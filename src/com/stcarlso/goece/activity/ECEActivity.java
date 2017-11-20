@@ -36,6 +36,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import com.stcarlso.goece.R;
 import com.stcarlso.goece.ui.FragmentTabListener;
+import com.stcarlso.goece.utility.UIFunctions;
 
 /**
  * Make it your pastime, make it your mission!
@@ -75,6 +76,8 @@ public final class ECEActivity extends FragmentActivity {
 		if (count > 0) {
 			final ActionBar bar = getActionBar();
 			manager.popBackStack();
+			// KO the soft keyboard
+			UIFunctions.hideKeyboard(this);
 			if (count < 2 && bar != null) {
 				// Back to main activity, clear display as-up
 				bar.setDisplayHomeAsUpEnabled(false);

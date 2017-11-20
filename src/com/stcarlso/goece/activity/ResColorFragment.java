@@ -118,7 +118,6 @@ public class ResColorFragment extends ChildFragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		// Display initial value
-		loadPrefs();
 		recalculate(bandCtrl[4]);
 	}
 	@Override

@@ -121,6 +121,7 @@
 	<string name="guiAdcCalc">ADC Calculation</string>
 	<string name="gui555Calc">555 Calculator</string>
 	<string name="guiPinout">Pinout Reference</string>
+	<string name="guiByteConv">Byte Conversion</string>
 	<!-- Resources for individual activities -->
 	<!-- SMD resistor code -->
 	<string name="guiResLine">Value is underlined</string>
@@ -266,4 +267,23 @@
 	<string name="guiAdcBadSpan">Positive reference voltage must be greater than negative reference.</string>
 	<string name="guiAdcBadVolt">Target voltage must be between the positive and negative references.</string>
 	<!-- Pinouts -->
+	<string name="guiPinoutHint">Part number or function</string>
+	<!-- Byte conversion -->
+	<string name="guiByteHex">Hexadecimal</string>
+	<string name="guiByteBin">Binary</string>
+	<string name="guiByteOctal">Octal</string>
+	<string name="guiByteASCII">ASCII</string>
+	<string name="guiByteFloat">Floating Point</string>
+	<string name="guiByteDec">Decimal</string>
+	<string name="guiByteSign">Signed</string>
+	<string name="guiByteSize8">Byte</string>
+	<string name="guiByteSize16">Word</string>
+	<string name="guiByteSize32">Dword</string>
+	<string name="guiByteSize64">Qword</string>
+	<string name="guiByteBigEnd">Big Endian</string>
+	<string name="guiByteBadHex">Invalid hexadecimal number; valid characters are 0-9 and A-F.</string>
+	<string name="guiByteBadBin">Invalid binary number; valid digits are 0 or 1.</string>
+	<string name="guiByteBadOctal">Invalid octal number; valid digits are 0-7.</string>
+	<string name="guiByteBadFloat">Invalid floating point number.</string>
+	<string name="guiByteBadDec">Invalid decimal number; valid digits are 0-9.</string>
 </resources>

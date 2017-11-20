@@ -40,6 +40,7 @@ public class DigitalFragment extends MenuFragment {
 	                         Bundle savedInstanceState) {
 		final View view = inflater.inflate(R.layout.digital, container, false);
 		// Configure all buttons
+		setButtonEvent(view, R.id.guiByteConv, ByteConversionFragment.class);
 		setButtonEvent(view, R.id.guiAdcCalc, ADCFragment.class);
 		return view;
 	}

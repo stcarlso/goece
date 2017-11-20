@@ -132,7 +132,6 @@ public class PcbTraceFragment extends ChildFragment implements
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		loadPrefs();
 		recalculate(controls.get(R.id.guiPcbThickness));
 	}
 	@Override

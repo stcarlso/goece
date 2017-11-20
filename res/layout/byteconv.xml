@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ The MIT License (MIT)
+  ~
+  ~ Copyright (c) 2017 Stephen Carlson
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			  xmlns:ece="http://schemas.android.com/apk/res/com.stcarlso.goece"
+			  android:layout_width="match_parent" android:layout_height="match_parent"
+			  android:orientation="vertical">
+	<GridLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_marginLeft="10dp" android:rowCount="2"
+				android:columnCount="3" android:layout_gravity="center_horizontal">
+		<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
+				  android:text="@string/guiByteSign" android:id="@+id/guiByteSign"
+				  android:layout_row="0" android:layout_column="0" android:tag="byteSign"/>
+		<CheckBox android:layout_width="wrap_content" android:layout_height="wrap_content"
+				  android:text="@string/guiByteBigEnd" android:id="@+id/guiByteEndian"
+				  android:layout_row="1" android:layout_column="0" android:tag="byteEndian"
+				  android:checked="true"/>
+		<RadioButton android:layout_width="wrap_content" android:id="@+id/guiByteSize8"
+					 android:layout_row="0" android:text="@string/guiByteSize8"
+					 android:layout_height="wrap_content" android:layout_column="1"
+					 android:checked="true" android:tag="byteSize8"/>
+		<RadioButton android:layout_width="wrap_content" android:id="@+id/guiByteSize16"
+					 android:layout_row="0" android:text="@string/guiByteSize16"
+					 android:layout_height="wrap_content" android:layout_column="2"
+					 android:tag="byteSize16"/>
+		<RadioButton android:layout_width="wrap_content" android:id="@+id/guiByteSize32"
+					 android:layout_row="1" android:text="@string/guiByteSize32"
+					 android:layout_height="wrap_content" android:layout_column="1"
+					 android:tag="byteSize32"/>
+		<RadioButton android:layout_width="wrap_content" android:id="@+id/guiByteSize64"
+					 android:layout_row="1" android:text="@string/guiByteSize64"
+					 android:layout_height="wrap_content" android:layout_column="2"
+					 android:tag="byteSize64"/>
+	</GridLayout>
+	<GridLayout android:layout_width="wrap_content" android:layout_height="wrap_content"
+				android:layout_marginLeft="10dp" android:rowCount="6" android:columnCount="2"
+				android:layout_gravity="center_horizontal" android:layout_marginTop="5dp">
+		<view class="com.stcarlso.goece.ui.ValueTextBox" android:id="@+id/guiByteHex"
+			  android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:inputType="textNoSuggestions|textCapCharacters|textVisiblePassword"
+			  android:imeOptions="actionDone" android:tag="byteHex" android:maxLength="16"
+			  ece:group="all" android:layout_marginLeft="5dp" android:selectAllOnFocus="true"
+			  android:layout_row="0" android:ems="16" android:layout_column="1"
+			  android:textAppearance="?android:attr/textAppearanceSmall" ece:affects="all"/>
+		<view class="com.stcarlso.goece.ui.ValueTextBox" android:id="@+id/guiByteOct"
+			  android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:inputType="textNoSuggestions|number|textVisiblePassword"
+			  android:imeOptions="actionDone" android:tag="byteOct" android:maxLength="22"
+			  ece:group="all" android:layout_marginLeft="5dp" android:selectAllOnFocus="true"
+			  android:layout_row="1" android:ems="16" android:layout_column="1"
+			  android:textAppearance="?android:attr/textAppearanceSmall" ece:affects="all"/>
+		<view class="com.stcarlso.goece.ui.ValueTextBox" android:id="@+id/guiByteDec"
+			  android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:inputType="textNoSuggestions|numberSigned|textVisiblePassword"
+			  android:imeOptions="actionDone" android:tag="byteDec" android:maxLength="20"
+			  ece:group="all" android:layout_marginLeft="5dp" android:selectAllOnFocus="true"
+			  android:layout_row="2" android:ems="16" android:layout_column="1"
+			  android:textAppearance="?android:attr/textAppearanceSmall" ece:affects="all"/>
+		<view class="com.stcarlso.goece.ui.ValueTextBox" android:id="@+id/guiByteFloat"
+			  android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:inputType="textNoSuggestions|numberDecimal|numberSigned|textVisiblePassword"
+			  android:imeOptions="actionDone" android:tag="byteFloat" android:maxLength="24"
+			  ece:group="all" android:layout_marginLeft="5dp" android:selectAllOnFocus="true"
+			  android:layout_row="3" android:ems="16" android:layout_column="1"
+			  android:textAppearance="?android:attr/textAppearanceSmall" ece:affects="all"/>
+		<view class="com.stcarlso.goece.ui.ValueTextBox" android:id="@+id/guiByteAscii"
+			  android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:inputType="textNoSuggestions|textVisiblePassword"
+			  android:imeOptions="actionDone" android:tag="byteAscii" android:maxLength="8"
+			  ece:group="all" android:layout_marginLeft="5dp" android:selectAllOnFocus="true"
+			  android:layout_row="4" android:ems="8" android:layout_column="1"
+			  android:textAppearance="?android:attr/textAppearanceSmall" ece:affects="all"/>
+		<view class="com.stcarlso.goece.ui.ValueTextBox" android:id="@+id/guiByteBin"
+			  android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  android:inputType="textNoSuggestions|number|textVisiblePassword"
+			  android:imeOptions="actionDone" android:tag="byteBin" android:maxLength="64"
+			  ece:group="all" android:layout_marginLeft="5dp" android:selectAllOnFocus="true"
+			  android:layout_row="5" android:ems="16" android:layout_column="1"
+			  android:textAppearance="?android:attr/textAppearanceSmall" ece:affects="all"/>
+		<TextView android:labelFor="@id/guiByteHex" android:layout_height="wrap_content"
+				  android:layout_width="wrap_content" android:text="@string/guiByteHex"
+				  android:layout_gravity="right" android:layout_row="0"
+				  android:layout_column="0"/>
+		<TextView android:labelFor="@id/guiByteOct" android:layout_height="wrap_content"
+				  android:layout_width="wrap_content" android:text="@string/guiByteOctal"
+				  android:layout_gravity="right" android:layout_row="1"
+				  android:layout_column="0"/>
+		<TextView android:labelFor="@id/guiByteDec" android:layout_height="wrap_content"
+				  android:layout_width="wrap_content" android:text="@string/guiByteDec"
+				  android:layout_gravity="right" android:layout_row="2"
+				  android:layout_column="0"/>
+		<TextView android:labelFor="@id/guiByteFloat" android:layout_height="wrap_content"
+				  android:layout_width="wrap_content" android:text="@string/guiByteFloat"
+				  android:layout_gravity="right" android:layout_row="3"
+				  android:layout_column="0"/>
+		<TextView android:labelFor="@id/guiByteAscii" android:layout_height="wrap_content"
+				  android:layout_width="wrap_content" android:text="@string/guiByteASCII"
+				  android:layout_gravity="right" android:layout_row="4"
+				  android:layout_column="0"/>
+		<TextView android:labelFor="@id/guiByteBin" android:layout_height="wrap_content"
+				  android:layout_width="wrap_content" android:text="@string/guiByteBin"
+				  android:layout_gravity="right" android:layout_row="5"
+				  android:layout_column="0"/>
+	</GridLayout>
+</LinearLayout>

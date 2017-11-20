@@ -24,7 +24,18 @@
   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-				android:layout_width="match_parent"
-				android:layout_height="match_parent">
-
+				xmlns:ece="http://schemas.android.com/apk/res/com.stcarlso.goece"
+				android:layout_width="match_parent" android:layout_height="match_parent">
+	<AutoCompleteTextView android:layout_width="match_parent" android:id="@+id/guiPinoutIC"
+						  android:layout_height="wrap_content" android:layout_margin="5dp"
+						  android:layout_alignParentTop="true" android:maxLines="5"
+						  android:layout_gravity="center_horizontal"
+						  android:completionHint="@string/guiPinoutHint"
+						  android:completionThreshold="2"/>
+	<view class="com.stcarlso.goece.ui.ZoomScrollView" android:layout_width="match_parent"
+		  android:layout_height="match_parent" android:layout_below="@id/guiPinoutIC">
+		<view class="com.stcarlso.goece.ui.PinoutView" android:id="@+id/guiPinoutView"
+			  android:layout_width="wrap_content" android:layout_height="wrap_content"
+			  ece:pinLength="5dp" ece:pinMargin="3dp" ece:pinSpacing="2dp"/>
+	</view>
 </RelativeLayout>

@@ -66,7 +66,6 @@ public class OhmsLawFragment extends ChildFragment implements View.OnClickListen
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		loadPrefs();
 		// onClick handles initial calculations
 		onClick(dcCtrl);
 	}

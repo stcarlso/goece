@@ -29,6 +29,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.graphics.Color;
+import android.os.Build;
 import android.text.Html;
 import android.text.Spanned;
 import android.util.Log;
@@ -98,7 +99,12 @@ public final class UIFunctions {
 	 */
 	@SuppressWarnings("deprecation")
 	public static Spanned fromHtml(final String text) {
-		return Html.fromHtml(text);
+		final Spanned result;
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
+			result = Html.fromHtml(text, Html.FROM_HTML_MODE_LEGACY);
+		else
+			result = Html.fromHtml(text);
+		return result;
 	}
 	/**
 	 * Reports the parent activity of a Context, or null if the context has no parent activity.

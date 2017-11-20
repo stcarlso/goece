@@ -82,7 +82,6 @@ public class PowerUseFragment extends ChildFragment implements View.OnClickListe
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		loadPrefs();
 		// Initial calculations
 		onClick(runEnableCtrl);
 	}

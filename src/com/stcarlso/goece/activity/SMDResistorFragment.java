@@ -199,6 +199,7 @@ public class SMDResistorFragment extends ChildFragment implements View.OnClickLi
 		// Add listener to calculate on press
 		EnterKeyListener.addListener(view, R.id.guiResSMDCode, this);
 		view.findViewById(R.id.guiResCalculate).setOnClickListener(this);
+		codeIn.requestFocus();
 		return view;
 	}
 	@Override

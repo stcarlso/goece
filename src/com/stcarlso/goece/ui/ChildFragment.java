@@ -132,7 +132,7 @@ public abstract class ChildFragment extends Fragment implements Calculatable {
 	 * @param id the control ID to look up
 	 * @return the control with that ID, or null if no registered control has that ID
 	 */
-	protected ValueControl findValueById(final int id) {
+	protected final ValueControl findValueById(final int id) {
 		return fields.get(id);
 	}
 	/**
@@ -149,7 +149,6 @@ public abstract class ChildFragment extends Fragment implements Calculatable {
 	 * @param id the view ID
 	 * @return the matching view, or null if no view matches
 	 */
-	@Deprecated
 	protected View findViewById(final int id) {
 		return getActivity().findViewById(id);
 	}
@@ -165,7 +164,7 @@ public abstract class ChildFragment extends Fragment implements Calculatable {
 	 * Loads from application settings the values of all fields registered with
 	 * registerAdjustable.
 	 */
-	protected void loadPrefs() {
+	protected final void loadPrefs() {
 		final SharedPreferences prefs = getActivity().getPreferences(Context.MODE_PRIVATE);
 		for (ValueControl control : fields)
 			// Restore all items marked as Restorable
@@ -178,7 +177,7 @@ public abstract class ChildFragment extends Fragment implements Calculatable {
 	 * @param prefs the preference location to read the preferences
 	 * @param id the ID of the control to load
 	 */
-	protected void loadPrefsCheckBox(final SharedPreferences prefs, final int id) {
+	protected final void loadPrefsCheckBox(final SharedPreferences prefs, final int id) {
 		final CompoundButton view = (CompoundButton)findViewById(id);
 		final String tag = UIFunctions.getTag(view);
 		// Only change if the preferences are initialized
@@ -191,7 +190,7 @@ public abstract class ChildFragment extends Fragment implements Calculatable {
 	 * @param prefs the preference location to read the preferences
 	 * @param id the ID of the control to load
 	 */
-	protected void loadPrefsSpinner(final SharedPreferences prefs, final int id) {
+	protected final void loadPrefsSpinner(final SharedPreferences prefs, final int id) {
 		final Spinner view = asSpinner(findViewById(android.R.id.content), id);
 		final String tag = UIFunctions.getTag(view);
 		// Only change if the preferences are initialized
@@ -257,7 +256,7 @@ public abstract class ChildFragment extends Fragment implements Calculatable {
 	 *
 	 * @param view the control to add to the list
 	 */
-	protected void registerAdjustable(final ValueControl view) {
+	protected final void registerAdjustable(final ValueControl view) {
 		final String group = view.getGroup();
 		if (group != null) {
 			// If the item has a group
@@ -299,7 +298,7 @@ public abstract class ChildFragment extends Fragment implements Calculatable {
 	 * @param prefs the preference location to store the preferences
 	 * @param id the ID of the control to save
 	 */
-	protected void savePrefsCheckBox(final SharedPreferences.Editor prefs, final int id) {
+	protected final void savePrefsCheckBox(final SharedPreferences.Editor prefs, final int id) {
 		final CompoundButton view = (CompoundButton)findViewById(id);
 		prefs.putBoolean(UIFunctions.getTag(view), view.isChecked());
 	}
@@ -309,7 +308,7 @@ public abstract class ChildFragment extends Fragment implements Calculatable {
 	 * @param prefs the preference location to store the preferences
 	 * @param id the ID of the control to save
 	 */
-	protected void savePrefsSpinner(final SharedPreferences.Editor prefs, final int id) {
+	protected final void savePrefsSpinner(final SharedPreferences.Editor prefs, final int id) {
 		final Spinner view = asSpinner(findViewById(android.R.id.content), id);
 		prefs.putInt(UIFunctions.getTag(view), view.getSelectedItemPosition());
 	}
@@ -319,7 +318,7 @@ public abstract class ChildFragment extends Fragment implements Calculatable {
 	 *
 	 * @param box the entry box to configure
 	 */
-	protected void setupValueEntryBox(final AbstractEntryBox<?> box) {
+	protected final void setupValueEntryBox(final AbstractEntryBox<?> box) {
 		box.setOnCalculateListener(this);
 		registerAdjustable(box);
 	}

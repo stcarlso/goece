@@ -16,13 +16,13 @@
       <config>
         <devices>
           <device id="Nexus 5" />
+          <device id="Nexus S" />
           <device id="Nexus 4" />
           <device id="tv_720p" />
           <device id="Nexus One" />
           <device id="wear_square" />
           <device id="Nexus 7 2013" />
           <device id="Nexus 7" />
-          <device id="Nexus S" />
           <device id="tv_1080p" />
           <device id="Nexus 6" />
         </devices>
@@ -139,27 +139,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0024cbc7-21cd-4014-805d-7a7fa0b06e96" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/pinout.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/PinoutFragment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/byteconv.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/raw/pinouts.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ByteConversionFragment.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/PinoutView.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ZoomScrollView.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/Pinout.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoECE.ipr" afterPath="$PROJECT_DIR$/GoECE.ipr" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/GoECE.iws" afterPath="$PROJECT_DIR$/GoECE.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/ics.xml" afterPath="$PROJECT_DIR$/res/layout/ics.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/digital.xml" afterPath="$PROJECT_DIR$/res/layout/digital.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/pinout.xml" afterPath="$PROJECT_DIR$/res/layout/pinout.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/attrs.xml" afterPath="$PROJECT_DIR$/res/values/attrs.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ADCFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ADCFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/CurCapFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/CurCapFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/DeltaWyeFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/DeltaWyeFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ICFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ICFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ImpedanceFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ImpedanceFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/Ne555Fragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/Ne555Fragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/DigitalFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/DigitalFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ECEActivity.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ECEActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/OhmsLawFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/OhmsLawFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/OscDesignFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/OscDesignFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/PcbTraceFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/PcbTraceFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/PinoutFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/PinoutFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/PowerUseFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/PowerUseFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ResColorFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ResColorFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/SMDResistorFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/SMDResistorFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/SerParFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/SerParFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/VDivFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/activity/VDivFragment.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ChildFragment.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ChildFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/FragmentClickListener.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/ui/FragmentClickListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/UIFunctions.java" afterPath="$PROJECT_DIR$/src/com/stcarlso/goece/utility/UIFunctions.java" />
     </list>
     <ignored path="GoECE.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -179,14 +182,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="450">
-      <file leaf-file-name="PinoutFragment.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PinoutFragment.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/PinoutFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="56" column="1" lean-forward="true" selection-start-line="56" selection-start-column="1" selection-end-line="56" selection-end-column="1" />
+            <state relative-caret-position="902">
+              <caret line="102" column="30" lean-forward="false" selection-start-line="102" selection-start-column="30" selection-end-line="102" selection-end-column="30" />
               <folding>
-                <element signature="e#1997#2033#0" expanded="true" />
+                <element signature="e#3331#3339#0" expanded="true" />
+                <marker date="1511062689880" expanded="false" signature="2668:2704" ph="&quot;Pinout Reference&quot;" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SMDResistorFragment.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/SMDResistorFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="674">
+              <caret line="84" column="17" lean-forward="true" selection-start-line="84" selection-start-column="17" selection-end-line="84" selection-end-column="17" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -199,17 +213,16 @@
         <option value="valueResourceFile" />
         <option value="resourceFile" />
         <option value="Activity" />
-        <option value="layoutResourceFile_vertical" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="Fragment" />
         <option value="layoutResourceFile" />
+        <option value="layoutResourceFile_vertical" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>&quot;\u</find>
       <find>)</find>
       <find>)find</find>
       <find>)findVieB</find>
@@ -239,6 +252,7 @@
       <find>findviewby</find>
       <find>android:onClick</find>
       <find>return getString</find>
+      <find>7400\.([0-9]+) = (\w+)</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -250,6 +264,7 @@
       <replace>android:tag=&quot;d</replace>
       <replace>android:tag=&quot;p</replace>
       <replace>return parent.getString</replace>
+      <replace>sf.addPin($1, &quot;$2&quot;);</replace>
     </replaceStrings>
     <dirStrings>
       <dir>C:\Users\stcarlso\Documents\Visual Studio 2015\Projects\GoECE</dir>
@@ -274,6 +289,17 @@
       <projects_view />
     </option>
   </component>
+  <component name="GroovyConsoleState">
+    <option name="list">
+      <list>
+        <Entry>
+          <option name="url" value="file://$APPLICATION_CONFIG_DIR$/consoles/groovy/groovy_console.groovy" />
+          <option name="moduleName" value="GoECE" />
+          <option name="title" value="GoECE (Bundled Groovy 2.4.6)" />
+        </Entry>
+      </list>
+    </option>
+  </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/SerParFragment.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/res/layout/serpar.xml" root0="FORCE_HIGHLIGHTING" />
@@ -281,17 +307,17 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ResColorFragment.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/activity/SerParFragment.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/activity/SMDResistorFragment.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/activity/VDivFragment.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ChildFragment.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/ui/FragmentClickListener.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ADCFragment.java" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/activity/CurCapFragment.java" />
-        <option value="$PROJECT_DIR$/res/layout/ics.xml" />
-        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ICFragment.java" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/groovy/groovy_console.groovy" />
+        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/activity/ByteConversionFragment.java" />
+        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/utility/Pinout.java" />
+        <option value="$PROJECT_DIR$/res/values/attrs.xml" />
+        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/utility/UIFunctions.java" />
+        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/ui/PinoutView.java" />
+        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/ui/PanScrollView.java" />
+        <option value="$PROJECT_DIR$/res/layout/pinout.xml" />
+        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/ui/ZoomScrollView.java" />
         <option value="$PROJECT_DIR$/src/com/stcarlso/goece/activity/PinoutFragment.java" />
+        <option value="$PROJECT_DIR$/src/com/stcarlso/goece/activity/SMDResistorFragment.java" />
       </list>
     </option>
   </component>
@@ -314,10 +340,16 @@
           <State>
             <id />
           </State>
+          <State>
+            <id>Java</id>
+          </State>
+          <State>
+            <id>Probable bugsJava</id>
+          </State>
         </expanded-state>
         <selected-state>
           <State>
-            <id>General</id>
+            <id>CastToIncompatibleInterface</id>
           </State>
         </selected-state>
       </profile-state>
@@ -357,12 +389,6 @@
             <path>
               <item name="GoECE" type="b2602c69:ProjectViewProjectNode" />
               <item name="GoECE" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="layout" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GoECE" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GoECE" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -370,20 +396,13 @@
               <item name="GoECE" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="goece" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="GoECE" type="b2602c69:ProjectViewProjectNode" />
-              <item name="GoECE" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="goece" type="462c0819:PsiDirectoryNode" />
-              <item name="activity" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -403,7 +422,7 @@
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/GoECE.ipr" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="extract.method.default.visibility" value="protected" />
     <property name="SearchEverywhereHistoryKey" value="inspection&#9;ACTION&#9;ActivateInspectionToolWindow&#10;inspect&#9;ACTION&#9;ActivateInspectionToolWindow" />
@@ -429,14 +448,14 @@
     <property name="UI_DESIGNER_EDITOR_MODE.NlPaletteManager-NlPreviewForm.SHOW" value="false" />
     <property name="UI_DESIGNER_EDITOR_MODE.NlPaletteManager-NlEditorPanel.WIDTH" value="395" />
     <property name="OverrideImplement.combined" value="false" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="com.stcarlso.goece.ui" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\stcarlso\Documents\Visual Studio 2015\Projects\GoECE\res\layout" />
-      <recent name="C:\Users\stcarlso\Documents\Visual Studio 2015\Projects\GoECE\res" />
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Stephen\Documents\PRGM\GoECE\res\layout" />
       <recent name="U:\Users\Stephen\Documents\PRGM\GoECE\res\drawable" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -444,8 +463,9 @@
       <recent name="com.stcarlso.goece.utility" />
       <recent name="com.stcarlso.goece" />
     </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Stephen\Documents\PRGM\GoECE\res\layout" />
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\stcarlso\Documents\Visual Studio 2015\Projects\GoECE\res\layout" />
+      <recent name="C:\Users\stcarlso\Documents\Visual Studio 2015\Projects\GoECE\res" />
       <recent name="U:\Users\Stephen\Documents\PRGM\GoECE\res\drawable" />
     </key>
   </component>
@@ -816,31 +836,33 @@
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.3294714" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
-      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32874727" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.33001423" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.3279003" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.3294714" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12411095" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.33001423" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32310644" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.3294714" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.3294714" sideWeight="0.5" order="16" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.33001423" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32802317" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32981783" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="false" weight="0.18299966" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.1401138" sideWeight="0.5" order="9" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12055477" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.33001423" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="false" weight="0.18299966" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.1401138" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3244026" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32310644" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32982087" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.32982087" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Nl-Palette" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
@@ -848,11 +870,9 @@
       <window_info id="Inspection Results" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3294714" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.3300866" sideWeight="0.5" order="15" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39757085" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.33001423" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39757085" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.33044422" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.3300866" sideWeight="0.5" order="14" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.3240652" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -900,7 +920,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="47" />
+      <option name="time" value="49" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -909,85 +929,94 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/SerParFragment.java">
+    <entry file="file://$PROJECT_DIR$/res/values/attrs.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="128" column="9" lean-forward="true" selection-start-line="128" selection-start-column="9" selection-end-line="128" selection-end-column="9" />
+        <state relative-caret-position="1136">
+          <caret line="81" column="52" lean-forward="false" selection-start-line="81" selection-start-column="52" selection-end-line="81" selection-end-column="52" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ui/FragmentClickListener.java">
+    <entry file="file://$PROJECT_DIR$/res/layout/byteconv.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="682">
-          <caret line="57" column="88" lean-forward="true" selection-start-line="57" selection-start-column="88" selection-end-line="57" selection-end-column="88" />
+        <state relative-caret-position="946">
+          <caret line="71" column="76" lean-forward="true" selection-start-line="71" selection-start-column="76" selection-end-line="71" selection-end-column="76" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+    <entry file="jar://$APPLICATION_HOME_DIR$/android-sdk/platforms/android-24/android.jar!/android/content/res/TypedArray.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="448">
-          <caret line="122" column="18" lean-forward="false" selection-start-line="122" selection-start-column="18" selection-end-line="122" selection-end-column="18" />
+          <caret line="67" column="17" lean-forward="false" selection-start-line="67" selection-start-column="17" selection-end-line="67" selection-end-column="17" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/ics.xml">
+    <entry file="jar://$APPLICATION_HOME_DIR$/android-sdk/platforms/android-24/android.jar!/android/text/Html.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="26" column="85" lean-forward="true" selection-start-line="26" selection-start-column="85" selection-end-line="26" selection-end-column="85" />
+        <state relative-caret-position="464">
+          <caret line="29" column="26" lean-forward="false" selection-start-line="29" selection-start-column="26" selection-end-line="29" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/ICFragment.java">
+    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/utility/UIFunctions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="41" column="33" lean-forward="true" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
+        <state relative-caret-position="536">
+          <caret line="88" column="80" lean-forward="true" selection-start-line="87" selection-start-column="12" selection-end-line="88" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/android-sdk/platforms/android-24/android.jar!/android/view/View.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="338">
+          <caret line="190" column="0" lean-forward="true" selection-start-line="190" selection-start-column="0" selection-end-line="190" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ui/PinoutView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="66">
+          <caret line="198" column="29" lean-forward="false" selection-start-line="198" selection-start-column="29" selection-end-line="198" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/pinout.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="638">
-          <caret line="29" column="17" lean-forward="true" selection-start-line="29" selection-start-column="17" selection-end-line="29" selection-end-column="17" />
+        <state relative-caret-position="836">
+          <caret line="38" column="36" lean-forward="false" selection-start-line="38" selection-start-column="36" selection-end-line="38" selection-end-column="36" />
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/colorband.xml">
+    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ui/ZoomScrollView.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/deltawye.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="396">
-          <caret line="18" column="40" lean-forward="false" selection-start-line="18" selection-start-column="40" selection-end-line="18" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/ADCFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="50" column="30" lean-forward="false" selection-start-line="50" selection-start-column="30" selection-end-line="50" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/ui/ChildFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3476">
-          <caret line="45" column="22" lean-forward="false" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
+        <state relative-caret-position="286">
+          <caret line="19" column="7" lean-forward="false" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="7" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/PinoutFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="56" column="1" lean-forward="true" selection-start-line="56" selection-start-column="1" selection-end-line="56" selection-end-column="1" />
+        <state relative-caret-position="902">
+          <caret line="102" column="30" lean-forward="false" selection-start-line="102" selection-start-column="30" selection-end-line="102" selection-end-column="30" />
           <folding>
-            <element signature="e#1997#2033#0" expanded="true" />
+            <element signature="e#3331#3339#0" expanded="true" />
+            <marker date="1511062689880" expanded="false" signature="2668:2704" ph="&quot;Pinout Reference&quot;" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/stcarlso/goece/activity/SMDResistorFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="674">
+          <caret line="84" column="17" lean-forward="true" selection-start-line="84" selection-start-column="17" selection-end-line="84" selection-end-column="17" />
+          <folding />
         </state>
       </provider>
     </entry>

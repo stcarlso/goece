@@ -58,7 +58,6 @@ public class OscDesignFragment extends ChildFragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
-		loadPrefs();
 		recalculate(controls.get(R.id.guiOscFrequency));
 	}
 	@Override

@@ -89,6 +89,7 @@
         <option name="REPORT_FIELDS" value="true" />
       </inspection_tool>
       <inspection_tool class="CastConflictsWithInstanceof" enabled="true" level="INFO" enabled_by_default="true" />
+      <inspection_tool class="CastToIncompatibleInterface" enabled="true" level="WARNING" enabled_by_default="true" />
       <inspection_tool class="CatchGenericClass" enabled="false" level="INFO" enabled_by_default="false" />
       <inspection_tool class="ClassInitializer" enabled="true" level="INFO" enabled_by_default="true" />
       <inspection_tool class="ClassNameDiffersFromFileName" enabled="true" level="INFO" enabled_by_default="true" />
@@ -318,6 +319,7 @@
       <inspection_tool class="UnnecessaryContinue" enabled="false" level="WARNING" enabled_by_default="false" />
       <inspection_tool class="UnnecessaryFullyQualifiedName" enabled="false" level="INFO" enabled_by_default="false">
         <option name="m_ignoreJavadoc" value="true" />
+        <option name="ignoreInModuleStatements" value="true" />
       </inspection_tool>
       <inspection_tool class="UnnecessaryLabelOnBreakStatement" enabled="false" level="WARNING" enabled_by_default="false" />
       <inspection_tool class="UnnecessaryLabelOnContinueStatement" enabled="false" level="WARNING" enabled_by_default="false" />
